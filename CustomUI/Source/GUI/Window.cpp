@@ -95,8 +95,9 @@ void sdl_drawText(int x, int y, SDL_Color scolor, string text, TTF_Font *font)
 {
     SDL_Surface *surface = TTF_RenderUTF8_Blended_Wrapped(font, text.c_str(), scolor, 1280);
     SDL_SetSurfaceAlphaMod(surface, 255);
+    SDL_Texture *tex = sdl_textureFromSurface(surface);
     SDL_Rect position = { x, y, surface->w, surface->h };
-    SDL_BlitSurface(surface, NULL, sdlsurface, &position);
+    SDL_RenderCopy(sdlrenderer, tex, NULL, &position);
     SDL_FreeSurface(surface);
 }
 
@@ -116,7 +117,7 @@ void sdl_drawImage(string Path, int X, int Y)
     SDL_Surface *imgs = IMG_Load(Path.c_str());
 	if(imgs)
 	{
-		SDL_Texture *imgt = SDL_CreateTextureFromSurface(sdlrenderer, imgs);
+		SDL_Texture *imgt = sdl_textureFromSurface(imgs);
         SDL_Rect position;
 	    position.x = X;
         position.y = Y;
