@@ -47,7 +47,13 @@ int main()
                 mainw.setFooter("JoyCon(s) detached");
                 break;
             case EventType::KeyHeld:
-                if(event.keyHeld() & KEY_A) mainw.setFooter("A button was held");
+                if(event.keyHeld() & KEY_A) mainw.setFooter("A button held");
+                break;
+            case EventType::KeyDown:
+                if(event.keyDown() & KEY_A) mainw.setFooter("A button down");
+                break;
+            case EventType::KeyUp:
+                if(event.keyUp() & KEY_A) mainw.setFooter("A button up");
                 break;
         }
     };

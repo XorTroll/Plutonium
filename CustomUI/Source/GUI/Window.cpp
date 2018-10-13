@@ -13,8 +13,9 @@ SDL_RWops *fext;
 bool rfirst = true;
 u8 omode = 0;
 bool attach = false;
-
-void sdl_exit();
+u64 idown = 0;
+u64 iup = 0;
+u64 iheld = 0;
 
 void sdl_init()
 {
@@ -471,6 +472,10 @@ void CustomUI::GUI::Window::show()
     while(this->cont)
     {
         appletMainLoop();
+        hidScanInput();
+        idown = hidKeysDown(CONTROLLER_P1_AUTO);
+        iheld = hidKeysHeld(CONTROLLER_P1_AUTO);
+        iup = hidKeysUp(CONTROLLER_P1_AUTO);
         HidSharedMemory *hmem = (HidSharedMemory*)hidGetSharedmemAddr();
         if(rfirst)
         {
@@ -497,11 +502,9 @@ void CustomUI::GUI::Window::show()
             else (this->pages[this->cpageidx].getEventCallback())(Event(EventType::ChangedToDocked));
             this->draw();
         }
-        hidScanInput();
-        u64 idown = hidKeysDown(CONTROLLER_P1_AUTO);
         if((idown & KEY_UP) && this->pagemenu)
         {
-            if(this->cpageidx > 0) this->cpageidx++;
+            if(this->cpageidx > 0) this->cpageidx--;
             else this->cpageidx = (this->pages.size() - 1);
             this->draw();
         }
@@ -553,7 +556,7 @@ void CustomUI::GUI::Window::show()
             else this->controlmenu = !this->controlmenu;
             this->draw();
         }
-        else if(hidKeysDown(CONTROLLER_P1_AUTO))
+        else if(idown)
         {
             if(!this->kexit.empty()) for(u32 i = 0; i < this->kexit.size(); i++) if(idown & this->kexit[i])
             {
@@ -577,12 +580,12 @@ void CustomUI::GUI::Window::show()
                 this->draw();
             }
         }
-        else if(hidKeysUp(CONTROLLER_P1_AUTO))
+        else if(iup)
         {
             (this->pages[this->cpageidx].getEventCallback())(Event(EventType::KeyUp));
             this->draw();
         }
-        else if(hidKeysHeld(CONTROLLER_P1_AUTO))
+        else if(iheld)
         {
             (this->pages[this->cpageidx].getEventCallback())(Event(EventType::KeyHeld));
             this->draw();

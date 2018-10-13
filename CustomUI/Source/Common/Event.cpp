@@ -1,5 +1,9 @@
 #include "Event.hpp"
 
+extern u64 idown;
+extern u64 iup;
+extern u64 iheld;
+
 CustomUI::Event::Event(CustomUI::EventType CallingType)
 {
     this->type = CallingType;
@@ -13,17 +17,17 @@ CustomUI::EventType CustomUI::Event::getType()
 
 u64 CustomUI::Event::keyDown()
 {
-    return hidKeysDown(CONTROLLER_P1_AUTO);
+    return idown;
 }
 
 u64 CustomUI::Event::keyUp()
 {
-    return hidKeysUp(CONTROLLER_P1_AUTO);
+    return iup;
 }
 
 u64 CustomUI::Event::keyHeld()
 {
-    return hidKeysHeld(CONTROLLER_P1_AUTO);
+    return iheld;
 }
 
 CustomUI::OperationMode CustomUI::Event::currentMode()
