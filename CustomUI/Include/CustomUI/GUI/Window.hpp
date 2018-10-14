@@ -10,6 +10,13 @@ namespace CustomUI
     {
         class Window;
 
+        enum class DrawFont
+        {
+            Standard25,
+            Standard20,
+            Extended20,
+        };
+
         class Page
         {
             public:
@@ -26,6 +33,7 @@ namespace CustomUI
                 void drawRectangle(u32 X, u32 Y, u32 Width, u32 Height, Color RectangleColor);
                 void drawImage(string Path, u32 X, u32 Y);
                 void drawImageChroma(string Path, u32 X, u32 Y, Color ChromaKey);
+                void drawText(u32 X, u32 Y, string Text, DrawFont Font, Color TextColor);
             private:
                 Window *wptr;
                 bool drawset;

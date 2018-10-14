@@ -16,12 +16,14 @@ bool attach = false;
 u64 idown = 0;
 u64 iup = 0;
 u64 iheld = 0;
+bool okromfs = false;
 
 void sdl_init()
 {
     if(!sdlinit)
     {
-        romfsInit();
+        Result rc = romfsInit();
+        okromfs = (rc == 0);
         plInitialize();
         SDL_Init(SDL_INIT_EVERYTHING);
         SDL_CreateWindowAndRenderer(1280, 720, 0, &sdlwindow, &sdlrenderer);
@@ -30,8 +32,6 @@ void sdl_init()
         SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "2");
         IMG_Init(IMG_INIT_PNG | IMG_INIT_JPG | IMG_INIT_TIF | IMG_INIT_WEBP);
         TTF_Init();
-        Mix_Init(MIX_INIT_FLAC | MIX_INIT_MOD | MIX_INIT_MP3 | MIX_INIT_OGG);
-        Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, MIX_DEFAULT_CHANNELS, 4096);
         PlFontData stdfont;
         PlFontData extfont;
         size_t fontss = 0;
@@ -51,35 +51,19 @@ void sdl_exit()
 {
     if(sdlinit)
     {
-        SDL_FreeRW(fstd1);
-        SDL_FreeRW(fstd2);
-        SDL_FreeRW(fext);
         plExit();
-        romfsExit();
+        if(okromfs) romfsExit();
         TTF_CloseFont(normal);
         TTF_CloseFont(small);
         TTF_CloseFont(shfont);
         TTF_Quit();
         IMG_Quit();
-        Mix_CloseAudio();
-        Mix_Quit();
         SDL_DestroyRenderer(sdlrenderer);
         SDL_FreeSurface(sdlsurface);
         SDL_DestroyWindow(sdlwindow);
         SDL_Quit();
         sdlinit = false;
     }
-}
-
-SDL_Surface *sdl_surfaceFromImage(string Path)
-{
-    SDL_Surface *srf = IMG_Load(Path.c_str());
-	if(srf)
-	{
-		Uint32 colorkey = SDL_MapRGBA(srf->format, 0, 0, 0, 255);
-		SDL_SetColorKey(srf, SDL_TRUE, colorkey);
-	}
-	return srf;
 }
 
 SDL_Texture *sdl_textureFromSurface(SDL_Surface *srf)
@@ -94,12 +78,13 @@ SDL_Color sdl_fromColor(CustomUI::GUI::Color GUIColor)
 
 void sdl_drawText(int x, int y, SDL_Color scolor, string text, TTF_Font *font)
 {
-    SDL_Surface *surface = TTF_RenderUTF8_Blended_Wrapped(font, text.c_str(), scolor, 1280);
+    SDL_Surface *surface = TTF_RenderUTF8_Blended(font, text.c_str(), scolor);//, 1280);
     SDL_SetSurfaceAlphaMod(surface, 255);
     SDL_Texture *tex = sdl_textureFromSurface(surface);
+    SDL_FreeSurface(surface);
     SDL_Rect position = { x, y, surface->w, surface->h };
     SDL_RenderCopy(sdlrenderer, tex, NULL, &position);
-    SDL_FreeSurface(surface);
+    SDL_DestroyTexture(tex);
 }
 
 void sdl_drawRect(int x, int y, int w, int h, SDL_Color scolor)
@@ -135,7 +120,7 @@ void sdl_drawImageChroma(string Path, int X, int Y, SDL_Color ChromaKey)
 	{
 		Uint32 colorkey = SDL_MapRGBA(imgs->format, ChromaKey.r, ChromaKey.g, ChromaKey.g, ChromaKey.a);
 		SDL_SetColorKey(imgs, SDL_TRUE, colorkey);
-		SDL_Texture *imgt = SDL_CreateTextureFromSurface(sdlrenderer, imgs);
+		SDL_Texture *imgt = sdl_textureFromSurface(imgs);
         SDL_Rect position;
 	    position.x = X;
         position.y = Y;
@@ -210,6 +195,24 @@ void CustomUI::GUI::Page::drawImage(string Path, u32 X, u32 Y)
 void CustomUI::GUI::Page::drawImageChroma(string Path, u32 X, u32 Y, Color ChromaKey)
 {
     sdl_drawImageChroma(Path, X, (Y + 75), sdl_fromColor(ChromaKey));
+}
+
+void CustomUI::GUI::Page::drawText(u32 X, u32 Y, string Text, CustomUI::GUI::DrawFont Font, CustomUI::GUI::Color TextColor)
+{
+    TTF_Font *fnt = normal;
+    switch(Font)
+    {
+        case DrawFont::Standard25:
+            fnt = normal;
+            break;
+        case DrawFont::Standard20:
+            fnt = small;
+            break;
+        case DrawFont::Extended20:
+            fnt = shfont;
+            break;
+    }
+    sdl_drawText(X, (Y + 75), sdl_fromColor(TextColor), Text, fnt);
 }
 
 CustomUI::GUI::Window::Window()
