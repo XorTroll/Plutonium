@@ -1,13 +1,7 @@
-# CustomUI - GUI / CLI libraries for libnx, using SDL2 and freetype
+# Plutonium - C++ libnx GUI libraries, using SDL2 and based on WPF's functionality
 
-- Latest release: **0.2**
+- This is not CustomUI, this is a new project with the same purpose.
 
-## Usage
+- Still not released, has very basic graphics implementation.
 
-- Check the examples.
-- You need to link to all the SDL2/freetype libraries.
-- API documentation coming soon!
-
-## Download
-
-- Check the latest [releases](https://github.com/XorTroll/CustomUI/releases)
+## This libraries will be used for [Goldleaf](https://github.com/XorTroll/Goldleaf)'s GUI!
