@@ -27,8 +27,7 @@ namespace pn::fw
             draw::Color GetColor();
             void SetColor(draw::Color TextColor);
             void OnRender(render::Renderer *Drawer);
-            void OnGlobalInput(u64 Input);
-            void OnTouch(u32 TouchX, u32 TouchY);
+            void OnInput(u64 Input);
         private:
             std::string text;
             u32 x;

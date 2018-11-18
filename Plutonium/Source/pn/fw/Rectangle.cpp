@@ -90,11 +90,7 @@ namespace pn::fw
         else Drawer->DrawRectangleFill(this->clr, this->x, this->y, this->w, this->h);
     }
 
-    void Rectangle::OnGlobalInput(u64 Input)
-    {
-    }
-
-    void Rectangle::OnTouch(u32 TouchX, u32 TouchY)
+    void Rectangle::OnInput(u64 Input)
     {
     }
 }

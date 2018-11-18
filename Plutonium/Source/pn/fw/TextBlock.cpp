@@ -127,11 +127,7 @@ namespace pn::fw
         Drawer->DrawText(this->text, this->fnt, this->fsize, this->x, this->y, this->clr);
     }
 
-    void TextBlock::OnGlobalInput(u64 Input)
-    {
-    }
-
-    void TextBlock::OnTouch(u32 TouchX, u32 TouchY)
+    void TextBlock::OnInput(u64 Input)
     {
     }
 }

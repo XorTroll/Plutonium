@@ -69,31 +69,22 @@ namespace pn
     void Application::Show()
     {
         this->show = true;
+        s32 fact = 255;
         while(this->show)
         {
             hidScanInput();
             u64 k = hidKeysHeld(CONTROLLER_P1_AUTO);
-            touchPosition tch;
-            bool touched = false;
-            if(k & KEY_TOUCH)
-            {
-                hidTouchRead(&tch, 0);
-                touched = true;
-            }
             this->rend->Clear(this->bgcolor);
             if(this->hasimage) this->rend->DrawImage(this->bgimage, 0, 0);
             if(!this->elems.empty()) for(u32 i = 0; i < this->elems.size(); i++)
             {
-                this->elems[i]->OnGlobalInput(k);
-                if(touched)
-                {
-                    u32 bx = this->elems[i]->GetX();
-                    u32 x = (this->elems[i]->GetX() + this->elems[i]->GetWidth());
-                    u32 by = this->elems[i]->GetY();
-                    u32 y = (this->elems[i]->GetY() + this->elems[i]->GetHeight());
-                    if((tch.px >= bx) && (tch.px <= x) && (tch.py >= by) && (tch.py <= y)) this->elems[i]->OnTouch(tch.px, tch.py);
-                }
+                this->elems[i]->OnInput(k);
                 this->elems[i]->OnRender(this->rend);
+            }
+            if(fact > 0)
+            {
+                this->rend->DrawRectangleFill(draw::Color(0, 0, 0, fact), 0, 0, 1280, 720);
+                fact -= 8;
             }
             this->rend->Render();
         }
@@ -102,5 +93,54 @@ namespace pn
     void Application::Close()
     {
         this->show = false;
+    }
+
+    LayoutApplication::LayoutApplication() : Application()
+    {
+        this->layidx = 0;
+    }
+
+    void LayoutApplication::AddLayout(fw::Layout *NewLayout)
+    {
+        this->elems.push_back(NewLayout);
+    }
+
+    void LayoutApplication::NavigateTo(fw::Layout *Source)
+    {
+        if(!this->elems.empty()) for(u32 i = 0; i < this->elems.size(); i++) if(this->elems[i] == Source)
+        {
+            this->layidx = i;
+            break;
+        }
+    }
+
+    void LayoutApplication::ClearLayouts()
+    {
+        this->elems.clear();
+    }
+
+    void LayoutApplication::Show()
+    {
+        this->show = true;
+        s32 fact = 255;
+        while(this->show)
+        {
+            hidScanInput();
+            u64 k = hidKeysHeld(CONTROLLER_P1_AUTO);
+            this->rend->Clear(this->bgcolor);
+            if(this->hasimage) this->rend->DrawImage(this->bgimage, 0, 0);
+            if(!this->elems.empty())
+            {
+                fw::Element *elm = this->elems[this->layidx];
+                elm->OnInput(k);
+                elm->OnRender(this->rend);
+            }
+            if(fact > 0)
+            {
+                this->rend->DrawRectangleFill(draw::Color(0, 0, 0, fact), 0, 0, 1280, 720);
+                fact -= 8;
+            }
+            this->rend->Render();
+        }
     }
 }

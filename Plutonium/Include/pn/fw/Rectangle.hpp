@@ -21,8 +21,7 @@ namespace pn::fw
             draw::Color GetColor();
             void SetColor(draw::Color RecColor);
             void OnRender(render::Renderer *Drawer);
-            void OnGlobalInput(u64 Input);
-            void OnTouch(u32 TouchX, u32 TouchY);
+            void OnInput(u64 Input);
         private:
             u32 borderr;
             u32 x;

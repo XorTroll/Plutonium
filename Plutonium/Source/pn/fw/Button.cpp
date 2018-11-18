@@ -85,15 +85,25 @@ namespace pn::fw
         u32 diam = (2 * borderr);
         if(this->hover)
         {
-            Drawer->DrawRectangleFill({ 0, 255, 0, 255 }, (this->x + borderr), (this->y + borderr), (this->w - diam), (this->h - diam));
-            Drawer->DrawRectangleFill({ 0, 255, 0, 255 }, (this->x + borderr), this->y, (this->y + this->w - diam), borderr);
-            Drawer->DrawRectangleFill({ 0, 255, 0, 255 }, (this->x + borderr), (this->y + (this->h - borderr)), (this->w - diam), borderr);
-            Drawer->DrawRectangleFill({ 0, 255, 0, 255 }, this->x, (this->y + borderr), borderr, (this->h - diam));
-            Drawer->DrawRectangleFill({ 0, 255, 0, 255 }, (this->x + (this->w - borderr)), (this->y + borderr), borderr, (this->h - diam));
-            Drawer->DrawCircle({ 0, 255, 0, 255 }, this->x, this->y, borderr);
-            Drawer->DrawCircle({ 0, 255, 0, 255 }, (this->x + this->w - diam), this->y, borderr);
-            Drawer->DrawCircle({ 0, 255, 0, 255 }, this->x, (this->h - diam), borderr);
-            Drawer->DrawCircle({ 0, 255, 0, 255 }, (this->x + this->w - diam), (this->h - diam), borderr);
+            s32 clrr = this->clr.R;
+            s32 clrg = this->clr.G;
+            s32 clrb = this->clr.B;
+            s32 nr = clrr - 70;
+            if(nr < 0) nr = 0;
+            s32 ng = clrg - 70;
+            if(ng < 0) ng = 0;
+            s32 nb = clrb - 70;
+            if(nb < 0) nb = 0;
+            draw::Color nclr(nr, ng, nb, this->clr.A);
+            Drawer->DrawRectangleFill(nclr, (this->x + borderr), (this->y + borderr), (this->w - diam), (this->h - diam));
+            Drawer->DrawRectangleFill(nclr, (this->x + borderr), this->y, (this->y + this->w - diam), borderr);
+            Drawer->DrawRectangleFill(nclr, (this->x + borderr), (this->y + (this->h - borderr)), (this->w - diam), borderr);
+            Drawer->DrawRectangleFill(nclr, this->x, (this->y + borderr), borderr, (this->h - diam));
+            Drawer->DrawRectangleFill(nclr, (this->x + (this->w - borderr)), (this->y + borderr), borderr, (this->h - diam));
+            Drawer->DrawCircle(nclr, this->x, this->y, borderr);
+            Drawer->DrawCircle(nclr, (this->x + this->w - diam), this->y, borderr);
+            Drawer->DrawCircle(nclr, this->x, (this->y + this->h - diam), borderr);
+            Drawer->DrawCircle(nclr, (this->x + this->w - diam), (this->y + this->h - diam), borderr);
         }
         else
         {
@@ -104,13 +114,13 @@ namespace pn::fw
             Drawer->DrawRectangleFill(this->clr, (this->x + (this->w - borderr)), (this->y + borderr), borderr, (this->h - diam));
             Drawer->DrawCircle(this->clr, this->x, this->y, borderr);
             Drawer->DrawCircle(this->clr, (this->x + this->w - diam), this->y, borderr);
-            Drawer->DrawCircle(this->clr, this->x, (this->h - diam), borderr);
-            Drawer->DrawCircle(this->clr, (this->x + this->w - diam), (this->h - diam), borderr);
+            Drawer->DrawCircle(this->clr, this->x, (this->y + this->h - diam), borderr);
+            Drawer->DrawCircle(this->clr, (this->x + this->w - diam), (this->y + this->h - diam), borderr);
         }
         Drawer->DrawText(this->cnt, draw::SystemFont::Standard, 25, (this->x + ((this->w - textsize) / 2)), (this->y + ((this->h - 25) / 2)), { 0, 0, 0, 255 });
     }
 
-    void Button::OnGlobalInput(u64 Input)
+    void Button::OnInput(u64 Input)
     {
         if(this->hover)
         {
@@ -119,14 +129,21 @@ namespace pn::fw
                 (this->clickcb)();
                 this->hover = false;
             }
+            else
+            {
+                touchPosition tch;
+                hidTouchRead(&tch, 0);
+                if(!(((this->x + this->w) > tch.px) && (tch.px > this->x) && ((this->y + this->h) > tch.py) && (tch.py > this->y))) this->hover = false;
+            }
         }
         else
         {
-            if(Input & KEY_TOUCH) this->hover = true;
+            if(Input & KEY_TOUCH)
+            {
+                touchPosition tch;
+                hidTouchRead(&tch, 0);
+                if(((this->x + this->w) > tch.px) && (tch.px > this->x) && ((this->y + this->h) > tch.py) && (tch.py > this->y)) this->hover = true;
+            }
         }
-    }
-
-    void Button::OnTouch(u32 TouchX, u32 TouchY)
-    {
     }
 }

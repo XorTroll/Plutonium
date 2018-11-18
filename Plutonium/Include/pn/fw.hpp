@@ -4,3 +4,4 @@
 #include <pn/fw/Rectangle.hpp>
 #include <pn/fw/TextBlock.hpp>
 #include <pn/fw/Button.hpp>
+#include <pn/fw/Layout.hpp>

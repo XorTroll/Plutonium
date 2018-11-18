@@ -1,7 +1,7 @@
 
 #pragma once
 #include <vector>
-#include <pn/fw/Rectangle.hpp>
+#include <pn/fw.hpp>
 
 namespace pn
 {
@@ -27,5 +27,17 @@ namespace pn
             bool show;
             std::vector<fw::Element*> elems;
             render::Renderer *rend;
+    };
+
+    class LayoutApplication : public Application
+    {
+        public:
+            LayoutApplication();
+            void AddLayout(fw::Layout *NewLayout);
+            void NavigateTo(fw::Layout *Source);
+            void ClearLayouts();
+            void Show();
+        private:
+            u32 layidx;
     };
 }

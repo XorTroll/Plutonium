@@ -23,8 +23,7 @@ namespace pn::fw
             void SetColor(draw::Color ButtonColor);
             void SetOnClick(std::function<void()> ClickCallback);
             void OnRender(render::Renderer *Drawer);
-            void OnGlobalInput(u64 Input);
-            void OnTouch(u32 TouchX, u32 TouchY);
+            void OnInput(u64 Input);
         private:
             u32 x;
             u32 y;
