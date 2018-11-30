@@ -66,6 +66,26 @@ namespace pn
         }
     }
 
+    void Application::SetCustomFont(std::string FontPath)
+    {
+        this->rend->SetCustomFont(FontPath);
+    }
+
+    bool Application::UsesCustomFont()
+    {
+        return this->rend->UsesCustomFont();
+    }
+
+    std::string Application::GetCustomFont()
+    {
+        return this->rend->GetCustomFont();
+    }
+
+    void Application::ShowDialog(fw::Dialog *Dialog)
+    {
+        Dialog->Show(this->rend);
+    }
+
     void Application::Show()
     {
         this->show = true;
@@ -78,8 +98,8 @@ namespace pn
             if(this->hasimage) this->rend->DrawImage(this->bgimage, 0, 0);
             if(!this->elems.empty()) for(u32 i = 0; i < this->elems.size(); i++)
             {
-                this->elems[i]->OnInput(k);
                 this->elems[i]->OnRender(this->rend);
+                this->elems[i]->OnInput(k);
             }
             if(fact > 0)
             {

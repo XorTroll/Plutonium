@@ -9,9 +9,9 @@ namespace pn::fw
         public:
             TextBlock(u32 X, u32 Y, std::string Text);
             TextBlock(u32 X, u32 Y, std::string Text, draw::Color TextColor);
-            TextBlock(u32 X, u32 Y, std::string Text, draw::SystemFont Font);
-            TextBlock(u32 X, u32 Y, std::string Text, draw::Color TextColor, draw::SystemFont Font);
-            TextBlock(u32 X, u32 Y, std::string Text, draw::Color TextColor, draw::SystemFont Font, u32 Size);
+            TextBlock(u32 X, u32 Y, std::string Text, draw::Font Font);
+            TextBlock(u32 X, u32 Y, std::string Text, draw::Color TextColor, draw::Font Font);
+            TextBlock(u32 X, u32 Y, std::string Text, draw::Color TextColor, draw::Font Font, u32 Size);
             u32 GetX();
             void SetX(u32 X);
             u32 GetY();
@@ -20,8 +20,8 @@ namespace pn::fw
             u32 GetHeight();
             std::string GetText();
             void SetText(std::string Text);
-            draw::SystemFont GetFont();
-            void SetFont(draw::SystemFont Font);
+            draw::Font GetFont();
+            void SetFont(draw::Font Font);
             u32 GetFontSize();
             void SetFontSize(u32 Size);
             draw::Color GetColor();
@@ -32,7 +32,7 @@ namespace pn::fw
             std::string text;
             u32 x;
             u32 y;
-            draw::SystemFont fnt;
+            draw::Font fnt;
             u32 fsize;
             draw::Color clr;
     };

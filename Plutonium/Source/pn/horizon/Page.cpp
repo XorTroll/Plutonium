@@ -74,13 +74,13 @@ namespace pn::horizon
 
     void Page::OnRender(render::Renderer *Drawer)
     {
-        Drawer->DrawText(this->name, draw::SystemFont::Standard, 30, 30, 30, draw::Color(0, 0, 0, 255));
+        Drawer->DrawText(this->name, draw::Font::NintendoStandard, 30, 30, 30, draw::Color(0, 0, 0, 255));
         u32 basey = 50;
         std::map<std::string, std::string> ctrlss = this->ctrls->GetControls();
         if(!ctrlss.empty()) for(auto const& ctrl : ctrlss)
         {
-            Drawer->DrawText(ctrl.first, draw::SystemFont::Extended, 20, 50, basey, draw::Color(0, 0, 0, 255));
-            Drawer->DrawText(ctrl.second, draw::SystemFont::Standard, 20, 80, basey, draw::Color(0, 0, 0, 255));
+            Drawer->DrawText(ctrl.first, draw::Font::NintendoExtended, 20, 50, basey, draw::Color(0, 0, 0, 255));
+            Drawer->DrawText(ctrl.second, draw::Font::NintendoStandard, 20, 80, basey, draw::Color(0, 0, 0, 255));
             basey += 25;
         }
         if(!this->pelems.empty()) for(u32 i = 0; i < this->pelems.size(); i++) this->pelems[i]->OnRender(Drawer);

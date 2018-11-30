@@ -42,6 +42,32 @@ namespace pn::render
         return this->initialized;
     }
 
+    void Renderer::SetCustomFont(std::string FontPath)
+    {
+        std::ifstream ifs(FontPath);
+        if(ifs.good())
+        {
+            this->cfont = true;
+            this->pfont = FontPath;
+        }
+        ifs.close();
+    }
+
+    bool Renderer::UsesCustomFont()
+    {
+        return this->cfont;
+    }
+
+    bool Renderer::HasRomFs()
+    {
+        return this->okromfs;
+    }
+
+    std::string Renderer::GetCustomFont()
+    {
+        return this->pfont;
+    }
+
     void Renderer::Clear(draw::Color ClearColor)
     {
         SDL_SetRenderDrawColor(this->rendrd, ClearColor.R, ClearColor.G, ClearColor.B, ClearColor.A);
@@ -85,19 +111,28 @@ namespace pn::render
         SDL_FreeSurface(imgs);
     }
 
-    void Renderer::DrawText(std::string Text, draw::SystemFont Font, u32 Size, u32 X, u32 Y, draw::Color TextColor)
+    void Renderer::DrawText(std::string Text, draw::Font Font, u32 Size, u32 X, u32 Y, draw::Color TextColor)
     {
         PlFontData plfont;
         TTF_Font *font = NULL;
         SDL_RWops *mem = NULL;
         switch(Font)
         {
-            case draw::SystemFont::Standard:
+            case draw::Font::Custom:
+                if(this->cfont) font = TTF_OpenFont(this->pfont.c_str(), Size);
+                else
+                {
+                    plGetSharedFontByType(&plfont, 0);
+                    mem = SDL_RWFromMem(plfont.address, plfont.size);
+                    font = TTF_OpenFontRW(mem, 1, Size);   
+                }
+                break;
+            case draw::Font::NintendoStandard:
                 plGetSharedFontByType(&plfont, 0);
                 mem = SDL_RWFromMem(plfont.address, plfont.size);
                 font = TTF_OpenFontRW(mem, 1, Size);
                 break;
-            case draw::SystemFont::Extended:
+            case draw::Font::NintendoExtended:
                 plGetSharedFontByType(&plfont, 5);
                 mem = SDL_RWFromMem(plfont.address, plfont.size);
                 font = TTF_OpenFontRW(mem, 1, Size);
@@ -105,7 +140,7 @@ namespace pn::render
         }
         if(font == NULL) return;
         SDL_Color clr = { TextColor.R, TextColor.G, TextColor.B, TextColor.A };
-        SDL_Surface *surface = TTF_RenderUTF8_Blended(font, Text.c_str(), clr);
+        SDL_Surface *surface = TTF_RenderUTF8_Blended_Wrapped(font, Text.c_str(), clr, 1280);
         SDL_SetSurfaceAlphaMod(surface, 255);
         SDL_Texture *tex = SDL_CreateTextureFromSurface(this->rendrd, surface);
         SDL_FreeSurface(surface);
@@ -150,5 +185,75 @@ namespace pn::render
             SDL_RenderDrawLine(this->rendrd, cx - dx, cy + dy - radius, cx + dx, cy + dy - radius);
             SDL_RenderDrawLine(this->rendrd, cx - dx, cy - dy + radius, cx + dx, cy - dy + radius);
         }
+    }
+
+    u32 Renderer::GetTextWidth(draw::Font Font, std::string Text, u32 Size)
+    {
+        PlFontData plfont;
+        TTF_Font *font = NULL;
+        SDL_RWops *mem = NULL;
+        switch(Font)
+        {
+            case draw::Font::Custom:
+                if(this->cfont) font = TTF_OpenFont(this->pfont.c_str(), Size);
+                else
+                {
+                    plGetSharedFontByType(&plfont, 0);
+                    mem = SDL_RWFromMem(plfont.address, plfont.size);
+                    font = TTF_OpenFontRW(mem, 1, Size);   
+                }
+                break;
+            case draw::Font::NintendoStandard:
+                plGetSharedFontByType(&plfont, 0);
+                mem = SDL_RWFromMem(plfont.address, plfont.size);
+                font = TTF_OpenFontRW(mem, 1, Size);
+                break;
+            case draw::Font::NintendoExtended:
+                plGetSharedFontByType(&plfont, 5);
+                mem = SDL_RWFromMem(plfont.address, plfont.size);
+                font = TTF_OpenFontRW(mem, 1, Size);
+                break;
+        }
+        if(font == NULL) return 0;
+        int w = 0;
+        int h = 0;
+        TTF_SizeText(font, Text.c_str(), &w, &h);
+        TTF_CloseFont(font);
+        return w;
+    }
+
+    u32 Renderer::GetTextHeight(draw::Font Font, std::string Text, u32 Size)
+    {
+        PlFontData plfont;
+        TTF_Font *font = NULL;
+        SDL_RWops *mem = NULL;
+        switch(Font)
+        {
+            case draw::Font::Custom:
+                if(this->cfont) font = TTF_OpenFont(this->pfont.c_str(), Size);
+                else
+                {
+                    plGetSharedFontByType(&plfont, 0);
+                    mem = SDL_RWFromMem(plfont.address, plfont.size);
+                    font = TTF_OpenFontRW(mem, 1, Size);   
+                }
+                break;
+            case draw::Font::NintendoStandard:
+                plGetSharedFontByType(&plfont, 0);
+                mem = SDL_RWFromMem(plfont.address, plfont.size);
+                font = TTF_OpenFontRW(mem, 1, Size);
+                break;
+            case draw::Font::NintendoExtended:
+                plGetSharedFontByType(&plfont, 5);
+                mem = SDL_RWFromMem(plfont.address, plfont.size);
+                font = TTF_OpenFontRW(mem, 1, Size);
+                break;
+        }
+        if(font == NULL) return 0;
+        int w = 0;
+        int h = 0;
+        TTF_SizeText(font, Text.c_str(), &w, &h);
+        TTF_CloseFont(font);
+        return h;
     }
 }

@@ -3,9 +3,10 @@
 
 namespace pn::draw
 {
-    enum class SystemFont
+    enum class Font
     {
-        Standard,
-        Extended,
+        Custom,
+        NintendoStandard,
+        NintendoExtended,
     };
 }

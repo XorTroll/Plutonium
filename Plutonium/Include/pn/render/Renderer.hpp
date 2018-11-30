@@ -3,6 +3,7 @@
 #include <pn/draw/Color.hpp>
 #include <pn/draw/Font.hpp>
 #include <string>
+#include <fstream>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_mixer.h>
@@ -16,17 +17,25 @@ namespace pn::render
             void Initialize();
             void Finalize();
             bool HasInitialized();
+            void SetCustomFont(std::string FontPath);
+            bool UsesCustomFont();
+            std::string GetCustomFont();
+            bool HasRomFs();
             void Clear(draw::Color ClearColor);
             void Render();
             void DrawImage(std::string Path, u32 X, u32 Y);
             void DrawImageColorKey(std::string Path, draw::Color ColorKey, u32 X, u32 Y);
-            void DrawText(std::string Text, draw::SystemFont Font, u32 Size, u32 X, u32 Y, draw::Color TextColor);
+            void DrawText(std::string Text, draw::Font Font, u32 Size, u32 X, u32 Y, draw::Color TextColor);
             void DrawRectangle(draw::Color RecColor, u32 X, u32 Y, u32 Width, u32 Height);
             void DrawRectangleFill(draw::Color RecColor, u32 X, u32 Y, u32 Width, u32 Height);
             void DrawCircle(draw::Color CircleColor, u32 X, u32 Y, u32 Radius);
+            u32 GetTextWidth(draw::Font Font, std::string Text, u32 Size);
+            u32 GetTextHeight(draw::Font Font, std::string Text, u32 Size);
         private:
             bool okromfs;
             bool initialized;
+            bool cfont;
+            std::string pfont;
             SDL_Window *rendwd;
             SDL_Renderer *rendrd;
             SDL_Surface *rendsf;

@@ -33,5 +33,6 @@ namespace pn::fw
             std::string cnt;
             std::function<void()> clickcb;
             bool hover;
+            s32 hoverfact;
     };
 }

@@ -18,6 +18,10 @@ namespace pn
             bool HasBackgroundImage();
             void SetBackgroundImage(std::string Path);
             void DeleteBackgroundImage();
+            void SetCustomFont(std::string FontPath);
+            bool UsesCustomFont();
+            std::string GetCustomFont();
+            void ShowDialog(fw::Dialog *Dialog);
             void Show();
             void Close();
         protected:

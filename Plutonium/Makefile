@@ -16,7 +16,7 @@ include $(DEVKITPRO)/libnx/switch_rules
 # INCLUDES is a list of directories containing header files
 #---------------------------------------------------------------------------------
 BUILD		:=	Build
-TARGET		:=  Plutonium
+TARGET		:=  pn
 SOURCES		:=	Source Source/pn Source/pn/draw Source/pn/fw Source/pn/render Source/pn/horizon Source/pn/horizon/button
 INCLUDES	:=	Include Include/pn Include/pn/draw Include/pn/fw Include/pn/render Include/pn/horizon Include/pn/horizon/button
 
@@ -32,12 +32,12 @@ CFLAGS	:=	-g -w -D__SWITCH__ \
 
 CFLAGS	+=	$(INCLUDE)
 
-CXXFLAGS	:= $(CFLAGS) -fno-rtti -fno-exceptions -std=c++17
+CXXFLAGS	:= $(CFLAGS) -fno-rtti -fno-exceptions -std=gnu++17
 
 ASFLAGS	:=	-g $(ARCH)
 LDFLAGS	=	-specs=${DEVKITPRO}/libnx/switch.specs -g $(ARCH) -Wl,-r,-Map,$(notdir $*.map)
 
-LIBS	:=  -lnx -lfreetype -lSDL2_mixer -lmodplug -lmpg123 -lvorbisidec -logg -lSDL2_ttf -lSDL2_gfx -lSDL2_image -lpng -ljpeg `sdl2-config --libs` `freetype-config --libs`
+LIBS	:=  -lnx -lfreetype -lSDL2_ttf -lSDL2_gfx -lSDL2_image -lpng -ljpeg `sdl2-config --libs` `freetype-config --libs`
 
 #---------------------------------------------------------------------------------
 # list of directories containing libraries, this must be the top level containing
@@ -84,13 +84,14 @@ export INCLUDE	:=	$(foreach dir,$(INCLUDES),-I$(CURDIR)/$(dir)) \
 			$(foreach dir,$(LIBDIRS),-I$(dir)/include) \
 			-I$(CURDIR)/$(BUILD)
 
-.PHONY: all
+.PHONY: $(BUILD) clean all
 
 #---------------------------------------------------------------------------------
 all: $(BUILD)
 
 $(BUILD):
-	@[ -d $(BUILD) ] || mkdir -p $(BUILD)
+	@[ -d $@ ] || mkdir -p $@
+	@[ -d Output/lib ] || mkdir -p Output/lib
 	@$(MAKE) --no-print-directory -C $(BUILD) -f $(CURDIR)/Makefile
 	@rm -rf Output/include
 	@cp -r Include Output/include
@@ -98,7 +99,7 @@ $(BUILD):
 #---------------------------------------------------------------------------------
 clean:
 	@echo clean ...
-	@rm -fr $(DEPSDIR)
+	@rm -fr $(BUILD) $(OUTPUT).a
 
 #---------------------------------------------------------------------------------
 else

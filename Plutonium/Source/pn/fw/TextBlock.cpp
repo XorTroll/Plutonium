@@ -8,7 +8,7 @@ namespace pn::fw
         this->y = Y;
         this->text = Text;
         this->clr = { 0, 0, 0, 255 };
-        this->fnt = draw::SystemFont::Standard;
+        this->fnt = draw::Font::NintendoStandard;
         this->fsize = 25;
     }
 
@@ -18,11 +18,11 @@ namespace pn::fw
         this->y = Y;
         this->text = Text;
         this->clr = TextColor;
-        this->fnt = draw::SystemFont::Standard;
+        this->fnt = draw::Font::NintendoStandard;
         this->fsize = 25;
     }
 
-    TextBlock::TextBlock(u32 X, u32 Y, std::string Text, draw::SystemFont Font)
+    TextBlock::TextBlock(u32 X, u32 Y, std::string Text, draw::Font Font)
     {
         this->x = X;
         this->y = Y;
@@ -32,7 +32,7 @@ namespace pn::fw
         this->fsize = 25;
     }
 
-    TextBlock::TextBlock(u32 X, u32 Y, std::string Text, draw::Color TextColor, draw::SystemFont Font)
+    TextBlock::TextBlock(u32 X, u32 Y, std::string Text, draw::Color TextColor, draw::Font Font)
     {
         this->x = X;
         this->y = Y;
@@ -42,7 +42,7 @@ namespace pn::fw
         this->fsize = 25;
     }
 
-    TextBlock::TextBlock(u32 X, u32 Y, std::string Text, draw::Color TextColor, draw::SystemFont Font, u32 Size)
+    TextBlock::TextBlock(u32 X, u32 Y, std::string Text, draw::Color TextColor, draw::Font Font, u32 Size)
     {
         this->x = X;
         this->y = Y;
@@ -92,12 +92,12 @@ namespace pn::fw
         this->text = Text;
     }
 
-    draw::SystemFont TextBlock::GetFont()
+    draw::Font TextBlock::GetFont()
     {
         return this->fnt;
     }
 
-    void TextBlock::SetFont(draw::SystemFont Font)
+    void TextBlock::SetFont(draw::Font Font)
     {
         this->fnt = Font;
     }

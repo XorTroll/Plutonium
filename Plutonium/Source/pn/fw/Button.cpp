@@ -11,6 +11,7 @@ namespace pn::fw
         this->cnt = Content;
         this->clr = ButtonColor;
         this->hover = false;
+        this->hoverfact = 255;
     }
 
     u32 Button::GetX()
@@ -80,44 +81,41 @@ namespace pn::fw
 
     void Button::OnRender(render::Renderer *Drawer)
     {
-        u32 textsize = (this->cnt.length() * 25);
-        u32 borderr = 25;
-        u32 diam = (2 * borderr);
+        s32 clrr = this->clr.R;
+        s32 clrg = this->clr.G;
+        s32 clrb = this->clr.B;
+        s32 nr = clrr - 70;
+        if(nr < 0) nr = 0;
+        s32 ng = clrg - 70;
+        if(ng < 0) ng = 0;
+        s32 nb = clrb - 70;
+        if(nb < 0) nb = 0;
+        draw::Color nclr(nr, ng, nb, this->clr.A);
         if(this->hover)
         {
-            s32 clrr = this->clr.R;
-            s32 clrg = this->clr.G;
-            s32 clrb = this->clr.B;
-            s32 nr = clrr - 70;
-            if(nr < 0) nr = 0;
-            s32 ng = clrg - 70;
-            if(ng < 0) ng = 0;
-            s32 nb = clrb - 70;
-            if(nb < 0) nb = 0;
-            draw::Color nclr(nr, ng, nb, this->clr.A);
-            Drawer->DrawRectangleFill(nclr, (this->x + borderr), (this->y + borderr), (this->w - diam), (this->h - diam));
-            Drawer->DrawRectangleFill(nclr, (this->x + borderr), this->y, (this->y + this->w - diam), borderr);
-            Drawer->DrawRectangleFill(nclr, (this->x + borderr), (this->y + (this->h - borderr)), (this->w - diam), borderr);
-            Drawer->DrawRectangleFill(nclr, this->x, (this->y + borderr), borderr, (this->h - diam));
-            Drawer->DrawRectangleFill(nclr, (this->x + (this->w - borderr)), (this->y + borderr), borderr, (this->h - diam));
-            Drawer->DrawCircle(nclr, this->x, this->y, borderr);
-            Drawer->DrawCircle(nclr, (this->x + this->w - diam), this->y, borderr);
-            Drawer->DrawCircle(nclr, this->x, (this->y + this->h - diam), borderr);
-            Drawer->DrawCircle(nclr, (this->x + this->w - diam), (this->y + this->h - diam), borderr);
+            Drawer->DrawRectangleFill(this->clr, this->x, this->y, this->w, this->h);
+            if(this->hoverfact < 255)
+            {
+                Drawer->DrawRectangleFill(draw::Color(nr, ng, nb, this->hoverfact), this->x, this->y, this->w, this->h);
+                this->hoverfact += 48;
+            }
+            else Drawer->DrawRectangleFill(nclr, this->x, this->y, this->w, this->h);
         }
         else
         {
-            Drawer->DrawRectangleFill(this->clr, (this->x + borderr), (this->y + borderr), (this->w - diam), (this->h - diam));
-            Drawer->DrawRectangleFill(this->clr, (this->x + borderr), this->y, (this->y + this->w - diam), borderr);
-            Drawer->DrawRectangleFill(this->clr, (this->x + borderr), (this->y + (this->h - borderr)), (this->w - diam), borderr);
-            Drawer->DrawRectangleFill(this->clr, this->x, (this->y + borderr), borderr, (this->h - diam));
-            Drawer->DrawRectangleFill(this->clr, (this->x + (this->w - borderr)), (this->y + borderr), borderr, (this->h - diam));
-            Drawer->DrawCircle(this->clr, this->x, this->y, borderr);
-            Drawer->DrawCircle(this->clr, (this->x + this->w - diam), this->y, borderr);
-            Drawer->DrawCircle(this->clr, this->x, (this->y + this->h - diam), borderr);
-            Drawer->DrawCircle(this->clr, (this->x + this->w - diam), (this->y + this->h - diam), borderr);
+            Drawer->DrawRectangleFill(this->clr, this->x, this->y, this->w, this->h);
+            if(this->hoverfact > 0)
+            {
+                Drawer->DrawRectangleFill(draw::Color(nr, ng, nb, this->hoverfact), this->x, this->y, this->w, this->h);
+                this->hoverfact -= 48;
+            }
+            else Drawer->DrawRectangleFill(this->clr, this->x, this->y, this->w, this->h);
         }
-        Drawer->DrawText(this->cnt, draw::SystemFont::Standard, 25, (this->x + ((this->w - textsize) / 2)), (this->y + ((this->h - 25) / 2)), { 0, 0, 0, 255 });
+        u32 xw = Drawer->GetTextWidth(draw::Font::Custom, this->cnt, 25);
+        u32 xh = Drawer->GetTextHeight(draw::Font::Custom, this->cnt, 25);
+        u32 tx = ((this->w - xw) / 2) + this->x;
+        u32 ty = ((this->h - xh) / 2) + this->y;
+        Drawer->DrawText(this->cnt, draw::Font::Custom, 25, tx, ty, { 0, 0, 0, 255 });
     }
 
     void Button::OnInput(u64 Input)
@@ -128,12 +126,17 @@ namespace pn::fw
             {
                 (this->clickcb)();
                 this->hover = false;
+                this->hoverfact = 255;
             }
             else
             {
                 touchPosition tch;
                 hidTouchRead(&tch, 0);
-                if(!(((this->x + this->w) > tch.px) && (tch.px > this->x) && ((this->y + this->h) > tch.py) && (tch.py > this->y))) this->hover = false;
+                if(!(((this->x + this->w) > tch.px) && (tch.px > this->x) && ((this->y + this->h) > tch.py) && (tch.py > this->y)))
+                {
+                    this->hover = false;
+                    this->hoverfact = 255;
+                }
             }
         }
         else
@@ -142,7 +145,11 @@ namespace pn::fw
             {
                 touchPosition tch;
                 hidTouchRead(&tch, 0);
-                if(((this->x + this->w) > tch.px) && (tch.px > this->x) && ((this->y + this->h) > tch.py) && (tch.py > this->y)) this->hover = true;
+                if(((this->x + this->w) > tch.px) && (tch.px > this->x) && ((this->y + this->h) > tch.py) && (tch.py > this->y)) if(!this->hover)
+                {
+                    this->hover = true;
+                    this->hoverfact = 0;
+                }
             }
         }
     }
