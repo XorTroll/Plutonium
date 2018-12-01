@@ -22,7 +22,7 @@ namespace pn::fw
     class Menu : public Element
     {
         public:
-            Menu(u32 X, u32 Y, u32 Width, u32 Height, draw::Color OptionColor, u32 ItemSize);
+            Menu(u32 X, u32 Y, u32 Width, draw::Color OptionColor, u32 ItemSize, u32 ItemsToShow);
             u32 GetX();
             void SetX(u32 X);
             u32 GetY();
@@ -30,19 +30,24 @@ namespace pn::fw
             u32 GetWidth();
             void SetWidth(u32 Width);
             u32 GetHeight();
-            void SetHeight(u32 Height);
+            u32 GetItemSize();
+            void SetItemSize(u32 ItemSize);
+            u32 GetNumberOfItemsToShow();
+            void SetNumberOfItemsToShow(u32 ItemsToShow);
             draw::Color GetColor();
             void SetColor(draw::Color OptionColor);
             void AddItem(MenuItem *Item);
+            void ClearItems();
             void OnRender(render::Renderer *Drawer);
             void OnInput(u64 Input);
         private:
             u32 x;
             u32 y;
             u32 w;
-            u32 h;
             u32 isize;
+            u32 ishow;
             u32 previsel;
+            u32 fisel;
             u32 isel;
             s32 pselfact;
             s32 selfact;

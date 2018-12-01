@@ -7,8 +7,7 @@ namespace pn::fw
     class Toggle : public Element
     {
         public:
-            Toggle(u32 X, u32 Y, std::string Content, draw::Color General);
-            Toggle(u32 X, u32 Y, std::string Content, draw::Color On, draw::Color Off);
+            Toggle(u32 X, u32 Y, std::string Content, u64 Key, draw::Color Checked);
             u32 GetX();
             void SetX(u32 X);
             u32 GetY();
@@ -23,19 +22,20 @@ namespace pn::fw
             void SetFontSize(u32 Size);
             draw::Color GetColor();
             void SetColor(draw::Color General);
-            draw::Color GetOnColor();
-            void SetOnColor(draw::Color On);
-            draw::Color GetOffColor();
-            void SetOffColor(draw::Color Off);
+            u64 GetKey();
+            void SetKey(u64 Key);
             void OnRender(render::Renderer *Drawer);
             void OnInput(u64 Input);
+            bool IsChecked();
         private:
             std::string cnt;
             u32 x;
             u32 y;
-            bool toggled;
-            bool genclr;
-            draw::Color on;
-            draw::Color off;
+            u64 key;
+            bool checked;
+            draw::Color clr;
+            draw::Font fnt;
+            u32 fsize;
+            s32 togfact;
     };
 }

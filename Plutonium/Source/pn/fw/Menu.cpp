@@ -5,6 +5,7 @@ namespace pn::fw
     MenuItem::MenuItem(std::string Name)
     {
         this->name = Name;
+        this->cb = [&](){};
     }
 
     std::string MenuItem::GetName()
@@ -27,16 +28,17 @@ namespace pn::fw
         return this->cb;
     }
 
-    Menu::Menu(u32 X, u32 Y, u32 Width, u32 Height, draw::Color OptionColor, u32 ItemSize)
+    Menu::Menu(u32 X, u32 Y, u32 Width, draw::Color OptionColor, u32 ItemSize, u32 ItemsToShow)
     {
         this->x = X;
         this->y = Y;
         this->w = Width;
-        this->h = Height;
         this->clr = OptionColor;
         this->isize = ItemSize;
+        this->ishow = ItemsToShow;
         this->previsel = 0;
         this->isel = 0;
+        this->fisel = 0;
         this->selfact = 255;
         this->pselfact = 0;
     }
@@ -73,12 +75,27 @@ namespace pn::fw
 
     u32 Menu::GetHeight()
     {
-        return this->h;
+        return (this->isize * this->ishow);
     }
 
-    void Menu::SetHeight(u32 Height)
+    u32 Menu::GetItemSize()
     {
-        this->h = Height;
+        return this->isize;
+    }
+
+    void Menu::SetItemSize(u32 ItemSize)
+    {
+        this->isize = ItemSize;
+    }
+
+    u32 Menu::GetNumberOfItemsToShow()
+    {
+        return this->isize;
+    }
+
+    void Menu::SetNumberOfItemsToShow(u32 ItemsToShow)
+    {
+        this->isize = ItemsToShow;
     }
 
     draw::Color Menu::GetColor()
@@ -96,6 +113,11 @@ namespace pn::fw
         this->itms.push_back(Item);
     }
 
+    void Menu::ClearItems()
+    {
+        this->itms.clear();
+    }
+
     void Menu::OnRender(render::Renderer *Drawer)
     {
         if(!this->itms.empty())
@@ -104,7 +126,9 @@ namespace pn::fw
             u32 cy = this->y;
             u32 cw = this->w;
             u32 ch = this->isize;
-            for(u32 i = 0; i < this->itms.size(); i++)
+            u32 its = this->ishow;
+            if(its > this->itms.size()) its = this->itms.size();
+            for(u32 i = this->fisel; i < (its + this->fisel); i++)
             {
                 s32 clrr = this->clr.R;
                 s32 clrg = this->clr.G;
@@ -145,37 +169,77 @@ namespace pn::fw
                 Drawer->DrawText(cnt, draw::Font::Custom, 25, tx, ty, { 0, 0, 0, 255 });
                 cy += ch;
             }
+            if(this->ishow < this->itms.size())
+            {
+                u32 scx = this->x + (this->w - 20);
+                u32 scy = this->y;
+                u32 scw = 20;
+                u32 sch = (this->ishow * this->isize);
+                Drawer->DrawRectangleFill({ 0, 0, 255, 255 }, scx, scy, scw, sch);
+                u32 fch = ((this->ishow * sch) / this->itms.size());
+                u32 fcy = scy + (this->fisel * (sch / this->itms.size()));
+                Drawer->DrawRectangleFill({ 0, 255, 255, 255 }, scx, fcy, scw, fch);
+            }
+            bool crop = false;
+            for(u32 al = 250; al > 0; al -= 50)
+            {
+                Drawer->DrawRectangleFill({ 130, 130, 130, al }, cx, cy, cw, 1);
+                if(crop)
+                {
+                    cw -= 2;
+                    cx++;
+                }
+                crop = !crop;
+                cy++;
+            }
         }
     }
 
     void Menu::OnInput(u64 Input)
     {
-        if(Input & KEY_DDOWN)
+        u64 k = hidKeysDown(CONTROLLER_P1_AUTO);
+        if(k & KEY_DOWN)
         {
             if(this->isel < (this->itms.size() - 1))
             {
-                this->previsel = this->isel;
-                this->isel++;
-                if(!this->itms.empty()) for(u32 i = 0; i < this->itms.size(); i++)
+                if((this->isel - this->fisel) == (this->ishow - 1))
                 {
-                    if(i == this->isel) this->selfact = 0;
-                    else if(i == this->previsel) this->pselfact = 255;
+                    this->fisel++;
+                    this->isel++;
+                }
+                else
+                {
+                    this->previsel = this->isel;
+                    this->isel++;
+                    if(!this->itms.empty()) for(u32 i = 0; i < this->itms.size(); i++)
+                    {
+                        if(i == this->isel) this->selfact = 0;
+                        else if(i == this->previsel) this->pselfact = 255;
+                    }
                 }
             }
         }
-        else if(Input & KEY_DUP)
+        else if(k & KEY_UP)
         {
             if(this->isel > 0)
             {
-                this->previsel = this->isel;
-                this->isel--;
-                if(!this->itms.empty()) for(u32 i = 0; i < this->itms.size(); i++)
+                if(this->isel == this->fisel)
                 {
-                    if(i == this->isel) this->selfact = 0;
-                    else if(i == this->previsel) this->pselfact = 255;
+                    this->fisel--;
+                    this->isel--;
+                }
+                else
+                {
+                    this->previsel = this->isel;
+                    this->isel--;
+                    if(!this->itms.empty()) for(u32 i = 0; i < this->itms.size(); i++)
+                    {
+                        if(i == this->isel) this->selfact = 0;
+                        else if(i == this->previsel) this->pselfact = 255;
+                    }
                 }
             }
         }
-        else if(hidKeysDown(CONTROLLER_P1_AUTO) & KEY_A) if(!this->itms.empty()) for(u32 i = 0; i < this->itms.size(); i++) if(i == this->isel) (this->itms[i]->GetCallback())();
+        else if(k & KEY_A) if(!this->itms.empty()) for(u32 i = 0; i < this->itms.size(); i++) if(i == this->isel) (this->itms[i]->GetCallback())();
     }
 }

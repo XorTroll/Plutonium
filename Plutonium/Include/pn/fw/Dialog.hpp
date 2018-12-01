@@ -27,7 +27,7 @@ namespace pn::fw
     class Dialog
     {
         public:
-            Dialog(std::string Title, std::string Content);
+            Dialog(std::string Title, std::string Content, draw::Font Font);
             void AddOption(DialogOption *Option);
             void Show(render::Renderer *Drawer);
             bool GotOk();
@@ -41,5 +41,6 @@ namespace pn::fw
             u32 prevosel;
             s32 pselfact;
             s32 selfact;
+            draw::Font fnt;
     };
 }

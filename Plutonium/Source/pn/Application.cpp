@@ -93,13 +93,17 @@ namespace pn
         while(this->show)
         {
             hidScanInput();
-            u64 k = hidKeysHeld(CONTROLLER_P1_AUTO);
+            u64 k = hidKeysDown(CONTROLLER_P1_AUTO);
             this->rend->Clear(this->bgcolor);
             if(this->hasimage) this->rend->DrawImage(this->bgimage, 0, 0);
             if(!this->elems.empty()) for(u32 i = 0; i < this->elems.size(); i++)
             {
-                this->elems[i]->OnRender(this->rend);
-                this->elems[i]->OnInput(k);
+                fw::Element *elm = this->elems[i];
+                if(elm->IsVisible())
+                {
+                    elm->OnRender(this->rend);
+                    elm->OnInput(k);
+                }
             }
             if(fact > 0)
             {
@@ -146,14 +150,17 @@ namespace pn
         while(this->show)
         {
             hidScanInput();
-            u64 k = hidKeysHeld(CONTROLLER_P1_AUTO);
+            u64 k = hidKeysDown(CONTROLLER_P1_AUTO);
             this->rend->Clear(this->bgcolor);
             if(this->hasimage) this->rend->DrawImage(this->bgimage, 0, 0);
             if(!this->elems.empty())
             {
                 fw::Element *elm = this->elems[this->layidx];
-                elm->OnInput(k);
-                elm->OnRender(this->rend);
+                if(elm->IsVisible())
+                {
+                    elm->OnRender(this->rend);
+                    elm->OnInput(k);
+                }
             }
             if(fact > 0)
             {

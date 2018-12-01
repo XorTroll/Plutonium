@@ -28,7 +28,7 @@ namespace pn::fw
         this->type = Type;
     }
 
-    Dialog::Dialog(std::string Title, std::string Content)
+    Dialog::Dialog(std::string Title, std::string Content, draw::Font Font)
     {
         this->title = Title;
         this->cnt = Content;
@@ -36,6 +36,7 @@ namespace pn::fw
         this->prevosel = 0;
         this->selfact = 255;
         this->pselfact = 0;
+        this->fnt = Font;
     }
 
     void Dialog::AddOption(DialogOption *Option)
@@ -53,7 +54,7 @@ namespace pn::fw
         u32 nr = 180;
         u32 ng = 180;
         u32 nb = 200;
-        draw::Color nclr(nr, ng, nb, 255);
+        s32 initfact = 0;
         while(true)
         {
             hidScanInput();
@@ -85,14 +86,14 @@ namespace pn::fw
                 }
             }
             else if(k & KEY_A) break;
-            Drawer->DrawRectangleFill({ 225, 225, 225, 255 }, dx, dy, 1280, 720);
-            Drawer->DrawText(this->title, draw::Font::NintendoStandard, 35, (dx + 45), (dy + 45), { 10, 10, 10, 255 });
-            Drawer->DrawText(this->cnt, draw::Font::NintendoStandard, 25, (dx + 45), (dy + 100), { 10, 10, 10, 255 });
+            Drawer->DrawRectangleFill({ 225, 225, 225, initfact }, dx, dy, 1280, 720);
+            Drawer->DrawText(this->title, this->fnt, 35, (dx + 45), (dy + 45), { 10, 10, 10, initfact });
+            Drawer->DrawText(this->cnt, this->fnt, 25, (dx + 45), (dy + 100), { 10, 10, 10, initfact });
             for(u32 i = 0; i < this->opts.size(); i++)
             {
                 DialogOption *opt = this->opts[i];
-                u32 tw = Drawer->GetTextWidth(draw::Font::NintendoStandard, opt->GetName(), 20);
-                u32 th = Drawer->GetTextHeight(draw::Font::NintendoStandard, opt->GetName(), 20);
+                u32 tw = Drawer->GetTextWidth(this->fnt, opt->GetName(), 20);
+                u32 th = Drawer->GetTextHeight(this->fnt, opt->GetName(), 20);
                 u32 tx = dx + ((elemw - tw) / 2) + (elemw * i);
                 u32 ty = dy + (720 - elemh) + ((elemh - th) / 2);
                 u32 rx = dx + (elemw * i);
@@ -104,7 +105,7 @@ namespace pn::fw
                         Drawer->DrawRectangleFill(draw::Color(nr, ng, nb, this->selfact), rx, ry, elemw, elemh);
                         this->selfact += 48;
                     }
-                    else Drawer->DrawRectangleFill(nclr, rx, ry, elemw, elemh);
+                    else Drawer->DrawRectangleFill({ nr, ng, nb, initfact }, rx, ry, elemw, elemh);
                 }
                 else if(this->prevosel == i)
                 {
@@ -114,9 +115,11 @@ namespace pn::fw
                         this->pselfact -= 48;
                     }
                 }
-                Drawer->DrawText(opt->GetName(), draw::Font::NintendoStandard, 20, tx, ty, { 10, 10, 10, 255 });
+                Drawer->DrawText(opt->GetName(), this->fnt, 20, tx, ty, { 10, 10, 10, initfact });
             }
             Drawer->Render();
+            if(initfact < 255) initfact += 25;
+            if(initfact > 255) initfact = 255;
         }
     }
 
