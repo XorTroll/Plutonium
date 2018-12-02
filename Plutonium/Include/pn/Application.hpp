@@ -1,7 +1,8 @@
 
 #pragma once
 #include <vector>
-#include <pn/fw.hpp>
+#include <functional>
+#include <pn/Layout.hpp>
 
 namespace pn
 {
@@ -10,8 +11,7 @@ namespace pn
         public:
             Application();
             ~Application();
-            void AddChild(fw::Element *Child);
-            void ClearChildren();
+            void LoadLayout(Layout *Layout);
             draw::Color GetBackgroundColor();
             void SetBackgroundColor(draw::Color BackColor);
             std::string GetBackgroundImage();
@@ -21,6 +21,7 @@ namespace pn
             void SetCustomFont(std::string FontPath);
             bool UsesCustomFont();
             std::string GetCustomFont();
+            void AddThread(std::function<void()> Callback);
             void ShowDialog(fw::Dialog *Dialog);
             void Show();
             void Close();
@@ -29,19 +30,8 @@ namespace pn
             std::string bgimage;
             bool hasimage;
             bool show;
-            std::vector<fw::Element*> elems;
+            Layout *lyt;
+            std::vector<std::function<void()>> thds;
             render::Renderer *rend;
-    };
-
-    class LayoutApplication : public Application
-    {
-        public:
-            LayoutApplication();
-            void AddLayout(fw::Layout *NewLayout);
-            void NavigateTo(fw::Layout *Source);
-            void ClearLayouts();
-            void Show();
-        private:
-            u32 layidx;
     };
 }

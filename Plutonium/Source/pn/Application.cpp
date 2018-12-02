@@ -15,17 +15,11 @@ namespace pn
     Application::~Application()
     {
         this->rend->Finalize();
-        this->elems.clear();
     }
 
-    void Application::AddChild(fw::Element *Child)
+    void Application::LoadLayout(Layout *Layout)
     {
-        this->elems.push_back(Child);
-    }
-
-    void Application::ClearChildren()
-    {
-        this->elems.clear();
+        this->lyt = Layout;
     }
 
     draw::Color Application::GetBackgroundColor()
@@ -81,6 +75,11 @@ namespace pn
         return this->rend->GetCustomFont();
     }
 
+    void Application::AddThread(std::function<void()> Callback)
+    {
+        this->thds.push_back(Callback);
+    }
+
     void Application::ShowDialog(fw::Dialog *Dialog)
     {
         Dialog->Show(this->rend);
@@ -94,11 +93,12 @@ namespace pn
         {
             hidScanInput();
             u64 k = hidKeysDown(CONTROLLER_P1_AUTO);
+            if(!this->thds.empty()) for(u32 i = 0; i < this->thds.size(); i++) (this->thds[i])();
             this->rend->Clear(this->bgcolor);
             if(this->hasimage) this->rend->DrawImage(this->bgimage, 0, 0);
-            if(!this->elems.empty()) for(u32 i = 0; i < this->elems.size(); i++)
+            if(this->lyt->HasChilds()) for(u32 i = 0; i < this->lyt->GetChildCount(); i++)
             {
-                fw::Element *elm = this->elems[i];
+                fw::Element *elm = this->lyt->GetChildAt(i);
                 if(elm->IsVisible())
                 {
                     elm->OnRender(this->rend);
@@ -108,7 +108,7 @@ namespace pn
             if(fact > 0)
             {
                 this->rend->DrawRectangleFill(draw::Color(0, 0, 0, fact), 0, 0, 1280, 720);
-                fact -= 8;
+                fact -= 20;
             }
             this->rend->Render();
         }
@@ -117,57 +117,5 @@ namespace pn
     void Application::Close()
     {
         this->show = false;
-    }
-
-    LayoutApplication::LayoutApplication() : Application()
-    {
-        this->layidx = 0;
-    }
-
-    void LayoutApplication::AddLayout(fw::Layout *NewLayout)
-    {
-        this->elems.push_back(NewLayout);
-    }
-
-    void LayoutApplication::NavigateTo(fw::Layout *Source)
-    {
-        if(!this->elems.empty()) for(u32 i = 0; i < this->elems.size(); i++) if(this->elems[i] == Source)
-        {
-            this->layidx = i;
-            break;
-        }
-    }
-
-    void LayoutApplication::ClearLayouts()
-    {
-        this->elems.clear();
-    }
-
-    void LayoutApplication::Show()
-    {
-        this->show = true;
-        s32 fact = 255;
-        while(this->show)
-        {
-            hidScanInput();
-            u64 k = hidKeysDown(CONTROLLER_P1_AUTO);
-            this->rend->Clear(this->bgcolor);
-            if(this->hasimage) this->rend->DrawImage(this->bgimage, 0, 0);
-            if(!this->elems.empty())
-            {
-                fw::Element *elm = this->elems[this->layidx];
-                if(elm->IsVisible())
-                {
-                    elm->OnRender(this->rend);
-                    elm->OnInput(k);
-                }
-            }
-            if(fact > 0)
-            {
-                this->rend->DrawRectangleFill(draw::Color(0, 0, 0, fact), 0, 0, 1280, 720);
-                fact -= 8;
-            }
-            this->rend->Render();
-        }
     }
 }
