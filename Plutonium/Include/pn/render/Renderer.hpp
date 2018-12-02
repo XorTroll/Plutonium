@@ -24,11 +24,12 @@ namespace pn::render
             void Clear(draw::Color ClearColor);
             void Render();
             void DrawImage(std::string Path, u32 X, u32 Y);
-            void DrawImageColorKey(std::string Path, draw::Color ColorKey, u32 X, u32 Y);
+            void DrawImageScaled(std::string Path, u32 X, u32 Y, u32 Width, u32 Height);
             void DrawText(std::string Text, draw::Font Font, u32 Size, u32 X, u32 Y, draw::Color TextColor);
             void DrawRectangle(draw::Color RecColor, u32 X, u32 Y, u32 Width, u32 Height);
             void DrawRectangleFill(draw::Color RecColor, u32 X, u32 Y, u32 Width, u32 Height);
             void DrawCircle(draw::Color CircleColor, u32 X, u32 Y, u32 Radius);
+            void DrawHorizontalShadow(u32 X, u32 Y, u32 Width, u32 Height, u32 BaseAlpha);
             u32 GetTextWidth(draw::Font Font, std::string Text, u32 Size);
             u32 GetTextHeight(draw::Font Font, std::string Text, u32 Size);
         private:

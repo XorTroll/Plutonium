@@ -95,7 +95,7 @@ namespace pn::render
         SDL_FreeSurface(imgs);
     }
 
-    void Renderer::DrawImageColorKey(std::string Path, draw::Color ColorKey, u32 X, u32 Y)
+    void Renderer::DrawImageScaled(std::string Path, u32 X, u32 Y, u32 Width, u32 Height)
     {
         SDL_Surface *imgs = IMG_Load(Path.c_str());
         if(imgs)
@@ -104,8 +104,9 @@ namespace pn::render
             SDL_Rect position;
             position.x = X;
             position.y = Y;
-            SDL_QueryTexture(imgt, NULL, NULL, &position.w, &position.h);
-            SDL_RenderCopy(this->rendrd, imgt, NULL, &position);
+            position.w = Width;
+            position.h = Height;
+            SDL_RenderCopyEx(this->rendrd, imgt, NULL, &position, 0, NULL, SDL_FLIP_NONE);
             SDL_DestroyTexture(imgt);
         }
         SDL_FreeSurface(imgs);
@@ -119,25 +120,23 @@ namespace pn::render
         switch(Font)
         {
             case draw::Font::Custom:
-                if(this->cfont) font = TTF_OpenFont(this->pfont.c_str(), Size);
+                if(this->cfont) mem = SDL_RWFromFile(this->pfont.c_str(), "rb");
                 else
                 {
                     plGetSharedFontByType(&plfont, 0);
-                    mem = SDL_RWFromMem(plfont.address, plfont.size);
-                    font = TTF_OpenFontRW(mem, 1, Size);   
+                    mem = SDL_RWFromMem(plfont.address, plfont.size);  
                 }
                 break;
             case draw::Font::NintendoStandard:
                 plGetSharedFontByType(&plfont, 0);
                 mem = SDL_RWFromMem(plfont.address, plfont.size);
-                font = TTF_OpenFontRW(mem, 1, Size);
                 break;
             case draw::Font::NintendoExtended:
                 plGetSharedFontByType(&plfont, 5);
                 mem = SDL_RWFromMem(plfont.address, plfont.size);
-                font = TTF_OpenFontRW(mem, 1, Size);
                 break;
         }
+        font = TTF_OpenFontRW(mem, 1, Size); 
         if(font == NULL) return;
         SDL_Color clr = { TextColor.R, TextColor.G, TextColor.B, TextColor.A };
         SDL_Surface *surface = TTF_RenderUTF8_Blended_Wrapped(font, Text.c_str(), clr, 1280);
@@ -184,6 +183,25 @@ namespace pn::render
             int x = cx - dx;
             SDL_RenderDrawLine(this->rendrd, cx - dx, cy + dy - radius, cx + dx, cy + dy - radius);
             SDL_RenderDrawLine(this->rendrd, cx - dx, cy - dy + radius, cx + dx, cy - dy + radius);
+        }
+    }
+
+    void Renderer::DrawHorizontalShadow(u32 X, u32 Y, u32 Width, u32 Height, u32 BaseAlpha)
+    {
+        bool crop = false;
+        u32 shw = Width;
+        u32 shx = X;
+        u32 shy = Y;
+        for(s32 al = BaseAlpha; al > 0; al -= (180 / Height))
+        {
+            this->DrawRectangleFill({ 130, 130, 130, al }, shx, shy, shw, 1);
+            if(crop)
+            {
+                shw -= 2;
+                shx++;
+            }
+            crop = !crop;
+            shy++;
         }
     }
 

@@ -45,10 +45,11 @@ namespace pn::fw
     void Layout::OnRender(render::Renderer *Drawer)
     {
         Drawer->DrawRectangleFill(this->bg, 0, 0, 1280, 720);
-        if(!this->elms.empty()) for(u32 i = 0; i < this->elms.size(); i++) this->elms[i]->OnRender(Drawer);
+        if(!this->elms.empty()) for(u32 i = 0; i < this->elms.size(); i++) if(this->elms[i]->IsVisible()) this->elms[i]->OnRender(Drawer);
     }
 
     void Layout::OnInput(u64 Input)
     {
+        if(!this->elms.empty()) for(u32 i = 0; i < this->elms.size(); i++) if(this->elms[i]->IsVisible()) this->elms[i]->OnInput(Input);
     }
 }

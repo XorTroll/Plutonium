@@ -8,7 +8,7 @@ namespace pn::fw
     class Button : public Element
     {
         public:
-            Button(u32 X, u32 Y, u32 Width, u32 Height, std::string Content, draw::Color ButtonColor);
+            Button(u32 X, u32 Y, u32 Width, u32 Height, std::string Content, draw::Color Color);
             u32 GetX();
             void SetX(u32 X);
             u32 GetY();
@@ -20,7 +20,9 @@ namespace pn::fw
             std::string GetContent();
             void SetContent(std::string Content);
             draw::Color GetColor();
-            void SetColor(draw::Color ButtonColor);
+            void SetColor(draw::Color Color);
+            draw::Font GetContentFont();
+            void SetContentFont(draw::Font Font);
             void SetOnClick(std::function<void()> ClickCallback);
             void OnRender(render::Renderer *Drawer);
             void OnInput(u64 Input);
@@ -29,6 +31,8 @@ namespace pn::fw
             u32 y;
             u32 w;
             u32 h;
+            draw::Font fnt;
+            u32 fsize;
             draw::Color clr;
             std::string cnt;
             std::function<void()> clickcb;

@@ -2,16 +2,18 @@
 
 namespace pn::fw
 {
-    Button::Button(u32 X, u32 Y, u32 Width, u32 Height, std::string Content, draw::Color ButtonColor)
+    Button::Button(u32 X, u32 Y, u32 Width, u32 Height, std::string Content, draw::Color Color)
     {
         this->x = X;
         this->x = Y;
         this->w = Width;
         this->h = Height;
         this->cnt = Content;
-        this->clr = ButtonColor;
+        this->clr = Color;
         this->hover = false;
         this->hoverfact = 255;
+        this->fnt = draw::Font::NintendoStandard;
+        this->fsize = 25;
     }
 
     u32 Button::GetX()
@@ -69,9 +71,19 @@ namespace pn::fw
         return this->clr;
     }
 
-    void Button::SetColor(draw::Color ButtonColor)
+    void Button::SetColor(draw::Color Color)
     {
-        this->clr = ButtonColor;
+        this->clr = Color;
+    }
+
+    draw::Font Button::GetContentFont()
+    {
+        return this->fnt;
+    }
+
+    void Button::SetContentFont(draw::Font Font)
+    {
+        this->fnt = Font;
     }
 
     void Button::SetOnClick(std::function<void()> ClickCallback)
@@ -111,11 +123,11 @@ namespace pn::fw
             }
             else Drawer->DrawRectangleFill(this->clr, this->x, this->y, this->w, this->h);
         }
-        u32 xw = Drawer->GetTextWidth(draw::Font::Custom, this->cnt, 25);
-        u32 xh = Drawer->GetTextHeight(draw::Font::Custom, this->cnt, 25);
+        u32 xw = Drawer->GetTextWidth(this->fnt, this->cnt, this->fsize);
+        u32 xh = Drawer->GetTextHeight(this->fnt, this->cnt, this->fsize);
         u32 tx = ((this->w - xw) / 2) + this->x;
         u32 ty = ((this->h - xh) / 2) + this->y;
-        Drawer->DrawText(this->cnt, draw::Font::Custom, 25, tx, ty, { 0, 0, 0, 255 });
+        Drawer->DrawText(this->cnt, this->fnt, this->fsize, tx, ty, { 0, 0, 0, 255 });
     }
 
     void Button::OnInput(u64 Input)

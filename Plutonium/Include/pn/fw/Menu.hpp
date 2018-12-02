@@ -14,8 +14,13 @@ namespace pn::fw
             void SetName(std::string Name);
             void SetOnClick(std::function<void()> Callback);
             std::function<void()> GetCallback();
+            std::string GetIcon();
+            void SetIcon(std::string Icon);
+            bool HasIcon();
         private:
             std::string name;
+            bool hasicon;
+            std::string icon;
             std::function<void()> cb;
     };
 
@@ -34,8 +39,14 @@ namespace pn::fw
             void SetItemSize(u32 ItemSize);
             u32 GetNumberOfItemsToShow();
             void SetNumberOfItemsToShow(u32 ItemsToShow);
+            draw::Font GetFont();
+            void SetFont(draw::Font Font);
+            u32 GetFontSize();
+            void SetFontSize(u32 Size);
             draw::Color GetColor();
             void SetColor(draw::Color OptionColor);
+            draw::Color GetScrollbarColor();
+            void SetScrollbarColor(draw::Color ScrollbarColor);
             void AddItem(MenuItem *Item);
             void ClearItems();
             void OnRender(render::Renderer *Drawer);
@@ -51,7 +62,10 @@ namespace pn::fw
             u32 isel;
             s32 pselfact;
             s32 selfact;
+            draw::Color scb;
             draw::Color clr;
+            draw::Font fnt;
+            u32 fsize;
             std::vector<MenuItem*> itms;
     };
 }
