@@ -54,6 +54,7 @@ namespace pn::fw
         u32 nr = 180;
         u32 ng = 180;
         u32 nb = 200;
+        bool end = false;
         s32 initfact = 0;
         while(true)
         {
@@ -85,7 +86,10 @@ namespace pn::fw
                     }
                 }
             }
-            else if(k & KEY_A) break;
+            else if(k & KEY_A)
+            {
+                end = true;
+            }
             Drawer->DrawRectangleFill({ 225, 225, 225, initfact }, dx, dy, 1280, 720);
             Drawer->DrawText(this->title, this->fnt, 35, (dx + 45), (dy + 45), { 10, 10, 10, initfact });
             Drawer->DrawText(this->cnt, this->fnt, 25, (dx + 45), (dy + 100), { 10, 10, 10, initfact });
@@ -118,8 +122,17 @@ namespace pn::fw
                 Drawer->DrawText(opt->GetName(), this->fnt, 20, tx, ty, { 10, 10, 10, initfact });
             }
             Drawer->Render();
-            if(initfact < 255) initfact += 25;
-            if(initfact > 255) initfact = 255;
+            if(end)
+            {
+                if(initfact == 0) break;
+                if(initfact > 0) initfact -= 25;
+                if(initfact < 0) initfact = 0;
+            }
+            else
+            {
+                if(initfact < 255) initfact += 25;
+                if(initfact > 255) initfact = 255;
+            }
         }
     }
 

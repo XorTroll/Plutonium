@@ -253,7 +253,7 @@ namespace pn::fw
                 u32 fcy = scy + (this->fisel * (sch / this->itms.size()));
                 Drawer->DrawRectangleFill(sclr, scx, fcy, scw, fch);
             }
-            Drawer->DrawHorizontalShadow(cx, cy, cw, 160, 160);
+            Drawer->DrawHorizontalShadow(cx, cy, cw, 5, 160);
         }
     }
 

@@ -120,23 +120,25 @@ namespace pn::render
         switch(Font)
         {
             case draw::Font::Custom:
-                if(this->cfont) mem = SDL_RWFromFile(this->pfont.c_str(), "rb");
+                if(this->cfont) font = TTF_OpenFont(this->pfont.c_str(), Size);
                 else
                 {
                     plGetSharedFontByType(&plfont, 0);
-                    mem = SDL_RWFromMem(plfont.address, plfont.size);  
+                    mem = SDL_RWFromMem(plfont.address, plfont.size);
+                    font = TTF_OpenFontRW(mem, 1, Size);   
                 }
                 break;
             case draw::Font::NintendoStandard:
                 plGetSharedFontByType(&plfont, 0);
                 mem = SDL_RWFromMem(plfont.address, plfont.size);
+                font = TTF_OpenFontRW(mem, 1, Size);
                 break;
             case draw::Font::NintendoExtended:
                 plGetSharedFontByType(&plfont, 5);
                 mem = SDL_RWFromMem(plfont.address, plfont.size);
+                font = TTF_OpenFontRW(mem, 1, Size);
                 break;
         }
-        font = TTF_OpenFontRW(mem, 1, Size); 
         if(font == NULL) return;
         SDL_Color clr = { TextColor.R, TextColor.G, TextColor.B, TextColor.A };
         SDL_Surface *surface = TTF_RenderUTF8_Blended_Wrapped(font, Text.c_str(), clr, 1280);

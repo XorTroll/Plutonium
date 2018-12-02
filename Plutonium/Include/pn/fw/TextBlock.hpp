@@ -8,10 +8,6 @@ namespace pn::fw
     {
         public:
             TextBlock(u32 X, u32 Y, std::string Text);
-            TextBlock(u32 X, u32 Y, std::string Text, draw::Color TextColor);
-            TextBlock(u32 X, u32 Y, std::string Text, draw::Font Font);
-            TextBlock(u32 X, u32 Y, std::string Text, draw::Color TextColor, draw::Font Font);
-            TextBlock(u32 X, u32 Y, std::string Text, draw::Color TextColor, draw::Font Font, u32 Size);
             u32 GetX();
             void SetX(u32 X);
             u32 GetY();

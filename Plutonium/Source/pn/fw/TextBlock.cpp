@@ -12,46 +12,6 @@ namespace pn::fw
         this->fsize = 25;
     }
 
-    TextBlock::TextBlock(u32 X, u32 Y, std::string Text, draw::Color TextColor)
-    {
-        this->x = X;
-        this->y = Y;
-        this->text = Text;
-        this->clr = TextColor;
-        this->fnt = draw::Font::NintendoStandard;
-        this->fsize = 25;
-    }
-
-    TextBlock::TextBlock(u32 X, u32 Y, std::string Text, draw::Font Font)
-    {
-        this->x = X;
-        this->y = Y;
-        this->text = Text;
-        this->clr = { 0, 0, 0, 255 };
-        this->fnt = Font;
-        this->fsize = 25;
-    }
-
-    TextBlock::TextBlock(u32 X, u32 Y, std::string Text, draw::Color TextColor, draw::Font Font)
-    {
-        this->x = X;
-        this->y = Y;
-        this->text = Text;
-        this->clr = TextColor;
-        this->fnt = Font;
-        this->fsize = 25;
-    }
-
-    TextBlock::TextBlock(u32 X, u32 Y, std::string Text, draw::Color TextColor, draw::Font Font, u32 Size)
-    {
-        this->x = X;
-        this->y = Y;
-        this->text = Text;
-        this->clr = TextColor;
-        this->fnt = Font;
-        this->fsize = Size;
-    }
-
     u32 TextBlock::GetX()
     {
         return this->x;
