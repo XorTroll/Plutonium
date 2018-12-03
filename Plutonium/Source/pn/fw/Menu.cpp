@@ -66,6 +66,7 @@ namespace pn::fw
         this->pselfact = 0;
         this->fnt = draw::Font::NintendoStandard;
         this->fsize = 25;
+        this->onselch = [&](){};
     }
 
     u32 Menu::GetX()
@@ -163,6 +164,11 @@ namespace pn::fw
         this->scb = ScrollbarColor;
     }
 
+    void Menu::SetOnSelectionChanged(std::function<void()> Callback)
+    {
+        this->onselch = Callback;
+    }
+
     void Menu::AddItem(MenuItem *Item)
     {
         this->itms.push_back(Item);
@@ -171,6 +177,11 @@ namespace pn::fw
     void Menu::ClearItems()
     {
         this->itms.clear();
+    }
+
+    MenuItem *Menu::GetSelectedItem()
+    {
+        return this->itms[this->isel];
     }
 
     void Menu::OnRender(render::Renderer *Drawer)
@@ -259,8 +270,7 @@ namespace pn::fw
 
     void Menu::OnInput(u64 Input)
     {
-        u64 k = hidKeysDown(CONTROLLER_P1_AUTO);
-        if(k & KEY_DOWN)
+        if(Input & KEY_DOWN)
         {
             if(this->isel < (this->itms.size() - 1))
             {
@@ -268,11 +278,13 @@ namespace pn::fw
                 {
                     this->fisel++;
                     this->isel++;
+                    (this->onselch)();
                 }
                 else
                 {
                     this->previsel = this->isel;
                     this->isel++;
+                    (this->onselch)();
                     if(!this->itms.empty()) for(u32 i = 0; i < this->itms.size(); i++)
                     {
                         if(i == this->isel) this->selfact = 0;
@@ -281,7 +293,7 @@ namespace pn::fw
                 }
             }
         }
-        else if(k & KEY_UP)
+        else if(Input & KEY_UP)
         {
             if(this->isel > 0)
             {
@@ -289,11 +301,13 @@ namespace pn::fw
                 {
                     this->fisel--;
                     this->isel--;
+                    (this->onselch)();
                 }
                 else
                 {
                     this->previsel = this->isel;
                     this->isel--;
+                    (this->onselch)();
                     if(!this->itms.empty()) for(u32 i = 0; i < this->itms.size(); i++)
                     {
                         if(i == this->isel) this->selfact = 0;
@@ -302,6 +316,6 @@ namespace pn::fw
                 }
             }
         }
-        else if(k & KEY_A) if(!this->itms.empty()) for(u32 i = 0; i < this->itms.size(); i++) if(i == this->isel) (this->itms[i]->GetCallback())();
+        else if(Input & KEY_A) (this->itms[this->isel]->GetCallback())();
     }
 }

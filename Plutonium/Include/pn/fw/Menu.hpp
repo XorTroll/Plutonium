@@ -47,8 +47,10 @@ namespace pn::fw
             void SetColor(draw::Color OptionColor);
             draw::Color GetScrollbarColor();
             void SetScrollbarColor(draw::Color ScrollbarColor);
+            void SetOnSelectionChanged(std::function<void()> Callback);
             void AddItem(MenuItem *Item);
             void ClearItems();
+            MenuItem *GetSelectedItem();
             void OnRender(render::Renderer *Drawer);
             void OnInput(u64 Input);
         private:
@@ -66,6 +68,7 @@ namespace pn::fw
             draw::Color clr;
             draw::Font fnt;
             u32 fsize;
+            std::function<void()> onselch;
             std::vector<MenuItem*> itms;
     };
 }

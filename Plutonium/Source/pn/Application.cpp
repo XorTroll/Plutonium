@@ -96,6 +96,7 @@ namespace pn
             if(!this->thds.empty()) for(u32 i = 0; i < this->thds.size(); i++) (this->thds[i])();
             this->rend->Clear(this->bgcolor);
             if(this->hasimage) this->rend->DrawImage(this->bgimage, 0, 0);
+            (this->lyt->GetOnInput())(k);
             if(this->lyt->HasChilds()) for(u32 i = 0; i < this->lyt->GetChildCount(); i++)
             {
                 fw::Element *elm = this->lyt->GetChildAt(i);
