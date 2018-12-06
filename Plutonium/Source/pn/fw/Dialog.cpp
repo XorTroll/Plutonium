@@ -37,11 +37,23 @@ namespace pn::fw
         this->selfact = 255;
         this->pselfact = 0;
         this->fnt = Font;
+        this->hicon = false;
     }
 
     void Dialog::AddOption(DialogOption *Option)
     {
         this->opts.push_back(Option);
+    }
+
+    void Dialog::SetIcon(Image *Icon)
+    {
+        this->hicon = true;
+        this->icon = Icon;
+    }
+
+    bool Dialog::Hasicon()
+    {
+        return this->hicon;
     }
 
     void Dialog::Show(render::Renderer *Drawer)
@@ -93,6 +105,7 @@ namespace pn::fw
             Drawer->DrawRectangleFill({ 225, 225, 225, initfact }, dx, dy, 1280, 720);
             Drawer->DrawText(this->title, this->fnt, 35, (dx + 45), (dy + 45), { 10, 10, 10, initfact });
             Drawer->DrawText(this->cnt, this->fnt, 25, (dx + 45), (dy + 100), { 10, 10, 10, initfact });
+            if(this->hicon) this->icon->OnRender(Drawer);
             for(u32 i = 0; i < this->opts.size(); i++)
             {
                 DialogOption *opt = this->opts[i];

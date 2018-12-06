@@ -2,13 +2,14 @@
 
 namespace pn::fw
 {
-    ProgressBar::ProgressBar(u32 X, u32 Y, u32 Width, u32 Height, draw::Color Color)
+    ProgressBar::ProgressBar(u32 X, u32 Y, u32 Width, u32 Height)
     {
         this->x = X;
         this->y = Y;
         this->w = Width;
         this->h = Height;
-        this->clr = Color;
+        this->clr = { 140, 140, 140, 255 };
+        this->oclr = { 139, 195, 74, 255 };
     }
 
     u32 ProgressBar::GetX()
@@ -61,6 +62,16 @@ namespace pn::fw
         this->clr = Color;
     }
 
+    draw::Color ProgressBar::GetProgressColor()
+    {
+        return this->oclr;
+    }
+
+    void ProgressBar::SetProgressColor(draw::Color Color)
+    {
+        this->oclr = Color;
+    }
+
     u8 ProgressBar::GetProgress()
     {
         return this->perc;
@@ -101,9 +112,9 @@ namespace pn::fw
 
     void ProgressBar::OnRender(render::Renderer *Drawer)
     {
-        Drawer->DrawRectangleFill({ 150, 150, 150, 255 }, this->x, this->y, this->w, this->h);
+        Drawer->DrawRectangleFill(this->clr, this->x, this->y, this->w, this->h);
         u32 pcw = ((this->perc * this->w) / 100);
-        Drawer->DrawRectangleFill(this->clr, this->x, this->y, pcw, this->h);
+        Drawer->DrawRectangleFill(this->oclr, this->x, this->y, pcw, this->h);
     }
 
     void ProgressBar::OnInput(u64 Input)

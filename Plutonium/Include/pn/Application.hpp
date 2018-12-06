@@ -24,12 +24,14 @@ namespace pn
             void AddThread(std::function<void()> Callback);
             void ShowDialog(fw::Dialog *Dialog);
             void Show();
+            void CallForRender();
             void Close();
         protected:
             draw::Color bgcolor;
             std::string bgimage;
             bool hasimage;
             bool show;
+            s32 fact;
             Layout *lyt;
             std::vector<std::function<void()>> thds;
             render::Renderer *rend;

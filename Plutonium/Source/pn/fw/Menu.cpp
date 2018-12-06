@@ -184,6 +184,22 @@ namespace pn::fw
         return this->itms[this->isel];
     }
 
+    u32 Menu::GetSelectedIndex()
+    {
+        return this->isel;
+    }
+
+    void Menu::SetSelectedIndex(u32 Index)
+    {
+        if(this->itms.size() > Index)
+        {
+            this->isel = Index;
+            this->fisel = 0;
+            this->selfact = 255;
+            this->pselfact = 0;
+        }
+    }
+
     void Menu::OnRender(render::Renderer *Drawer)
     {
         if(!this->itms.empty())

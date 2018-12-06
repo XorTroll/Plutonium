@@ -88,31 +88,33 @@ namespace pn
     void Application::Show()
     {
         this->show = true;
-        s32 fact = 255;
-        while(this->show)
+        this->fact = 255;
+        while(this->show) this->CallForRender();
+    }
+
+    void Application::CallForRender()
+    {
+        hidScanInput();
+        u64 k = hidKeysDown(CONTROLLER_P1_AUTO);
+        if(!this->thds.empty()) for(u32 i = 0; i < this->thds.size(); i++) (this->thds[i])();
+        this->rend->Clear(this->bgcolor);
+        if(this->hasimage) this->rend->DrawImage(this->bgimage, 0, 0);
+        (this->lyt->GetOnInput())(k);
+        if(this->lyt->HasChilds()) for(u32 i = 0; i < this->lyt->GetChildCount(); i++)
         {
-            hidScanInput();
-            u64 k = hidKeysDown(CONTROLLER_P1_AUTO);
-            if(!this->thds.empty()) for(u32 i = 0; i < this->thds.size(); i++) (this->thds[i])();
-            this->rend->Clear(this->bgcolor);
-            if(this->hasimage) this->rend->DrawImage(this->bgimage, 0, 0);
-            (this->lyt->GetOnInput())(k);
-            if(this->lyt->HasChilds()) for(u32 i = 0; i < this->lyt->GetChildCount(); i++)
+            fw::Element *elm = this->lyt->GetChildAt(i);
+            if(elm->IsVisible())
             {
-                fw::Element *elm = this->lyt->GetChildAt(i);
-                if(elm->IsVisible())
-                {
-                    elm->OnRender(this->rend);
-                    elm->OnInput(k);
-                }
+                elm->OnRender(this->rend);
+                elm->OnInput(k);
             }
-            if(fact > 0)
-            {
-                this->rend->DrawRectangleFill(draw::Color(0, 0, 0, fact), 0, 0, 1280, 720);
-                fact -= 20;
-            }
-            this->rend->Render();
         }
+        if(this->fact > 0)
+        {
+            this->rend->DrawRectangleFill(draw::Color(0, 0, 0, this->fact), 0, 0, 1280, 720);
+            this->fact -= 20;
+        }
+        this->rend->Render();
     }
 
     void Application::Close()

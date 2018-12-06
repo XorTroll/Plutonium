@@ -7,7 +7,7 @@ namespace pn::fw
     class ProgressBar : public Element
     {
         public:
-            ProgressBar(u32 X, u32 Y, u32 Width, u32 Height, draw::Color Color);
+            ProgressBar(u32 X, u32 Y, u32 Width, u32 Height);
             u32 GetX();
             void SetX(u32 X);
             u32 GetY();
@@ -18,6 +18,8 @@ namespace pn::fw
             void SetHeight(u32 Height);
             draw::Color GetColor();
             void SetColor(draw::Color Color);
+            draw::Color GetProgressColor();
+            void SetProgressColor(draw::Color Color);
             u8 GetProgress();
             void SetProgress(u8 Percentage);
             void IncrementProgress(u8 Percentage);
@@ -34,5 +36,6 @@ namespace pn::fw
             u32 h;
             u8 perc;
             draw::Color clr;
+            draw::Color oclr;
     };
 }

@@ -1,6 +1,6 @@
 
 #pragma once
-#include <pn/fw/Element.hpp>
+#include <pn/fw/Image.hpp>
 #include <vector>
 
 namespace pn::fw
@@ -29,6 +29,8 @@ namespace pn::fw
         public:
             Dialog(std::string Title, std::string Content, draw::Font Font);
             void AddOption(DialogOption *Option);
+            void SetIcon(Image *Icon);
+            bool Hasicon();
             void Show(render::Renderer *Drawer);
             bool GotOk();
             bool GotCancel();
@@ -38,6 +40,8 @@ namespace pn::fw
             std::string cnt;
             std::vector<DialogOption*> opts;
             u32 osel;
+            bool hicon;
+            Image *icon;
             u32 prevosel;
             s32 pselfact;
             s32 selfact;

@@ -51,6 +51,8 @@ namespace pn::fw
             void AddItem(MenuItem *Item);
             void ClearItems();
             MenuItem *GetSelectedItem();
+            u32 GetSelectedIndex();
+            void SetSelectedIndex(u32 Index);
             void OnRender(render::Renderer *Drawer);
             void OnInput(u64 Input);
         private:
