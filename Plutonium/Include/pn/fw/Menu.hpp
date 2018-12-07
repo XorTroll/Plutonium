@@ -50,6 +50,7 @@ namespace pn::fw
             void SetOnSelectionChanged(std::function<void()> Callback);
             void AddItem(MenuItem *Item);
             void ClearItems();
+            void SetCooldownEnabled(bool Cooldown);
             MenuItem *GetSelectedItem();
             u32 GetSelectedIndex();
             void SetSelectedIndex(u32 Index);
@@ -70,6 +71,7 @@ namespace pn::fw
             draw::Color clr;
             draw::Font fnt;
             u32 fsize;
+            bool icdown;
             std::function<void()> onselch;
             std::vector<MenuItem*> itms;
     };

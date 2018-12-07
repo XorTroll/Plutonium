@@ -67,6 +67,7 @@ namespace pn::fw
         this->fnt = draw::Font::NintendoStandard;
         this->fsize = 25;
         this->onselch = [&](){};
+        this->icdown = true;
     }
 
     u32 Menu::GetX()
@@ -177,6 +178,12 @@ namespace pn::fw
     void Menu::ClearItems()
     {
         this->itms.clear();
+        this->icdown = true;
+    }
+
+    void Menu::SetCooldownEnabled(bool Cooldown)
+    {
+        this->icdown = Cooldown;
     }
 
     MenuItem *Menu::GetSelectedItem()
@@ -332,6 +339,10 @@ namespace pn::fw
                 }
             }
         }
-        else if(Input & KEY_A) (this->itms[this->isel]->GetCallback())();
+        else if(Input & KEY_A)
+        {
+            if(this->icdown) this->icdown = false;
+            else (this->itms[this->isel]->GetCallback())();
+        }
     }
 }
