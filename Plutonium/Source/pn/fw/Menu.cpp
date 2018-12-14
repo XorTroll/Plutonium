@@ -67,7 +67,7 @@ namespace pn::fw
         this->fnt = draw::Font::NintendoStandard;
         this->fsize = 25;
         this->onselch = [&](){};
-        this->icdown = true;
+        this->icdown = false;
     }
 
     u32 Menu::GetX()
