@@ -14,9 +14,9 @@
 
 - This library uses software-accelerated SDL2 rendering.
 
-- This library's performance is based on WPF's system. The user doesn't directly interact with the rendering, as it's done by elements, same way WPF works with `FrameworkElement` and `Window` objects, Plutonium has `pn::fw::Element` and `pn::Application`.
+- This library's performance is based on WPF's system. The user doesn't directly interact with the rendering, as it's done by elements, same way WPF works with `FrameworkElement` and `Window` objects, Plutonium has `pu::element::Element` and `pu::Application`.
 
-- Same way WPF does, you can create an UI by making a custom Application class inheriting from `pn::Application` class, or simply creating a variable and adding elements to it.
+- Same way WPF does, you can create an UI by making a custom Application class inheriting from `pu::Application` class, or simply creating a variable and adding elements to it.
 
 - The main function to initialize the application is `Show()`.
 

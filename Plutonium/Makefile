@@ -16,9 +16,9 @@ include $(DEVKITPRO)/libnx/switch_rules
 # INCLUDES is a list of directories containing header files
 #---------------------------------------------------------------------------------
 BUILD		:=	Build
-TARGET		:=  pn
-SOURCES		:=	Source Source/pn Source/pn/draw Source/pn/fw Source/pn/render Source/pn/horizon Source/pn/horizon/button
-INCLUDES	:=	Include Include/pn Include/pn/draw Include/pn/fw Include/pn/render Include/pn/horizon Include/pn/horizon/button
+TARGET		:=  pu
+SOURCES		:=	Source Source/pu Source/pu/draw Source/pu/element Source/pu/render Source/pu/horizon Source/pu/horizon/button
+INCLUDES	:=	Include Include/pu Include/pu/draw Include/pu/element Include/pu/render Include/pu/horizon Include/pu/horizon/button
 
 #---------------------------------------------------------------------------------
 # options for code generation

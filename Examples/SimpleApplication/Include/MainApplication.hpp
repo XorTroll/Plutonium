@@ -1,16 +1,16 @@
 
 #pragma once
-#include <pn/pn.hpp>
+#include <pu/Plutonium>
 
-class Layout1 : public pn::Layout
+class Layout1 : public pu::Layout
 {
     public:
         Layout1();
     private:
-        pn::fw::TextBlock *helloText;
+        pu::element::TextBlock *helloText;
 };
 
-class MainApplication : public pn::Application
+class MainApplication : public pu::Application
 {
     public:
         MainApplication();

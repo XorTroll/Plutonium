@@ -2,7 +2,7 @@
 
 Layout1::Layout1()
 {
-    this->helloText = new pn::fw::TextBlock(300, 300, "Hello world!");
+    this->helloText = new pu::element::TextBlock(300, 300, "Hello world!");
     this->AddChild(this->helloText);
 }
 
