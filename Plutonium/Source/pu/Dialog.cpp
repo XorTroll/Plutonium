@@ -98,7 +98,7 @@ namespace pu
                     }
                 }
             }
-            else if(k & KEY_A)
+            else if((k & KEY_A) || (k & KEY_B))
             {
                 end = true;
             }
