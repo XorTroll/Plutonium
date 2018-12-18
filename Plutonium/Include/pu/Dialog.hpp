@@ -1,4 +1,16 @@
 
+/*
+
+    Plutonium library
+
+    @file Dialog.hpp
+    @brief A Dialog is an easy way to ask the user to choose between several options.
+    @author XorTroll
+
+    @copyright Plutonium project - an easy-to-use UI framework for Nintendo Switch homebrew
+
+*/
+
 #pragma once
 #include <pu/element/Image.hpp>
 #include <vector>

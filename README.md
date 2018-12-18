@@ -1,12 +1,16 @@
-# Plutonium - C++ UI library for libnx, using SDL2
+# Plutonium - an easy-to-use UI framework for Nintendo Switch homebrew
 
 ## What is Plutonium?
 
-- Plutonium is a high-level, C++ graphical libraries to make UIs.
+- Plutonium is a high-level, C++ graphical library with the aim of making UIs in a more user-firendly way.
 
 - It uses libnx and SDL2, so both libraries are required.
 
-- Exactly, these extra libraries are required: `-lnx -lfreetype -lSDL2_ttf -lSDL2_gfx -lSDL2_image -lpng -ljpeg`
+- Exactly, these extra libraries are required:
+
+```
+-lnx -lfreetype -lSDL2_ttf -lSDL2_gfx -lSDL2_image -lSDL2 -lEGL -lGLESv2 -lglapi -ldrm_nouveau -lpng -ljpeg `sdl2-config --libs` `freetype-config --libs`
+```
 
 ## Internal structure and performance
 
@@ -20,7 +24,7 @@
 
 - Check the [examples](Examples) for a basic usage of the libraries.
 
-- Documentation is also coming soon.
+- Check the [documentation](https://XorTroll.github.io/Plutonium/) for a more detailed explanation of the library's usage.
 
 ## Patreon
 
