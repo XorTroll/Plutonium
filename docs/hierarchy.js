@@ -3,7 +3,6 @@ var hierarchy =
     [ "pu::Application", "d7/d15/classpu_1_1_application.html", null ],
     [ "pu::draw::Color", "d4/d7e/structpu_1_1draw_1_1_color.html", null ],
     [ "pu::Dialog", "d0/d22/classpu_1_1_dialog.html", null ],
-    [ "pu::DialogOption", "dc/d93/classpu_1_1_dialog_option.html", null ],
     [ "pu::element::Element", "d6/d14/classpu_1_1element_1_1_element.html", [
       [ "pu::element::Button", "d8/d02/classpu_1_1element_1_1_button.html", null ],
       [ "pu::element::Image", "df/d74/classpu_1_1element_1_1_image.html", null ],

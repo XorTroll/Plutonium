@@ -6,7 +6,9 @@ var dir_e04b5918434782f2b266fd4d1c674cfa =
     [ "Application.hpp", "d2/dcb/_application_8hpp.html", [
       [ "Application", "d7/d15/classpu_1_1_application.html", "d7/d15/classpu_1_1_application" ]
     ] ],
-    [ "Dialog.hpp", "dc/de6/_dialog_8hpp.html", "dc/de6/_dialog_8hpp" ],
+    [ "Dialog.hpp", "dc/de6/_dialog_8hpp.html", [
+      [ "Dialog", "d0/d22/classpu_1_1_dialog.html", "d0/d22/classpu_1_1_dialog" ]
+    ] ],
     [ "draw.hpp", "de/df3/draw_8hpp.html", null ],
     [ "element.hpp", "d0/d23/_element_8hpp.html", null ],
     [ "Layout.hpp", "d0/dc7/_layout_8hpp.html", [
