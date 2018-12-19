@@ -2,32 +2,6 @@
 
 namespace pu
 {
-    DialogOption::DialogOption(std::string Name, DialogResult Type)
-    {
-        this->name = Name;
-        this->type = Type;
-    }
-
-    std::string DialogOption::GetName()
-    {
-        return this->name;
-    }
-
-    void DialogOption::SetName(std::string Name)
-    {
-        this->name = Name;
-    }
-
-    DialogResult DialogOption::GetType()
-    {
-        return this->type;
-    }
-
-    void DialogOption::SetType(DialogResult Type)
-    {
-        this->type = Type;
-    }
-
     Dialog::Dialog(std::string Title, std::string Content, draw::Font Font)
     {
         this->title = Title;
@@ -38,11 +12,12 @@ namespace pu
         this->pselfact = 0;
         this->fnt = Font;
         this->hicon = false;
+        this->cancel = false;
     }
 
-    void Dialog::AddOption(DialogOption *Option)
+    void Dialog::AddOption(std::string Name)
     {
-        this->opts.push_back(Option);
+        this->opts.push_back(Name);
     }
 
     void Dialog::SetIcon(element::Image *Icon)
@@ -98,8 +73,14 @@ namespace pu
                     }
                 }
             }
-            else if((k & KEY_A) || (k & KEY_B))
+            else if(k & KEY_A)
             {
+                this->cancel = false;
+                end = true;
+            }
+            else if(k & KEY_B)
+            {
+                this->cancel = true;
                 end = true;
             }
             Drawer->DrawRectangleFill({ 225, 225, 225, initfact }, dx, dy, 1280, 720);
@@ -108,9 +89,8 @@ namespace pu
             if(this->hicon) this->icon->OnRender(Drawer);
             for(u32 i = 0; i < this->opts.size(); i++)
             {
-                DialogOption *opt = this->opts[i];
-                u32 tw = Drawer->GetTextWidth(this->fnt, opt->GetName(), 20);
-                u32 th = Drawer->GetTextHeight(this->fnt, opt->GetName(), 20);
+                u32 tw = Drawer->GetTextWidth(this->fnt, opts[i], 20);
+                u32 th = Drawer->GetTextHeight(this->fnt, opts[i], 20);
                 u32 tx = dx + ((elemw - tw) / 2) + (elemw * i);
                 u32 ty = dy + (720 - elemh) + ((elemh - th) / 2);
                 u32 rx = dx + (elemw * i);
@@ -132,7 +112,7 @@ namespace pu
                         this->pselfact -= 48;
                     }
                 }
-                Drawer->DrawText(opt->GetName(), this->fnt, 20, tx, ty, { 10, 10, 10, initfact });
+                Drawer->DrawText(opts[i], this->fnt, 20, tx, ty, { 10, 10, 10, initfact });
             }
             Drawer->Render();
             if(end)
@@ -149,18 +129,13 @@ namespace pu
         }
     }
 
-    bool Dialog::GotOk()
+    bool Dialog::UserCancelled()
     {
-        return (this->opts[this->osel]->GetType() == DialogResult::Ok);
+        return this->cancel;
     }
 
-    bool Dialog::GotCancel()
+    u32 Dialog::GetSelectedIndex()
     {
-        return !this->GotOk();
-    }
-
-    DialogOption *Dialog::GetSelectedOption()
-    {
-        return this->opts[this->osel];
+        return this->osel;
     }
 }
