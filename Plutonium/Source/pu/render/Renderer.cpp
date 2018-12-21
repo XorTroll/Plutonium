@@ -11,7 +11,7 @@ namespace pu::render
             plInitialize();
             SDL_Init(SDL_INIT_EVERYTHING);
             this->rendwd = SDL_CreateWindow("Plutonium", 0, 0, 1280, 720, SDL_WINDOW_FULLSCREEN);
-            this->rendrd = SDL_CreateRenderer(this->rendwd, -1, SDL_RENDERER_ACCELERATED);
+            this->rendrd = SDL_CreateRenderer(this->rendwd, -1, (SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC));
             this->rendsf = SDL_GetWindowSurface(this->rendwd);
             SDL_SetRenderDrawBlendMode(this->rendrd, SDL_BLENDMODE_BLEND);
             IMG_Init(IMG_INIT_PNG | IMG_INIT_JPG | IMG_INIT_TIF | IMG_INIT_WEBP);
