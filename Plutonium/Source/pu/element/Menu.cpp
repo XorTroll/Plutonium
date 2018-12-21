@@ -5,9 +5,7 @@ namespace pu::element
     MenuItem::MenuItem(std::string Name)
     {
         this->name = Name;
-        this->cb = [&](){};
         this->hasicon = false;
-        this->cbipt = KEY_A;
     }
 
     std::string MenuItem::GetName()
@@ -20,20 +18,25 @@ namespace pu::element
         this->name = Name;
     }
 
-    void MenuItem::SetOnClick(std::function<void()> Callback, u64 Key)
+    void MenuItem::AddOnClick(std::function<void()> Callback, u64 Key)
     {
-        this->cb = Callback;
-        this->cbipt = Key;
+        this->cbs.push_back(Callback);
+        this->cbipts.push_back(Key);
     }
 
-    std::function<void()> MenuItem::GetCallback()
+    u32 MenuItem::GetCallbackCount()
     {
-        return this->cb;
+        return this->cbs.size();
     }
 
-    u64 MenuItem::GetCallbackKey()
+    std::function<void()> MenuItem::GetCallback(u32 Index)
     {
-        return this->cbipt;
+        return this->cbs[Index];
+    }
+
+    u64 MenuItem::GetCallbackKey(u32 Index)
+    {
+        return this->cbipts[Index];
     }
 
     std::string MenuItem::GetIcon()
@@ -345,10 +348,17 @@ namespace pu::element
                 }
             }
         }
-        else if(Input & this->itms[this->isel]->GetCallbackKey())
+        else
         {
-            if(this->icdown) this->icdown = false;
-            else (this->itms[this->isel]->GetCallback())();
+            u32 ipc = this->itms[this->isel]->GetCallbackCount();
+            if(ipc > 0) for(u32 i = 0; i < ipc; i++)
+            {
+                if(Input & this->itms[this->isel]->GetCallbackKey(i))
+                {
+                    if(this->icdown) this->icdown = false;
+                    else (this->itms[this->isel]->GetCallback(i))();
+                }
+            }
         }
     }
 }

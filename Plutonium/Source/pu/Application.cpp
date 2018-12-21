@@ -10,6 +10,7 @@ namespace pu
         this->bgcolor = { 255, 255, 255, 255 };
         this->bgimage = "";
         this->hasimage = false;
+        this->cbipt = [&](u64 Input){};
     }
 
     Application::~Application()
@@ -80,6 +81,11 @@ namespace pu
         this->thds.push_back(Callback);
     }
 
+    void Application::SetOnInput(std::function<void(u64 Input)> Callback)
+    {
+        this->cbipt = Callback;
+    }
+
     void Application::ShowDialog(Dialog *ToShow)
     {
         ToShow->Show(this->rend);
@@ -97,6 +103,7 @@ namespace pu
         hidScanInput();
         u64 k = hidKeysDown(CONTROLLER_P1_AUTO);
         if(!this->thds.empty()) for(u32 i = 0; i < this->thds.size(); i++) (this->thds[i])();
+        (this->cbipt)(k);
         this->rend->Clear(this->bgcolor);
         if(this->hasimage) this->rend->DrawImage(this->bgimage, 0, 0);
         (this->lyt->GetOnInput())(k);
