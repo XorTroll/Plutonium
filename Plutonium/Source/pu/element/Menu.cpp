@@ -7,6 +7,7 @@ namespace pu::element
         this->name = Name;
         this->cb = [&](){};
         this->hasicon = false;
+        this->cbipt = KEY_A;
     }
 
     std::string MenuItem::GetName()
@@ -19,14 +20,20 @@ namespace pu::element
         this->name = Name;
     }
 
-    void MenuItem::SetOnClick(std::function<void()> Callback)
+    void MenuItem::SetOnClick(std::function<void()> Callback, u64 Key)
     {
         this->cb = Callback;
+        this->cbipt = Key;
     }
 
     std::function<void()> MenuItem::GetCallback()
     {
         return this->cb;
+    }
+
+    u64 MenuItem::GetCallbackKey()
+    {
+        return this->cbipt;
     }
 
     std::string MenuItem::GetIcon()
@@ -338,7 +345,7 @@ namespace pu::element
                 }
             }
         }
-        else if(Input & KEY_A)
+        else if(Input & this->itms[this->isel]->GetCallbackKey())
         {
             if(this->icdown) this->icdown = false;
             else (this->itms[this->isel]->GetCallback())();

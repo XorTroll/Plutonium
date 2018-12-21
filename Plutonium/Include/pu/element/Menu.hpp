@@ -24,8 +24,9 @@ namespace pu::element
             MenuItem(std::string Name);
             std::string GetName();
             void SetName(std::string Name);
-            void SetOnClick(std::function<void()> Callback);
+            void SetOnClick(std::function<void()> Callback, u64 Key = KEY_A);
             std::function<void()> GetCallback();
+            u64 GetCallbackKey();
             std::string GetIcon();
             void SetIcon(std::string Icon);
             bool HasIcon();
@@ -34,6 +35,7 @@ namespace pu::element
             bool hasicon;
             std::string icon;
             std::function<void()> cb;
+            u64 cbipt;
     };
 
     class Menu : public Element
