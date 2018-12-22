@@ -1,5 +1,9 @@
 var NAVTREEINDEX1 =
 {
+"db/d72/classpu_1_1element_1_1_rectangle.html#ab00d3393704b6825f7f2b617d8f5cd17":[1,0,0,1,6,2],
+"db/d72/classpu_1_1element_1_1_rectangle.html#ab61febbd314532aed0f5ee5a9e35aa17":[1,0,0,1,6,8],
+"db/d72/classpu_1_1element_1_1_rectangle.html#ac65ab9c643cc38417e839b1038956a63":[1,0,0,1,6,11],
+"db/d72/classpu_1_1element_1_1_rectangle.html#afa367b7bc036b298eb545bf8c9e5e471":[1,0,0,1,6,6],
 "dc/d94/_renderer_8hpp.html":[2,0,0,0,0,2,0],
 "dc/d94/_renderer_8hpp_source.html":[2,0,0,0,0,2,0],
 "dc/de6/_dialog_8hpp.html":[2,0,0,0,0,4],

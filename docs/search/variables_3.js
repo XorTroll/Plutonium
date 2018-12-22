@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['g',['G',['../d4/d7e/structpu_1_1draw_1_1_color.html#aeb26eb7d91a4162f60cc6965f6a1f4de',1,'pu::draw::Color']]]
+  ['fact',['fact',['../d7/d15/classpu_1_1_application.html#ae814b1859bf4979da8d984897aab5763',1,'pu::Application']]]
 ];

@@ -126,6 +126,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a54ba6bf0f5e7f7d420dc4c591b0a6975"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad432a74ec4674ad486f716b2a392d189"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d7/d15/classpu_1_1_application.html#ad432a74ec4674ad486f716b2a392d189">AddThread</a> (std::function&lt; void()&gt; Callback)</td></tr>
 <tr class="separator:ad432a74ec4674ad486f716b2a392d189"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5e0fa1744e1c1071a5a8d78b3f0eba96"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d7/d15/classpu_1_1_application.html#a5e0fa1744e1c1071a5a8d78b3f0eba96">SetOnInput</a> (std::function&lt; void(u64 Input)&gt; Callback)</td></tr>
+<tr class="separator:a5e0fa1744e1c1071a5a8d78b3f0eba96"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2964f571fe0938f2c33b8e25e0922b53"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d7/d15/classpu_1_1_application.html#a2964f571fe0938f2c33b8e25e0922b53">ShowDialog</a> (<a class="el" href="../../d0/d22/classpu_1_1_dialog.html">Dialog</a> *ToShow)</td></tr>
 <tr class="separator:a2964f571fe0938f2c33b8e25e0922b53"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a60596e0937847ad0a51f2792a12a856d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d7/d15/classpu_1_1_application.html#a60596e0937847ad0a51f2792a12a856d">Show</a> ()</td></tr>
@@ -151,6 +153,8 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:afb0aa90192713debf30d8c43d5253309"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a21fefc0a42e2da4ca73e403b722c6055"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::function&lt; void()&gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d7/d15/classpu_1_1_application.html#a21fefc0a42e2da4ca73e403b722c6055">thds</a></td></tr>
 <tr class="separator:a21fefc0a42e2da4ca73e403b722c6055"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abe3b379449842eae0d4cf7d8658c33d1"><td class="memItemLeft" align="right" valign="top">std::function&lt; void(u64)&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d7/d15/classpu_1_1_application.html#abe3b379449842eae0d4cf7d8658c33d1">cbipt</a></td></tr>
+<tr class="separator:abe3b379449842eae0d4cf7d8658c33d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaaf19c794db3dfadba9f70425253a40d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../d6/dba/classpu_1_1render_1_1_renderer.html">render::Renderer</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d7/d15/classpu_1_1_application.html#aaaf19c794db3dfadba9f70425253a40d">rend</a></td></tr>
 <tr class="separator:aaaf19c794db3dfadba9f70425253a40d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
@@ -399,6 +403,24 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="a5e0fa1744e1c1071a5a8d78b3f0eba96"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5e0fa1744e1c1071a5a8d78b3f0eba96">&#9670;&nbsp;</a></span>SetOnInput()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void pu::Application::SetOnInput </td>
+          <td>(</td>
+          <td class="paramtype">std::function&lt; void(u64 Input)&gt;&#160;</td>
+          <td class="paramname"><em>Callback</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a60596e0937847ad0a51f2792a12a856d"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a60596e0937847ad0a51f2792a12a856d">&#9670;&nbsp;</a></span>Show()</h2>
 
@@ -485,6 +507,28 @@ Protected Attributes</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">std::string pu::Application::bgimage</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="abe3b379449842eae0d4cf7d8658c33d1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abe3b379449842eae0d4cf7d8658c33d1">&#9670;&nbsp;</a></span>cbipt</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::function&lt;void(u64)&gt; pu::Application::cbipt</td>
         </tr>
       </table>
   </td>
