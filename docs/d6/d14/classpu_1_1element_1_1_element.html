@@ -127,8 +127,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:abda35fb4c452cae06ea80ea76b3f5b2a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4ccc6705f3a29ac7fcd83ce26eccf637"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d14/classpu_1_1element_1_1_element.html#a4ccc6705f3a29ac7fcd83ce26eccf637">OnRender</a> (<a class="el" href="../../d6/dba/classpu_1_1render_1_1_renderer.html">render::Renderer</a> *Drawer)=0</td></tr>
 <tr class="separator:a4ccc6705f3a29ac7fcd83ce26eccf637"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aea190b294b459f268cd6f56ce038441e"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d14/classpu_1_1element_1_1_element.html#aea190b294b459f268cd6f56ce038441e">OnInput</a> (u64 Input)=0</td></tr>
-<tr class="separator:aea190b294b459f268cd6f56ce038441e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1dda56c7f33345f4a6e0ae1a3d866528"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d14/classpu_1_1element_1_1_element.html#a1dda56c7f33345f4a6e0ae1a3d866528">OnInput</a> (u64 Down, u64 Up, u64 Held)=0</td></tr>
+<tr class="separator:a1dda56c7f33345f4a6e0ae1a3d866528"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2e23f710aeda816dd6c16c00943aca4b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d14/classpu_1_1element_1_1_element.html#a2e23f710aeda816dd6c16c00943aca4b">IsVisible</a> ()</td></tr>
 <tr class="separator:a2e23f710aeda816dd6c16c00943aca4b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a08ab602ce820663df0a0eab7f2455c03"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d14/classpu_1_1element_1_1_element.html#a08ab602ce820663df0a0eab7f2455c03">SetVisible</a> (bool Visible)</td></tr>
@@ -283,8 +283,8 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="aea190b294b459f268cd6f56ce038441e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aea190b294b459f268cd6f56ce038441e">&#9670;&nbsp;</a></span>OnInput()</h2>
+<a id="a1dda56c7f33345f4a6e0ae1a3d866528"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1dda56c7f33345f4a6e0ae1a3d866528">&#9670;&nbsp;</a></span>OnInput()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -296,8 +296,24 @@ Protected Attributes</h2></td></tr>
           <td class="memname">virtual void pu::element::Element::OnInput </td>
           <td>(</td>
           <td class="paramtype">u64&#160;</td>
-          <td class="paramname"><em>Input</em></td><td>)</td>
+          <td class="paramname"><em>Down</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">u64&#160;</td>
+          <td class="paramname"><em>Up</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">u64&#160;</td>
+          <td class="paramname"><em>Held</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
   </td>
@@ -307,7 +323,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Implemented in <a class="el" href="../../d5/d9b/classpu_1_1element_1_1_menu.html#aa2cf8804e3848841c519d8db1ccbd805">pu::element::Menu</a>, <a class="el" href="../../d1/d83/classpu_1_1element_1_1_progress_bar.html#a8c5942d8792944033003b9ddbe0eec3e">pu::element::ProgressBar</a>, <a class="el" href="../../d8/d02/classpu_1_1element_1_1_button.html#a8f58a8fa4d04f5bca5ab6f1e763b2189">pu::element::Button</a>, <a class="el" href="../../d9/d2a/classpu_1_1element_1_1_toggle.html#aca18b648abd05b09e382eaa11ad24940">pu::element::Toggle</a>, <a class="el" href="../../d0/d38/classpu_1_1element_1_1_text_block.html#a82f49c75a8d5e373bff2bf54423c33f6">pu::element::TextBlock</a>, <a class="el" href="../../db/d72/classpu_1_1element_1_1_rectangle.html#a50a19cdd9526578383725b3efe7fe458">pu::element::Rectangle</a>, and <a class="el" href="../../df/d74/classpu_1_1element_1_1_image.html#ad1c4a7aed39624e0a525e97f3c03400d">pu::element::Image</a>.</p>
+<p>Implemented in <a class="el" href="../../d5/d9b/classpu_1_1element_1_1_menu.html#a36cababa86cef1929d1d23d5d306342f">pu::element::Menu</a>, <a class="el" href="../../d1/d83/classpu_1_1element_1_1_progress_bar.html#a126fd1943d12dd8afbb963a3295473b0">pu::element::ProgressBar</a>, <a class="el" href="../../d8/d02/classpu_1_1element_1_1_button.html#ac0b8b05b79edbc4861ba9aa3cbffd96e">pu::element::Button</a>, <a class="el" href="../../d9/d2a/classpu_1_1element_1_1_toggle.html#a72dcdd2f96b2c9244b24e754746dde23">pu::element::Toggle</a>, <a class="el" href="../../d0/d38/classpu_1_1element_1_1_text_block.html#a382380a531a9b556b70e95b00895010c">pu::element::TextBlock</a>, <a class="el" href="../../db/d72/classpu_1_1element_1_1_rectangle.html#a2659366e25c0ba02e130e99300d81ab2">pu::element::Rectangle</a>, and <a class="el" href="../../df/d74/classpu_1_1element_1_1_image.html#ab3e94abc5894873fec2baffefe1ea80e">pu::element::Image</a>.</p>
 
 </div>
 </div>

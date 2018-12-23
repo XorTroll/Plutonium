@@ -111,10 +111,10 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a01203b6baecde44174f527b4a2c70ca5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8f47bd0446b7a3103f858a7422da19df"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/dcb/classpu_1_1_layout.html#a8f47bd0446b7a3103f858a7422da19df">HasChilds</a> ()</td></tr>
 <tr class="separator:a8f47bd0446b7a3103f858a7422da19df"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab60d8a232755bb23b15e99eab629924e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/dcb/classpu_1_1_layout.html#ab60d8a232755bb23b15e99eab629924e">SetOnInput</a> (std::function&lt; void(u64 Input)&gt; Callback)</td></tr>
-<tr class="separator:ab60d8a232755bb23b15e99eab629924e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aaf0d1c1dc96c290922a5af038137c4e0"><td class="memItemLeft" align="right" valign="top">std::function&lt; void(u64 Input)&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/dcb/classpu_1_1_layout.html#aaf0d1c1dc96c290922a5af038137c4e0">GetOnInput</a> ()</td></tr>
-<tr class="separator:aaf0d1c1dc96c290922a5af038137c4e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acf604e9697ca5697e211c57a45c6820e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/dcb/classpu_1_1_layout.html#acf604e9697ca5697e211c57a45c6820e">SetOnInput</a> (std::function&lt; void(u64 Down, u64 Up, u64 Held)&gt; Callback)</td></tr>
+<tr class="separator:acf604e9697ca5697e211c57a45c6820e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a66b16386aca566a4b2758f94e30d29d8"><td class="memItemLeft" align="right" valign="top">std::function&lt; void(u64 Down, u64 Up, u64 Held)&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/dcb/classpu_1_1_layout.html#a66b16386aca566a4b2758f94e30d29d8">GetOnInput</a> ()</td></tr>
+<tr class="separator:a66b16386aca566a4b2758f94e30d29d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a18ae0759067c8d4e842720ae40e98bc2"></a>
@@ -205,14 +205,14 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="aaf0d1c1dc96c290922a5af038137c4e0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aaf0d1c1dc96c290922a5af038137c4e0">&#9670;&nbsp;</a></span>GetOnInput()</h2>
+<a id="a66b16386aca566a4b2758f94e30d29d8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a66b16386aca566a4b2758f94e30d29d8">&#9670;&nbsp;</a></span>GetOnInput()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">std::function&lt;void(u64 Input)&gt; pu::Layout::GetOnInput </td>
+          <td class="memname">std::function&lt;void(u64 Down, u64 Up, u64 Held)&gt; pu::Layout::GetOnInput </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -239,8 +239,8 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="ab60d8a232755bb23b15e99eab629924e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab60d8a232755bb23b15e99eab629924e">&#9670;&nbsp;</a></span>SetOnInput()</h2>
+<a id="acf604e9697ca5697e211c57a45c6820e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acf604e9697ca5697e211c57a45c6820e">&#9670;&nbsp;</a></span>SetOnInput()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -248,7 +248,7 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname">void pu::Layout::SetOnInput </td>
           <td>(</td>
-          <td class="paramtype">std::function&lt; void(u64 Input)&gt;&#160;</td>
+          <td class="paramtype">std::function&lt; void(u64 Down, u64 Up, u64 Held)&gt;&#160;</td>
           <td class="paramname"><em>Callback</em></td><td>)</td>
           <td></td>
         </tr>

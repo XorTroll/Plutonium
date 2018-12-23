@@ -11,7 +11,7 @@ var classpu_1_1element_1_1_toggle =
     [ "GetX", "d9/d2a/classpu_1_1element_1_1_toggle.html#a67a5721579b4f4d94b2b899b4cdcc6dd", null ],
     [ "GetY", "d9/d2a/classpu_1_1element_1_1_toggle.html#a1b89802ea50685eaa3f01e02e64c4450", null ],
     [ "IsChecked", "d9/d2a/classpu_1_1element_1_1_toggle.html#ae5d659de395c396cc2278aaaf85320df", null ],
-    [ "OnInput", "d9/d2a/classpu_1_1element_1_1_toggle.html#aca18b648abd05b09e382eaa11ad24940", null ],
+    [ "OnInput", "d9/d2a/classpu_1_1element_1_1_toggle.html#a72dcdd2f96b2c9244b24e754746dde23", null ],
     [ "OnRender", "d9/d2a/classpu_1_1element_1_1_toggle.html#abfe84329147b94ad4bf4e5d5d65ac5a5", null ],
     [ "SetColor", "d9/d2a/classpu_1_1element_1_1_toggle.html#a8f956c6cf0c598900145a1ecb8151ac4", null ],
     [ "SetContent", "d9/d2a/classpu_1_1element_1_1_toggle.html#a7acb9eb9fb248ed9cf160fa7aef450e3", null ],

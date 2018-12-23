@@ -9,7 +9,7 @@ var classpu_1_1element_1_1_text_block =
     [ "GetWidth", "d0/d38/classpu_1_1element_1_1_text_block.html#a3be74883af3c8e0d80ce7d7f330abe20", null ],
     [ "GetX", "d0/d38/classpu_1_1element_1_1_text_block.html#ab8b652008d67581b41754121b930ec37", null ],
     [ "GetY", "d0/d38/classpu_1_1element_1_1_text_block.html#ac2858ee52904ccc4be881e1fbb25fb32", null ],
-    [ "OnInput", "d0/d38/classpu_1_1element_1_1_text_block.html#a82f49c75a8d5e373bff2bf54423c33f6", null ],
+    [ "OnInput", "d0/d38/classpu_1_1element_1_1_text_block.html#a382380a531a9b556b70e95b00895010c", null ],
     [ "OnRender", "d0/d38/classpu_1_1element_1_1_text_block.html#ae8e41f80b645c64348af7b826ea5717f", null ],
     [ "SetColor", "d0/d38/classpu_1_1element_1_1_text_block.html#ada8cd08202c633add74b7cc9781e3f2e", null ],
     [ "SetFont", "d0/d38/classpu_1_1element_1_1_text_block.html#aa866bba916caa38cf819732dc597d945", null ],

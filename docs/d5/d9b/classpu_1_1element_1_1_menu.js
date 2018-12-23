@@ -15,7 +15,7 @@ var classpu_1_1element_1_1_menu =
     [ "GetWidth", "d5/d9b/classpu_1_1element_1_1_menu.html#a95088491021ba2fd9da285690c240286", null ],
     [ "GetX", "d5/d9b/classpu_1_1element_1_1_menu.html#a221179d51d197fcd029afee6f71251dc", null ],
     [ "GetY", "d5/d9b/classpu_1_1element_1_1_menu.html#ae7a1a2adf1de6363ab9872a58c0995e0", null ],
-    [ "OnInput", "d5/d9b/classpu_1_1element_1_1_menu.html#aa2cf8804e3848841c519d8db1ccbd805", null ],
+    [ "OnInput", "d5/d9b/classpu_1_1element_1_1_menu.html#a36cababa86cef1929d1d23d5d306342f", null ],
     [ "OnRender", "d5/d9b/classpu_1_1element_1_1_menu.html#aa4b62d8adbb44c94bbc3190d0a2cf643", null ],
     [ "SetColor", "d5/d9b/classpu_1_1element_1_1_menu.html#a593b906db9d7861a97eee1c3546660f0", null ],
     [ "SetCooldownEnabled", "d5/d9b/classpu_1_1element_1_1_menu.html#aa4f9137a85142e60b0c2d5a9183bbfcc", null ],

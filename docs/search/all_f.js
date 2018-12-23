@@ -18,7 +18,7 @@ var searchData=
   ['setname',['SetName',['../d0/dcd/classpu_1_1element_1_1_menu_item.html#a0d9ab022978e1d54acb16c3bd39efa12',1,'pu::element::MenuItem']]],
   ['setnumberofitemstoshow',['SetNumberOfItemsToShow',['../d5/d9b/classpu_1_1element_1_1_menu.html#af3346bb61f9a6121482ac4608fe9fa5a',1,'pu::element::Menu']]],
   ['setonclick',['SetOnClick',['../d8/d02/classpu_1_1element_1_1_button.html#aa8ea1bea95beb547af22aa722d2c1805',1,'pu::element::Button']]],
-  ['setoninput',['SetOnInput',['../d7/d15/classpu_1_1_application.html#a5e0fa1744e1c1071a5a8d78b3f0eba96',1,'pu::Application::SetOnInput()'],['../d0/dcb/classpu_1_1_layout.html#ab60d8a232755bb23b15e99eab629924e',1,'pu::Layout::SetOnInput()']]],
+  ['setoninput',['SetOnInput',['../d7/d15/classpu_1_1_application.html#a48f7d3aa6b7cb016ee4996d113bf8b1b',1,'pu::Application::SetOnInput()'],['../d0/dcb/classpu_1_1_layout.html#acf604e9697ca5697e211c57a45c6820e',1,'pu::Layout::SetOnInput()']]],
   ['setonselectionchanged',['SetOnSelectionChanged',['../d5/d9b/classpu_1_1element_1_1_menu.html#aaad76943193a0645bd76f944a41f0a0f',1,'pu::element::Menu']]],
   ['setprogress',['SetProgress',['../d1/d83/classpu_1_1element_1_1_progress_bar.html#ac838097d54865f76a4161a309d4c01b0',1,'pu::element::ProgressBar']]],
   ['setprogresscolor',['SetProgressColor',['../d1/d83/classpu_1_1element_1_1_progress_bar.html#ae40801dd8e397bc7b94a54621d029840',1,'pu::element::ProgressBar']]],

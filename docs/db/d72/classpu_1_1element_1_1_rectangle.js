@@ -7,7 +7,7 @@ var classpu_1_1element_1_1_rectangle =
     [ "GetWidth", "db/d72/classpu_1_1element_1_1_rectangle.html#a1aaee5bfeec4c976c867cc062575ed06", null ],
     [ "GetX", "db/d72/classpu_1_1element_1_1_rectangle.html#a7e9628c9136fa265246404d0f90e859d", null ],
     [ "GetY", "db/d72/classpu_1_1element_1_1_rectangle.html#afa367b7bc036b298eb545bf8c9e5e471", null ],
-    [ "OnInput", "db/d72/classpu_1_1element_1_1_rectangle.html#a50a19cdd9526578383725b3efe7fe458", null ],
+    [ "OnInput", "db/d72/classpu_1_1element_1_1_rectangle.html#a2659366e25c0ba02e130e99300d81ab2", null ],
     [ "OnRender", "db/d72/classpu_1_1element_1_1_rectangle.html#ab61febbd314532aed0f5ee5a9e35aa17", null ],
     [ "SetBorderRadius", "db/d72/classpu_1_1element_1_1_rectangle.html#aa6f631ea1de211d7afdac519bf324eca", null ],
     [ "SetColor", "db/d72/classpu_1_1element_1_1_rectangle.html#a3b0d955c23c1f6cdfa1253ba6f514c17", null ],
