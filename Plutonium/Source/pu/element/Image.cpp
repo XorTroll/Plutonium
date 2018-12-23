@@ -81,7 +81,7 @@ namespace pu::element
         else Drawer->DrawImageScaled(this->img, this->x, this->y, iw, ih);
     }
 
-    void Image::OnInput(u64 Input)
+    void Image::OnInput(u64 Down, u64 Up, u64 Held)
     {
     }
 }

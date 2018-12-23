@@ -87,7 +87,7 @@ namespace pu::element
         Drawer->DrawText(this->text, this->fnt, this->fsize, this->x, this->y, this->clr);
     }
 
-    void TextBlock::OnInput(u64 Input)
+    void TextBlock::OnInput(u64 Down, u64 Up, u64 Held)
     {
     }
 }

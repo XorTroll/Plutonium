@@ -117,7 +117,7 @@ namespace pu::element
         Drawer->DrawRectangleFill(this->oclr, this->x, this->y, pcw, this->h);
     }
 
-    void ProgressBar::OnInput(u64 Input)
+    void ProgressBar::OnInput(u64 Down, u64 Up, u64 Held)
     {
     }
 }

@@ -127,8 +127,8 @@ namespace pu::element
         Drawer->DrawText(this->cnt, this->fnt, this->fsize, tx, ty, { 0, 0, 0, 255 });
     }
 
-    void Toggle::OnInput(u64 Input)
+    void Toggle::OnInput(u64 Down, u64 Up, u64 Held)
     {
-        if(Input & this->key) this->checked = !this->checked;
+        if(Down & this->key) this->checked = !this->checked;
     }
 }

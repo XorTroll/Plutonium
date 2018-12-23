@@ -10,7 +10,7 @@ namespace pu
         this->bgcolor = { 255, 255, 255, 255 };
         this->bgimage = "";
         this->hasimage = false;
-        this->cbipt = [&](u64 Input){};
+        this->cbipt = [&](u64 Down, u64 Up, u64 Held){};
     }
 
     Application::~Application()
@@ -81,7 +81,7 @@ namespace pu
         this->thds.push_back(Callback);
     }
 
-    void Application::SetOnInput(std::function<void(u64 Input)> Callback)
+    void Application::SetOnInput(std::function<void(u64 Down, u64 Up, u64 Held)> Callback)
     {
         this->cbipt = Callback;
     }
@@ -101,19 +101,21 @@ namespace pu
     void Application::CallForRender()
     {
         hidScanInput();
-        u64 k = hidKeysDown(CONTROLLER_P1_AUTO);
+        u64 d = hidKeysDown(CONTROLLER_P1_AUTO);
+        u64 u = hidKeysUp(CONTROLLER_P1_AUTO);
+        u64 h = hidKeysHeld(CONTROLLER_P1_AUTO);
         if(!this->thds.empty()) for(u32 i = 0; i < this->thds.size(); i++) (this->thds[i])();
-        (this->cbipt)(k);
+        (this->cbipt)(d, u, h);
         this->rend->Clear(this->bgcolor);
         if(this->hasimage) this->rend->DrawImage(this->bgimage, 0, 0);
-        (this->lyt->GetOnInput())(k);
+        (this->lyt->GetOnInput())(d, u, h);
         if(this->lyt->HasChilds()) for(u32 i = 0; i < this->lyt->GetChildCount(); i++)
         {
             element::Element *elm = this->lyt->GetChildAt(i);
             if(elm->IsVisible())
             {
                 elm->OnRender(this->rend);
-                elm->OnInput(k);
+                elm->OnInput(d, u, h);
             }
         }
         if(this->fact > 0)

@@ -90,7 +90,7 @@ namespace pu::element
         else Drawer->DrawRectangleFill(this->clr, this->x, this->y, this->w, this->h);
     }
 
-    void Rectangle::OnInput(u64 Input)
+    void Rectangle::OnInput(u64 Down, u64 Up, u64 Held)
     {
     }
 }

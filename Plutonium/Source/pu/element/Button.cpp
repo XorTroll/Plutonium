@@ -130,11 +130,11 @@ namespace pu::element
         Drawer->DrawText(this->cnt, this->fnt, this->fsize, tx, ty, { 0, 0, 0, 255 });
     }
 
-    void Button::OnInput(u64 Input)
+    void Button::OnInput(u64 Down, u64 Up, u64 Held)
     {
         if(this->hover)
         {
-            if(!(Input & KEY_TOUCH))
+            if(!(Down & KEY_TOUCH))
             {
                 (this->clickcb)();
                 this->hover = false;
@@ -153,7 +153,7 @@ namespace pu::element
         }
         else
         {
-            if(Input & KEY_TOUCH)
+            if(Down & KEY_TOUCH)
             {
                 touchPosition tch;
                 hidTouchRead(&tch, 0);

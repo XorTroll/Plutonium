@@ -300,9 +300,9 @@ namespace pu::element
         }
     }
 
-    void Menu::OnInput(u64 Input)
+    void Menu::OnInput(u64 Down, u64 Up, u64 Held)
     {
-        if(Input & KEY_DOWN)
+        if((Down & KEY_DDOWN) || (Down & KEY_LSTICK_DOWN) || (Held & KEY_RSTICK_DOWN))
         {
             if(this->isel < (this->itms.size() - 1))
             {
@@ -325,7 +325,7 @@ namespace pu::element
                 }
             }
         }
-        else if(Input & KEY_UP)
+        if((Down & KEY_DUP) || (Down & KEY_LSTICK_UP) || (Held & KEY_RSTICK_UP))
         {
             if(this->isel > 0)
             {
@@ -353,7 +353,7 @@ namespace pu::element
             u32 ipc = this->itms[this->isel]->GetCallbackCount();
             if(ipc > 0) for(u32 i = 0; i < ipc; i++)
             {
-                if(Input & this->itms[this->isel]->GetCallbackKey(i))
+                if(Down & this->itms[this->isel]->GetCallbackKey(i))
                 {
                     if(this->icdown) this->icdown = false;
                     else (this->itms[this->isel]->GetCallback(i))();
