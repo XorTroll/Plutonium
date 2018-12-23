@@ -14,6 +14,7 @@ namespace pu
 
     void Layout::ClearChildren()
     {
+        if(!this->chld.empty()) for(u32 i = 0; i < this->chld.size(); i++) delete this->chld[i];
         this->chld.clear();
     }
 

@@ -187,6 +187,7 @@ namespace pu::element
 
     void Menu::ClearItems()
     {
+        if(!this->itms.empty()) for(u32 i = 0; i < this->itms.size(); i++) delete this->itms[i];
         this->itms.clear();
     }
 
