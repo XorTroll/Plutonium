@@ -7,6 +7,10 @@ namespace pu::element
         this->visible = true;
     }
 
+    Element::~Element()
+    {
+    }
+
     bool Element::IsVisible()
     {
         return this->visible;

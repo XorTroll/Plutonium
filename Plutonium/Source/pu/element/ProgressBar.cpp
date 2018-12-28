@@ -10,6 +10,7 @@ namespace pu::element
         this->h = Height;
         this->clr = { 140, 140, 140, 255 };
         this->oclr = { 139, 195, 74, 255 };
+        this->perc = 0;
     }
 
     u32 ProgressBar::GetX()
