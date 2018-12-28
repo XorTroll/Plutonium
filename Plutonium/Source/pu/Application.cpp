@@ -49,6 +49,7 @@ namespace pu
         {
             this->bgimage = Path;
             this->hasimage = true;
+            this->ntex = render::LoadImage(Path);
         }
     }
 
@@ -59,21 +60,6 @@ namespace pu
             this->bgimage = "";
             this->hasimage = false;
         }
-    }
-
-    void Application::SetCustomFont(std::string FontPath)
-    {
-        this->rend->SetCustomFont(FontPath);
-    }
-
-    bool Application::UsesCustomFont()
-    {
-        return this->rend->UsesCustomFont();
-    }
-
-    std::string Application::GetCustomFont()
-    {
-        return this->rend->GetCustomFont();
     }
 
     void Application::AddThread(std::function<void()> Callback)
@@ -106,8 +92,8 @@ namespace pu
         u64 h = hidKeysHeld(CONTROLLER_P1_AUTO);
         if(!this->thds.empty()) for(u32 i = 0; i < this->thds.size(); i++) (this->thds[i])();
         (this->cbipt)(d, u, h);
-        this->rend->Clear(this->bgcolor);
-        if(this->hasimage) this->rend->DrawImage(this->bgimage, 0, 0);
+        this->rend->InitializeRender(this->bgcolor);
+        if(this->hasimage) this->rend->RenderTexture(this->ntex, 0, 0);
         (this->lyt->GetOnInput())(d, u, h);
         if(this->lyt->HasChilds()) for(u32 i = 0; i < this->lyt->GetChildCount(); i++)
         {
@@ -120,10 +106,10 @@ namespace pu
         }
         if(this->fact > 0)
         {
-            this->rend->DrawRectangleFill(draw::Color(0, 0, 0, this->fact), 0, 0, 1280, 720);
+            this->rend->RenderRectangleFill(draw::Color(0, 0, 0, this->fact), 0, 0, 1280, 720);
             this->fact -= 20;
         }
-        this->rend->Render();
+        this->rend->FinalizeRender();
     }
 
     void Application::Close()

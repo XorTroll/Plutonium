@@ -2,7 +2,7 @@
 
 namespace pu::element
 {
-    Button::Button(u32 X, u32 Y, u32 Width, u32 Height, std::string Content, draw::Color Color)
+    Button::Button(u32 X, u32 Y, u32 Width, u32 Height, std::string Content, draw::Color Color) : Element::Element()
     {
         this->x = X;
         this->x = Y;
@@ -12,8 +12,14 @@ namespace pu::element
         this->clr = Color;
         this->hover = false;
         this->hoverfact = 255;
-        this->fnt = draw::Font::NintendoStandard;
-        this->fsize = 25;
+        this->fnt = render::LoadSharedFont(render::SharedFont::Standard, 25);
+        this->ntex = render::RenderText(this->fnt, Content, Color);
+    }
+
+    Button::~Button()
+    {
+        render::DeleteFont(this->fnt);
+        render::DeleteTexture(this->ntex);
     }
 
     u32 Button::GetX()
@@ -64,6 +70,8 @@ namespace pu::element
     void Button::SetContent(std::string Content)
     {
         this->cnt = Content;
+        render::DeleteTexture(this->ntex);
+        this->ntex = render::RenderText(this->fnt, Content, this->clr);
     }
 
     draw::Color Button::GetColor()
@@ -74,16 +82,16 @@ namespace pu::element
     void Button::SetColor(draw::Color Color)
     {
         this->clr = Color;
+        render::DeleteTexture(this->ntex);
+        this->ntex = render::RenderText(this->fnt, this->cnt, Color);
     }
 
-    draw::Font Button::GetContentFont()
+    void Button::SetContentFont(render::NativeFont Font)
     {
-        return this->fnt;
-    }
-
-    void Button::SetContentFont(draw::Font Font)
-    {
+        render::DeleteFont(this->fnt);
         this->fnt = Font;
+        render::DeleteTexture(this->ntex);
+        this->ntex = render::RenderText(this->fnt, this->cnt, this->clr);
     }
 
     void Button::SetOnClick(std::function<void()> ClickCallback)
@@ -105,29 +113,29 @@ namespace pu::element
         draw::Color nclr(nr, ng, nb, this->clr.A);
         if(this->hover)
         {
-            Drawer->DrawRectangleFill(this->clr, this->x, this->y, this->w, this->h);
+            Drawer->RenderRectangleFill(this->clr, this->x, this->y, this->w, this->h);
             if(this->hoverfact < 255)
             {
-                Drawer->DrawRectangleFill(draw::Color(nr, ng, nb, this->hoverfact), this->x, this->y, this->w, this->h);
+                Drawer->RenderRectangleFill({ nr, ng, nb, this->hoverfact }, this->x, this->y, this->w, this->h);
                 this->hoverfact += 48;
             }
-            else Drawer->DrawRectangleFill(nclr, this->x, this->y, this->w, this->h);
+            else Drawer->RenderRectangleFill(nclr, this->x, this->y, this->w, this->h);
         }
         else
         {
-            Drawer->DrawRectangleFill(this->clr, this->x, this->y, this->w, this->h);
+            Drawer->RenderRectangleFill(this->clr, this->x, this->y, this->w, this->h);
             if(this->hoverfact > 0)
             {
-                Drawer->DrawRectangleFill(draw::Color(nr, ng, nb, this->hoverfact), this->x, this->y, this->w, this->h);
+                Drawer->RenderRectangleFill({ nr, ng, nb, this->hoverfact }, this->x, this->y, this->w, this->h);
                 this->hoverfact -= 48;
             }
-            else Drawer->DrawRectangleFill(this->clr, this->x, this->y, this->w, this->h);
+            else Drawer->RenderRectangleFill(this->clr, this->x, this->y, this->w, this->h);
         }
-        u32 xw = Drawer->GetTextWidth(this->fnt, this->cnt, this->fsize);
-        u32 xh = Drawer->GetTextHeight(this->fnt, this->cnt, this->fsize);
+        u32 xw = render::GetTextWidth(this->fnt, this->cnt);
+        u32 xh = render::GetTextHeight(this->fnt, this->cnt);
         u32 tx = ((this->w - xw) / 2) + this->x;
         u32 ty = ((this->h - xh) / 2) + this->y;
-        Drawer->DrawText(this->cnt, this->fnt, this->fsize, tx, ty, { 0, 0, 0, 255 });
+        Drawer->RenderTexture(this->ntex, tx, ty);
     }
 
     void Button::OnInput(u64 Down, u64 Up, u64 Held)

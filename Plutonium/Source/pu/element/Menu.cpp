@@ -4,8 +4,17 @@ namespace pu::element
 {
     MenuItem::MenuItem(std::string Name)
     {
+        this->font = render::LoadSharedFont(render::SharedFont::Standard, 25);
         this->name = Name;
+        this->ntex = render::RenderText(this->font, Name, { 10, 10, 10, 255 });
         this->hasicon = false;
+    }
+
+    MenuItem::~MenuItem()
+    {
+        render::DeleteFont(this->font);
+        render::DeleteTexture(this->ntex);
+        if(this->hasicon) render::DeleteTexture(this->itex);
     }
 
     std::string MenuItem::GetName()
@@ -16,6 +25,8 @@ namespace pu::element
     void MenuItem::SetName(std::string Name)
     {
         this->name = Name;
+        render::DeleteTexture(this->ntex);
+        this->ntex = render::RenderText(this->font, Name, { 10, 10, 10, 255 });
     }
 
     void MenuItem::AddOnClick(std::function<void()> Callback, u64 Key)
@@ -49,8 +60,10 @@ namespace pu::element
         std::ifstream ifs(Icon);
         if(ifs.good())
         {
-            this->hasicon = true;
             this->icon = Icon;
+            if(this->hasicon) render::DeleteTexture(this->itex);
+            this->itex = render::LoadImage(Icon);
+            this->hasicon = true;
         }
         ifs.close();
     }
@@ -60,7 +73,22 @@ namespace pu::element
         return this->hasicon;
     }
 
-    Menu::Menu(u32 X, u32 Y, u32 Width, draw::Color OptionColor, u32 ItemSize, u32 ItemsToShow)
+    render::NativeFont MenuItem::GetFont()
+    {
+        return this->font;
+    }
+
+    render::NativeTexture MenuItem::GetNameTexture()
+    {
+        return this->ntex;
+    }
+
+    render::NativeTexture MenuItem::GetIconTexture()
+    {
+        return this->itex;
+    }
+
+    Menu::Menu(u32 X, u32 Y, u32 Width, draw::Color OptionColor, u32 ItemSize, u32 ItemsToShow) : Element::Element()
     {
         this->x = X;
         this->y = Y;
@@ -74,10 +102,13 @@ namespace pu::element
         this->fisel = 0;
         this->selfact = 255;
         this->pselfact = 0;
-        this->fnt = draw::Font::NintendoStandard;
-        this->fsize = 25;
         this->onselch = [&](){};
         this->icdown = false;
+    }
+
+    Menu::~Menu()
+    {
+        this->ClearItems();
     }
 
     u32 Menu::GetX()
@@ -135,34 +166,14 @@ namespace pu::element
         this->isize = ItemsToShow;
     }
 
-    draw::Font Menu::GetFont()
-    {
-        return this->fnt;
-    }
-
-    void Menu::SetFont(draw::Font Font)
-    {
-        this->fnt = Font;
-    }
-
-    u32 Menu::GetFontSize()
-    {
-        return this->fsize;
-    }
-
-    void Menu::SetFontSize(u32 Size)
-    {
-        this->fsize = Size;
-    }
-
     draw::Color Menu::GetColor()
     {
         return this->clr;
     }
 
-    void Menu::SetColor(draw::Color OptionColor)
+    void Menu::SetColor(draw::Color Color)
     {
-        this->clr = OptionColor;
+        this->clr = Color;
     }
 
     draw::Color Menu::GetScrollbarColor()
@@ -170,9 +181,9 @@ namespace pu::element
         return this->scb;
     }
 
-    void Menu::SetScrollbarColor(draw::Color ScrollbarColor)
+    void Menu::SetScrollbarColor(draw::Color Color)
     {
-        this->scb = ScrollbarColor;
+        this->scb = Color;
     }
 
     void Menu::SetOnSelectionChanged(std::function<void()> Callback)
@@ -241,28 +252,27 @@ namespace pu::element
                 draw::Color nclr(nr, ng, nb, this->clr.A);
                 if(this->isel == i)
                 {
-                    Drawer->DrawRectangleFill(this->clr, cx, cy, cw, ch);
+                    Drawer->RenderRectangleFill(this->clr, cx, cy, cw, ch);
                     if(this->selfact < 255)
                     {
-                        Drawer->DrawRectangleFill(draw::Color(nr, ng, nb, this->selfact), cx, cy, cw, ch);
+                        Drawer->RenderRectangleFill(draw::Color(nr, ng, nb, this->selfact), cx, cy, cw, ch);
                         this->selfact += 48;
                     }
-                    else Drawer->DrawRectangleFill(nclr, cx, cy, cw, ch);
+                    else Drawer->RenderRectangleFill(nclr, cx, cy, cw, ch);
                 }
                 else if(this->previsel == i)
                 {
-                    Drawer->DrawRectangleFill(this->clr, cx, cy, cw, ch);
+                    Drawer->RenderRectangleFill(this->clr, cx, cy, cw, ch);
                     if(this->pselfact > 0)
                     {
-                        Drawer->DrawRectangleFill(draw::Color(nr, ng, nb, this->pselfact), cx, cy, cw, ch);
+                        Drawer->RenderRectangleFill(draw::Color(nr, ng, nb, this->pselfact), cx, cy, cw, ch);
                         this->pselfact -= 48;
                     }
-                    else Drawer->DrawRectangleFill(this->clr, cx, cy, cw, ch);
+                    else Drawer->RenderRectangleFill(this->clr, cx, cy, cw, ch);
                 }
-                else Drawer->DrawRectangleFill(this->clr, cx, cy, cw, ch);
+                else Drawer->RenderRectangleFill(this->clr, cx, cy, cw, ch);
                 MenuItem *itm = this->itms[i];
-                std::string cnt = itm->GetName();
-                u32 xh = Drawer->GetTextHeight(this->fnt, cnt, this->fsize);
+                u32 xh = render::GetTextHeight(itm->GetFont(), itm->GetName());
                 u32 tx = (cx + 25);
                 u32 ty = ((ch - xh) / 2) + cy;
                 if(itm->HasIcon())
@@ -271,9 +281,9 @@ namespace pu::element
                     u32 icx = (cx + 25);
                     u32 icy = (cy + 5);
                     tx = (icx + icd + 25);
-                    Drawer->DrawImageScaled(itm->GetIcon(), icx, icy, icd, icd);
+                    Drawer->RenderTextureScaled(itm->GetIconTexture(), icx, icy, icd, icd);
                 }
-                Drawer->DrawText(cnt, this->fnt, this->fsize, tx, ty, { 0, 0, 0, 255 });
+                Drawer->RenderTexture(itm->GetNameTexture(), tx, ty);
                 cy += ch;
             }
             if(this->ishow < this->itms.size())
@@ -292,12 +302,12 @@ namespace pu::element
                 u32 scy = this->y;
                 u32 scw = 20;
                 u32 sch = (this->ishow * this->isize);
-                Drawer->DrawRectangleFill(this->scb, scx, scy, scw, sch);
+                Drawer->RenderRectangleFill(this->scb, scx, scy, scw, sch);
                 u32 fch = ((this->ishow * sch) / this->itms.size());
                 u32 fcy = scy + (this->fisel * (sch / this->itms.size()));
-                Drawer->DrawRectangleFill(sclr, scx, fcy, scw, fch);
+                Drawer->RenderRectangleFill(sclr, scx, fcy, scw, fch);
             }
-            Drawer->DrawHorizontalShadow(cx, cy, cw, 5, 160);
+            Drawer->RenderShadowSimple(cx, cy, cw, 5, 160);
         }
     }
 

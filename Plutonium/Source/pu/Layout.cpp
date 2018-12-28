@@ -7,6 +7,11 @@ namespace pu
         this->onipt = [&](u64 Down, u64 Up, u64 Held){};
     }
 
+    Layout::~Layout()
+    {
+        this->ClearChildren();
+    }
+
     void Layout::AddChild(element::Element *Child)
     {
         this->chld.push_back(Child);
@@ -30,7 +35,7 @@ namespace pu
 
     bool Layout::HasChilds()
     {
-        return !(this->chld.empty());
+        return !this->chld.empty();
     }
 
     void Layout::SetOnInput(std::function<void(u64 Down, u64 Up, u64 Held)> Callback)

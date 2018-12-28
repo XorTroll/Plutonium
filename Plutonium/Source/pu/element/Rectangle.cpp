@@ -2,7 +2,7 @@
 
 namespace pu::element
 {
-    Rectangle::Rectangle(u32 X, u32 Y, u32 Width, u32 Height, draw::Color RecColor, u32 BorderRadius)
+    Rectangle::Rectangle(u32 X, u32 Y, u32 Width, u32 Height, draw::Color RecColor, u32 BorderRadius) : Element::Element()
     {
         this->x = X;
         this->x = Y;
@@ -77,17 +77,17 @@ namespace pu::element
         if(this->borderr > 0)
         {
             u32 diam = (2 * this->borderr);
-            Drawer->DrawRectangleFill(this->clr, (this->x + this->borderr), (this->y + this->borderr), (this->w - diam), (this->h - diam));
-            Drawer->DrawRectangleFill(this->clr, (this->x + this->borderr), this->y, (this->y + this->w - diam), this->borderr);
-            Drawer->DrawRectangleFill(this->clr, (this->x + this->borderr), (this->y + (this->h - this->borderr)), (this->w - diam), this->borderr);
-            Drawer->DrawRectangleFill(this->clr, this->x, (this->y + this->borderr), this->borderr, (this->h - diam));
-            Drawer->DrawRectangleFill(this->clr, (this->x + (this->w - this->borderr)), (this->y + this->borderr), this->borderr, (this->h - diam));
-            Drawer->DrawCircle(this->clr, this->x, this->y, this->borderr);
-            Drawer->DrawCircle(this->clr, (this->x + this->w - diam), this->y, this->borderr);
-            Drawer->DrawCircle(this->clr, this->x, (this->h - diam), this->borderr);
-            Drawer->DrawCircle(this->clr, (this->x + this->w - diam), (this->h - diam), this->borderr);
+            Drawer->RenderRectangleFill(this->clr, (this->x + this->borderr), (this->y + this->borderr), (this->w - diam), (this->h - diam));
+            Drawer->RenderRectangleFill(this->clr, (this->x + this->borderr), this->y, (this->y + this->w - diam), this->borderr);
+            Drawer->RenderRectangleFill(this->clr, (this->x + this->borderr), (this->y + (this->h - this->borderr)), (this->w - diam), this->borderr);
+            Drawer->RenderRectangleFill(this->clr, this->x, (this->y + this->borderr), this->borderr, (this->h - diam));
+            Drawer->RenderRectangleFill(this->clr, (this->x + (this->w - this->borderr)), (this->y + this->borderr), this->borderr, (this->h - diam));
+            Drawer->RenderCircle(this->clr, this->x, this->y, this->borderr);
+            Drawer->RenderCircle(this->clr, (this->x + this->w - diam), this->y, this->borderr);
+            Drawer->RenderCircle(this->clr, this->x, (this->h - diam), this->borderr);
+            Drawer->RenderCircle(this->clr, (this->x + this->w - diam), (this->h - diam), this->borderr);
         }
-        else Drawer->DrawRectangleFill(this->clr, this->x, this->y, this->w, this->h);
+        else Drawer->RenderRectangleFill(this->clr, this->x, this->y, this->w, this->h);
     }
 
     void Rectangle::OnInput(u64 Down, u64 Up, u64 Held)

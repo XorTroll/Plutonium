@@ -2,7 +2,7 @@
 
 namespace pu::element
 {
-    ProgressBar::ProgressBar(u32 X, u32 Y, u32 Width, u32 Height)
+    ProgressBar::ProgressBar(u32 X, u32 Y, u32 Width, u32 Height) : Element::Element()
     {
         this->x = X;
         this->y = Y;
@@ -112,9 +112,9 @@ namespace pu::element
 
     void ProgressBar::OnRender(render::Renderer *Drawer)
     {
-        Drawer->DrawRectangleFill(this->clr, this->x, this->y, this->w, this->h);
+        Drawer->RenderRectangleFill(this->clr, this->x, this->y, this->w, this->h);
         u32 pcw = ((this->perc * this->w) / 100);
-        Drawer->DrawRectangleFill(this->oclr, this->x, this->y, pcw, this->h);
+        Drawer->RenderRectangleFill(this->oclr, this->x, this->y, pcw, this->h);
     }
 
     void ProgressBar::OnInput(u64 Down, u64 Up, u64 Held)

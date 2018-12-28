@@ -2,16 +2,24 @@
 
 namespace pu::element
 {
-    Toggle::Toggle(u32 X, u32 Y, std::string Content, u64 Key, draw::Color Checked)
+    Toggle::Toggle(u32 X, u32 Y, std::string Content, u64 Key, draw::Color Color) : Element::Element()
     {
         this->x = X;
         this->y = Y;
         this->key = Key;
         this->cnt = Content;
-        this->clr = Checked;
-        this->fnt = draw::Font::NintendoStandard;
+        this->clr = Color;
+        this->fnt = render::LoadSharedFont(render::SharedFont::Standard, 25);
         this->fsize = 25;
         this->togfact = 255;
+        this->checked = false;
+        this->ntex = render::RenderText(this->fnt, Content, Color);
+    }
+
+    Toggle::~Toggle()
+    {
+        render::DeleteFont(this->fnt);
+        render::DeleteTexture(this->ntex);
     }
 
     u32 Toggle::GetX()
@@ -52,26 +60,15 @@ namespace pu::element
     void Toggle::SetContent(std::string Content)
     {
         this->cnt = Content;
+        render::DeleteTexture(this->ntex);
+        this->ntex = render::RenderText(this->fnt, Content, this->clr);
     }
 
-    draw::Font Toggle::GetFont()
+    void Toggle::SetFont(render::NativeFont Font)
     {
-        return this->fnt;
-    }
-
-    void Toggle::SetFont(draw::Font Font)
-    {
+        render::DeleteFont(this->fnt);
         this->fnt = Font;
-    }
-
-    u32 Toggle::GetFontSize()
-    {
-        return this->fsize;
-    }
-
-    void Toggle::SetFontSize(u32 Size)
-    {
-        this->fsize = Size;
+        this->ntex = render::RenderText(Font, this->cnt, this->clr);
     }
 
     draw::Color Toggle::GetColor()
@@ -82,6 +79,8 @@ namespace pu::element
     void Toggle::SetColor(draw::Color Color)
     {
         this->clr = Color;
+        render::DeleteTexture(this->ntex);
+        this->ntex = render::RenderText(this->fnt, this->cnt, Color);
     }
 
     u64 Toggle::GetKey()
@@ -96,8 +95,8 @@ namespace pu::element
 
     void Toggle::OnRender(render::Renderer *Drawer)
     {
-        u32 tw = Drawer->GetTextWidth(this->fnt, this->cnt, this->fsize);
-        u32 th = Drawer->GetTextHeight(this->fnt, this->cnt, this->fsize);
+        u32 tw = render::GetTextWidth(this->fnt, this->cnt);
+        u32 th = render::GetTextHeight(this->fnt, this->cnt);
         u32 rw = th;
         u32 rh = (2 * th);
         u32 rx = this->x;
@@ -106,25 +105,25 @@ namespace pu::element
         u32 ty = this->y + (th / 2);
         if(this->checked)
         {
-            Drawer->DrawRectangleFill({ 130, 130, 130, 255 }, rx, ry, rw, rh);
+            Drawer->RenderRectangleFill({ 130, 130, 130, 255 }, rx, ry, rw, rh);
             if(this->togfact < 255)
             {
-                Drawer->DrawRectangleFill({ this->clr.R, this->clr.G, this->clr.B, (255 - this->togfact) }, rx, ry, rw, rh);
+                Drawer->RenderRectangleFill({ this->clr.R, this->clr.G, this->clr.B, (255 - this->togfact) }, rx, ry, rw, rh);
                 this->togfact += 48;
             }
-            else Drawer->DrawRectangleFill({ 130, 130, 130, 255 }, rx, ry, rw, rh);
+            else Drawer->RenderRectangleFill({ 130, 130, 130, 255 }, rx, ry, rw, rh);
         }
         else
         {
-            Drawer->DrawRectangleFill(this->clr, rx, ry, rw, rh);
+            Drawer->RenderRectangleFill(this->clr, rx, ry, rw, rh);
             if(this->togfact > 0)
             {
-                Drawer->DrawRectangleFill({ 130, 130, 130, this->togfact }, rx, ry, rw, rh);
+                Drawer->RenderRectangleFill({ 130, 130, 130, this->togfact }, rx, ry, rw, rh);
                 this->togfact -= 48;
             }
-            else Drawer->DrawRectangleFill(this->clr, rx, ry, rw, rh);
+            else Drawer->RenderRectangleFill(this->clr, rx, ry, rw, rh);
         }
-        Drawer->DrawText(this->cnt, this->fnt, this->fsize, tx, ty, { 0, 0, 0, 255 });
+        Drawer->RenderTexture(this->ntex, tx, ty);
     }
 
     void Toggle::OnInput(u64 Down, u64 Up, u64 Held)
