@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['visible',['visible',['../d6/d14/classpu_1_1element_1_1_element.html#a66e702be5383a68a9d715abeb883bc41',1,'pu::element::Element']]]
+  ['usercancelled',['UserCancelled',['../d0/d22/classpu_1_1_dialog.html#a05228b90c92e8567de20f7fb9e7f39c3',1,'pu::Dialog']]]
 ];

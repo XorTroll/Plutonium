@@ -1,5 +1,8 @@
 var searchData=
 [
-  ['usercancelled',['UserCancelled',['../d0/d22/classpu_1_1_dialog.html#a05228b90c92e8567de20f7fb9e7f39c3',1,'pu::Dialog']]],
-  ['usescustomfont',['UsesCustomFont',['../d7/d15/classpu_1_1_application.html#a141f19a1ab0d03f49470ff410c99b6f2',1,'pu::Application::UsesCustomFont()'],['../d6/dba/classpu_1_1render_1_1_renderer.html#ad6059dcc3c0dd2bdea735b36c5f26b38',1,'pu::render::Renderer::UsesCustomFont()']]]
+  ['textblock',['TextBlock',['../d0/d38/classpu_1_1element_1_1_text_block.html',1,'pu::element::TextBlock'],['../d0/d38/classpu_1_1element_1_1_text_block.html#a602462ba7de18f60276e0728fbc4a730',1,'pu::element::TextBlock::TextBlock()']]],
+  ['textblock_2ehpp',['TextBlock.hpp',['../d3/d14/_text_block_8hpp.html',1,'']]],
+  ['thds',['thds',['../d7/d15/classpu_1_1_application.html#a21fefc0a42e2da4ca73e403b722c6055',1,'pu::Application']]],
+  ['toggle',['Toggle',['../d9/d2a/classpu_1_1element_1_1_toggle.html',1,'pu::element::Toggle'],['../d9/d2a/classpu_1_1element_1_1_toggle.html#ad253fbdb2bf7dcd5d25ce994aeab64a5',1,'pu::element::Toggle::Toggle()']]],
+  ['toggle_2ehpp',['Toggle.hpp',['../de/d66/_toggle_8hpp.html',1,'']]]
 ];

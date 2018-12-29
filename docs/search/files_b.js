@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['textblock_2ehpp',['TextBlock.hpp',['../d3/d14/_text_block_8hpp.html',1,'']]],
-  ['toggle_2ehpp',['Toggle.hpp',['../de/d66/_toggle_8hpp.html',1,'']]]
+  ['sdl2_2ehpp',['SDL2.hpp',['../dc/dd0/_s_d_l2_8hpp.html',1,'']]]
 ];

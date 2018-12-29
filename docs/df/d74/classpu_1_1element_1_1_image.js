@@ -1,6 +1,7 @@
 var classpu_1_1element_1_1_image =
 [
     [ "Image", "df/d74/classpu_1_1element_1_1_image.html#a322f147b60d37e0a9aa187b944691b12", null ],
+    [ "~Image", "df/d74/classpu_1_1element_1_1_image.html#a48c3adea3991bc72fe66aaeee5d8d289", null ],
     [ "GetHeight", "df/d74/classpu_1_1element_1_1_image.html#aff05c311d9322e3fec29e9f1444351eb", null ],
     [ "GetImage", "df/d74/classpu_1_1element_1_1_image.html#a014a20da8ac727ae1504ad6fcca81761", null ],
     [ "GetWidth", "df/d74/classpu_1_1element_1_1_image.html#a9b2fc471b4d18da7a63c4dc2cd4f331c", null ],

@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['usercancelled',['UserCancelled',['../d0/d22/classpu_1_1_dialog.html#a05228b90c92e8567de20f7fb9e7f39c3',1,'pu::Dialog']]],
-  ['usescustomfont',['UsesCustomFont',['../d7/d15/classpu_1_1_application.html#a141f19a1ab0d03f49470ff410c99b6f2',1,'pu::Application::UsesCustomFont()'],['../d6/dba/classpu_1_1render_1_1_renderer.html#ad6059dcc3c0dd2bdea735b36c5f26b38',1,'pu::render::Renderer::UsesCustomFont()']]]
+  ['usercancelled',['UserCancelled',['../d0/d22/classpu_1_1_dialog.html#a05228b90c92e8567de20f7fb9e7f39c3',1,'pu::Dialog']]]
 ];

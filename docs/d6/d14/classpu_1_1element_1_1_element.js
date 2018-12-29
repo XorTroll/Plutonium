@@ -1,6 +1,7 @@
 var classpu_1_1element_1_1_element =
 [
     [ "Element", "d6/d14/classpu_1_1element_1_1_element.html#a30a7bb0c75853ed633ee3cf300be4e54", null ],
+    [ "~Element", "d6/d14/classpu_1_1element_1_1_element.html#af8a483138da149acba8f4623c43b5bc4", null ],
     [ "GetHeight", "d6/d14/classpu_1_1element_1_1_element.html#abda35fb4c452cae06ea80ea76b3f5b2a", null ],
     [ "GetWidth", "d6/d14/classpu_1_1element_1_1_element.html#a6abe7864b7286997702b67e43c0df737", null ],
     [ "GetX", "d6/d14/classpu_1_1element_1_1_element.html#a5442c100288ec2760286bec7f20d6a17", null ],
