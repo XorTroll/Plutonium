@@ -158,12 +158,12 @@ namespace pu::element
 
     u32 Menu::GetNumberOfItemsToShow()
     {
-        return this->isize;
+        return this->ishow;
     }
 
     void Menu::SetNumberOfItemsToShow(u32 ItemsToShow)
     {
-        this->isize = ItemsToShow;
+        this->ishow = ItemsToShow;
     }
 
     draw::Color Menu::GetColor()
