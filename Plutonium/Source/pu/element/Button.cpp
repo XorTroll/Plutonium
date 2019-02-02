@@ -18,8 +18,16 @@ namespace pu::element
 
     Button::~Button()
     {
-        render::DeleteFont(this->fnt);
-        render::DeleteTexture(this->ntex);
+        if(this->fnt != NULL)
+        {
+            render::DeleteFont(this->fnt);
+            this->fnt = NULL;
+        }
+        if(this->ntex != NULL)
+        {
+            render::DeleteTexture(this->ntex);
+            this->ntex = NULL;
+        }
     }
 
     u32 Button::GetX()

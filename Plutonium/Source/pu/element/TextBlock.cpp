@@ -15,8 +15,16 @@ namespace pu::element
 
     TextBlock::~TextBlock()
     {
-        render::DeleteFont(this->fnt);
-        render::DeleteTexture(this->ntex);
+        if(this->fnt != NULL)
+        {
+            render::DeleteFont(this->fnt);
+            this->fnt = NULL;
+        }
+        if(this->ntex != NULL)
+        {
+            render::DeleteTexture(this->ntex);
+            this->ntex = NULL;
+        }
     }
 
     u32 TextBlock::GetX()

@@ -18,8 +18,16 @@ namespace pu::element
 
     Toggle::~Toggle()
     {
-        render::DeleteFont(this->fnt);
-        render::DeleteTexture(this->ntex);
+        if(this->fnt != NULL)
+        {
+            render::DeleteFont(this->fnt);
+            this->fnt = NULL;
+        }
+        if(this->ntex != NULL)
+        {
+            render::DeleteTexture(this->ntex);
+            this->ntex = NULL;
+        }
     }
 
     u32 Toggle::GetX()

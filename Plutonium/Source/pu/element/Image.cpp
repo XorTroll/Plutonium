@@ -19,7 +19,11 @@ namespace pu::element
 
     Image::~Image()
     {
-        render::DeleteTexture(this->ntex);
+        if(this->ntex != NULL)
+        {
+            render::DeleteTexture(this->ntex);
+            this->ntex = NULL;
+        }
     }
 
     u32 Image::GetX()

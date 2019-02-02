@@ -12,9 +12,21 @@ namespace pu::element
 
     MenuItem::~MenuItem()
     {
-        render::DeleteFont(this->font);
-        render::DeleteTexture(this->ntex);
-        if(this->hasicon) render::DeleteTexture(this->itex);
+        if(this->font != NULL)
+        {
+            render::DeleteFont(this->font);
+            this->font = NULL;
+        }
+        if(this->ntex != NULL)
+        {
+            render::DeleteTexture(this->ntex);
+            this->ntex = NULL;
+        }
+        if(this->hasicon && (this->itex != NULL))
+        {
+            render::DeleteTexture(this->itex);
+            this->itex = NULL;
+        }
     }
 
     std::string MenuItem::GetName()

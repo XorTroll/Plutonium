@@ -21,15 +21,39 @@ namespace pu
 
     Dialog::~Dialog()
     {
-        render::DeleteFont(this->tfont);
-        render::DeleteFont(this->cfont);
-        render::DeleteFont(this->ofont);
-        render::DeleteTexture(this->title);
-        render::DeleteTexture(this->cnt);
-        if(this->hicon) render::DeleteTexture(this->icon);
+        if(this->tfont != NULL)
+        {
+            render::DeleteFont(this->tfont);
+            this->tfont = NULL;
+        }
+        if(this->cfont != NULL)
+        {
+            render::DeleteFont(this->cfont);
+            this->cfont = NULL;
+        }
+        if(this->ofont != NULL)
+        {
+            render::DeleteFont(this->ofont);
+            this->ofont = NULL;
+        }
+        if(this->title != NULL)
+        {
+            render::DeleteTexture(this->title);
+            this->title = NULL;
+        }
+        if(this->cnt != NULL)
+        {
+            render::DeleteTexture(this->cnt);
+            this->cnt = NULL;
+        }
+        if(this->hicon && (this->icon != NULL))
+        {
+            render::DeleteTexture(this->icon);
+            this->icon = NULL;
+            this->hicon = false;
+        }
         if(!this->opts.empty()) for(u32 i = 0; i < this->opts.size(); i++) delete this->opts[i];
         this->opts.clear();
-        this->sopts.clear();
     }
 
     void Dialog::AddOption(std::string Name)

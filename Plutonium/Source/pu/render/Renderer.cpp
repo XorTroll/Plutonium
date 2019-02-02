@@ -102,17 +102,14 @@ namespace pu::render
 
     void Renderer::RenderCircle(draw::Color Color, u32 X, u32 Y, u32 Radius)
     {
-        int cx = X + Radius;
-        int cy = Y + Radius;
-        int radius = Radius;
-        SDL_SetRenderDrawColor(purend, Color.R, Color.G, Color.B, Color.A);
-        for(double dy = 1; dy <= radius; dy += 1.0)
-        {
-            double dx = floor(sqrt((2.0 * radius * dy) - (dy * dy)));
-            int x = cx - dx;
-            SDL_RenderDrawLine(purend, cx - dx, cy + dy - radius, cx + dx, cy + dy - radius);
-            SDL_RenderDrawLine(purend, cx - dx, cy - dy + radius, cx + dx, cy - dy + radius);
-        }
+        aacircleRGBA(purend, X, Y, Radius, Color.R, Color.G, Color.B, Color.A);
+        circleRGBA(purend, X, Y, Radius, Color.R, Color.G, Color.B, Color.A);
+    }
+
+    void Renderer::RenderCircleFill(draw::Color Color, u32 X, u32 Y, u32 Radius)
+    {
+        aacircleRGBA(purend, X, Y, Radius, Color.R, Color.G, Color.B, Color.A);
+        filledCircleRGBA(purend, X, Y, Radius, Color.R, Color.G, Color.B, Color.A);
     }
 
     void Renderer::RenderShadowSimple(u32 X, u32 Y, u32 Width, u32 Height, u32 BaseAlpha)
