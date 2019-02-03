@@ -130,19 +130,13 @@ namespace pu::element
         Drawer->RenderTextureScaled(this->ntex, dfx, dfy, sf, sf);
     }
 
-    void IconButton::OnInput(u64 Down, u64 Up, u64 Held)
+    void IconButton::OnInput(u64 Down, u64 Up, u64 Held, bool Touch)
     {
         u32 w = this->rad * 2;
         u32 h = w;
         if(this->hover)
         {
-            if(!(Down & KEY_TOUCH))
-            {
-                (this->clickcb)();
-                this->hover = false;
-                this->hoverfact = 255;
-            }
-            else
+            if(Touch)
             {
                 touchPosition tch;
                 hidTouchRead(&tch, 0);
@@ -152,10 +146,16 @@ namespace pu::element
                     this->hoverfact = 255;
                 }
             }
+            else
+            {
+                (this->clickcb)();
+                this->hover = false;
+                this->hoverfact = 255;
+            }
         }
         else
         {
-            if(Down & KEY_TOUCH)
+            if(Touch)
             {
                 touchPosition tch;
                 hidTouchRead(&tch, 0);

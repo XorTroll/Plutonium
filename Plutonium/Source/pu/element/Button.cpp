@@ -146,17 +146,11 @@ namespace pu::element
         Drawer->RenderTexture(this->ntex, tx, ty);
     }
 
-    void Button::OnInput(u64 Down, u64 Up, u64 Held)
+    void Button::OnInput(u64 Down, u64 Up, u64 Held, bool Touch)
     {
         if(this->hover)
         {
-            if(!(Down & KEY_TOUCH))
-            {
-                (this->clickcb)();
-                this->hover = false;
-                this->hoverfact = 255;
-            }
-            else
+            if(Touch)
             {
                 touchPosition tch;
                 hidTouchRead(&tch, 0);
@@ -166,10 +160,16 @@ namespace pu::element
                     this->hoverfact = 255;
                 }
             }
+            else
+            {
+                (this->clickcb)();
+                this->hover = false;
+                this->hoverfact = 255;
+            }
         }
         else
         {
-            if(Down & KEY_TOUCH)
+            if(Touch)
             {
                 touchPosition tch;
                 hidTouchRead(&tch, 0);

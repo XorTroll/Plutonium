@@ -10,7 +10,9 @@ namespace pu
         this->bgcolor = { 255, 255, 255, 255 };
         this->bgimage = "";
         this->hasimage = false;
-        this->cbipt = [&](u64 Down, u64 Up, u64 Held){};
+        this->cbipt = [&](u64 Down, u64 Up, u64 Held, bool Touch){};
+        this->rover = false;
+        this->rof = [](render::Renderer *Drawer){ return true; };
     }
 
     Application::~Application()
@@ -67,14 +69,14 @@ namespace pu
         this->thds.push_back(Callback);
     }
 
-    void Application::SetOnInput(std::function<void(u64 Down, u64 Up, u64 Held)> Callback)
+    void Application::SetOnInput(std::function<void(u64 Down, u64 Up, u64 Held, bool Touch)> Callback)
     {
         this->cbipt = Callback;
     }
 
-    void Application::ShowDialog(Dialog *ToShow)
+    u32 Application::ShowDialog(Dialog *ToShow)
     {
-        ToShow->Show(this->rend);
+        return ToShow->Show(this->rend, this);
     }
 
     void Application::Show()
@@ -84,15 +86,38 @@ namespace pu
         while(this->show) this->CallForRender();
     }
 
-    void Application::CallForRender()
+    bool Application::CallForRender()
+    {
+        bool c = true;
+        this->rend->InitializeRender(this->bgcolor);
+        this->OnRender();
+        if(this->rover)
+        {
+            c = (this->rof)(this->rend);
+            this->rover = false;
+            this->rof = [](render::Renderer *Drawer){ return true; };
+        }
+        this->rend->FinalizeRender();
+        return c;
+    }
+
+    bool Application::CallForRenderWithRenderOver(std::function<bool(render::Renderer *Drawer)> RenderFunc)
+    {
+        this->rover = true;
+        this->rof = RenderFunc;
+        return this->CallForRender();
+    }
+
+    void Application::OnRender()
     {
         hidScanInput();
         u64 d = hidKeysDown(CONTROLLER_P1_AUTO);
         u64 u = hidKeysUp(CONTROLLER_P1_AUTO);
         u64 h = hidKeysHeld(CONTROLLER_P1_AUTO);
+        u64 th = hidKeysDown(CONTROLLER_HANDHELD);
+        bool touch = (th & KEY_TOUCH);
         if(!this->thds.empty()) for(u32 i = 0; i < this->thds.size(); i++) (this->thds[i])();
-        (this->cbipt)(d, u, h);
-        this->rend->InitializeRender(this->bgcolor);
+        (this->cbipt)(d, u, h, touch);
         if(this->hasimage) this->rend->RenderTexture(this->ntex, 0, 0);
         (this->lyt->GetOnInput())(d, u, h);
         if(this->lyt->HasChilds()) for(u32 i = 0; i < this->lyt->GetChildCount(); i++)
@@ -101,15 +126,14 @@ namespace pu
             if(elm->IsVisible())
             {
                 elm->OnRender(this->rend);
-                elm->OnInput(d, u, h);
+                if(!this->rover) elm->OnInput(d, u, h, touch);
             }
         }
         if(this->fact > 0)
         {
             this->rend->RenderRectangleFill(draw::Color(0, 0, 0, this->fact), 0, 0, 1280, 720);
             this->fact -= 20;
-        }
-        this->rend->FinalizeRender();
+        }  
     }
 
     void Application::Close()

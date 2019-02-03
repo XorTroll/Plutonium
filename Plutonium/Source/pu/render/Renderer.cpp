@@ -16,6 +16,7 @@ namespace pu::render
             purend = SDL_CreateRenderer(this->rendwd, -1, (SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC));
             this->rendsf = SDL_GetWindowSurface(this->rendwd);
             SDL_SetRenderDrawBlendMode(purend, SDL_BLENDMODE_BLEND);
+            SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "2");
             IMG_Init(IMG_INIT_PNG | IMG_INIT_JPG | IMG_INIT_TIF | IMG_INIT_WEBP);
             TTF_Init();
             this->initialized = true;
@@ -102,14 +103,14 @@ namespace pu::render
 
     void Renderer::RenderCircle(draw::Color Color, u32 X, u32 Y, u32 Radius)
     {
-        aacircleRGBA(purend, X, Y, Radius, Color.R, Color.G, Color.B, Color.A);
         circleRGBA(purend, X, Y, Radius, Color.R, Color.G, Color.B, Color.A);
+        aacircleRGBA(purend, X, Y, Radius, Color.R, Color.G, Color.B, Color.A);
     }
 
     void Renderer::RenderCircleFill(draw::Color Color, u32 X, u32 Y, u32 Radius)
     {
-        aacircleRGBA(purend, X, Y, Radius, Color.R, Color.G, Color.B, Color.A);
         filledCircleRGBA(purend, X, Y, Radius, Color.R, Color.G, Color.B, Color.A);
+        aacircleRGBA(purend, X, Y, Radius, Color.R, Color.G, Color.B, Color.A);
     }
 
     void Renderer::RenderShadowSimple(u32 X, u32 Y, u32 Width, u32 Height, u32 BaseAlpha)

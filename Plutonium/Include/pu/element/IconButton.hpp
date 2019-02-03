@@ -36,7 +36,7 @@ namespace pu::element
             void SetColor(draw::Color Color);
             void SetOnClick(std::function<void()> ClickCallback);
             void OnRender(render::Renderer *Drawer);
-            void OnInput(u64 Down, u64 Up, u64 Held);
+            void OnInput(u64 Down, u64 Up, u64 Held, bool Touch);
         private:
             u32 x;
             u32 y;
@@ -44,6 +44,7 @@ namespace pu::element
             draw::Color clr;
             std::string icon;
             std::function<void()> clickcb;
+            bool doclick;
             bool hover;
             s32 hoverfact;
             render::NativeTexture ntex;

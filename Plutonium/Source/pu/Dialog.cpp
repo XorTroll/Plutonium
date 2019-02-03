@@ -1,4 +1,6 @@
 #include <pu/Dialog.hpp>
+#include <pu/Application.hpp>
+#include <cmath>
 
 namespace pu
 {
@@ -15,8 +17,7 @@ namespace pu
         this->pselfact = 0;
         this->hicon = false;
         this->cancel = false;
-        this->ix = 0;
-        this->iy = 0;
+        this->hcancel = false;
     }
 
     Dialog::~Dialog()
@@ -62,12 +63,27 @@ namespace pu
         this->sopts.push_back(Name);
     }
 
-    void Dialog::SetIcon(std::string Icon, u32 IconX, u32 IconY)
+    void Dialog::SetCancelOption(std::string Name)
+    {
+        this->hcancel = true;
+        this->scancel = Name;
+    }
+
+    void Dialog::RemoveCancelOption()
+    {
+        this->hcancel = false;
+        this->scancel = "";
+    }
+
+    bool Dialog::HasCancelOption()
+    {
+        return this->hcancel;
+    }
+
+    void Dialog::SetIcon(std::string Icon)
     {
         if(this->hicon) render::DeleteTexture(this->icon);
         this->icon = render::LoadImage(Icon);
-        this->ix = IconX;
-        this->iy = IconY;
         this->hicon = true;
     }
 
@@ -76,13 +92,31 @@ namespace pu
         return this->hicon;
     }
 
-    void Dialog::Show(render::Renderer *Drawer)
+    u32 Dialog::Show(render::Renderer *Drawer, void *App)
     {
-        if(this->opts.empty()) return;
-        u32 dx = 0;
-        u32 dy = 0;
-        u32 elemw = (1280 / this->opts.size());
-        u32 elemh = 80;
+        if(this->hcancel) this->AddOption(this->scancel);
+        if(this->opts.empty()) return 0;
+        u32 dw = (20 * (this->opts.size() - 1)) + 250;
+        for(u32 i = 0; i < this->opts.size(); i++)
+        {
+            u32 tw = render::GetTextWidth(this->ofont, this->sopts[i]);
+            dw += tw + 20;
+        }
+        u32 icm = 30;
+        u32 elemh = 60;
+        u32 ely = render::GetTextureHeight(this->title) + render::GetTextureHeight(this->cnt) + 140;
+        if(this->hicon)
+        {
+            u32 tely = render::GetTextureHeight(this->icon) + icm + 25;
+            if(tely > ely) ely = tely;
+        }
+        u32 dh = ely + elemh + 30;
+        u32 dx = (1280 - dw) / 2;
+        u32 dy = (720 - dh) / 2;
+        ely += dy;
+        u32 elemw = ((dw - (20 * (this->opts.size() + 1))) / this->opts.size());
+        u32 elx = dx + ((dw - ((elemw * this->opts.size()) + (20 * (this->opts.size() - 1)))) / 2);
+        u32 r = 35;
         u32 nr = 180;
         u32 ng = 180;
         u32 nb = 200;
@@ -90,88 +124,142 @@ namespace pu
         s32 initfact = 0;
         while(true)
         {
-            hidScanInput();
-            u64 k = hidKeysDown(CONTROLLER_P1_AUTO);
-            if(k & KEY_LEFT)
+            bool ok = ((Application*)App)->CallForRenderWithRenderOver([&](render::Renderer *Drawer) -> bool
             {
-                if(this->osel > 0)
+                u64 k = hidKeysDown(CONTROLLER_P1_AUTO);
+                if(k & KEY_LEFT)
                 {
-                    this->prevosel = this->osel;
-                    this->osel--;
+                    if(this->osel > 0)
+                    {
+                        this->prevosel = this->osel;
+                        this->osel--;
+                        for(u32 i = 0; i < this->opts.size(); i++)
+                        {
+                            if(i == this->osel) this->selfact = 0;
+                            else if(i == this->prevosel) this->pselfact = 255;
+                        }
+                    }
+                }
+                else if(k & KEY_RIGHT)
+                {
+                    if(this->osel < (this->opts.size() - 1))
+                    {
+                        this->prevosel = this->osel;
+                        this->osel++;
+                        for(u32 i = 0; i < this->opts.size(); i++)
+                        {
+                            if(i == this->osel) this->selfact = 0;
+                            else if(i == this->prevosel) this->pselfact = 255;
+                        }
+                    }
+                }
+                else if(k & KEY_A)
+                {
+                    this->cancel = false;
+                    end = true;
+                }
+                else if(k & KEY_B)
+                {
+                    this->cancel = true;
+                    end = true;
+                }
+                else if(hidKeysDown(CONTROLLER_HANDHELD) & KEY_TOUCH)
+                {
+                    touchPosition tch;
+                    hidTouchRead(&tch, 0);
                     for(u32 i = 0; i < this->opts.size(); i++)
                     {
-                        if(i == this->osel) this->selfact = 0;
-                        else if(i == this->prevosel) this->pselfact = 255;
+                        std::string txt = this->sopts[i];
+                        u32 rx = elx + ((elemw + 20) * i);
+                        u32 ry = ely;
+                        if(((rx + elemw) > tch.px) && (tch.px > rx) && ((ry + elemh) > tch.py) && (tch.py > ry))
+                        {
+                            this->osel = i;
+                            this->cancel = false;
+                            end = true;
+                        }
                     }
                 }
-            }
-            else if(k & KEY_RIGHT)
-            {
-                if(this->osel < (this->opts.size() - 1))
+                u32 bw = dw;
+                u32 bh = dh;
+                u32 fw = bw - (r * 2);
+                u32 fh = bh - (r * 2);
+                draw::Color clr = { 225, 225, 225, initfact };
+                draw::Color sclr = { 225, 225, 225, 255 };
+                Drawer->RenderRectangleFill({ 0, 0, 0, 105 }, 0, 0, 1280, 720);
+                Drawer->RenderRectangleFill(clr, dx, (dy + r), r, fh);
+                Drawer->RenderRectangleFill(clr, (dx + r + fw), (dy + r), r, fh);
+                Drawer->RenderRectangleFill(clr, (dx + r), (dy + r), fw, fh);
+                Drawer->RenderRectangleFill(clr, (dx + r), dy, fw, r);
+                Drawer->RenderRectangleFill(clr, (dx + r), (dy + r + fh), fw, r);
+                Drawer->RenderCircleFill(sclr, (dx + r), (dy + r), r);
+                Drawer->RenderCircleFill(sclr, (dx + r + fw), (dy + r), r);
+                Drawer->RenderCircleFill(sclr, (dx + r), (dy + r + fh), r);
+                Drawer->RenderCircleFill(sclr, (dx + r + fw), (dy + r + fh), r);
+                Drawer->RenderTexture(this->title, (dx + 45), (dy + 55));
+                Drawer->RenderTexture(this->cnt, (dx + 45), (dy + 140));
+                if(this->hicon)
                 {
-                    this->prevosel = this->osel;
-                    this->osel++;
-                    for(u32 i = 0; i < this->opts.size(); i++)
-                    {
-                        if(i == this->osel) this->selfact = 0;
-                        else if(i == this->prevosel) this->pselfact = 255;
-                    }
+                    u32 icw = render::GetTextureWidth(this->icon);
+                    u32 icx = dx + (dw - (icw + icm));
+                    u32 icy = dy + icm;
+                    Drawer->RenderTexture(this->icon, icx, icy);
                 }
-            }
-            else if(k & KEY_A)
-            {
-                this->cancel = false;
-                end = true;
-            }
-            else if(k & KEY_B)
-            {
-                this->cancel = true;
-                end = true;
-            }
-            Drawer->RenderRectangleFill({ 225, 225, 225, initfact }, dx, dy, 1280, 720);
-            Drawer->RenderTexture(this->title, (dx + 45), (dy + 45));
-            Drawer->RenderTexture(this->cnt, (dx + 45), (dy + 100));
-            if(this->hicon) Drawer->RenderTexture(this->icon, this->ix, this->iy);
-            for(u32 i = 0; i < this->opts.size(); i++)
-            {
-                u32 tw = render::GetTextWidth(this->ofont, sopts[i]);
-                u32 th = render::GetTextHeight(this->ofont, sopts[i]);
-                u32 tx = dx + ((elemw - tw) / 2) + (elemw * i);
-                u32 ty = dy + (720 - elemh) + ((elemh - th) / 2);
-                u32 rx = dx + (elemw * i);
-                u32 ry = dy + (720 - elemh);
-                if(this->osel == i)
+                for(u32 i = 0; i < this->opts.size(); i++)
                 {
-                    if(this->selfact < 255)
+                    std::string txt = this->sopts[i];
+                    u32 tw = render::GetTextWidth(this->ofont, txt);
+                    u32 th = render::GetTextHeight(this->ofont, txt);
+                    u32 tx = elx + ((elemw - tw) / 2) + ((elemw + 20) * i);
+                    u32 ty = ely + ((elemh - th) / 2);
+                    u32 rx = elx + ((elemw + 20) * i);
+                    u32 ry = ely;
+                    u32 rr = (elemh / 2);
+                    if(this->osel == i)
                     {
-                        Drawer->RenderRectangleFill(draw::Color(nr, ng, nb, this->selfact), rx, ry, elemw, elemh);
-                        this->selfact += 48;
+                        if(this->selfact < 255)
+                        {
+                            Drawer->RenderCircleFill({ nr, ng, nb, this->selfact }, (rx + rr), (ry + rr), rr);
+                            Drawer->RenderCircleFill({ nr, ng, nb, this->selfact }, (rx + elemw - rr), (ry + rr), rr);
+                            Drawer->RenderRectangleFill({ nr, ng, nb, this->selfact }, (rx + rr), ry, (elemw - (2 * rr)), elemh);
+                            this->selfact += 48;
+                        }
+                        else
+                        {
+                            Drawer->RenderCircleFill({ nr, ng, nb, initfact }, (rx + rr), (ry + rr), rr);
+                            Drawer->RenderCircleFill({ nr, ng, nb, initfact }, (rx + elemw - rr), (ry + rr), rr);
+                            Drawer->RenderRectangleFill({ nr, ng, nb, initfact }, (rx + rr), ry, (elemw - (2 * rr)), elemh);
+                        }
                     }
-                    else Drawer->RenderRectangleFill({ nr, ng, nb, initfact }, rx, ry, elemw, elemh);
+                    else if(this->prevosel == i)
+                    {
+                        if(this->pselfact > 0)
+                        {
+                            Drawer->RenderCircleFill({ nr, ng, nb, this->pselfact }, (rx + rr), (ry + rr), rr);
+                            Drawer->RenderCircleFill({ nr, ng, nb, this->pselfact }, (rx + elemw - rr), (ry + rr), rr);
+                            Drawer->RenderRectangleFill({ nr, ng, nb, this->pselfact }, (rx + rr), ry, (elemw - (2 * rr)), elemh);
+                            this->pselfact -= 48;
+                        }
+                    }
+                    Drawer->RenderTexture(this->opts[i], tx, ty);
                 }
-                else if(this->prevosel == i)
+                Drawer->RenderShadowSimple((dx + r), (dy + r + fh + r + 5), fw, 5, 160);
+                if(end)
                 {
-                    if(this->pselfact > 0)
-                    {
-                        Drawer->RenderRectangleFill(draw::Color(nr, ng, nb, this->pselfact), rx, ry, elemw, elemh);
-                        this->pselfact -= 48;
-                    }
+                    if(initfact == 0) return false;
+                    if(initfact > 0) initfact -= 25;
+                    if(initfact < 0) initfact = 0;
                 }
-                Drawer->RenderTexture(this->opts[i], tx, ty);
-            }
-            Drawer->FinalizeRender();
-            if(end)
-            {
-                if(initfact == 0) break;
-                if(initfact > 0) initfact -= 25;
-                if(initfact < 0) initfact = 0;
-            }
-            else
-            {
-                if(initfact < 255) initfact += 25;
-                if(initfact > 255) initfact = 255;
-            }
+                else
+                {
+                    if(initfact < 255) initfact += 25;
+                    if(initfact > 255) initfact = 255;
+                }
+                return true;
+            });
+            if(!ok) break;
         }
+        return this->osel;
     }
 
     bool Dialog::UserCancelled()
@@ -179,8 +267,11 @@ namespace pu
         return this->cancel;
     }
 
-    u32 Dialog::GetSelectedIndex()
+    bool Dialog::IsOk()
     {
-        return this->osel;
+        bool ok = true;
+        if(this->cancel) ok = false;
+        if(this->hcancel && (this->osel == (this->opts.size() - 1))) ok = false;
+        return ok;
     }
 }

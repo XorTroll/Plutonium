@@ -31,6 +31,8 @@ namespace pu::render
     NativeTexture LoadImage(std::string Path);
     NativeFont LoadSharedFont(SharedFont Type, u32 Size);
     NativeFont LoadFont(std::string Path, u32 Size);
+    u32 GetTextureWidth(NativeTexture Texture);
+    u32 GetTextureHeight(NativeTexture Texture);
     u32 GetTextWidth(NativeFont Font, std::string Text);
     u32 GetTextHeight(NativeFont Font, std::string Text);
     void DeleteFont(NativeFont Font);

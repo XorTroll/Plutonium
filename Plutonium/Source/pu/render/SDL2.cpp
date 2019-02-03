@@ -41,6 +41,20 @@ namespace pu::render
         return TTF_OpenFont(Path.c_str(), Size);
     }
 
+    u32 GetTextureWidth(NativeTexture Texture)
+    {
+        int w = 0;
+        SDL_QueryTexture(Texture, NULL, NULL, &w, NULL);
+        return (u32)w;
+    }
+
+    u32 GetTextureHeight(NativeTexture Texture)
+    {
+        int h = 0;
+        SDL_QueryTexture(Texture, NULL, NULL, NULL, &h);
+        return (u32)h;
+    }
+
     u32 GetTextWidth(NativeFont Font, std::string Text)
     {
         int tw = 0;

@@ -116,6 +116,7 @@ namespace pu::element
         this->pselfact = 0;
         this->onselch = [&](){};
         this->icdown = false;
+        this->dtouch = false;
     }
 
     Menu::~Menu()
@@ -323,63 +324,100 @@ namespace pu::element
         }
     }
 
-    void Menu::OnInput(u64 Down, u64 Up, u64 Held)
+    void Menu::OnInput(u64 Down, u64 Up, u64 Held, bool Touch)
     {
-        if((Down & KEY_DDOWN) || (Down & KEY_LSTICK_DOWN) || (Held & KEY_RSTICK_DOWN))
+        if(Touch)
         {
-            if(this->isel < (this->itms.size() - 1))
+            touchPosition tch;
+            hidTouchRead(&tch, 0);
+            u32 cx = this->x;
+            u32 cy = this->y;
+            u32 cw = this->w;
+            u32 ch = this->isize;
+            u32 its = this->ishow;
+            if(its > this->itms.size()) its = this->itms.size();
+            for(u32 i = this->fisel; i < (this->fisel + its); i++)
             {
-                if((this->isel - this->fisel) == (this->ishow - 1))
+                if(((cx + cw) > tch.px) && (tch.px > cx) && ((cy + ch) > tch.py) && (tch.py > cy))
                 {
-                    this->fisel++;
-                    this->isel++;
-                    (this->onselch)();
-                }
-                else
-                {
+                    this->dtouch = true;
                     this->previsel = this->isel;
-                    this->isel++;
+                    this->isel = i;
                     (this->onselch)();
-                    if(!this->itms.empty()) for(u32 i = 0; i < this->itms.size(); i++)
-                    {
-                        if(i == this->isel) this->selfact = 0;
-                        else if(i == this->previsel) this->pselfact = 255;
-                    }
+                        if(i == this->isel) this->selfact = 255;
+                        else if(i == this->previsel) this->pselfact = 0;
+                    break;
                 }
+                cy += this->isize;
             }
         }
-        if((Down & KEY_DUP) || (Down & KEY_LSTICK_UP) || (Held & KEY_RSTICK_UP))
+        else if(this->dtouch)
         {
-            if(this->isel > 0)
+            if((this->selfact >= 255) && (this->pselfact <= 0))
             {
-                if(this->isel == this->fisel)
-                {
-                    this->fisel--;
-                    this->isel--;
-                    (this->onselch)();
-                }
-                else
-                {
-                    this->previsel = this->isel;
-                    this->isel--;
-                    (this->onselch)();
-                    if(!this->itms.empty()) for(u32 i = 0; i < this->itms.size(); i++)
-                    {
-                        if(i == this->isel) this->selfact = 0;
-                        else if(i == this->previsel) this->pselfact = 255;
-                    }
-                }
+                if(this->icdown) this->icdown = false;
+                else (this->itms[this->isel]->GetCallback(0))();
+                this->dtouch = false;
             }
         }
         else
         {
-            u32 ipc = this->itms[this->isel]->GetCallbackCount();
-            if(ipc > 0) for(u32 i = 0; i < ipc; i++)
+            if((Down & KEY_DDOWN) || (Down & KEY_LSTICK_DOWN) || (Held & KEY_RSTICK_DOWN))
             {
-                if(Down & this->itms[this->isel]->GetCallbackKey(i))
+                if(this->isel < (this->itms.size() - 1))
                 {
-                    if(this->icdown) this->icdown = false;
-                    else (this->itms[this->isel]->GetCallback(i))();
+                    if((this->isel - this->fisel) == (this->ishow - 1))
+                    {
+                        this->fisel++;
+                        this->isel++;
+                        (this->onselch)();
+                    }
+                    else
+                    {
+                        this->previsel = this->isel;
+                        this->isel++;
+                        (this->onselch)();
+                        if(!this->itms.empty()) for(u32 i = 0; i < this->itms.size(); i++)
+                        {
+                            if(i == this->isel) this->selfact = 0;
+                            else if(i == this->previsel) this->pselfact = 255;
+                        }
+                    }
+                }
+            }
+            else if((Down & KEY_DUP) || (Down & KEY_LSTICK_UP) || (Held & KEY_RSTICK_UP))
+            {
+                if(this->isel > 0)
+                {
+                    if(this->isel == this->fisel)
+                    {
+                        this->fisel--;
+                        this->isel--;
+                        (this->onselch)();
+                    }
+                    else
+                    {
+                        this->previsel = this->isel;
+                        this->isel--;
+                        (this->onselch)();
+                        if(!this->itms.empty()) for(u32 i = 0; i < this->itms.size(); i++)
+                        {
+                            if(i == this->isel) this->selfact = 0;
+                            else if(i == this->previsel) this->pselfact = 255;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                u32 ipc = this->itms[this->isel]->GetCallbackCount();
+                if(ipc > 0) for(u32 i = 0; i < ipc; i++)
+                {
+                    if(Down & this->itms[this->isel]->GetCallbackKey(i))
+                    {
+                        if(this->icdown) this->icdown = false;
+                        else (this->itms[this->isel]->GetCallback(i))();
+                    }
                 }
             }
         }
