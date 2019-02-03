@@ -53,8 +53,9 @@ namespace pu
             this->icon = NULL;
             this->hicon = false;
         }
-        if(!this->opts.empty()) for(u32 i = 0; i < this->opts.size(); i++) delete this->opts[i];
+        if(!this->opts.empty()) for(u32 i = 0; i < this->opts.size(); i++) render::DeleteTexture(this->opts[i]);
         this->opts.clear();
+        this->sopts.clear();
     }
 
     void Dialog::AddOption(std::string Name)
@@ -104,11 +105,19 @@ namespace pu
         }
         u32 icm = 30;
         u32 elemh = 60;
+        u32 tdw = render::GetTextureWidth(this->cnt) + 90;
+        if(tdw > dw) dw = tdw;
+        tdw = render::GetTextureWidth(this->title) + 90;
+        if(tdw > dw) dw = tdw;
         u32 ely = render::GetTextureHeight(this->title) + render::GetTextureHeight(this->cnt) + 140;
         if(this->hicon)
         {
             u32 tely = render::GetTextureHeight(this->icon) + icm + 25;
             if(tely > ely) ely = tely;
+            tdw = render::GetTextureWidth(this->cnt) + 90 + render::GetTextureWidth(this->icon) + 20;
+            if(tdw > dw) dw = tdw;
+            tdw = render::GetTextureWidth(this->title) + 90 + render::GetTextureWidth(this->icon) + 20;
+            if(tdw > dw) dw = tdw;
         }
         u32 dh = ely + elemh + 30;
         u32 dx = (1280 - dw) / 2;
@@ -185,17 +194,16 @@ namespace pu
                 u32 fw = bw - (r * 2);
                 u32 fh = bh - (r * 2);
                 draw::Color clr = { 225, 225, 225, initfact };
-                draw::Color sclr = { 225, 225, 225, 255 };
                 Drawer->RenderRectangleFill({ 0, 0, 0, 105 }, 0, 0, 1280, 720);
                 Drawer->RenderRectangleFill(clr, dx, (dy + r), r, fh);
                 Drawer->RenderRectangleFill(clr, (dx + r + fw), (dy + r), r, fh);
                 Drawer->RenderRectangleFill(clr, (dx + r), (dy + r), fw, fh);
                 Drawer->RenderRectangleFill(clr, (dx + r), dy, fw, r);
                 Drawer->RenderRectangleFill(clr, (dx + r), (dy + r + fh), fw, r);
-                Drawer->RenderCircleFill(sclr, (dx + r), (dy + r), r);
-                Drawer->RenderCircleFill(sclr, (dx + r + fw), (dy + r), r);
-                Drawer->RenderCircleFill(sclr, (dx + r), (dy + r + fh), r);
-                Drawer->RenderCircleFill(sclr, (dx + r + fw), (dy + r + fh), r);
+                Drawer->RenderCircleFill(clr, (dx + r), (dy + r), r);
+                Drawer->RenderCircleFill(clr, (dx + r + fw), (dy + r), r);
+                Drawer->RenderCircleFill(clr, (dx + r), (dy + r + fh), r);
+                Drawer->RenderCircleFill(clr, (dx + r + fw), (dy + r + fh), r);
                 Drawer->RenderTexture(this->title, (dx + 45), (dy + 55));
                 Drawer->RenderTexture(this->cnt, (dx + 45), (dy + 140));
                 if(this->hicon)
