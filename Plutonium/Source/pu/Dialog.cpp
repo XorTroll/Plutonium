@@ -6,9 +6,9 @@ namespace pu
 {
     Dialog::Dialog(std::string Title, std::string Content)
     {
-        this->tfont = render::LoadSharedFont(render::SharedFont::Standard, 35);
-        this->cfont = render::LoadSharedFont(render::SharedFont::Standard, 25);
-        this->ofont = render::LoadSharedFont(render::SharedFont::Standard, 20);
+        this->tfont = render::LoadSharedFont(render::SharedFont::Standard, 30);
+        this->cfont = render::LoadSharedFont(render::SharedFont::Standard, 20);
+        this->ofont = render::LoadSharedFont(render::SharedFont::Standard, 18);
         this->title = render::RenderText(this->tfont, Title, { 10, 10, 10, 255 });
         this->cnt = render::RenderText(this->cfont, Content, { 20, 20, 20, 255 });
         this->osel = 0;
@@ -103,6 +103,7 @@ namespace pu
             u32 tw = render::GetTextWidth(this->ofont, this->sopts[i]);
             dw += tw + 20;
         }
+        if(dw > 1280) dw = 1280;
         u32 icm = 30;
         u32 elemh = 60;
         u32 tdw = render::GetTextureWidth(this->cnt) + 90;
@@ -119,7 +120,9 @@ namespace pu
             tdw = render::GetTextureWidth(this->title) + 90 + render::GetTextureWidth(this->icon) + 20;
             if(tdw > dw) dw = tdw;
         }
+        if(dw > 1280) dw = 1280;
         u32 dh = ely + elemh + 30;
+        if(dh > 720) dh = 720;
         u32 dx = (1280 - dw) / 2;
         u32 dy = (720 - dh) / 2;
         ely += dy;
@@ -136,7 +139,8 @@ namespace pu
             bool ok = ((Application*)App)->CallForRenderWithRenderOver([&](render::Renderer *Drawer) -> bool
             {
                 u64 k = hidKeysDown(CONTROLLER_P1_AUTO);
-                if(k & KEY_LEFT)
+                u64 h = hidKeysHeld(CONTROLLER_P1_AUTO);
+                if((k & KEY_DLEFT) || (k & KEY_LSTICK_LEFT) || (h & KEY_RSTICK_LEFT))
                 {
                     if(this->osel > 0)
                     {
@@ -149,7 +153,7 @@ namespace pu
                         }
                     }
                 }
-                else if(k & KEY_RIGHT)
+                else if((k & KEY_DRIGHT) || (k & KEY_LSTICK_RIGHT) || (h & KEY_RSTICK_RIGHT))
                 {
                     if(this->osel < (this->opts.size() - 1))
                     {

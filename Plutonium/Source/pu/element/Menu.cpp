@@ -5,8 +5,9 @@ namespace pu::element
     MenuItem::MenuItem(std::string Name)
     {
         this->font = render::LoadSharedFont(render::SharedFont::Standard, 25);
+        this->clr = { 10, 10, 10, 255 };
         this->name = Name;
-        this->ntex = render::RenderText(this->font, Name, { 10, 10, 10, 255 });
+        this->ntex = render::RenderText(this->font, Name, this->clr);
         this->hasicon = false;
     }
 
@@ -38,7 +39,19 @@ namespace pu::element
     {
         this->name = Name;
         render::DeleteTexture(this->ntex);
-        this->ntex = render::RenderText(this->font, Name, { 10, 10, 10, 255 });
+        this->ntex = render::RenderText(this->font, Name, this->clr);
+    }
+
+    draw::Color MenuItem::GetColor()
+    {
+        return this->clr;
+    }
+
+    void MenuItem::SetColor(draw::Color Color)
+    {
+        this->clr = Color;
+        render::DeleteTexture(this->ntex);
+        this->ntex = render::RenderText(this->font, this->name, Color);
     }
 
     void MenuItem::AddOnClick(std::function<void()> Callback, u64 Key)
@@ -117,6 +130,7 @@ namespace pu::element
         this->onselch = [&](){};
         this->icdown = false;
         this->dtouch = false;
+        this->fcs = { 40, 40, 40, 255 };
     }
 
     Menu::~Menu()
@@ -187,6 +201,16 @@ namespace pu::element
     void Menu::SetColor(draw::Color Color)
     {
         this->clr = Color;
+    }
+    
+    draw::Color Menu::GetOnFocusColor()
+    {
+        return this->fcs;
+    }
+
+    void Menu::SetOnFocusColor(draw::Color Color)
+    {
+        this->fcs = Color;
     }
 
     draw::Color Menu::GetScrollbarColor()
@@ -268,17 +292,17 @@ namespace pu::element
                     Drawer->RenderRectangleFill(this->clr, cx, cy, cw, ch);
                     if(this->selfact < 255)
                     {
-                        Drawer->RenderRectangleFill(draw::Color(nr, ng, nb, this->selfact), cx, cy, cw, ch);
+                        Drawer->RenderRectangleFill(draw::Color(this->fcs.R, this->fcs.G, this->fcs.B, this->selfact), cx, cy, cw, ch);
                         this->selfact += 48;
                     }
-                    else Drawer->RenderRectangleFill(nclr, cx, cy, cw, ch);
+                    else Drawer->RenderRectangleFill(this->fcs, cx, cy, cw, ch);
                 }
                 else if(this->previsel == i)
                 {
                     Drawer->RenderRectangleFill(this->clr, cx, cy, cw, ch);
                     if(this->pselfact > 0)
                     {
-                        Drawer->RenderRectangleFill(draw::Color(nr, ng, nb, this->pselfact), cx, cy, cw, ch);
+                        Drawer->RenderRectangleFill(draw::Color(this->fcs.R, this->fcs.G, this->fcs.B, this->pselfact), cx, cy, cw, ch);
                         this->pselfact -= 48;
                     }
                     else Drawer->RenderRectangleFill(this->clr, cx, cy, cw, ch);
@@ -344,8 +368,8 @@ namespace pu::element
                     this->previsel = this->isel;
                     this->isel = i;
                     (this->onselch)();
-                        if(i == this->isel) this->selfact = 255;
-                        else if(i == this->previsel) this->pselfact = 0;
+                    if(i == this->isel) this->selfact = 255;
+                    else if(i == this->previsel) this->pselfact = 0;
                     break;
                 }
                 cy += this->isize;

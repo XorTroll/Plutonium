@@ -5,7 +5,7 @@ namespace pu::element
     Rectangle::Rectangle(u32 X, u32 Y, u32 Width, u32 Height, draw::Color RecColor, u32 BorderRadius) : Element::Element()
     {
         this->x = X;
-        this->x = Y;
+        this->y = Y;
         this->w = Width;
         this->h = Height;
         this->clr = RecColor;

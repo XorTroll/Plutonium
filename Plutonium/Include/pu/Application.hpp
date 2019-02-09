@@ -34,6 +34,7 @@ namespace pu
             void AddThread(std::function<void()> Callback);
             void SetOnInput(std::function<void(u64 Down, u64 Up, u64 Held, bool Touch)> Callback);
             u32 ShowDialog(Dialog *ToShow);
+            int CreateShowDialog(std::string Title, std::string Content, std::vector<std::string> Options, bool UseLastOptionAsCancel, std::string Icon = "");
             void Show();
             bool CallForRender();
             bool CallForRenderWithRenderOver(std::function<bool(render::Renderer *Drawer)> RenderFunc);

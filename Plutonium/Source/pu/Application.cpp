@@ -7,7 +7,7 @@ namespace pu
         this->rend = new render::Renderer();
         this->rend->Initialize();
         this->show = false;
-        this->bgcolor = { 255, 255, 255, 255 };
+        this->bgcolor = { 235, 235, 235, 255 };
         this->bgimage = "";
         this->hasimage = false;
         this->cbipt = [&](u64 Down, u64 Up, u64 Held, bool Touch){};
@@ -77,6 +77,22 @@ namespace pu
     u32 Application::ShowDialog(Dialog *ToShow)
     {
         return ToShow->Show(this->rend, this);
+    }
+
+    int Application::CreateShowDialog(std::string Title, std::string Content, std::vector<std::string> Options, bool UseLastOptionAsCancel, std::string Icon)
+    {
+        Dialog *dlg = new Dialog(Title, Content);
+        for(u32 i = 0; i < Options.size(); i++)
+        {
+            if(UseLastOptionAsCancel && (i == Options.size() - 1)) dlg->SetCancelOption(Options[i]);
+            else dlg->AddOption(Options[i]);
+        }
+        if(!Icon.empty()) dlg->SetIcon(Icon);
+        int opt = this->ShowDialog(dlg);
+        if(dlg->UserCancelled()) opt = -1;
+        else if(!dlg->IsOk()) opt = -2;
+        delete dlg;
+        return opt;
     }
 
     void Application::Show()
