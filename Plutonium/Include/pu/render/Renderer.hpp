@@ -32,7 +32,7 @@ namespace pu::render
             void RenderTextureScaled(NativeTexture Texture, u32 X, u32 Y, u32 Width, u32 Height, int AlphaMod = -1);
             void RenderRectangle(draw::Color Color, u32 X, u32 Y, u32 Width, u32 Height);
             void RenderRectangleFill(draw::Color Color, u32 X, u32 Y, u32 Width, u32 Height);
-			void RenderRoundedRectangle(draw::Color Color, u32 X, u32 Y, u32 Width, u32 Height, u32 Radius);
+            void RenderRoundedRectangle(draw::Color Color, u32 X, u32 Y, u32 Width, u32 Height, u32 Radius);
             void RenderRoundedRectangleFill(draw::Color Color, u32 X, u32 Y, u32 Width, u32 Height, u32 Radius);
             void RenderCircle(draw::Color Color, u32 X, u32 Y, u32 Radius);
             void RenderCircleFill(draw::Color Color, u32 X, u32 Y, u32 Radius);
