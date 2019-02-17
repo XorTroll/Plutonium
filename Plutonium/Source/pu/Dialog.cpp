@@ -225,7 +225,13 @@ namespace pu
                         if(this->selfact < 255)
                         {
                             dclr = { nr, ng, nb, this->selfact };
+                            Drawer->RenderRoundedRectangleFill(dclr, rx, ry, elemw, elemh, rr);
                             this->selfact += 48;
+                        }
+                        else
+                        {
+                            dclr = { nr, ng, nb, initfact };
+                            Drawer->RenderRoundedRectangleFill(dclr, rx, ry, elemw, elemh, rr);
                         }
                     }
                     else if(this->prevosel == i)
@@ -233,10 +239,10 @@ namespace pu
                         if(this->pselfact > 0)
                         {
                             dclr = { nr, ng, nb, this->pselfact };
+                            Drawer->RenderRoundedRectangleFill(dclr, rx, ry, elemw, elemh, rr);
                             this->pselfact -= 48;
                         }
                     }
-                    Drawer->RenderRoundedRectangleFill(dclr, rx, ry, elemw, elemh, rr);
                     Drawer->RenderTexture(this->opts[i], tx, ty);
                 }
                 Drawer->RenderShadowSimple((dx + r), (dy + fh + (2 * r)), fw, 5, 160);
