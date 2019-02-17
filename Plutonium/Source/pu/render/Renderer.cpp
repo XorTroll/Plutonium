@@ -113,11 +113,13 @@ namespace pu::render
     void Renderer::RenderRoundedRectangle(draw::Color Color, u32 X, u32 Y, u32 Width, u32 Height, u32 Radius)
     {
         roundedRectangleRGBA(purend, X, Y, X + Width, Y + Height, Radius, Color.R, Color.G, Color.B, Color.A);
+        SDL_SetRenderDrawBlendMode(purend, SDL_BLENDMODE_BLEND);
     }
 
     void Renderer::RenderRoundedRectangleFill(draw::Color Color, u32 X, u32 Y, u32 Width, u32 Height, u32 Radius)
     {
         roundedBoxRGBA(purend, X, Y, X + Width, Y + Height, Radius, Color.R, Color.G, Color.B, Color.A);
+        SDL_SetRenderDrawBlendMode(purend, SDL_BLENDMODE_BLEND);
     }
 
     void Renderer::RenderCircle(draw::Color Color, u32 X, u32 Y, u32 Radius)

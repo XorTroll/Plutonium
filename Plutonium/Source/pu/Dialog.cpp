@@ -199,15 +199,7 @@ namespace pu
                 u32 fh = bh - (r * 2);
                 draw::Color clr = { 225, 225, 225, initfact };
                 Drawer->RenderRectangleFill({ 0, 0, 0, 105 }, 0, 0, 1280, 720);
-                Drawer->RenderRectangleFill(clr, dx, (dy + r), r, fh);
-                Drawer->RenderRectangleFill(clr, (dx + r + fw), (dy + r), r, fh);
-                Drawer->RenderRectangleFill(clr, (dx + r), (dy + r), fw, fh);
-                Drawer->RenderRectangleFill(clr, (dx + r), dy, fw, r);
-                Drawer->RenderRectangleFill(clr, (dx + r), (dy + r + fh), fw, r);
-                Drawer->RenderCircleFill(clr, (dx + r), (dy + r), r);
-                Drawer->RenderCircleFill(clr, (dx + r + fw), (dy + r), r);
-                Drawer->RenderCircleFill(clr, (dx + r), (dy + r + fh), r);
-                Drawer->RenderCircleFill(clr, (dx + r + fw), (dy + r + fh), r);
+                Drawer->RenderRoundedRectangleFill(clr, dx, dy, bw, bh, r);
                 Drawer->RenderTexture(this->title, (dx + 45), (dy + 55));
                 Drawer->RenderTexture(this->cnt, (dx + 45), (dy + 140));
                 if(this->hicon)
@@ -227,35 +219,27 @@ namespace pu
                     u32 rx = elx + ((elemw + 20) * i);
                     u32 ry = ely;
                     u32 rr = (elemh / 2);
+                    draw::Color dclr = { nr, ng, nb, initfact };
                     if(this->osel == i)
                     {
                         if(this->selfact < 255)
                         {
-                            Drawer->RenderCircleFill({ nr, ng, nb, this->selfact }, (rx + rr), (ry + rr), rr);
-                            Drawer->RenderCircleFill({ nr, ng, nb, this->selfact }, (rx + elemw - rr), (ry + rr), rr);
-                            Drawer->RenderRectangleFill({ nr, ng, nb, this->selfact }, (rx + rr), ry, (elemw - (2 * rr)), elemh);
+                            dclr = { nr, ng, nb, this->selfact };
                             this->selfact += 48;
-                        }
-                        else
-                        {
-                            Drawer->RenderCircleFill({ nr, ng, nb, initfact }, (rx + rr), (ry + rr), rr);
-                            Drawer->RenderCircleFill({ nr, ng, nb, initfact }, (rx + elemw - rr), (ry + rr), rr);
-                            Drawer->RenderRectangleFill({ nr, ng, nb, initfact }, (rx + rr), ry, (elemw - (2 * rr)), elemh);
                         }
                     }
                     else if(this->prevosel == i)
                     {
                         if(this->pselfact > 0)
                         {
-                            Drawer->RenderCircleFill({ nr, ng, nb, this->pselfact }, (rx + rr), (ry + rr), rr);
-                            Drawer->RenderCircleFill({ nr, ng, nb, this->pselfact }, (rx + elemw - rr), (ry + rr), rr);
-                            Drawer->RenderRectangleFill({ nr, ng, nb, this->pselfact }, (rx + rr), ry, (elemw - (2 * rr)), elemh);
+                            dclr = { nr, ng, nb, this->pselfact };
                             this->pselfact -= 48;
                         }
                     }
+                    Drawer->RenderRoundedRectangleFill(dclr, rx, ry, elemw, elemh, rr);
                     Drawer->RenderTexture(this->opts[i], tx, ty);
                 }
-                Drawer->RenderShadowSimple((dx + r), (dy + r + fh + r + 5), fw, 5, 160);
+                Drawer->RenderShadowSimple((dx + r), (dy + fh + (2 * r)), fw, 5, 160);
                 if(end)
                 {
                     if(initfact == 0) return false;
