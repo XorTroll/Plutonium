@@ -135,7 +135,7 @@ namespace pu
         if(!this->thds.empty()) for(u32 i = 0; i < this->thds.size(); i++) (this->thds[i])();
         (this->cbipt)(d, u, h, touch);
         if(this->hasimage) this->rend->RenderTexture(this->ntex, 0, 0);
-        (this->lyt->GetOnInput())(d, u, h);
+        if(!this->rover) (this->lyt->GetOnInput())(d, u, h, touch);
         if(this->lyt->HasChilds()) for(u32 i = 0; i < this->lyt->GetChildCount(); i++)
         {
             element::Element *elm = this->lyt->GetChildAt(i);

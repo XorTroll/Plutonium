@@ -114,12 +114,9 @@ namespace pu::element
     void ProgressBar::OnRender(render::Renderer *Drawer)
     {
         u32 rad = (this->h / 2);
-        if(this->IsCompleted()) Drawer->RenderCircleFill(this->oclr, (this->x + this->w - rad), (this->y + rad), rad);
-        else Drawer->RenderCircleFill(this->clr, (this->x + this->w - rad), (this->y + rad), rad);
-        Drawer->RenderCircleFill(this->oclr, (this->x + rad), (this->y + rad), rad);
-        Drawer->RenderRectangleFill(this->clr, (this->x + rad), this->y, (this->w - this->h), this->h);
-        u32 pcw = ((this->perc * (this->w - this->h)) / 100);
-        Drawer->RenderRectangleFill(this->oclr, (this->x + rad), this->y, pcw, this->h);
+        Drawer->RenderRectangleFill(this->clr, this->x, this->y, this->w, this->h);
+        u32 pcw = ((this->perc * this->w) / 100);
+        Drawer->RenderRectangleFill(this->oclr, this->x, this->y, pcw, this->h);
     }
 
     void ProgressBar::OnInput(u64 Down, u64 Up, u64 Held, bool Touch)

@@ -215,7 +215,7 @@ namespace pu
                     u32 icw = render::GetTextureWidth(this->icon);
                     u32 icx = dx + (dw - (icw + icm));
                     u32 icy = dy + icm;
-                    Drawer->RenderTexture(this->icon, icx, icy);
+                    Drawer->RenderTexture(this->icon, icx, icy, initfact);
                 }
                 for(u32 i = 0; i < this->opts.size(); i++)
                 {
@@ -269,7 +269,11 @@ namespace pu
                 }
                 return true;
             });
-            if(!ok) break;
+            if(!ok)
+            {
+                ((Application*)App)->CallForRenderWithRenderOver([&](render::Renderer *Drawer) -> bool {});
+                break;
+            }
         }
         return this->osel;
     }

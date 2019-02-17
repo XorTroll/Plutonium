@@ -4,7 +4,7 @@ namespace pu
 {
     Layout::Layout()
     {
-        this->onipt = [&](u64 Down, u64 Up, u64 Held){};
+        this->onipt = [&](u64 Down, u64 Up, u64 Held, bool Touch){};
     }
 
     Layout::~Layout()
@@ -38,12 +38,12 @@ namespace pu
         return !this->chld.empty();
     }
 
-    void Layout::SetOnInput(std::function<void(u64 Down, u64 Up, u64 Held)> Callback)
+    void Layout::SetOnInput(std::function<void(u64 Down, u64 Up, u64 Held, bool Touch)> Callback)
     {
         this->onipt = Callback;
     }
 
-    std::function<void(u64 Down, u64 Up, u64 Held)> Layout::GetOnInput()
+    std::function<void(u64 Down, u64 Up, u64 Held, bool Touch)> Layout::GetOnInput()
     {
         return this->onipt;
     }

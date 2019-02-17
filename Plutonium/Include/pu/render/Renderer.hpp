@@ -28,8 +28,8 @@ namespace pu::render
             bool HasRomFs();
             void InitializeRender(draw::Color Color);
             void FinalizeRender();
-            void RenderTexture(NativeTexture Texture, u32 X, u32 Y);
-            void RenderTextureScaled(NativeTexture Texture, u32 X, u32 Y, u32 Width, u32 Height);
+            void RenderTexture(NativeTexture Texture, u32 X, u32 Y, int AlphaMod = -1);
+            void RenderTextureScaled(NativeTexture Texture, u32 X, u32 Y, u32 Width, u32 Height, int AlphaMod = -1);
             void RenderRectangle(draw::Color Color, u32 X, u32 Y, u32 Width, u32 Height);
             void RenderRectangleFill(draw::Color Color, u32 X, u32 Y, u32 Width, u32 Height);
             void RenderCircle(draw::Color Color, u32 X, u32 Y, u32 Radius);

@@ -59,22 +59,24 @@ namespace pu::render
         SDL_RenderPresent(purend);
     }
 
-    void Renderer::RenderTexture(NativeTexture Texture, u32 X, u32 Y)
+    void Renderer::RenderTexture(NativeTexture Texture, u32 X, u32 Y, int AlphaMod)
     {
         SDL_Rect pos;
         pos.x = X;
         pos.y = Y;
+        if(AlphaMod >= 0) SDL_SetTextureAlphaMod(Texture, (u8)AlphaMod);
         SDL_QueryTexture(Texture, NULL, NULL, &pos.w, &pos.h);
         SDL_RenderCopy(purend, Texture, NULL, &pos);
     }
 
-    void Renderer::RenderTextureScaled(NativeTexture Texture, u32 X, u32 Y, u32 Width, u32 Height)
+    void Renderer::RenderTextureScaled(NativeTexture Texture, u32 X, u32 Y, u32 Width, u32 Height, int AlphaMod)
     {
         SDL_Rect pos;
         pos.x = X;
         pos.y = Y;
         pos.w = Width;
         pos.h = Height;
+        if(AlphaMod >= 0) SDL_SetTextureAlphaMod(Texture, (u8)AlphaMod);
         SDL_RenderCopyEx(purend, Texture, NULL, &pos, 0, NULL, SDL_FLIP_NONE);
     }
 
