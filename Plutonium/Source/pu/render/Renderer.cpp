@@ -102,15 +102,15 @@ namespace pu::render
         SDL_RenderFillRect(purend, &rect);
     }
 	
-	void Renderer::RenderRoundedRectangle(draw::Color Color, u32 X, u32 Y, u32 Width, u32 Height, u32 Radius)
-	{
-		roundedRectangleRGBA(purend, X, Y, X + Width, Y + Height, Radius, Color.R, Color.G, Color.B, Color.A);
-	}
-	
-	void Renderer::RenderRoundedRectangleFill(draw::Color Color, u32 X, u32 Y, u32 Width, u32 Height, u32 Radius)
-	{
-		roundedBoxRGBA(purend, X, Y, X + Width, Y + Height, Radius, Color.R, Color.G, Color.B, Color.A);
-	}
+    void Renderer::RenderRoundedRectangle(draw::Color Color, u32 X, u32 Y, u32 Width, u32 Height, u32 Radius)
+    {
+        roundedRectangleRGBA(purend, X, Y, X + Width, Y + Height, Radius, Color.R, Color.G, Color.B, Color.A);
+    }
+
+    void Renderer::RenderRoundedRectangleFill(draw::Color Color, u32 X, u32 Y, u32 Width, u32 Height, u32 Radius)
+    {
+        roundedBoxRGBA(purend, X, Y, X + Width, Y + Height, Radius, Color.R, Color.G, Color.B, Color.A);
+    }
 
     void Renderer::RenderCircle(draw::Color Color, u32 X, u32 Y, u32 Radius)
     {
