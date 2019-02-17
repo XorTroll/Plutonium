@@ -64,7 +64,11 @@ namespace pu::render
         SDL_Rect pos;
         pos.x = X;
         pos.y = Y;
-        if(AlphaMod >= 0) SDL_SetTextureAlphaMod(Texture, (u8)AlphaMod);
+        if(AlphaMod >= 0)
+        {
+            SDL_SetTextureBlendMode(Texture, SDL_BLENDMODE_BLEND);
+            SDL_SetTextureAlphaMod(Texture, (u8)AlphaMod);
+        }
         SDL_QueryTexture(Texture, NULL, NULL, &pos.w, &pos.h);
         SDL_RenderCopy(purend, Texture, NULL, &pos);
     }
@@ -76,7 +80,11 @@ namespace pu::render
         pos.y = Y;
         pos.w = Width;
         pos.h = Height;
-        if(AlphaMod >= 0) SDL_SetTextureAlphaMod(Texture, (u8)AlphaMod);
+        if(AlphaMod >= 0)
+        {
+            SDL_SetTextureBlendMode(Texture, SDL_BLENDMODE_BLEND);
+            SDL_SetTextureAlphaMod(Texture, (u8)AlphaMod);
+        }
         SDL_RenderCopyEx(purend, Texture, NULL, &pos, 0, NULL, SDL_FLIP_NONE);
     }
 

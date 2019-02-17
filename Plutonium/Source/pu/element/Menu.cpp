@@ -328,11 +328,11 @@ namespace pu::element
                 s32 sccr = this->scb.R;
                 s32 sccg = this->scb.G;
                 s32 sccb = this->scb.B;
-                s32 snr = sccr - 50;
+                s32 snr = sccr - 30;
                 if(snr < 0) snr = 0;
-                s32 sng = sccg - 50;
+                s32 sng = sccg - 30;
                 if(sng < 0) sng = 0;
-                s32 snb = sccb - 50;
+                s32 snb = sccb - 30;
                 if(snb < 0) snb = 0;
                 draw::Color sclr(snr, sng, snb, this->scb.A);
                 u32 scx = this->x + (this->w - 20);
