@@ -142,7 +142,7 @@ namespace pu
             if(elm->IsVisible())
             {
                 elm->OnRender(this->rend);
-                if(!this->rover) elm->OnInput(d, u, h, touch);
+                if(!this->rover) elm->ProcessInput((void*)this->lyt, d, u, h, touch);
             }
         }
         if(this->fact > 0)

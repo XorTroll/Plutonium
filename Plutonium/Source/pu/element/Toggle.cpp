@@ -134,8 +134,13 @@ namespace pu::element
         Drawer->RenderTexture(this->ntex, tx, ty);
     }
 
-    void Toggle::OnInput(u64 Down, u64 Up, u64 Held, bool Touch)
+    void Toggle::OnInput(u64 Down, u64 Up, u64 Held, bool Touch, bool Focus)
     {
         if((Down & this->key) || ((this->key == KEY_TOUCH) && Touch)) this->checked = !this->checked;
+    }
+
+    void Toggle::OnDirectionPress(DirectionController Controller)
+    {
+
     }
 }

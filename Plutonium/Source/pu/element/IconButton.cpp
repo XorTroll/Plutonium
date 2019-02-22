@@ -130,7 +130,7 @@ namespace pu::element
         Drawer->RenderTextureScaled(this->ntex, dfx, dfy, sf, sf);
     }
 
-    void IconButton::OnInput(u64 Down, u64 Up, u64 Held, bool Touch)
+    void IconButton::OnInput(u64 Down, u64 Up, u64 Held, bool Touch, bool Focus)
     {
         u32 w = this->rad * 2;
         u32 h = w;
@@ -166,5 +166,10 @@ namespace pu::element
                 }
             }
         }
+    }
+
+    void IconButton::OnDirectionPress(DirectionController Controller)
+    {
+
     }
 }

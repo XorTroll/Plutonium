@@ -146,7 +146,7 @@ namespace pu::element
         Drawer->RenderTexture(this->ntex, tx, ty);
     }
 
-    void Button::OnInput(u64 Down, u64 Up, u64 Held, bool Touch)
+    void Button::OnInput(u64 Down, u64 Up, u64 Held, bool Touch, bool Focus)
     {
         if(this->hover)
         {
@@ -180,5 +180,10 @@ namespace pu::element
                 }
             }
         }
+    }
+
+    void Button::OnDirectionPress(DirectionController Controller)
+    {
+
     }
 }

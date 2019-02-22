@@ -119,7 +119,12 @@ namespace pu::element
         Drawer->RenderRectangleFill(this->oclr, this->x, this->y, pcw, this->h);
     }
 
-    void ProgressBar::OnInput(u64 Down, u64 Up, u64 Held, bool Touch)
+    void ProgressBar::OnInput(u64 Down, u64 Up, u64 Held, bool Touch, bool Focus)
     {
+    }
+
+    void ProgressBar::OnDirectionPress(DirectionController Controller)
+    {
+
     }
 }

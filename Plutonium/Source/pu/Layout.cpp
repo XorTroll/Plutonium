@@ -5,6 +5,7 @@ namespace pu
     Layout::Layout()
     {
         this->onipt = [&](u64 Down, u64 Up, u64 Held, bool Touch){};
+        this->efocus = NULL;
     }
 
     Layout::~Layout()
@@ -14,6 +15,7 @@ namespace pu
 
     void Layout::AddChild(element::Element *Child)
     {
+        if(this->efocus == NULL) this->efocus = Child;
         this->chld.push_back(Child);
     }
 
@@ -36,6 +38,16 @@ namespace pu
     bool Layout::HasChilds()
     {
         return !this->chld.empty();
+    }
+
+    void Layout::SetElementOnFocus(element::Element *OnFocus)
+    {
+        this->efocus = OnFocus;
+    }
+
+    element::Element *Layout::GetElementOnFocus()
+    {
+        return this->efocus;
     }
 
     void Layout::SetOnInput(std::function<void(u64 Down, u64 Up, u64 Held, bool Touch)> Callback)

@@ -126,7 +126,12 @@ namespace pu::element
         Drawer->RenderTexture(this->ntex, tx, ty);
     }
 
-    void TextBlock::OnInput(u64 Down, u64 Up, u64 Held, bool Touch)
+    void TextBlock::OnInput(u64 Down, u64 Up, u64 Held, bool Touch, bool Focus)
     {
+    }
+
+    void TextBlock::OnDirectionPress(DirectionController Controller)
+    {
+
     }
 }

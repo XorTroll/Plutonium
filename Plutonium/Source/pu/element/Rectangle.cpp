@@ -74,23 +74,17 @@ namespace pu::element
 
     void Rectangle::OnRender(render::Renderer *Drawer)
     {
-        if(this->borderr > 0)
-        {
-            u32 diam = (2 * this->borderr);
-            Drawer->RenderRectangleFill(this->clr, (this->x + this->borderr), (this->y + this->borderr), (this->w - diam), (this->h - diam));
-            Drawer->RenderRectangleFill(this->clr, (this->x + this->borderr), this->y, (this->y + this->w - diam), this->borderr);
-            Drawer->RenderRectangleFill(this->clr, (this->x + this->borderr), (this->y + (this->h - this->borderr)), (this->w - diam), this->borderr);
-            Drawer->RenderRectangleFill(this->clr, this->x, (this->y + this->borderr), this->borderr, (this->h - diam));
-            Drawer->RenderRectangleFill(this->clr, (this->x + (this->w - this->borderr)), (this->y + this->borderr), this->borderr, (this->h - diam));
-            Drawer->RenderCircle(this->clr, this->x, this->y, this->borderr);
-            Drawer->RenderCircle(this->clr, (this->x + this->w - diam), this->y, this->borderr);
-            Drawer->RenderCircle(this->clr, this->x, (this->h - diam), this->borderr);
-            Drawer->RenderCircle(this->clr, (this->x + this->w - diam), (this->h - diam), this->borderr);
-        }
-        else Drawer->RenderRectangleFill(this->clr, this->x, this->y, this->w, this->h);
+        Drawer->RenderRectangleFill(this->clr, this->x, this->y, this->w, this->h);
     }
 
-    void Rectangle::OnInput(u64 Down, u64 Up, u64 Held, bool Touch)
+    void Rectangle::OnInput(u64 Down, u64 Up, u64 Held, bool Touch, bool Focus)
     {
+        if(Focus) this->clr = { 0, 0, 255, 255 };
+        else this->clr = { 0, 0, 0, 255 };
+    }
+
+    void Rectangle::OnDirectionPress(DirectionController Controller)
+    {
+        this->x++;
     }
 }

@@ -99,7 +99,12 @@ namespace pu::element
         else Drawer->RenderTextureScaled(this->ntex, this->x, this->y, iw, ih);
     }
 
-    void Image::OnInput(u64 Down, u64 Up, u64 Held, bool Touch)
+    void Image::OnInput(u64 Down, u64 Up, u64 Held, bool Touch, bool Focus)
     {
+    }
+
+    void Image::OnDirectionPress(DirectionController Controller)
+    {
+
     }
 }

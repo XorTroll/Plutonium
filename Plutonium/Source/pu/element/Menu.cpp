@@ -348,7 +348,7 @@ namespace pu::element
         }
     }
 
-    void Menu::OnInput(u64 Down, u64 Up, u64 Held, bool Touch)
+    void Menu::OnInput(u64 Down, u64 Up, u64 Held, bool Touch, bool Focus)
     {
         if(Touch)
         {
@@ -445,5 +445,10 @@ namespace pu::element
                 }
             }
         }
+    }
+
+    void Menu::OnDirectionPress(DirectionController Controller)
+    {
+
     }
 }
