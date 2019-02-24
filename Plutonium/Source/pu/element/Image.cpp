@@ -102,9 +102,4 @@ namespace pu::element
     void Image::OnInput(u64 Down, u64 Up, u64 Held, bool Touch, bool Focus)
     {
     }
-
-    void Image::OnDirectionPress(DirectionController Controller)
-    {
-
-    }
 }

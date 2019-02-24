@@ -167,9 +167,4 @@ namespace pu::element
             }
         }
     }
-
-    void IconButton::OnDirectionPress(DirectionController Controller)
-    {
-
-    }
 }

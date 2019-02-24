@@ -122,9 +122,4 @@ namespace pu::element
     void ProgressBar::OnInput(u64 Down, u64 Up, u64 Held, bool Touch, bool Focus)
     {
     }
-
-    void ProgressBar::OnDirectionPress(DirectionController Controller)
-    {
-
-    }
 }

@@ -79,12 +79,6 @@ namespace pu::element
 
     void Rectangle::OnInput(u64 Down, u64 Up, u64 Held, bool Touch, bool Focus)
     {
-        if(Focus) this->clr = { 0, 0, 255, 255 };
-        else this->clr = { 0, 0, 0, 255 };
-    }
-
-    void Rectangle::OnDirectionPress(DirectionController Controller)
-    {
-        this->x++;
+        ;
     }
 }

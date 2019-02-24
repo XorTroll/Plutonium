@@ -101,6 +101,11 @@ namespace pu::element
         this->key = Key;
     }
 
+    bool Toggle::IsChecked()
+    {
+        return this->checked;
+    }
+
     void Toggle::OnRender(render::Renderer *Drawer)
     {
         u32 tw = render::GetTextWidth(this->fnt, this->cnt);
@@ -137,10 +142,5 @@ namespace pu::element
     void Toggle::OnInput(u64 Down, u64 Up, u64 Held, bool Touch, bool Focus)
     {
         if((Down & this->key) || ((this->key == KEY_TOUCH) && Touch)) this->checked = !this->checked;
-    }
-
-    void Toggle::OnDirectionPress(DirectionController Controller)
-    {
-
     }
 }

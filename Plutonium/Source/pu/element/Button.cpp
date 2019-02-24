@@ -167,9 +167,4 @@ namespace pu::element
             }
         }
     }
-
-    void Button::OnDirectionPress(DirectionController Controller)
-    {
-
-    }
 }

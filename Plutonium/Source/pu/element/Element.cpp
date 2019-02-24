@@ -54,13 +54,7 @@ namespace pu::element
                 if(this->fright != NULL) lyt->SetElementOnFocus(this->fright);
             }
         }
-        else if((Down & KEY_PLSTICK) || (Down & KEY_DPAD))
-        {
-            DirectionController ctrl = DirectionController::DPad;
-            if(Down & KEY_LSTICK) ctrl = DirectionController::JoyStick;
-            if(onfocus) this->OnDirectionPress(ctrl);
-        }
-        else this->OnInput(Down, Up, Held, thistouch, onfocus);
+        else if(onfocus) this->OnInput(Down, Up, Held, thistouch, onfocus);
     }
 
     bool Element::IsVisible()

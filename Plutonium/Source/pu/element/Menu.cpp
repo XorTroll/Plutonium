@@ -386,7 +386,7 @@ namespace pu::element
         }
         else
         {
-            if((Down & KEY_DDOWN) || (Down & KEY_LSTICK_DOWN) || (Held & KEY_RSTICK_DOWN))
+            if((Down & KEY_DDOWN) || (Held & KEY_LSTICK_DOWN))
             {
                 if(this->isel < (this->itms.size() - 1))
                 {
@@ -409,7 +409,7 @@ namespace pu::element
                     }
                 }
             }
-            else if((Down & KEY_DUP) || (Down & KEY_LSTICK_UP) || (Held & KEY_RSTICK_UP))
+            else if((Down & KEY_DUP) || (Held & KEY_LSTICK_UP))
             {
                 if(this->isel > 0)
                 {
@@ -445,10 +445,5 @@ namespace pu::element
                 }
             }
         }
-    }
-
-    void Menu::OnDirectionPress(DirectionController Controller)
-    {
-
     }
 }
