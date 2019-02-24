@@ -20,7 +20,7 @@ namespace pu::element
     class Button : public Element
     {
         public:
-            Button(u32 X, u32 Y, u32 Width, u32 Height, std::string Content, draw::Color Color);
+            Button(u32 X, u32 Y, u32 Width, u32 Height, std::string Content, draw::Color TextColor, draw::Color Color);
             ~Button();
             u32 GetX();
             void SetX(u32 X);

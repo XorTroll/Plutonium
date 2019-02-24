@@ -59,4 +59,14 @@ namespace pu
     {
         return this->onipt;
     }
+
+    void Layout::AddThread(std::function<void()> Callback)
+    {
+        this->thds.push_back(Callback);
+    }
+
+    std::vector<std::function<void()>> Layout::GetAllThreads()
+    {
+        return this->thds;
+    }
 }

@@ -30,8 +30,11 @@ namespace pu
             element::Element *GetElementOnFocus();
             void SetOnInput(std::function<void(u64 Down, u64 Up, u64 Held, bool Touch)> Callback);
             std::function<void(u64 Down, u64 Up, u64 Held, bool Touch)> GetOnInput();
+            void AddThread(std::function<void()> Callback);
+            std::vector<std::function<void()>> GetAllThreads();
         private:
             std::function<void(u64, u64, u64, bool)> onipt;
+            std::vector<std::function<void()>> thds;
             std::vector<element::Element*> chld;
             element::Element *efocus;
     };

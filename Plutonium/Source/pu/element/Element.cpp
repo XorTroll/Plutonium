@@ -23,7 +23,19 @@ namespace pu::element
         u64 KEY_PLSTICK = (KEY_LSTICK_UP | KEY_LSTICK_DOWN | KEY_LSTICK_LEFT | KEY_LSTICK_RIGHT);
         u64 KEY_PRSTICK = (KEY_RSTICK_UP | KEY_RSTICK_DOWN | KEY_RSTICK_LEFT | KEY_RSTICK_RIGHT);
         bool onfocus = (lyt->GetElementOnFocus() == this);
-        if((Down & KEY_PRSTICK) && onfocus)
+        bool thistouch = false;
+        if(Touch)
+        {
+            touchPosition tch;
+            hidTouchRead(&tch, 0);
+            thistouch = (((this->GetX() + this->GetWidth()) > tch.px) && (tch.px > this->GetX()) && ((this->GetY() + this->GetHeight()) > tch.py) && (tch.py > this->GetY()));
+            if(thistouch)
+            {
+                lyt->SetElementOnFocus(this);
+                this->OnInput(Down, Up, Held, thistouch, onfocus);
+            }
+        }
+        else if((Down & KEY_PRSTICK) && onfocus)
         {
             if(Down & KEY_RSTICK_UP)
             {
@@ -48,7 +60,7 @@ namespace pu::element
             if(Down & KEY_LSTICK) ctrl = DirectionController::JoyStick;
             if(onfocus) this->OnDirectionPress(ctrl);
         }
-        else this->OnInput(Down, Up, Held, Touch, onfocus);
+        else this->OnInput(Down, Up, Held, thistouch, onfocus);
     }
 
     bool Element::IsVisible()

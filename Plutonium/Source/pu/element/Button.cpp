@@ -2,10 +2,10 @@
 
 namespace pu::element
 {
-    Button::Button(u32 X, u32 Y, u32 Width, u32 Height, std::string Content, draw::Color Color) : Element::Element()
+    Button::Button(u32 X, u32 Y, u32 Width, u32 Height, std::string Content, draw::Color TextColor, draw::Color Color) : Element::Element()
     {
         this->x = X;
-        this->x = Y;
+        this->y = Y;
         this->w = Width;
         this->h = Height;
         this->cnt = Content;
@@ -13,7 +13,8 @@ namespace pu::element
         this->hover = false;
         this->hoverfact = 255;
         this->fnt = render::LoadSharedFont(render::SharedFont::Standard, 25);
-        this->ntex = render::RenderText(this->fnt, Content, Color);
+        this->ntex = render::RenderText(this->fnt, Content, TextColor);
+        this->clickcb = [](){};
     }
 
     Button::~Button()
@@ -150,17 +151,7 @@ namespace pu::element
     {
         if(this->hover)
         {
-            if(Touch)
-            {
-                touchPosition tch;
-                hidTouchRead(&tch, 0);
-                if(!(((this->x + this->w) > tch.px) && (tch.px > this->x) && ((this->y + this->h) > tch.py) && (tch.py > this->y)))
-                {
-                    this->hover = false;
-                    this->hoverfact = 255;
-                }
-            }
-            else
+            if(!Touch)
             {
                 (this->clickcb)();
                 this->hover = false;
@@ -171,13 +162,8 @@ namespace pu::element
         {
             if(Touch)
             {
-                touchPosition tch;
-                hidTouchRead(&tch, 0);
-                if(((this->x + this->w) > tch.px) && (tch.px > this->x) && ((this->y + this->h) > tch.py) && (tch.py > this->y)) if(!this->hover)
-                {
-                    this->hover = true;
-                    this->hoverfact = 0;
-                }
+                this->hover = true;
+                this->hoverfact = 0;
             }
         }
     }

@@ -133,6 +133,8 @@ namespace pu
         u64 th = hidKeysDown(CONTROLLER_HANDHELD);
         bool touch = (th & KEY_TOUCH);
         if(!this->thds.empty()) for(u32 i = 0; i < this->thds.size(); i++) (this->thds[i])();
+        std::vector<std::function<void()>> lyth = this->lyt->GetAllThreads();
+        if(!lyth.empty()) for(u32 i = 0; i < lyth.size(); i++) (lyth[i])();
         (this->cbipt)(d, u, h, touch);
         if(this->hasimage) this->rend->RenderTexture(this->ntex, 0, 0);
         if(!this->rover) (this->lyt->GetOnInput())(d, u, h, touch);
