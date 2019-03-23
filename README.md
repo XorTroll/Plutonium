@@ -8,13 +8,13 @@ It uses libnx and SDL2, so both libraries are required.
 
 To be more exact, this libraries should be installed via pacman:
 
-```
--lnx -lfreetype -lSDL2_ttf -lSDL2_gfx -lSDL2_image -lSDL2 -lEGL -lGLESv2 -lglapi -ldrm_nouveau -lpng -ljpeg `sdl2-config --libs` `freetype-config --libs`
+```sh
+pacman -S switch-sdl2 switch-sdl2_ttf switch-sdl2_gfx
 ```
 
 ## Internal structure and performance
 
-Plutonium uses software-accelerated SDL2 rendering.
+Plutonium uses SDL2 (SDL2 via OpenGL) rendering.
 
 Plutonium's performance is based on WPF's system. The user doesn't directly interact with the rendering, as it's done via a main rendering system and different objects to render.
 
@@ -30,19 +30,38 @@ Check the [documentation](https://XorTroll.github.io/Plutonium/) for a more deta
 
 On the [releases](https://github.com/XorTroll/Plutonium/releases) page you have all the released versions. All of them are zipped files, containing `include` and `lib` directories.
 
-To link them to a devkitPro libnx project, on the `LIBDIRS` variable of the Makefile add the folder containing the two folders mentioned above. (if you set `plutonium`, place the other two folders as `plutonium/include` and `plutonium/lib`)
+### Simple project layout
 
-Include the main header:
+This is how a regular Plutonium project would (more or less) have its Makefile and project layout using Plutonium:
 
-```cpp
-#include <pu/Plutonium>
+- Makefile
+
+```Makefile
+...
+
+LIBS := -lpu -lfreetype -lSDL2_ttf -lSDL2_gfx -lSDL2_image -lSDL2 -lEGL -lGLESv2 -lglapi -ldrm_nouveau -lpng -ljpeg `sdl2-config --libs` `freetype-config --libs` -lnx
+LIBDIRS := $(PORTLIBS) $(LIBNX) $(CURDIR)/Plutonium
+
+...
 ```
 
-And don't forget to add the libraries mentioned in the first section!
+- Project directory
+
+```txt
+Project
+ |
+ |-- Makefile
+ |-- source
+ |-- include
+ |-- Plutonium
+      |
+      |-- include
+      |-- lib
+```
 
 ## Building
 
-Clone the repository, go into `Plutonium` directory and run `make`.
+Clone the repository, cd into `Plutonium` directory and run `make`.
 
 You will need devkitPro, libnx and all the libraries mentioned above installed via pacman.
 
