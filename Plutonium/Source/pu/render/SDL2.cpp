@@ -69,6 +69,12 @@ namespace pu::render
         return (u32)th;
     }
 
+    void SetAlphaValue(NativeTexture Texture, u8 Alpha)
+    {
+        SDL_SetTextureBlendMode(Texture, SDL_BLENDMODE_BLEND);
+        SDL_SetTextureAlphaMod(Texture, Alpha);
+    }
+
     void DeleteFont(NativeFont Font)
     {
         TTF_CloseFont(Font);

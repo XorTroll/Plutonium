@@ -38,10 +38,13 @@ namespace pu::element
             void ProcessInput(void *Lyt, u64 Down, u64 Up, u64 Held, bool Touch);
             bool IsVisible();
             void SetVisible(bool Visible);
+            bool IsAffectedByFocus();
+            void SetAffectedByFocus(bool Affected);
             Element *GetFocusChangeElement(FocusChangeDirection Direction);
             void SetFocusChangeElement(FocusChangeDirection Direction, Element *ToChange);
         protected:
             bool visible;
+            bool afocus;
             Element *fup;
             Element *fdown;
             Element *fleft;

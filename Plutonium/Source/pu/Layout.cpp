@@ -2,10 +2,11 @@
 
 namespace pu
 {
-    Layout::Layout()
+    Layout::Layout(bool UseFocus)
     {
         this->onipt = [&](u64 Down, u64 Up, u64 Held, bool Touch){};
         this->efocus = NULL;
+        this->ufocus = UseFocus;
     }
 
     Layout::~Layout()
@@ -68,5 +69,15 @@ namespace pu
     std::vector<std::function<void()>> Layout::GetAllThreads()
     {
         return this->thds;
+    }
+
+    bool Layout::UsesFocus()
+    {
+        return this->ufocus;
+    }
+
+    void Layout::SetUseFocus(bool Focus)
+    {
+        this->ufocus = Focus;
     }
 }

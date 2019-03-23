@@ -198,8 +198,13 @@ namespace pu
                 u32 fw = bw - (r * 2);
                 u32 fh = bh - (r * 2);
                 draw::Color clr = { 225, 225, 225, initfact };
-                Drawer->RenderRectangleFill({ 0, 0, 0, 105 }, 0, 0, 1280, 720);
+                s32 aclr = initfact;
+                if(aclr < 0) aclr = 0;
+                if(aclr > 125) aclr = 125;
+                Drawer->RenderRectangleFill({ 0, 0, 0, (u8)aclr }, 0, 0, 1280, 720);
                 Drawer->RenderRoundedRectangleFill(clr, dx, dy, bw, bh, r);
+                render::SetAlphaValue(this->title, initfact);
+                render::SetAlphaValue(this->cnt, initfact);
                 Drawer->RenderTexture(this->title, (dx + 45), (dy + 55));
                 Drawer->RenderTexture(this->cnt, (dx + 45), (dy + 140));
                 if(this->hicon)
@@ -243,9 +248,9 @@ namespace pu
                             this->pselfact -= 48;
                         }
                     }
+                    render::SetAlphaValue(this->opts[i], initfact);
                     Drawer->RenderTexture(this->opts[i], tx, ty);
                 }
-                Drawer->RenderShadowSimple((dx + r), (dy + fh + (2 * r)), fw, 5, 160);
                 if(end)
                 {
                     if(initfact == 0) return false;

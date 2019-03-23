@@ -16,7 +16,7 @@ namespace pu::render
             purend = SDL_CreateRenderer(this->rendwd, -1, (SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC));
             this->rendsf = SDL_GetWindowSurface(this->rendwd);
             SDL_SetRenderDrawBlendMode(purend, SDL_BLENDMODE_BLEND);
-            SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "1");
+            SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "2");
             IMG_Init(IMG_INIT_PNG | IMG_INIT_JPG | IMG_INIT_TIF | IMG_INIT_WEBP);
             TTF_Init();
             this->initialized = true;
@@ -65,11 +65,7 @@ namespace pu::render
         SDL_Rect pos;
         pos.x = X;
         pos.y = Y;
-        if(AlphaMod >= 0)
-        {
-            SDL_SetTextureBlendMode(Texture, SDL_BLENDMODE_BLEND);
-            SDL_SetTextureAlphaMod(Texture, (u8)AlphaMod);
-        }
+        if(AlphaMod >= 0) SetAlphaValue(Texture, (u8)AlphaMod);
         SDL_QueryTexture(Texture, NULL, NULL, &pos.w, &pos.h);
         SDL_RenderCopy(purend, Texture, NULL, &pos);
     }
@@ -81,11 +77,7 @@ namespace pu::render
         pos.y = Y;
         pos.w = Width;
         pos.h = Height;
-        if(AlphaMod >= 0)
-        {
-            SDL_SetTextureBlendMode(Texture, SDL_BLENDMODE_BLEND);
-            SDL_SetTextureAlphaMod(Texture, (u8)AlphaMod);
-        }
+        if(AlphaMod >= 0) SetAlphaValue(Texture, (u8)AlphaMod);
         SDL_RenderCopyEx(purend, Texture, NULL, &pos, 0, NULL, SDL_FLIP_NONE);
     }
 
@@ -135,7 +127,7 @@ namespace pu::render
         aacircleRGBA(purend, X, Y, Radius - 1, Color.R, Color.G, Color.B, Color.A);
     }
 
-    void Renderer::RenderShadowSimple(u32 X, u32 Y, u32 Width, u32 Height, u32 BaseAlpha)
+    void Renderer::RenderShadowSimple(u32 X, u32 Y, u32 Width, u32 Height, u32 BaseAlpha, u8 MainAlpha)
     {
         bool crop = false;
         u32 shw = Width;
@@ -143,7 +135,7 @@ namespace pu::render
         u32 shy = Y;
         for(s32 al = BaseAlpha; al > 0; al -= (180 / Height))
         {
-            this->RenderRectangleFill({ 130, 130, 130, al }, shx, shy, shw, 1);
+            this->RenderRectangleFill({ 130, 130, 130, (al * (MainAlpha / 255)) }, shx, shy, shw, 1);
             if(crop)
             {
                 shw -= 2;
