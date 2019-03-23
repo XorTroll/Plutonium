@@ -5,6 +5,7 @@ var hierarchy =
     [ "pu::Dialog", "d0/d22/classpu_1_1_dialog.html", null ],
     [ "pu::element::Element", "d6/d14/classpu_1_1element_1_1_element.html", [
       [ "pu::element::Button", "d8/d02/classpu_1_1element_1_1_button.html", null ],
+      [ "pu::element::IconButton", "d6/deb/classpu_1_1element_1_1_icon_button.html", null ],
       [ "pu::element::Image", "df/d74/classpu_1_1element_1_1_image.html", null ],
       [ "pu::element::Menu", "d5/d9b/classpu_1_1element_1_1_menu.html", null ],
       [ "pu::element::ProgressBar", "d1/d83/classpu_1_1element_1_1_progress_bar.html", null ],

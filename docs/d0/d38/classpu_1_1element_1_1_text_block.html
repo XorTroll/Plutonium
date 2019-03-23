@@ -128,6 +128,12 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a328d9b468486e4eb3c5cb7474bac540f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a78efe4eca59538e977ab7c41914253bc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/d38/classpu_1_1element_1_1_text_block.html#a78efe4eca59538e977ab7c41914253bc">SetText</a> (std::string Text)</td></tr>
 <tr class="separator:a78efe4eca59538e977ab7c41914253bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad44551b3b51ad998b74c83fb8f5df96c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/d38/classpu_1_1element_1_1_text_block.html#ad44551b3b51ad998b74c83fb8f5df96c">SetTextAlign</a> (<a class="el" href="../../d4/dab/namespacepu_1_1element.html#a4daada4c4ade0295725e3fab89b8498f">TextAlign</a> Align)</td></tr>
+<tr class="separator:ad44551b3b51ad998b74c83fb8f5df96c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a50758ebc6b82b3435b85f429a76b913a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/d38/classpu_1_1element_1_1_text_block.html#a50758ebc6b82b3435b85f429a76b913a">RemoveTextAlign</a> ()</td></tr>
+<tr class="separator:a50758ebc6b82b3435b85f429a76b913a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1c1dec70adee03586ff688e50766d88d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/d38/classpu_1_1element_1_1_text_block.html#a1c1dec70adee03586ff688e50766d88d">HasTextAlign</a> ()</td></tr>
+<tr class="separator:a1c1dec70adee03586ff688e50766d88d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0c5b5832e74cc2c1b7e1fa2508f5fdc0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/d38/classpu_1_1element_1_1_text_block.html#a0c5b5832e74cc2c1b7e1fa2508f5fdc0">SetFont</a> (<a class="el" href="../../d8/d89/namespacepu_1_1render.html#a43f44a4e8c840dcf382ff6d984793939">render::NativeFont</a> Font)</td></tr>
 <tr class="separator:a0c5b5832e74cc2c1b7e1fa2508f5fdc0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad1617dd262547862824aaf53be664ae8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../d4/d7e/structpu_1_1draw_1_1_color.html">draw::Color</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/d38/classpu_1_1element_1_1_text_block.html#ad1617dd262547862824aaf53be664ae8">GetColor</a> ()</td></tr>
@@ -136,23 +142,43 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a6a3c91e29b0f64143f380bdace5d9255"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae8e41f80b645c64348af7b826ea5717f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/d38/classpu_1_1element_1_1_text_block.html#ae8e41f80b645c64348af7b826ea5717f">OnRender</a> (<a class="el" href="../../d6/dba/classpu_1_1render_1_1_renderer.html">render::Renderer</a> *Drawer)</td></tr>
 <tr class="separator:ae8e41f80b645c64348af7b826ea5717f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a382380a531a9b556b70e95b00895010c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/d38/classpu_1_1element_1_1_text_block.html#a382380a531a9b556b70e95b00895010c">OnInput</a> (u64 Down, u64 Up, u64 Held)</td></tr>
-<tr class="separator:a382380a531a9b556b70e95b00895010c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab7b725c6e6c6f6f1c8be355f96409c9a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/d38/classpu_1_1element_1_1_text_block.html#ab7b725c6e6c6f6f1c8be355f96409c9a">OnInput</a> (u64 <a class="el" href="../../d4/dab/namespacepu_1_1element.html#a10a1a29bed06f48ad887bd79eea77503a08a38277b0309070706f6652eeae9a53">Down</a>, u64 <a class="el" href="../../d4/dab/namespacepu_1_1element.html#a10a1a29bed06f48ad887bd79eea77503a258f49887ef8d14ac268c92b02503aaa">Up</a>, u64 Held, bool Touch, bool Focus)</td></tr>
+<tr class="separator:ab7b725c6e6c6f6f1c8be355f96409c9a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classpu_1_1element_1_1_element"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classpu_1_1element_1_1_element')"><img src="../../closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="../../d6/d14/classpu_1_1element_1_1_element.html">pu::element::Element</a></td></tr>
 <tr class="memitem:a30a7bb0c75853ed633ee3cf300be4e54 inherit pub_methods_classpu_1_1element_1_1_element"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d14/classpu_1_1element_1_1_element.html#a30a7bb0c75853ed633ee3cf300be4e54">Element</a> ()</td></tr>
 <tr class="separator:a30a7bb0c75853ed633ee3cf300be4e54 inherit pub_methods_classpu_1_1element_1_1_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af8a483138da149acba8f4623c43b5bc4 inherit pub_methods_classpu_1_1element_1_1_element"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d14/classpu_1_1element_1_1_element.html#af8a483138da149acba8f4623c43b5bc4">~Element</a> ()</td></tr>
 <tr class="separator:af8a483138da149acba8f4623c43b5bc4 inherit pub_methods_classpu_1_1element_1_1_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a63b7d0a4f6bc2212a59877295e4accc8 inherit pub_methods_classpu_1_1element_1_1_element"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d14/classpu_1_1element_1_1_element.html#a63b7d0a4f6bc2212a59877295e4accc8">ProcessInput</a> (void *Lyt, u64 <a class="el" href="../../d4/dab/namespacepu_1_1element.html#a10a1a29bed06f48ad887bd79eea77503a08a38277b0309070706f6652eeae9a53">Down</a>, u64 <a class="el" href="../../d4/dab/namespacepu_1_1element.html#a10a1a29bed06f48ad887bd79eea77503a258f49887ef8d14ac268c92b02503aaa">Up</a>, u64 Held, bool Touch)</td></tr>
+<tr class="separator:a63b7d0a4f6bc2212a59877295e4accc8 inherit pub_methods_classpu_1_1element_1_1_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2e23f710aeda816dd6c16c00943aca4b inherit pub_methods_classpu_1_1element_1_1_element"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d14/classpu_1_1element_1_1_element.html#a2e23f710aeda816dd6c16c00943aca4b">IsVisible</a> ()</td></tr>
 <tr class="separator:a2e23f710aeda816dd6c16c00943aca4b inherit pub_methods_classpu_1_1element_1_1_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a08ab602ce820663df0a0eab7f2455c03 inherit pub_methods_classpu_1_1element_1_1_element"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d14/classpu_1_1element_1_1_element.html#a08ab602ce820663df0a0eab7f2455c03">SetVisible</a> (bool Visible)</td></tr>
 <tr class="separator:a08ab602ce820663df0a0eab7f2455c03 inherit pub_methods_classpu_1_1element_1_1_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a785c29051f82233752282a468afa4673 inherit pub_methods_classpu_1_1element_1_1_element"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d14/classpu_1_1element_1_1_element.html#a785c29051f82233752282a468afa4673">IsAffectedByFocus</a> ()</td></tr>
+<tr class="separator:a785c29051f82233752282a468afa4673 inherit pub_methods_classpu_1_1element_1_1_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2128eaaba12c28366ef56023f4d2d922 inherit pub_methods_classpu_1_1element_1_1_element"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d14/classpu_1_1element_1_1_element.html#a2128eaaba12c28366ef56023f4d2d922">SetAffectedByFocus</a> (bool Affected)</td></tr>
+<tr class="separator:a2128eaaba12c28366ef56023f4d2d922 inherit pub_methods_classpu_1_1element_1_1_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a991f535a8c3243c819fa72a250bdea54 inherit pub_methods_classpu_1_1element_1_1_element"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../d6/d14/classpu_1_1element_1_1_element.html">Element</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d14/classpu_1_1element_1_1_element.html#a991f535a8c3243c819fa72a250bdea54">GetFocusChangeElement</a> (<a class="el" href="../../d4/dab/namespacepu_1_1element.html#a10a1a29bed06f48ad887bd79eea77503">FocusChangeDirection</a> Direction)</td></tr>
+<tr class="separator:a991f535a8c3243c819fa72a250bdea54 inherit pub_methods_classpu_1_1element_1_1_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a67df8b6cea26f70f7301c064956a613b inherit pub_methods_classpu_1_1element_1_1_element"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d14/classpu_1_1element_1_1_element.html#a67df8b6cea26f70f7301c064956a613b">SetFocusChangeElement</a> (<a class="el" href="../../d4/dab/namespacepu_1_1element.html#a10a1a29bed06f48ad887bd79eea77503">FocusChangeDirection</a> Direction, <a class="el" href="../../d6/d14/classpu_1_1element_1_1_element.html">Element</a> *ToChange)</td></tr>
+<tr class="separator:a67df8b6cea26f70f7301c064956a613b inherit pub_methods_classpu_1_1element_1_1_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
 Additional Inherited Members</h2></td></tr>
 <tr class="inherit_header pro_attribs_classpu_1_1element_1_1_element"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_classpu_1_1element_1_1_element')"><img src="../../closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="../../d6/d14/classpu_1_1element_1_1_element.html">pu::element::Element</a></td></tr>
 <tr class="memitem:a66e702be5383a68a9d715abeb883bc41 inherit pro_attribs_classpu_1_1element_1_1_element"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d14/classpu_1_1element_1_1_element.html#a66e702be5383a68a9d715abeb883bc41">visible</a></td></tr>
 <tr class="separator:a66e702be5383a68a9d715abeb883bc41 inherit pro_attribs_classpu_1_1element_1_1_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2a4f36f06093693307adccabe76c3385 inherit pro_attribs_classpu_1_1element_1_1_element"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d14/classpu_1_1element_1_1_element.html#a2a4f36f06093693307adccabe76c3385">afocus</a></td></tr>
+<tr class="separator:a2a4f36f06093693307adccabe76c3385 inherit pro_attribs_classpu_1_1element_1_1_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a02bec86d4716da3c2336354bd77f9786 inherit pro_attribs_classpu_1_1element_1_1_element"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../d6/d14/classpu_1_1element_1_1_element.html">Element</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d14/classpu_1_1element_1_1_element.html#a02bec86d4716da3c2336354bd77f9786">fup</a></td></tr>
+<tr class="separator:a02bec86d4716da3c2336354bd77f9786 inherit pro_attribs_classpu_1_1element_1_1_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7022e3000ac9579468bec039c3d1ef26 inherit pro_attribs_classpu_1_1element_1_1_element"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../d6/d14/classpu_1_1element_1_1_element.html">Element</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d14/classpu_1_1element_1_1_element.html#a7022e3000ac9579468bec039c3d1ef26">fdown</a></td></tr>
+<tr class="separator:a7022e3000ac9579468bec039c3d1ef26 inherit pro_attribs_classpu_1_1element_1_1_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0678b2c3c076e928884a3aefb5a231ff inherit pro_attribs_classpu_1_1element_1_1_element"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../d6/d14/classpu_1_1element_1_1_element.html">Element</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d14/classpu_1_1element_1_1_element.html#a0678b2c3c076e928884a3aefb5a231ff">fleft</a></td></tr>
+<tr class="separator:a0678b2c3c076e928884a3aefb5a231ff inherit pro_attribs_classpu_1_1element_1_1_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a41e809d249c86705057a9f5475429cb3 inherit pro_attribs_classpu_1_1element_1_1_element"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../d6/d14/classpu_1_1element_1_1_element.html">Element</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d14/classpu_1_1element_1_1_element.html#a41e809d249c86705057a9f5475429cb3">fright</a></td></tr>
+<tr class="separator:a41e809d249c86705057a9f5475429cb3 inherit pro_attribs_classpu_1_1element_1_1_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a602462ba7de18f60276e0728fbc4a730"></a>
@@ -355,8 +381,25 @@ Additional Inherited Members</h2></td></tr>
 
 </div>
 </div>
-<a id="a382380a531a9b556b70e95b00895010c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a382380a531a9b556b70e95b00895010c">&#9670;&nbsp;</a></span>OnInput()</h2>
+<a id="a1c1dec70adee03586ff688e50766d88d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1c1dec70adee03586ff688e50766d88d">&#9670;&nbsp;</a></span>HasTextAlign()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool pu::element::TextBlock::HasTextAlign </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab7b725c6e6c6f6f1c8be355f96409c9a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab7b725c6e6c6f6f1c8be355f96409c9a">&#9670;&nbsp;</a></span>OnInput()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -380,7 +423,19 @@ Additional Inherited Members</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">u64&#160;</td>
-          <td class="paramname"><em>Held</em>&#160;</td>
+          <td class="paramname"><em>Held</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>Touch</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>Focus</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -395,7 +450,7 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Implements <a class="el" href="../../d6/d14/classpu_1_1element_1_1_element.html#a1dda56c7f33345f4a6e0ae1a3d866528">pu::element::Element</a>.</p>
+<p>Implements <a class="el" href="../../d6/d14/classpu_1_1element_1_1_element.html#ad5ae0710076c0b4f749554b00143a3d9">pu::element::Element</a>.</p>
 
 </div>
 </div>
@@ -424,6 +479,23 @@ Additional Inherited Members</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Implements <a class="el" href="../../d6/d14/classpu_1_1element_1_1_element.html#a4ccc6705f3a29ac7fcd83ce26eccf637">pu::element::Element</a>.</p>
+
+</div>
+</div>
+<a id="a50758ebc6b82b3435b85f429a76b913a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a50758ebc6b82b3435b85f429a76b913a">&#9670;&nbsp;</a></span>RemoveTextAlign()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void pu::element::TextBlock::RemoveTextAlign </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
 
 </div>
 </div>
@@ -474,6 +546,24 @@ Additional Inherited Members</h2></td></tr>
           <td>(</td>
           <td class="paramtype">std::string&#160;</td>
           <td class="paramname"><em>Text</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ad44551b3b51ad998b74c83fb8f5df96c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad44551b3b51ad998b74c83fb8f5df96c">&#9670;&nbsp;</a></span>SetTextAlign()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void pu::element::TextBlock::SetTextAlign </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="../../d4/dab/namespacepu_1_1element.html#a4daada4c4ade0295725e3fab89b8498f">TextAlign</a>&#160;</td>
+          <td class="paramname"><em>Align</em></td><td>)</td>
           <td></td>
         </tr>
       </table>

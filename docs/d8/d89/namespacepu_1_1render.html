@@ -143,10 +143,16 @@ Functions</h2></td></tr>
 <tr class="separator:a1f3ee6ea4945db01777c463dcf6d5329"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a53a83528e929392ccd48901c464e853b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../d8/d89/namespacepu_1_1render.html#a43f44a4e8c840dcf382ff6d984793939">NativeFont</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/d89/namespacepu_1_1render.html#a53a83528e929392ccd48901c464e853b">LoadFont</a> (std::string Path, u32 Size)</td></tr>
 <tr class="separator:a53a83528e929392ccd48901c464e853b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9a5145f769407f40a9315eddacf23671"><td class="memItemLeft" align="right" valign="top">u32&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/d89/namespacepu_1_1render.html#a9a5145f769407f40a9315eddacf23671">GetTextureWidth</a> (<a class="el" href="../../d8/d89/namespacepu_1_1render.html#ab086e943374f3b3916a2eabf99512098">NativeTexture</a> Texture)</td></tr>
+<tr class="separator:a9a5145f769407f40a9315eddacf23671"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0ad2f6177b315c2c2c845777b8453468"><td class="memItemLeft" align="right" valign="top">u32&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/d89/namespacepu_1_1render.html#a0ad2f6177b315c2c2c845777b8453468">GetTextureHeight</a> (<a class="el" href="../../d8/d89/namespacepu_1_1render.html#ab086e943374f3b3916a2eabf99512098">NativeTexture</a> Texture)</td></tr>
+<tr class="separator:a0ad2f6177b315c2c2c845777b8453468"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4646fc1a889ffc63cbe94fc8b9726623"><td class="memItemLeft" align="right" valign="top">u32&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/d89/namespacepu_1_1render.html#a4646fc1a889ffc63cbe94fc8b9726623">GetTextWidth</a> (<a class="el" href="../../d8/d89/namespacepu_1_1render.html#a43f44a4e8c840dcf382ff6d984793939">NativeFont</a> Font, std::string Text)</td></tr>
 <tr class="separator:a4646fc1a889ffc63cbe94fc8b9726623"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad9c51276e32372180f34fdb234f19da8"><td class="memItemLeft" align="right" valign="top">u32&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/d89/namespacepu_1_1render.html#ad9c51276e32372180f34fdb234f19da8">GetTextHeight</a> (<a class="el" href="../../d8/d89/namespacepu_1_1render.html#a43f44a4e8c840dcf382ff6d984793939">NativeFont</a> Font, std::string Text)</td></tr>
 <tr class="separator:ad9c51276e32372180f34fdb234f19da8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7183eb82093076a1493c1e5185dbc568"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/d89/namespacepu_1_1render.html#a7183eb82093076a1493c1e5185dbc568">SetAlphaValue</a> (<a class="el" href="../../d8/d89/namespacepu_1_1render.html#ab086e943374f3b3916a2eabf99512098">NativeTexture</a> Texture, u8 Alpha)</td></tr>
+<tr class="separator:a7183eb82093076a1493c1e5185dbc568"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae2910789883fedd2ea490130d71bcb71"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/d89/namespacepu_1_1render.html#ae2910789883fedd2ea490130d71bcb71">DeleteFont</a> (<a class="el" href="../../d8/d89/namespacepu_1_1render.html#a43f44a4e8c840dcf382ff6d984793939">NativeFont</a> Font)</td></tr>
 <tr class="separator:ae2910789883fedd2ea490130d71bcb71"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a397216d01f2ac09d440f2407fdae45c7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/d89/namespacepu_1_1render.html#a397216d01f2ac09d440f2407fdae45c7">DeleteTexture</a> (<a class="el" href="../../d8/d89/namespacepu_1_1render.html#ab086e943374f3b3916a2eabf99512098">NativeTexture</a> Texture)</td></tr>
@@ -354,6 +360,42 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="a0ad2f6177b315c2c2c845777b8453468"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0ad2f6177b315c2c2c845777b8453468">&#9670;&nbsp;</a></span>GetTextureHeight()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">u32 pu::render::GetTextureHeight </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="../../d8/d89/namespacepu_1_1render.html#ab086e943374f3b3916a2eabf99512098">NativeTexture</a>&#160;</td>
+          <td class="paramname"><em>Texture</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a9a5145f769407f40a9315eddacf23671"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9a5145f769407f40a9315eddacf23671">&#9670;&nbsp;</a></span>GetTextureWidth()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">u32 pu::render::GetTextureWidth </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="../../d8/d89/namespacepu_1_1render.html#ab086e943374f3b3916a2eabf99512098">NativeTexture</a>&#160;</td>
+          <td class="paramname"><em>Texture</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a4646fc1a889ffc63cbe94fc8b9726623"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a4646fc1a889ffc63cbe94fc8b9726623">&#9670;&nbsp;</a></span>GetTextWidth()</h2>
 
@@ -479,6 +521,34 @@ Functions</h2></td></tr>
           <td></td>
           <td class="paramtype"><a class="el" href="../../d4/d7e/structpu_1_1draw_1_1_color.html">draw::Color</a>&#160;</td>
           <td class="paramname"><em>Color</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a7183eb82093076a1493c1e5185dbc568"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7183eb82093076a1493c1e5185dbc568">&#9670;&nbsp;</a></span>SetAlphaValue()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void pu::render::SetAlphaValue </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="../../d8/d89/namespacepu_1_1render.html#ab086e943374f3b3916a2eabf99512098">NativeTexture</a>&#160;</td>
+          <td class="paramname"><em>Texture</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">u8&#160;</td>
+          <td class="paramname"><em>Alpha</em>&#160;</td>
         </tr>
         <tr>
           <td></td>

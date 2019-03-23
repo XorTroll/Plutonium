@@ -99,8 +99,8 @@ $(document).ready(function(){initNavTree('d0/dcb/classpu_1_1_layout.html','../..
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a18ae0759067c8d4e842720ae40e98bc2"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/dcb/classpu_1_1_layout.html#a18ae0759067c8d4e842720ae40e98bc2">Layout</a> ()</td></tr>
-<tr class="separator:a18ae0759067c8d4e842720ae40e98bc2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad24362b31f0abb1a92bf42c58c96b67a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/dcb/classpu_1_1_layout.html#ad24362b31f0abb1a92bf42c58c96b67a">Layout</a> (bool UseFocus=false)</td></tr>
+<tr class="separator:ad24362b31f0abb1a92bf42c58c96b67a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae5c8b9300508a5f89d0ace9262598174"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/dcb/classpu_1_1_layout.html#ae5c8b9300508a5f89d0ace9262598174">~Layout</a> ()</td></tr>
 <tr class="separator:ae5c8b9300508a5f89d0ace9262598174"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9f55f42f687abc37264d710fa793f1f4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/dcb/classpu_1_1_layout.html#a9f55f42f687abc37264d710fa793f1f4">AddChild</a> (<a class="el" href="../../d6/d14/classpu_1_1element_1_1_element.html">element::Element</a> *Child)</td></tr>
@@ -113,14 +113,26 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a01203b6baecde44174f527b4a2c70ca5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8f47bd0446b7a3103f858a7422da19df"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/dcb/classpu_1_1_layout.html#a8f47bd0446b7a3103f858a7422da19df">HasChilds</a> ()</td></tr>
 <tr class="separator:a8f47bd0446b7a3103f858a7422da19df"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acf604e9697ca5697e211c57a45c6820e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/dcb/classpu_1_1_layout.html#acf604e9697ca5697e211c57a45c6820e">SetOnInput</a> (std::function&lt; void(u64 Down, u64 Up, u64 Held)&gt; Callback)</td></tr>
-<tr class="separator:acf604e9697ca5697e211c57a45c6820e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a66b16386aca566a4b2758f94e30d29d8"><td class="memItemLeft" align="right" valign="top">std::function&lt; void(u64 Down, u64 Up, u64 Held)&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/dcb/classpu_1_1_layout.html#a66b16386aca566a4b2758f94e30d29d8">GetOnInput</a> ()</td></tr>
-<tr class="separator:a66b16386aca566a4b2758f94e30d29d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a22acd978cd693f1c84a566d1b14fdbeb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/dcb/classpu_1_1_layout.html#a22acd978cd693f1c84a566d1b14fdbeb">SetElementOnFocus</a> (<a class="el" href="../../d6/d14/classpu_1_1element_1_1_element.html">element::Element</a> *OnFocus)</td></tr>
+<tr class="separator:a22acd978cd693f1c84a566d1b14fdbeb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1159290dc2b054a445a546ce8a8c214f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../d6/d14/classpu_1_1element_1_1_element.html">element::Element</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/dcb/classpu_1_1_layout.html#a1159290dc2b054a445a546ce8a8c214f">GetElementOnFocus</a> ()</td></tr>
+<tr class="separator:a1159290dc2b054a445a546ce8a8c214f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a895bf8ba2273db05cdbc255f150ec86d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/dcb/classpu_1_1_layout.html#a895bf8ba2273db05cdbc255f150ec86d">SetOnInput</a> (std::function&lt; void(u64 Down, u64 Up, u64 Held, bool Touch)&gt; Callback)</td></tr>
+<tr class="separator:a895bf8ba2273db05cdbc255f150ec86d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a645d6000d2ec704bf41d0c86867bdcf1"><td class="memItemLeft" align="right" valign="top">std::function&lt; void(u64 Down, u64 Up, u64 Held, bool Touch)&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/dcb/classpu_1_1_layout.html#a645d6000d2ec704bf41d0c86867bdcf1">GetOnInput</a> ()</td></tr>
+<tr class="separator:a645d6000d2ec704bf41d0c86867bdcf1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a81175d593155a1e5a007e080d0da0e1f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/dcb/classpu_1_1_layout.html#a81175d593155a1e5a007e080d0da0e1f">AddThread</a> (std::function&lt; void()&gt; Callback)</td></tr>
+<tr class="separator:a81175d593155a1e5a007e080d0da0e1f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7bdb2877d29b9fc3eb4fac821e31c73a"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::function&lt; void()&gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/dcb/classpu_1_1_layout.html#a7bdb2877d29b9fc3eb4fac821e31c73a">GetAllThreads</a> ()</td></tr>
+<tr class="separator:a7bdb2877d29b9fc3eb4fac821e31c73a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3b9185144bd39a539c360f92ce88f528"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/dcb/classpu_1_1_layout.html#a3b9185144bd39a539c360f92ce88f528">UsesFocus</a> ()</td></tr>
+<tr class="separator:a3b9185144bd39a539c360f92ce88f528"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae41cc1a428679f1df0e426b554a05985"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/dcb/classpu_1_1_layout.html#ae41cc1a428679f1df0e426b554a05985">SetUseFocus</a> (bool Focus)</td></tr>
+<tr class="separator:ae41cc1a428679f1df0e426b554a05985"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a18ae0759067c8d4e842720ae40e98bc2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a18ae0759067c8d4e842720ae40e98bc2">&#9670;&nbsp;</a></span>Layout()</h2>
+<a id="ad24362b31f0abb1a92bf42c58c96b67a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad24362b31f0abb1a92bf42c58c96b67a">&#9670;&nbsp;</a></span>Layout()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -128,7 +140,8 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname">pu::Layout::Layout </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>UseFocus</em> = <code>false</code></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -172,6 +185,24 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="a81175d593155a1e5a007e080d0da0e1f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a81175d593155a1e5a007e080d0da0e1f">&#9670;&nbsp;</a></span>AddThread()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void pu::Layout::AddThread </td>
+          <td>(</td>
+          <td class="paramtype">std::function&lt; void()&gt;&#160;</td>
+          <td class="paramname"><em>Callback</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a842da21febe8a7543642b7156c032f02"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a842da21febe8a7543642b7156c032f02">&#9670;&nbsp;</a></span>ClearChildren()</h2>
 
@@ -180,6 +211,23 @@ Public Member Functions</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">void pu::Layout::ClearChildren </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a7bdb2877d29b9fc3eb4fac821e31c73a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7bdb2877d29b9fc3eb4fac821e31c73a">&#9670;&nbsp;</a></span>GetAllThreads()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt;std::function&lt;void()&gt; &gt; pu::Layout::GetAllThreads </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -224,14 +272,31 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a66b16386aca566a4b2758f94e30d29d8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a66b16386aca566a4b2758f94e30d29d8">&#9670;&nbsp;</a></span>GetOnInput()</h2>
+<a id="a1159290dc2b054a445a546ce8a8c214f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1159290dc2b054a445a546ce8a8c214f">&#9670;&nbsp;</a></span>GetElementOnFocus()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">std::function&lt;void(u64 Down, u64 Up, u64 Held)&gt; pu::Layout::GetOnInput </td>
+          <td class="memname"><a class="el" href="../../d6/d14/classpu_1_1element_1_1_element.html">element::Element</a>* pu::Layout::GetElementOnFocus </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a645d6000d2ec704bf41d0c86867bdcf1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a645d6000d2ec704bf41d0c86867bdcf1">&#9670;&nbsp;</a></span>GetOnInput()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::function&lt;void(u64 Down, u64 Up, u64 Held, bool Touch)&gt; pu::Layout::GetOnInput </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -258,8 +323,26 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="acf604e9697ca5697e211c57a45c6820e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acf604e9697ca5697e211c57a45c6820e">&#9670;&nbsp;</a></span>SetOnInput()</h2>
+<a id="a22acd978cd693f1c84a566d1b14fdbeb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a22acd978cd693f1c84a566d1b14fdbeb">&#9670;&nbsp;</a></span>SetElementOnFocus()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void pu::Layout::SetElementOnFocus </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="../../d6/d14/classpu_1_1element_1_1_element.html">element::Element</a> *&#160;</td>
+          <td class="paramname"><em>OnFocus</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a895bf8ba2273db05cdbc255f150ec86d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a895bf8ba2273db05cdbc255f150ec86d">&#9670;&nbsp;</a></span>SetOnInput()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -267,8 +350,43 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname">void pu::Layout::SetOnInput </td>
           <td>(</td>
-          <td class="paramtype">std::function&lt; void(u64 Down, u64 Up, u64 Held)&gt;&#160;</td>
+          <td class="paramtype">std::function&lt; void(u64 Down, u64 Up, u64 Held, bool Touch)&gt;&#160;</td>
           <td class="paramname"><em>Callback</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae41cc1a428679f1df0e426b554a05985"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae41cc1a428679f1df0e426b554a05985">&#9670;&nbsp;</a></span>SetUseFocus()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void pu::Layout::SetUseFocus </td>
+          <td>(</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>Focus</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a3b9185144bd39a539c360f92ce88f528"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3b9185144bd39a539c360f92ce88f528">&#9670;&nbsp;</a></span>UsesFocus()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool pu::Layout::UsesFocus </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
       </table>

@@ -3,8 +3,9 @@ var dir_02089ba3c3db3d2fef9f90946eec69f2 =
     [ "Button.hpp", "d2/df0/_button_8hpp.html", [
       [ "Button", "d8/d02/classpu_1_1element_1_1_button.html", "d8/d02/classpu_1_1element_1_1_button" ]
     ] ],
-    [ "Element.hpp", "d8/d9e/element_2_element_8hpp.html", [
-      [ "Element", "d6/d14/classpu_1_1element_1_1_element.html", "d6/d14/classpu_1_1element_1_1_element" ]
+    [ "Element.hpp", "d8/d9e/element_2_element_8hpp.html", "d8/d9e/element_2_element_8hpp" ],
+    [ "IconButton.hpp", "dd/d3c/_icon_button_8hpp.html", [
+      [ "IconButton", "d6/deb/classpu_1_1element_1_1_icon_button.html", "d6/deb/classpu_1_1element_1_1_icon_button" ]
     ] ],
     [ "Image.hpp", "df/d6f/_image_8hpp.html", [
       [ "Image", "df/d74/classpu_1_1element_1_1_image.html", "df/d74/classpu_1_1element_1_1_image" ]
@@ -19,9 +20,7 @@ var dir_02089ba3c3db3d2fef9f90946eec69f2 =
     [ "Rectangle.hpp", "d4/d32/_rectangle_8hpp.html", [
       [ "Rectangle", "db/d72/classpu_1_1element_1_1_rectangle.html", "db/d72/classpu_1_1element_1_1_rectangle" ]
     ] ],
-    [ "TextBlock.hpp", "d3/d14/_text_block_8hpp.html", [
-      [ "TextBlock", "d0/d38/classpu_1_1element_1_1_text_block.html", "d0/d38/classpu_1_1element_1_1_text_block" ]
-    ] ],
+    [ "TextBlock.hpp", "d3/d14/_text_block_8hpp.html", "d3/d14/_text_block_8hpp" ],
     [ "Toggle.hpp", "de/d66/_toggle_8hpp.html", [
       [ "Toggle", "d9/d2a/classpu_1_1element_1_1_toggle.html", "d9/d2a/classpu_1_1element_1_1_toggle" ]
     ] ]
