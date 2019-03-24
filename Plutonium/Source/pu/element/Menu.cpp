@@ -323,9 +323,6 @@ namespace pu::element
                 Drawer->RenderTexture(itm->GetNameTexture(), tx, ty);
                 cy += ch;
             }
-            auto txt = render::RenderText(this->itms[0]->GetFont(), "ISel: " + std::to_string(this->isel) + ", F-ISel: " + std::to_string(this->fisel), { 0, 0, 0, 255 });
-            Drawer->RenderTexture(txt, 0, 0);
-            render::DeleteTexture(txt);
             if(this->ishow < this->itms.size())
             {
                 s32 sccr = this->scb.R;
