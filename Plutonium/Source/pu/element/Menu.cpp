@@ -323,6 +323,9 @@ namespace pu::element
                 Drawer->RenderTexture(itm->GetNameTexture(), tx, ty);
                 cy += ch;
             }
+            auto txt = render::RenderText(this->itms[0]->GetFont(), "ISel: " + std::to_string(this->isel) + ", F-ISel: " + std::to_string(this->fisel), { 0, 0, 0, 255 });
+            Drawer->RenderTexture(txt, 0, 0);
+            render::DeleteTexture(txt);
             if(this->ishow < this->itms.size())
             {
                 s32 sccr = this->scb.R;
@@ -408,6 +411,11 @@ namespace pu::element
                         }
                     }
                 }
+                else
+                {
+                    this->isel = 0;
+                    this->fisel = 0;
+                }
             }
             else if((Down & KEY_DUP) || (Down & KEY_LSTICK_UP) || (Held & KEY_RSTICK_UP))
             {
@@ -430,6 +438,11 @@ namespace pu::element
                             else if(i == this->previsel) this->pselfact = 255;
                         }
                     }
+                }
+                else
+                {
+                    this->isel = this->itms.size() - 1;
+                    this->fisel = this->itms.size() - this->ishow;
                 }
             }
             else
