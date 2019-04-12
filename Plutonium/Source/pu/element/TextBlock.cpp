@@ -49,12 +49,12 @@ namespace pu::element
 
     u32 TextBlock::GetWidth()
     {
-        return (this->text.length() * this->fsize);
+        return this->GetTextWidth();
     }
 
     u32 TextBlock::GetHeight()
     {
-        return this->fsize;
+        return this->GetTextHeight();
     }
 
     u32 TextBlock::GetTextWidth()

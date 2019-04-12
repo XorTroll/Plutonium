@@ -6,6 +6,8 @@ namespace pu::overlay
     {
         this->text = new element::TextBlock(0, 0, Text, FontSize);
         this->text->SetColor(TextColor);
+        this->text->SetHorizontalAlign(pu::element::HorizontalAlign::Center);
+        this->text->SetVerticalAlign(pu::element::VerticalAlign::Center);
         u32 textw = this->text->GetTextWidth();
         u32 texth = this->text->GetTextHeight();
         u32 toastw = textw + (texth * 4);
@@ -13,10 +15,6 @@ namespace pu::overlay
         this->SetX((1280 - toastw) / 2);
         this->SetWidth(toastw);
         this->SetHeight(toasth);
-        u32 textx = texth * 2;
-        u32 texty = texth;
-        this->text->SetX(textx);
-        this->text->SetY(texty);
         this->Add(this->text);
     }
 
@@ -30,10 +28,6 @@ namespace pu::overlay
         this->SetX((1280 - toastw) / 2);
         this->SetWidth(toastw);
         this->SetHeight(toasth);
-        u32 textx = texth * 2;
-        u32 texty = texth;
-        this->text->SetX(textx);
-        this->text->SetY(texty);
     }
 
     void Toast::OnPreRender(render::Renderer *Drawer)
