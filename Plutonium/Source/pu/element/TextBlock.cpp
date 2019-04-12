@@ -11,7 +11,6 @@ namespace pu::element
         this->fnt = render::LoadSharedFont(render::SharedFont::Standard, FontSize);
         this->fsize = FontSize;
         this->ntex = render::RenderText(this->fnt, Text, this->clr);
-        this->halign = false;
     }
 
     TextBlock::~TextBlock()
@@ -58,6 +57,16 @@ namespace pu::element
         return this->fsize;
     }
 
+    u32 TextBlock::GetTextWidth()
+    {
+        return render::GetTextWidth(this->fnt, this->text);
+    }
+
+    u32 TextBlock::GetTextHeight()
+    {
+        return render::GetTextHeight(this->fnt, this->text);
+    }
+
     std::string TextBlock::GetText()
     {
         return this->text;
@@ -68,22 +77,6 @@ namespace pu::element
         this->text = Text;
         render::DeleteTexture(this->ntex);
         this->ntex = render::RenderText(this->fnt, Text, this->clr);
-    }
-
-    void TextBlock::SetTextAlign(TextAlign Align)
-    {
-        this->halign = true;
-        this->talign = Align;
-    }
-
-    void TextBlock::RemoveTextAlign()
-    {
-        this->halign = false;
-    }
-
-    bool TextBlock::HasTextAlign()
-    {
-        return this->halign;
     }
 
     void TextBlock::SetFont(render::NativeFont Font)
@@ -108,22 +101,9 @@ namespace pu::element
 
     void TextBlock::OnRender(render::Renderer *Drawer)
     {
-        u32 tx = this->x;
-        u32 ty = this->y;
-        if(this->halign) switch(this->talign)
-        {
-            case TextAlign::CenterHorizontal:
-                tx = ((1280 - render::GetTextureWidth(this->ntex)) / 2);
-                break;
-            case TextAlign::CenterVertical:
-                ty = ((720 - render::GetTextureHeight(this->ntex)) / 2);
-                break;
-            case TextAlign::CenterAll:
-                tx = ((1280 - render::GetTextureWidth(this->ntex)) / 2);
-                ty = ((720 - render::GetTextureHeight(this->ntex)) / 2);
-                break;
-        }
-        Drawer->RenderTexture(this->ntex, tx, ty);
+        u32 rdx = this->GetProcessedX();
+        u32 rdy = this->GetProcessedY();
+        Drawer->RenderTexture(this->ntex, rdx, rdy);
     }
 
     void TextBlock::OnInput(u64 Down, u64 Up, u64 Held, bool Touch, bool Focus)

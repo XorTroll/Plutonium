@@ -93,10 +93,12 @@ namespace pu::element
 
     void Image::OnRender(render::Renderer *Drawer)
     {
+        u32 rdx = this->GetProcessedX();
+        u32 rdy = this->GetProcessedY();
         u32 iw = this->w;
         u32 ih = this->h;
-        if((iw == 0) || (ih == 0)) Drawer->RenderTexture(this->ntex, this->x, this->y);
-        else Drawer->RenderTextureScaled(this->ntex, this->x, this->y, iw, ih);
+        if((iw == 0) || (ih == 0)) Drawer->RenderTexture(this->ntex, rdx, rdy);
+        else Drawer->RenderTextureScaled(this->ntex, rdx, rdy, iw, ih);
     }
 
     void Image::OnInput(u64 Down, u64 Up, u64 Held, bool Touch, bool Focus)

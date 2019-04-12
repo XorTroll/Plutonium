@@ -19,7 +19,7 @@ namespace pu::element
     class ProgressBar : public Element
     {
         public:
-            ProgressBar(u32 X, u32 Y, u32 Width, u32 Height);
+            ProgressBar(u32 X, u32 Y, u32 Width, u32 Height, double MaxValue);
             u32 GetX();
             void SetX(u32 X);
             u32 GetY();
@@ -32,10 +32,12 @@ namespace pu::element
             void SetColor(draw::Color Color);
             draw::Color GetProgressColor();
             void SetProgressColor(draw::Color Color);
-            u8 GetProgress();
-            void SetProgress(u8 Percentage);
-            void IncrementProgress(u8 Percentage);
-            void DecrementProgress(u8 Percentage);
+            double GetProgress();
+            void SetProgress(double Progress);
+            void IncrementProgress(double Progress);
+            void DecrementProgress(double Progress);
+            void SetMaxValue(double Max);
+            double GetMaxValue();
             void FillProgress();
             void ClearProgress();
             bool IsCompleted();
@@ -46,7 +48,8 @@ namespace pu::element
             u32 y;
             u32 w;
             u32 h;
-            u8 perc;
+            double val;
+            double maxval;
             draw::Color clr;
             draw::Color oclr;
     };

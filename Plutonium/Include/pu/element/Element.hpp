@@ -24,6 +24,20 @@ namespace pu::element
         Right,
     };
 
+    enum class HorizontalAlign
+    {
+        Left,
+        Center,
+        Right,
+    };
+
+    enum class VerticalAlign
+    {
+        Up,
+        Center,
+        Down,
+    };
+
     class Element
     {
         public:
@@ -42,6 +56,15 @@ namespace pu::element
             void SetAffectedByFocus(bool Affected);
             Element *GetFocusChangeElement(FocusChangeDirection Direction);
             void SetFocusChangeElement(FocusChangeDirection Direction, Element *ToChange);
+            void SetParent(void *Base);
+            void *GetParent();
+            void SetHorizontalAlign(HorizontalAlign Align);
+            HorizontalAlign GetHorizontalAlign();
+            void SetVerticalAlign(VerticalAlign Align);
+            VerticalAlign GetVerticalAlign();
+            bool HasParent();
+            u32 GetProcessedX();
+            u32 GetProcessedY();
         protected:
             bool visible;
             bool afocus;
@@ -49,5 +72,8 @@ namespace pu::element
             Element *fdown;
             Element *fleft;
             Element *fright;
+            HorizontalAlign halign;
+            VerticalAlign valign;
+            void *parent;
     };
 }

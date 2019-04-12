@@ -11,6 +11,9 @@ namespace pu::element
         this->fdown = NULL;
         this->fleft = NULL;
         this->fright = NULL;
+        this->parent = NULL;
+        this->halign = HorizontalAlign::Left;
+        this->valign = VerticalAlign::Up;
     }
 
     Element::~Element()
@@ -120,5 +123,84 @@ namespace pu::element
                 this->fright = ToChange;
                 break;
         }
+    }
+
+    void Element::SetParent(void *Base)
+    {
+        this->parent = Base;
+    }
+
+    void *Element::GetParent()
+    {
+        return this->parent;
+    }
+
+    void Element::SetHorizontalAlign(HorizontalAlign Align)
+    {
+        this->halign = Align;
+    }
+
+    HorizontalAlign Element::GetHorizontalAlign()
+    {
+        return this->halign;
+    }
+
+    void Element::SetVerticalAlign(VerticalAlign Align)
+    {
+        this->valign = Align;
+    }
+
+    VerticalAlign Element::GetVerticalAlign()
+    {
+        return this->valign;
+    }
+
+    bool Element::HasParent()
+    {
+        return (this->parent != NULL);
+    }
+
+    u32 Element::GetProcessedX()
+    {
+        u32 rx = this->GetX();
+        if(this->parent != NULL)
+        {
+            Container *cont = (Container*)this->parent;
+            rx += cont->GetX();
+            switch(this->halign)
+            {
+                case HorizontalAlign::Center:
+                    rx = cont->GetX() + ((cont->GetWidth() - this->GetWidth()) / 2);
+                    break;
+                case HorizontalAlign::Right:
+                    rx = cont->GetX() + (cont->GetWidth() - this->GetWidth());
+                    break;
+                default:
+                    break;
+            }
+        }
+        return rx;
+    }
+
+    u32 Element::GetProcessedY()
+    {
+        u32 ry = this->GetY();
+        if(this->parent != NULL)
+        {
+            Container *cont = (Container*)this->parent;
+            ry += cont->GetY();
+            switch(this->valign)
+            {
+                case VerticalAlign::Center:
+                    ry = cont->GetY() + ((cont->GetHeight() - this->GetHeight()) / 2);
+                    break;
+                case VerticalAlign::Down:
+                    ry = cont->GetY() + (cont->GetHeight() - this->GetHeight());
+                    break;
+                default:
+                    break;
+            }
+        }
+        return ry;
     }
 }

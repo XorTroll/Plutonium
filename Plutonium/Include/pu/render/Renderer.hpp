@@ -37,11 +37,18 @@ namespace pu::render
             void RenderCircle(draw::Color Color, u32 X, u32 Y, u32 Radius);
             void RenderCircleFill(draw::Color Color, u32 X, u32 Y, u32 Radius);
             void RenderShadowSimple(u32 X, u32 Y, u32 Width, u32 Height, u32 BaseAlpha, u8 MainAlpha = 255);
+            void SetBaseRenderPosition(u32 X, u32 Y);
+            void UnsetBaseRenderPosition();
+            void SetBaseRenderAlpha(u8 Alpha);
+            void UnsetBaseRenderAlpha();
         private:
             bool okromfs;
             bool initialized;
             NativeWindow rendwd;
             NativeSurface rendsf;
+            u32 basex;
+            u32 basey;
+            int basea;
     };
 
     NativeRenderer GetMainRenderer();

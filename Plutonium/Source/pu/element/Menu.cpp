@@ -267,10 +267,12 @@ namespace pu::element
 
     void Menu::OnRender(render::Renderer *Drawer)
     {
+        u32 rdx = this->GetProcessedX();
+        u32 rdy = this->GetProcessedY();
         if(!this->itms.empty())
         {
-            u32 cx = this->x;
-            u32 cy = this->y;
+            u32 cx = rdx;
+            u32 cy = rdy;
             u32 cw = this->w;
             u32 ch = this->isize;
             u32 its = this->ishow;
@@ -335,8 +337,8 @@ namespace pu::element
                 s32 snb = sccb - 30;
                 if(snb < 0) snb = 0;
                 draw::Color sclr(snr, sng, snb, this->scb.A);
-                u32 scx = this->x + (this->w - 20);
-                u32 scy = this->y;
+                u32 scx = rdx + (this->w - 20);
+                u32 scy = rdy;
                 u32 scw = 20;
                 u32 sch = (this->ishow * this->isize);
                 Drawer->RenderRectangleFill(this->scb, scx, scy, scw, sch);
@@ -350,12 +352,14 @@ namespace pu::element
 
     void Menu::OnInput(u64 Down, u64 Up, u64 Held, bool Touch, bool Focus)
     {
+        u32 rdx = this->GetProcessedX();
+        u32 rdy = this->GetProcessedY();
         if(Touch)
         {
             touchPosition tch;
             hidTouchRead(&tch, 0);
-            u32 cx = this->x;
-            u32 cy = this->y;
+            u32 cx = rdx;
+            u32 cy = rdx;
             u32 cw = this->w;
             u32 ch = this->isize;
             u32 its = this->ishow;
@@ -412,6 +416,12 @@ namespace pu::element
                 {
                     this->isel = 0;
                     this->fisel = 0;
+                    (this->onselch)();
+                    if(!this->itms.empty()) for(u32 i = 0; i < this->itms.size(); i++)
+                    {
+                        if(i == this->isel) this->selfact = 0;
+                        else if(i == this->previsel) this->pselfact = 255;
+                    }
                 }
             }
             else if((Down & KEY_DUP) || (Down & KEY_LSTICK_UP) || (Held & KEY_RSTICK_UP))
@@ -439,7 +449,14 @@ namespace pu::element
                 else
                 {
                     this->isel = this->itms.size() - 1;
-                    this->fisel = this->itms.size() - this->ishow;
+                    if(this->itms.size() > this->ishow) this->fisel = this->itms.size() - this->ishow;
+                    else this->fisel = 0;
+                    (this->onselch)();
+                    if(!this->itms.empty()) for(u32 i = 0; i < this->itms.size(); i++)
+                    {
+                        if(i == this->isel) this->selfact = 0;
+                        else if(i == this->previsel) this->pselfact = 255;
+                    }
                 }
             }
             else

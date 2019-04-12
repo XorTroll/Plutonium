@@ -12,19 +12,15 @@
 */
 
 #pragma once
-#include <pu/element.hpp>
+#include <pu/Container.hpp>
 
 namespace pu
 {
-    class Layout
+    class Layout : public Container
     {
         public:
             Layout(bool UseFocus = false);
             ~Layout();
-            void AddChild(element::Element *Child);
-            void ClearChildren();
-            element::Element *GetChildAt(u32 Index);
-            u32 GetChildCount();
             bool HasChilds();
             void SetElementOnFocus(element::Element *OnFocus);
             element::Element *GetElementOnFocus();
@@ -38,7 +34,6 @@ namespace pu
             bool ufocus;
             std::function<void(u64, u64, u64, bool)> onipt;
             std::vector<std::function<void()>> thds;
-            std::vector<element::Element*> chld;
             element::Element *efocus;
     };
 }

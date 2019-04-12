@@ -2,7 +2,7 @@
 
 namespace pu::element
 {
-    ProgressBar::ProgressBar(u32 X, u32 Y, u32 Width, u32 Height) : Element::Element()
+    ProgressBar::ProgressBar(u32 X, u32 Y, u32 Width, u32 Height, double MaxValue) : Element::Element()
     {
         this->x = X;
         this->y = Y;
@@ -10,7 +10,8 @@ namespace pu::element
         this->h = Height;
         this->clr = { 140, 140, 140, 255 };
         this->oclr = { 139, 195, 74, 255 };
-        this->perc = 0;
+        this->val = 0.0f;
+        this->maxval = MaxValue;
     }
 
     u32 ProgressBar::GetX()
@@ -73,50 +74,63 @@ namespace pu::element
         this->oclr = Color;
     }
 
-    u8 ProgressBar::GetProgress()
+    double ProgressBar::GetProgress()
     {
-        return this->perc;
+        return this->val;
     }
 
-    void ProgressBar::SetProgress(u8 Percentage)
+    void ProgressBar::SetProgress(double Progress)
     {
-        if(Percentage >= 100) this->perc = 100;
-        else this->perc = Percentage;
+        if(Progress >= this->maxval) this->FillProgress();
+        else this->val = Progress;
     }
 
-    void ProgressBar::IncrementProgress(u8 Percentage)
+    void ProgressBar::IncrementProgress(double Progress)
     {
-        u8 res = (this->perc + Percentage);
-        if(res >= 100) this->perc = 100;
-        else this->perc = res;
+        double res = (this->val + Progress);
+        if(res >= this->maxval) this->FillProgress();
+        else this->val = res;
     }
 
-    void ProgressBar::DecrementProgress(u8 Percentage)
+    void ProgressBar::DecrementProgress(double Progress)
     {
-        this->perc -= Percentage;
+        if(this->val > Progress) this->ClearProgress();
+        else this->val -= Progress;
+    }
+
+    void ProgressBar::SetMaxValue(double Max)
+    {
+        this->maxval = Max;
+    }
+
+    double ProgressBar::GetMaxValue()
+    {
+        return this->maxval;
     }
 
     void ProgressBar::FillProgress()
     {
-        this->perc = 100;
+        this->val = this->maxval;
     }
 
     void ProgressBar::ClearProgress()
     {
-        this->perc = 0;
+        this->val = 0;
     }
 
     bool ProgressBar::IsCompleted()
     {
-        return (this->perc >= 100);
+        return (this->val >= this->maxval);
     }
 
     void ProgressBar::OnRender(render::Renderer *Drawer)
     {
-        u32 rad = (this->h / 2);
-        Drawer->RenderRectangleFill(this->clr, this->x, this->y, this->w, this->h);
-        u32 pcw = ((this->perc * this->w) / 100);
-        Drawer->RenderRectangleFill(this->oclr, this->x, this->y, pcw, this->h);
+        u32 rdx = this->GetProcessedX();
+        u32 rdy = this->GetProcessedY();
+        u32 pcw = (u32)((this->val / this->maxval) * (double)this->w);
+        u32 rad = (this->h / 3);
+        Drawer->RenderRoundedRectangleFill(this->clr, rdx, rdy, this->w, this->h, rad);
+        Drawer->RenderRoundedRectangleFill(this->oclr, rdx, rdy, std::max(this->h, pcw), this->h, rad);
     }
 
     void ProgressBar::OnInput(u64 Down, u64 Up, u64 Held, bool Touch, bool Focus)

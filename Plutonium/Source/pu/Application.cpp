@@ -12,6 +12,9 @@ namespace pu
         this->hasimage = false;
         this->cbipt = [&](u64 Down, u64 Up, u64 Held, bool Touch){};
         this->rover = false;
+        this->ovl = NULL;
+        this->fovl = false;
+        this->ffovl = false;
         this->rof = [](render::Renderer *Drawer){ return true; };
     }
 
@@ -95,6 +98,33 @@ namespace pu
         return opt;
     }
 
+    void Application::StartOverlay(overlay::Overlay *Ovl)
+    {
+        if(this->ovl == NULL) this->ovl = Ovl;
+    }
+
+    void Application::StartOverlayWithTimeout(overlay::Overlay *Ovl, u64 Milli)
+    {
+        if(this->ovl == NULL)
+        {
+            this->ovl = Ovl;
+            this->tmillis = Milli;
+            this->tclock = std::chrono::steady_clock::now();
+        }
+    }
+
+    void Application::EndOverlay()
+    {
+        if(this->ovl != NULL)
+        {
+            this->ovl->NotifyEnding(false);
+            this->tmillis = 0;
+            this->ovl = NULL;
+            this->fovl = false;
+            this->ffovl = false;
+        }
+    }
+
     void Application::Show()
     {
         this->show = true;
@@ -133,19 +163,31 @@ namespace pu
         u64 th = hidKeysDown(CONTROLLER_HANDHELD);
         bool touch = (th & KEY_TOUCH);
         if(!this->thds.empty()) for(u32 i = 0; i < this->thds.size(); i++) (this->thds[i])();
+        this->lyt->PreRender();
         std::vector<std::function<void()>> lyth = this->lyt->GetAllThreads();
         if(!lyth.empty()) for(u32 i = 0; i < lyth.size(); i++) (lyth[i])();
-        (this->cbipt)(d, u, h, touch);
+        if(!this->rover) (this->cbipt)(d, u, h, touch);
         if(this->hasimage) this->rend->RenderTexture(this->ntex, 0, 0);
         if(!this->rover) (this->lyt->GetOnInput())(d, u, h, touch);
-        if(this->lyt->HasChilds()) for(u32 i = 0; i < this->lyt->GetChildCount(); i++)
+        if(this->lyt->HasChilds()) for(u32 i = 0; i < this->lyt->GetCount(); i++)
         {
-            element::Element *elm = this->lyt->GetChildAt(i);
+            element::Element *elm = this->lyt->At(i);
             if(elm->IsVisible())
             {
                 elm->OnRender(this->rend);
                 if(!this->rover) elm->ProcessInput((void*)this->lyt, d, u, h, touch);
             }
+        }
+        if(this->ovl != NULL)
+        {
+            bool rok = this->ovl->Render(this->rend);
+            if(this->tmillis > 0)
+            {
+                auto nclk = std::chrono::steady_clock::now();
+                u64 cctime = std::chrono::duration_cast<std::chrono::milliseconds>(nclk - this->tclock).count();
+                if(cctime >= this->tmillis) this->ovl->NotifyEnding(true);
+            }
+            if(!rok) this->EndOverlay();
         }
         if(this->fact > 0)
         {

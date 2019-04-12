@@ -16,13 +16,6 @@
 
 namespace pu::element
 {
-    enum class TextAlign
-    {
-        CenterHorizontal,
-        CenterVertical,
-        CenterAll,
-    };
-
     class TextBlock : public Element
     {
         public:
@@ -34,19 +27,16 @@ namespace pu::element
             void SetY(u32 Y);
             u32 GetWidth();
             u32 GetHeight();
+            u32 GetTextWidth();
+            u32 GetTextHeight();
             std::string GetText();
             void SetText(std::string Text);
-            void SetTextAlign(TextAlign Align);
-            void RemoveTextAlign();
-            bool HasTextAlign();
             void SetFont(render::NativeFont Font);
             draw::Color GetColor();
             void SetColor(draw::Color Color);
             void OnRender(render::Renderer *Drawer);
             void OnInput(u64 Down, u64 Up, u64 Held, bool Touch, bool Focus);
         private:
-            bool halign;
-            TextAlign talign;
             std::string text;
             u32 x;
             u32 y;

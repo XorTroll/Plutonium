@@ -110,6 +110,8 @@ namespace pu::element
 
     void Button::OnRender(render::Renderer *Drawer)
     {
+        u32 rdx = this->GetProcessedX();
+        u32 rdy = this->GetProcessedY();
         s32 clrr = this->clr.R;
         s32 clrg = this->clr.G;
         s32 clrb = this->clr.B;
@@ -122,28 +124,28 @@ namespace pu::element
         draw::Color nclr(nr, ng, nb, this->clr.A);
         if(this->hover)
         {
-            Drawer->RenderRectangleFill(this->clr, this->x, this->y, this->w, this->h);
+            Drawer->RenderRectangleFill(this->clr, rdx, rdy, this->w, this->h);
             if(this->hoverfact < 255)
             {
-                Drawer->RenderRectangleFill({ nr, ng, nb, this->hoverfact }, this->x, this->y, this->w, this->h);
+                Drawer->RenderRectangleFill({ nr, ng, nb, this->hoverfact }, rdx, rdy, this->w, this->h);
                 this->hoverfact += 48;
             }
-            else Drawer->RenderRectangleFill(nclr, this->x, this->y, this->w, this->h);
+            else Drawer->RenderRectangleFill(nclr, rdx, rdy, this->w, this->h);
         }
         else
         {
-            Drawer->RenderRectangleFill(this->clr, this->x, this->y, this->w, this->h);
+            Drawer->RenderRectangleFill(this->clr, rdx, rdy, this->w, this->h);
             if(this->hoverfact > 0)
             {
-                Drawer->RenderRectangleFill({ nr, ng, nb, this->hoverfact }, this->x, this->y, this->w, this->h);
+                Drawer->RenderRectangleFill({ nr, ng, nb, this->hoverfact }, rdx, rdy, this->w, this->h);
                 this->hoverfact -= 48;
             }
-            else Drawer->RenderRectangleFill(this->clr, this->x, this->y, this->w, this->h);
+            else Drawer->RenderRectangleFill(this->clr, rdx, rdy, this->w, this->h);
         }
         u32 xw = render::GetTextWidth(this->fnt, this->cnt);
         u32 xh = render::GetTextHeight(this->fnt, this->cnt);
-        u32 tx = ((this->w - xw) / 2) + this->x;
-        u32 ty = ((this->h - xh) / 2) + this->y;
+        u32 tx = ((this->w - xw) / 2) + rdx;
+        u32 ty = ((this->h - xh) / 2) + rdy;
         Drawer->RenderTexture(this->ntex, tx, ty);
     }
 

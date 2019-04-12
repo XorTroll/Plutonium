@@ -74,11 +74,12 @@ namespace pu::element
 
     void Rectangle::OnRender(render::Renderer *Drawer)
     {
-        Drawer->RenderRectangleFill(this->clr, this->x, this->y, this->w, this->h);
+        u32 rdx = this->GetProcessedX();
+        u32 rdy = this->GetProcessedY();
+        Drawer->RenderRectangleFill(this->clr, rdx, rdy, this->w, this->h);
     }
 
     void Rectangle::OnInput(u64 Down, u64 Up, u64 Held, bool Touch, bool Focus)
     {
-        ;
     }
 }

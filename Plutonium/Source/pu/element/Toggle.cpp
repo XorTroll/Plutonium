@@ -112,10 +112,10 @@ namespace pu::element
         u32 th = render::GetTextHeight(this->fnt, this->cnt);
         u32 rw = th;
         u32 rh = (2 * th);
-        u32 rx = this->x;
-        u32 ry = this->y;
-        u32 tx = this->x + rw + (th / 2);
-        u32 ty = this->y + (th / 2);
+        u32 rx = this->GetProcessedX();
+        u32 ry = this->GetProcessedY();
+        u32 tx = rx + rw + (th / 2);
+        u32 ty = ry + (th / 2);
         if(this->checked)
         {
             Drawer->RenderRectangleFill({ 130, 130, 130, 255 }, rx, ry, rw, rh);
