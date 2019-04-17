@@ -20,7 +20,6 @@ namespace pu
     {
         public:
             Layout(bool UseFocus = false);
-            ~Layout();
             bool HasChilds();
             void SetElementOnFocus(element::Element *OnFocus);
             element::Element *GetElementOnFocus();

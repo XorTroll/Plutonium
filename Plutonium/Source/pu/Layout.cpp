@@ -9,11 +9,6 @@ namespace pu
         this->ufocus = UseFocus;
     }
 
-    Layout::~Layout()
-    {
-        this->Clear();
-    }
-
     bool Layout::HasChilds()
     {
         return !this->elms.empty();

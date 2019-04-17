@@ -30,14 +30,14 @@ namespace pu::render
     {
         if(this->initialized)
         {
-            plExit();
-            if(this->okromfs) romfsExit();
             TTF_Quit();
             IMG_Quit();
             SDL_DestroyRenderer(purend);
             SDL_FreeSurface(this->rendsf);
             SDL_DestroyWindow(this->rendwd);
             SDL_Quit();
+            plExit();
+            if(this->okromfs) romfsExit();
             this->initialized = false;
         }
     }
