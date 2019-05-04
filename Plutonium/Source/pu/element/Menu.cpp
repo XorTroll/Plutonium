@@ -131,6 +131,10 @@ namespace pu::element
         this->icdown = false;
         this->dtouch = false;
         this->fcs = { 40, 40, 40, 255 };
+        this->uptime = false;
+        this->uphold = false;
+        this->downtime = false;
+        this->downhold = false;
     }
 
     Menu::~Menu()
@@ -390,8 +394,9 @@ namespace pu::element
         }
         else
         {
-            if((Down & KEY_DDOWN) || (Down & KEY_LSTICK_DOWN) || (Held & KEY_RSTICK_DOWN))
+            if(Down & KEY_DOWN)
             {
+                if(!downtime) this->downtp = std::chrono::steady_clock::now();
                 if(this->isel < (this->itms.size() - 1))
                 {
                     if((this->isel - this->fisel) == (this->ishow - 1))
@@ -423,9 +428,11 @@ namespace pu::element
                         else if(i == this->previsel) this->pselfact = 255;
                     }
                 }
+                downtime = !downtime;
             }
-            else if((Down & KEY_DUP) || (Down & KEY_LSTICK_UP) || (Held & KEY_RSTICK_UP))
+            else if(Down & KEY_UP)
             {
+                if(!uptime) this->uptp = std::chrono::steady_clock::now();
                 if(this->isel > 0)
                 {
                     if(this->isel == this->fisel)
@@ -458,6 +465,7 @@ namespace pu::element
                         else if(i == this->previsel) this->pselfact = 255;
                     }
                 }
+                uptime = !uptime;
             }
             else
             {
@@ -469,6 +477,108 @@ namespace pu::element
                         if(this->icdown) this->icdown = false;
                         else (this->itms[this->isel]->GetCallback(i))();
                     }
+                }
+            }
+            auto curtp = std::chrono::steady_clock::now();
+            if(downtime && !downhold)
+            {
+                u64 downdiff = std::chrono::duration_cast<std::chrono::milliseconds>(curtp - this->downtp).count();
+                if(downdiff >= 500)
+                {
+                    downhold = true;
+                }
+            }
+            else if(downhold)
+            {
+                if(Held & KEY_DOWN)
+                {
+                    if(this->isel < (this->itms.size() - 1))
+                    {
+                        if((this->isel - this->fisel) == (this->ishow - 1))
+                        {
+                            this->fisel++;
+                            this->isel++;
+                            (this->onselch)();
+                        }
+                        else
+                        {
+                            this->previsel = this->isel;
+                            this->isel++;
+                            (this->onselch)();
+                            if(!this->itms.empty()) for(u32 i = 0; i < this->itms.size(); i++)
+                            {
+                                if(i == this->isel) this->selfact = 0;
+                                else if(i == this->previsel) this->pselfact = 255;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        this->isel = 0;
+                        this->fisel = 0;
+                        (this->onselch)();
+                        if(!this->itms.empty()) for(u32 i = 0; i < this->itms.size(); i++)
+                        {
+                            if(i == this->isel) this->selfact = 0;
+                            else if(i == this->previsel) this->pselfact = 255;
+                        }
+                    }
+                }
+                else
+                {
+                    downhold = false;
+                    downtime = false;
+                }
+            }
+            if(uptime && !uphold)
+            {
+                u64 updiff = std::chrono::duration_cast<std::chrono::milliseconds>(curtp - this->uptp).count();
+                if(updiff >= 500)
+                {
+                    uphold = true;
+                }
+            }
+            else if(uphold)
+            {
+                if(Held & KEY_UP)
+                {
+                    if(this->isel > 0)
+                    {
+                        if(this->isel == this->fisel)
+                        {
+                            this->fisel--;
+                            this->isel--;
+                            (this->onselch)();
+                        }
+                        else
+                        {
+                            this->previsel = this->isel;
+                            this->isel--;
+                            (this->onselch)();
+                            if(!this->itms.empty()) for(u32 i = 0; i < this->itms.size(); i++)
+                            {
+                                if(i == this->isel) this->selfact = 0;
+                                else if(i == this->previsel) this->pselfact = 255;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        this->isel = this->itms.size() - 1;
+                        if(this->itms.size() > this->ishow) this->fisel = this->itms.size() - this->ishow;
+                        else this->fisel = 0;
+                        (this->onselch)();
+                        if(!this->itms.empty()) for(u32 i = 0; i < this->itms.size(); i++)
+                        {
+                            if(i == this->isel) this->selfact = 0;
+                            else if(i == this->previsel) this->pselfact = 255;
+                        }
+                    }
+                }
+                else
+                {
+                    uphold = false;
+                    uptime = false;
                 }
             }
         }

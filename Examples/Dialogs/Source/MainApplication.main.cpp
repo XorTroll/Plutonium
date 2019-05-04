@@ -7,6 +7,7 @@ int main()
     MainApplication *amain = new MainApplication();
     // Show it. This function will finalize when the application's "Close()" function is called.
     amain->Show();
+    while(true);
     // IMPORTANT! free the application to destroy allocated memory and to finalize graphics.
     delete amain;
     // Exit
