@@ -17,8 +17,8 @@ include $(DEVKITPRO)/libnx/switch_rules
 #---------------------------------------------------------------------------------
 BUILD		:=	Build
 TARGET		:=  pu
-SOURCES		:=	Source Source/pu Source/pu/draw Source/pu/element Source/pu/overlay Source/pu/render Source/pu/util
-INCLUDES	:=	Include Include/pu Include/pu/draw Include/pu/element Include/pu/overlay Include/pu/render Include/pu/util
+SOURCES		:=	Source Source/pu Source/pu/draw Source/pu/element Source/pu/overlay Source/pu/render Source/pu/util Source/pu/web
+INCLUDES	:=	Include Include/pu Include/pu/draw Include/pu/element Include/pu/overlay Include/pu/render Include/pu/util Include/pu/web
 
 #---------------------------------------------------------------------------------
 # options for code generation
