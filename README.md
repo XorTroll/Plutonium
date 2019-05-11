@@ -9,7 +9,7 @@ It uses libnx and SDL2, so both libraries are required.
 To be more exact, this libraries should be installed via pacman:
 
 ```sh
-pacman -S switch-sdl2 switch-sdl2_ttf switch-sdl2_gfx
+pacman -S switch-sdl2 switch-sdl2_ttf switch-sdl2_image switch-sdl2_gfx switch-mesa switch-glad switch-glm switch-libdrm_nouveau switch-libpng switch-freetype switch-bzip2 switch-libjpeg-turbo
 ```
 
 ## Internal structure and performance

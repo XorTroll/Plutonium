@@ -9,7 +9,7 @@ Layout1::Layout1()
     // Create the textblock (that text is a placeholder tho)
     this->sampleText = new pu::element::TextBlock(300, 300, "Count: ");
     // Add the textblock to the layout's element container. IMPORTANT! this MUST be done, having them as members is not enough (just a simple way to keep them)
-    this->AddChild(this->sampleText);
+    this->Add(this->sampleText);
 }
 
 // This will be executed each loop, before rendering data
