@@ -135,6 +135,7 @@ namespace pu::element
         this->uphold = false;
         this->downtime = false;
         this->downhold = false;
+		this->drawShadow = true;
     }
 
     Menu::~Menu()
@@ -269,6 +270,11 @@ namespace pu::element
         }
     }
 
+	void Menu::SetDrawShadow(bool drawShadow)
+	{
+		this->drawShadow = drawShadow;
+	}
+
     void Menu::OnRender(render::Renderer *Drawer)
     {
         u32 rdx = this->GetProcessedX();
@@ -350,7 +356,9 @@ namespace pu::element
                 u32 fcy = scy + (this->fisel * (sch / this->itms.size()));
                 Drawer->RenderRectangleFill(sclr, scx, fcy, scw, fch);
             }
-            Drawer->RenderShadowSimple(cx, cy, cw, 5, 160);
+
+			if(this->drawShadow)
+				Drawer->RenderShadowSimple(cx, cy, cw, 5, 160);
         }
     }
 
