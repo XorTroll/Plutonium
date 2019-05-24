@@ -81,6 +81,7 @@ namespace pu::element
             void SetSelectedIndex(u32 Index);
             void OnRender(render::Renderer *Drawer);
             void OnInput(u64 Down, u64 Up, u64 Held, bool Touch, bool Focus);
+			void SetDrawShadow(bool drawShadow);
         private:
             bool dtouch;
             u32 x;
@@ -105,5 +106,6 @@ namespace pu::element
             bool downtime;
             bool downhold;
             std::chrono::time_point<std::chrono::steady_clock> downtp;
+			bool drawShadow;
     };
 }
