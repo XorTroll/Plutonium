@@ -29,7 +29,15 @@ namespace pu
             std::vector<std::function<void()>> GetAllThreads();
             bool UsesFocus();
             void SetUseFocus(bool Focus);
+            void SetBackgroundImage(std::string Path);
+            void SetBackgroundColor(draw::Color Color);
+            render::NativeTexture GetBackgroundImageTexture();
+            draw::Color GetBackgroundColor();
+            bool HasBackgroundImage();
         private:
+            bool hasimage;
+            draw::Color overbgcolor;
+            render::NativeTexture overbgtex;
             bool ufocus;
             std::function<void(u64, u64, u64, bool)> onipt;
             std::vector<std::function<void()>> thds;

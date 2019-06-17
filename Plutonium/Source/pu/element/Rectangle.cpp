@@ -2,7 +2,7 @@
 
 namespace pu::element
 {
-    Rectangle::Rectangle(u32 X, u32 Y, u32 Width, u32 Height, draw::Color RecColor, u32 BorderRadius) : Element::Element()
+    Rectangle::Rectangle(s32 X, s32 Y, s32 Width, s32 Height, draw::Color RecColor, s32 BorderRadius) : Element::Element()
     {
         this->x = X;
         this->y = Y;
@@ -12,52 +12,52 @@ namespace pu::element
         this->borderr = BorderRadius;
     }
 
-    u32 Rectangle::GetX()
+    s32 Rectangle::GetX()
     {
         return this->x;
     }
 
-    void Rectangle::SetX(u32 X)
+    void Rectangle::SetX(s32 X)
     {
         this->x = X;
     }
 
-    u32 Rectangle::GetY()
+    s32 Rectangle::GetY()
     {
         return this->y;
     }
 
-    void Rectangle::SetY(u32 Y)
+    void Rectangle::SetY(s32 Y)
     {
         this->y = Y;
     }
 
-    u32 Rectangle::GetWidth()
+    s32 Rectangle::GetWidth()
     {
         return this->w;
     }
 
-    void Rectangle::SetWidth(u32 Width)
+    void Rectangle::SetWidth(s32 Width)
     {
         this->w = Width;
     }
 
-    u32 Rectangle::GetHeight()
+    s32 Rectangle::GetHeight()
     {
         return this->h;
     }
 
-    void Rectangle::SetHeight(u32 Height)
+    void Rectangle::SetHeight(s32 Height)
     {
         this->h = Height;
     }
 
-    u32 Rectangle::GetBorderRadius()
+    s32 Rectangle::GetBorderRadius()
     {
         return this->h;
     }
 
-    void Rectangle::SetBorderRadius(u32 Radius)
+    void Rectangle::SetBorderRadius(s32 Radius)
     {
         this->borderr = Radius;
     }
@@ -74,8 +74,8 @@ namespace pu::element
 
     void Rectangle::OnRender(render::Renderer *Drawer)
     {
-        u32 rdx = this->GetProcessedX();
-        u32 rdy = this->GetProcessedY();
+        s32 rdx = this->GetProcessedX();
+        s32 rdy = this->GetProcessedY();
         Drawer->RenderRectangleFill(this->clr, rdx, rdy, this->w, this->h);
     }
 

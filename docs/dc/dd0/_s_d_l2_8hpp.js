@@ -16,13 +16,16 @@ var _s_d_l2_8hpp =
     [ "ConvertToTexture", "dc/dd0/_s_d_l2_8hpp.html#a18cbe38302953ab42cfa451e8f86cb97", null ],
     [ "DeleteFont", "dc/dd0/_s_d_l2_8hpp.html#ae2910789883fedd2ea490130d71bcb71", null ],
     [ "DeleteTexture", "dc/dd0/_s_d_l2_8hpp.html#a397216d01f2ac09d440f2407fdae45c7", null ],
-    [ "GetTextHeight", "dc/dd0/_s_d_l2_8hpp.html#ad9c51276e32372180f34fdb234f19da8", null ],
-    [ "GetTextureHeight", "dc/dd0/_s_d_l2_8hpp.html#a0ad2f6177b315c2c2c845777b8453468", null ],
-    [ "GetTextureWidth", "dc/dd0/_s_d_l2_8hpp.html#a9a5145f769407f40a9315eddacf23671", null ],
-    [ "GetTextWidth", "dc/dd0/_s_d_l2_8hpp.html#a4646fc1a889ffc63cbe94fc8b9726623", null ],
-    [ "LoadFont", "dc/dd0/_s_d_l2_8hpp.html#a53a83528e929392ccd48901c464e853b", null ],
+    [ "GetTextHeight", "dc/dd0/_s_d_l2_8hpp.html#a0193881b411039d1094f84883dbf85af", null ],
+    [ "GetTextureHeight", "dc/dd0/_s_d_l2_8hpp.html#a2674c449a0860f2b0a538f2c393d01af", null ],
+    [ "GetTextureWidth", "dc/dd0/_s_d_l2_8hpp.html#a6c6c790757e11f7234989cf3584f86c9", null ],
+    [ "GetTextWidth", "dc/dd0/_s_d_l2_8hpp.html#a9854a54b1af93ba7eb02da72e16afaf2", null ],
+    [ "LoadDefaultFont", "dc/dd0/_s_d_l2_8hpp.html#a76cbed0533cc5e4922509abf494bab81", null ],
+    [ "LoadFont", "dc/dd0/_s_d_l2_8hpp.html#af48aa80ca5640fe45c85146d321028ca", null ],
     [ "LoadImage", "dc/dd0/_s_d_l2_8hpp.html#a84ee0adaf9e23df6bcf700f376b48fe2", null ],
-    [ "LoadSharedFont", "dc/dd0/_s_d_l2_8hpp.html#a1f3ee6ea4945db01777c463dcf6d5329", null ],
+    [ "LoadSharedFont", "dc/dd0/_s_d_l2_8hpp.html#ab1a63b1ac80871e77aa07a9d36698681", null ],
     [ "RenderText", "dc/dd0/_s_d_l2_8hpp.html#a5e3bae968be935a8abf7104f83f3b372", null ],
-    [ "SetAlphaValue", "dc/dd0/_s_d_l2_8hpp.html#a7183eb82093076a1493c1e5185dbc568", null ]
+    [ "SetAlphaValue", "dc/dd0/_s_d_l2_8hpp.html#a7183eb82093076a1493c1e5185dbc568", null ],
+    [ "SetDefaultFont", "dc/dd0/_s_d_l2_8hpp.html#a32651b70c6f6ddb8546e936a07b788a0", null ],
+    [ "SetDefaultFontFromShared", "dc/dd0/_s_d_l2_8hpp.html#a598d6d3cf1879d493abcc35d7fea1f58", null ]
 ];

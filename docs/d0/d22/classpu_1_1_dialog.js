@@ -9,6 +9,6 @@ var classpu_1_1_dialog =
     [ "RemoveCancelOption", "d0/d22/classpu_1_1_dialog.html#a43ed5ccf83815972af26923b6eb01055", null ],
     [ "SetCancelOption", "d0/d22/classpu_1_1_dialog.html#a4648782aa2030813bc7b65943ac341d0", null ],
     [ "SetIcon", "d0/d22/classpu_1_1_dialog.html#a505f97705810742fe3fdffb9b6dc47bf", null ],
-    [ "Show", "d0/d22/classpu_1_1_dialog.html#a01e4f98f10dbdfb2fd13b0edbe8c55fe", null ],
+    [ "Show", "d0/d22/classpu_1_1_dialog.html#a2b74d16f93a938ab5774e8986af4f04c", null ],
     [ "UserCancelled", "d0/d22/classpu_1_1_dialog.html#a05228b90c92e8567de20f7fb9e7f39c3", null ]
 ];

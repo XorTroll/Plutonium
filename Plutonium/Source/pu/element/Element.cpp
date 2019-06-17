@@ -160,9 +160,9 @@ namespace pu::element
         return (this->parent != NULL);
     }
 
-    u32 Element::GetProcessedX()
+    s32 Element::GetProcessedX()
     {
-        u32 rx = this->GetX();
+        s32 rx = this->GetX();
         if(this->parent != NULL)
         {
             Container *cont = (Container*)this->parent;
@@ -182,9 +182,9 @@ namespace pu::element
         return rx;
     }
 
-    u32 Element::GetProcessedY()
+    s32 Element::GetProcessedY()
     {
-        u32 ry = this->GetY();
+        s32 ry = this->GetY();
         if(this->parent != NULL)
         {
             Container *cont = (Container*)this->parent;

@@ -103,6 +103,7 @@ $(document).ready(function(){initNavTree('dc/dd0/_s_d_l2_8hpp.html','../../');})
 <code>#include &lt;SDL2/SDL_image.h&gt;</code><br />
 <code>#include &lt;SDL2/SDL_ttf.h&gt;</code><br />
 <code>#include &lt;SDL2/SDL2_gfxPrimitives.h&gt;</code><br />
+<code>#include &lt;SDL2/SDL_mixer.h&gt;</code><br />
 </div>
 <p><a href="../../dc/dd0/_s_d_l2_8hpp_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
@@ -148,18 +149,24 @@ Functions</h2></td></tr>
 <tr class="separator:a5e3bae968be935a8abf7104f83f3b372"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a84ee0adaf9e23df6bcf700f376b48fe2"><td class="memItemLeft" align="right" valign="top">NativeTexture&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/d89/namespacepu_1_1render.html#a84ee0adaf9e23df6bcf700f376b48fe2">pu::render::LoadImage</a> (std::string Path)</td></tr>
 <tr class="separator:a84ee0adaf9e23df6bcf700f376b48fe2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1f3ee6ea4945db01777c463dcf6d5329"><td class="memItemLeft" align="right" valign="top">NativeFont&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/d89/namespacepu_1_1render.html#a1f3ee6ea4945db01777c463dcf6d5329">pu::render::LoadSharedFont</a> (SharedFont Type, u32 Size)</td></tr>
-<tr class="separator:a1f3ee6ea4945db01777c463dcf6d5329"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a53a83528e929392ccd48901c464e853b"><td class="memItemLeft" align="right" valign="top">NativeFont&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/d89/namespacepu_1_1render.html#a53a83528e929392ccd48901c464e853b">pu::render::LoadFont</a> (std::string Path, u32 Size)</td></tr>
-<tr class="separator:a53a83528e929392ccd48901c464e853b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9a5145f769407f40a9315eddacf23671"><td class="memItemLeft" align="right" valign="top">u32&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/d89/namespacepu_1_1render.html#a9a5145f769407f40a9315eddacf23671">pu::render::GetTextureWidth</a> (NativeTexture Texture)</td></tr>
-<tr class="separator:a9a5145f769407f40a9315eddacf23671"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0ad2f6177b315c2c2c845777b8453468"><td class="memItemLeft" align="right" valign="top">u32&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/d89/namespacepu_1_1render.html#a0ad2f6177b315c2c2c845777b8453468">pu::render::GetTextureHeight</a> (NativeTexture Texture)</td></tr>
-<tr class="separator:a0ad2f6177b315c2c2c845777b8453468"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4646fc1a889ffc63cbe94fc8b9726623"><td class="memItemLeft" align="right" valign="top">u32&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/d89/namespacepu_1_1render.html#a4646fc1a889ffc63cbe94fc8b9726623">pu::render::GetTextWidth</a> (NativeFont Font, std::string Text)</td></tr>
-<tr class="separator:a4646fc1a889ffc63cbe94fc8b9726623"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad9c51276e32372180f34fdb234f19da8"><td class="memItemLeft" align="right" valign="top">u32&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/d89/namespacepu_1_1render.html#ad9c51276e32372180f34fdb234f19da8">pu::render::GetTextHeight</a> (NativeFont Font, std::string Text)</td></tr>
-<tr class="separator:ad9c51276e32372180f34fdb234f19da8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab1a63b1ac80871e77aa07a9d36698681"><td class="memItemLeft" align="right" valign="top">NativeFont&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/d89/namespacepu_1_1render.html#ab1a63b1ac80871e77aa07a9d36698681">pu::render::LoadSharedFont</a> (SharedFont Type, s32 Size)</td></tr>
+<tr class="separator:ab1a63b1ac80871e77aa07a9d36698681"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af48aa80ca5640fe45c85146d321028ca"><td class="memItemLeft" align="right" valign="top">NativeFont&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/d89/namespacepu_1_1render.html#af48aa80ca5640fe45c85146d321028ca">pu::render::LoadFont</a> (std::string Path, s32 Size)</td></tr>
+<tr class="separator:af48aa80ca5640fe45c85146d321028ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a32651b70c6f6ddb8546e936a07b788a0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/d89/namespacepu_1_1render.html#a32651b70c6f6ddb8546e936a07b788a0">pu::render::SetDefaultFont</a> (std::string Path)</td></tr>
+<tr class="separator:a32651b70c6f6ddb8546e936a07b788a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a598d6d3cf1879d493abcc35d7fea1f58"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/d89/namespacepu_1_1render.html#a598d6d3cf1879d493abcc35d7fea1f58">pu::render::SetDefaultFontFromShared</a> (SharedFont Type)</td></tr>
+<tr class="separator:a598d6d3cf1879d493abcc35d7fea1f58"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a76cbed0533cc5e4922509abf494bab81"><td class="memItemLeft" align="right" valign="top">NativeFont&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/d89/namespacepu_1_1render.html#a76cbed0533cc5e4922509abf494bab81">pu::render::LoadDefaultFont</a> (s32 Size)</td></tr>
+<tr class="separator:a76cbed0533cc5e4922509abf494bab81"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6c6c790757e11f7234989cf3584f86c9"><td class="memItemLeft" align="right" valign="top">s32&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/d89/namespacepu_1_1render.html#a6c6c790757e11f7234989cf3584f86c9">pu::render::GetTextureWidth</a> (NativeTexture Texture)</td></tr>
+<tr class="separator:a6c6c790757e11f7234989cf3584f86c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2674c449a0860f2b0a538f2c393d01af"><td class="memItemLeft" align="right" valign="top">s32&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/d89/namespacepu_1_1render.html#a2674c449a0860f2b0a538f2c393d01af">pu::render::GetTextureHeight</a> (NativeTexture Texture)</td></tr>
+<tr class="separator:a2674c449a0860f2b0a538f2c393d01af"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9854a54b1af93ba7eb02da72e16afaf2"><td class="memItemLeft" align="right" valign="top">s32&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/d89/namespacepu_1_1render.html#a9854a54b1af93ba7eb02da72e16afaf2">pu::render::GetTextWidth</a> (NativeFont Font, std::string Text)</td></tr>
+<tr class="separator:a9854a54b1af93ba7eb02da72e16afaf2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0193881b411039d1094f84883dbf85af"><td class="memItemLeft" align="right" valign="top">s32&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/d89/namespacepu_1_1render.html#a0193881b411039d1094f84883dbf85af">pu::render::GetTextHeight</a> (NativeFont Font, std::string Text)</td></tr>
+<tr class="separator:a0193881b411039d1094f84883dbf85af"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7183eb82093076a1493c1e5185dbc568"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/d89/namespacepu_1_1render.html#a7183eb82093076a1493c1e5185dbc568">pu::render::SetAlphaValue</a> (NativeTexture Texture, u8 Alpha)</td></tr>
 <tr class="separator:a7183eb82093076a1493c1e5185dbc568"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae2910789883fedd2ea490130d71bcb71"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/d89/namespacepu_1_1render.html#ae2910789883fedd2ea490130d71bcb71">pu::render::DeleteFont</a> (NativeFont Font)</td></tr>

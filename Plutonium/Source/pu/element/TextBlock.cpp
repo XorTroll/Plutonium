@@ -2,13 +2,13 @@
 
 namespace pu::element
 {
-    TextBlock::TextBlock(u32 X, u32 Y, std::string Text, u32 FontSize) : Element::Element()
+    TextBlock::TextBlock(s32 X, s32 Y, std::string Text, s32 FontSize) : Element::Element()
     {
         this->x = X;
         this->y = Y;
         this->text = Text;
         this->clr = { 0, 0, 0, 255 };
-        this->fnt = render::LoadSharedFont(render::SharedFont::Standard, FontSize);
+        this->fnt = render::LoadDefaultFont(FontSize);
         this->fsize = FontSize;
         this->ntex = render::RenderText(this->fnt, Text, this->clr);
     }
@@ -27,42 +27,42 @@ namespace pu::element
         }
     }
 
-    u32 TextBlock::GetX()
+    s32 TextBlock::GetX()
     {
         return this->x;
     }
 
-    void TextBlock::SetX(u32 X)
+    void TextBlock::SetX(s32 X)
     {
         this->x = X;
     }
 
-    u32 TextBlock::GetY()
+    s32 TextBlock::GetY()
     {
         return this->y;
     }
 
-    void TextBlock::SetY(u32 Y)
+    void TextBlock::SetY(s32 Y)
     {
         this->y = Y;
     }
 
-    u32 TextBlock::GetWidth()
+    s32 TextBlock::GetWidth()
     {
         return this->GetTextWidth();
     }
 
-    u32 TextBlock::GetHeight()
+    s32 TextBlock::GetHeight()
     {
         return this->GetTextHeight();
     }
 
-    u32 TextBlock::GetTextWidth()
+    s32 TextBlock::GetTextWidth()
     {
         return render::GetTextWidth(this->fnt, this->text);
     }
 
-    u32 TextBlock::GetTextHeight()
+    s32 TextBlock::GetTextHeight()
     {
         return render::GetTextHeight(this->fnt, this->text);
     }
@@ -101,8 +101,8 @@ namespace pu::element
 
     void TextBlock::OnRender(render::Renderer *Drawer)
     {
-        u32 rdx = this->GetProcessedX();
-        u32 rdy = this->GetProcessedY();
+        s32 rdx = this->GetProcessedX();
+        s32 rdy = this->GetProcessedY();
         Drawer->RenderTexture(this->ntex, rdx, rdy);
     }
 

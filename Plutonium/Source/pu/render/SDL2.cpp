@@ -3,6 +3,9 @@
 
 namespace pu::render
 {
+    static SharedFont shfont = SharedFont::Standard;
+    static std::string fontpth;
+
     NativeTexture ConvertToTexture(NativeSurface Surface)
     {
         NativeTexture tex = SDL_CreateTextureFromSurface(GetMainRenderer(), Surface);
@@ -22,12 +25,12 @@ namespace pu::render
         return ConvertToTexture(IMG_Load(Path.c_str()));
     }
 
-    NativeFont LoadSharedFont(SharedFont Type, u32 Size)
+    NativeFont LoadSharedFont(SharedFont Type, s32 Size)
     {
         PlFontData plfont;
         NativeFont font = NULL;
         SDL_RWops *mem = NULL;
-        Result rc = plGetSharedFontByType(&plfont, static_cast<u32>(Type));
+        Result rc = plGetSharedFontByType(&plfont, static_cast<s32>(Type));
         if(rc == 0)
         {
             mem = SDL_RWFromMem(plfont.address, plfont.size);
@@ -36,37 +39,53 @@ namespace pu::render
         return font;
     }
 
-    NativeFont LoadFont(std::string Path, u32 Size)
+    NativeFont LoadFont(std::string Path, s32 Size)
     {
         return TTF_OpenFont(Path.c_str(), Size);
     }
 
-    u32 GetTextureWidth(NativeTexture Texture)
+    void SetDefaultFont(std::string Path)
+    {
+        fontpth = Path;
+    }
+
+    void SetDefaultFontFromShared(SharedFont Type)
+    {
+        shfont = Type;
+    }
+
+    NativeFont LoadDefaultFont(s32 Size)
+    {
+        if(!fontpth.empty()) return LoadFont(fontpth, Size);
+        return LoadSharedFont(shfont, Size);
+    }
+
+    s32 GetTextureWidth(NativeTexture Texture)
     {
         int w = 0;
         SDL_QueryTexture(Texture, NULL, NULL, &w, NULL);
-        return (u32)w;
+        return (s32)w;
     }
 
-    u32 GetTextureHeight(NativeTexture Texture)
+    s32 GetTextureHeight(NativeTexture Texture)
     {
         int h = 0;
         SDL_QueryTexture(Texture, NULL, NULL, NULL, &h);
-        return (u32)h;
+        return (s32)h;
     }
 
-    u32 GetTextWidth(NativeFont Font, std::string Text)
+    s32 GetTextWidth(NativeFont Font, std::string Text)
     {
         int tw = 0;
         TTF_SizeUTF8(Font, Text.c_str(), &tw, NULL);
-        return (u32)tw;
+        return (s32)tw;
     }
 
-    u32 GetTextHeight(NativeFont Font, std::string Text)
+    s32 GetTextHeight(NativeFont Font, std::string Text)
     {
         int th = 0;
         TTF_SizeUTF8(Font, Text.c_str(), NULL, &th);
-        return (u32)th;
+        return (s32)th;
     }
 
     void SetAlphaValue(NativeTexture Texture, u8 Alpha)

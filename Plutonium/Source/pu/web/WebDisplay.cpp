@@ -13,7 +13,7 @@ namespace pu::web
         if(!CanShowWebContent()) return false;
         ShowWebContent(this->input, this->type, [&](WebCommonConfig *cfg)
         {
-            if(!this->calls.empty()) for(u32 i = 0; i < this->calls.size(); i++)
+            if(!this->calls.empty()) for(s32 i = 0; i < this->calls.size(); i++)
             {
                 (this->calls[i])(cfg);
             }

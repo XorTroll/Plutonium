@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['usercancelled',['UserCancelled',['../d0/d22/classpu_1_1_dialog.html#a05228b90c92e8567de20f7fb9e7f39c3',1,'pu::Dialog']]],
-  ['usesfocus',['UsesFocus',['../d0/dcb/classpu_1_1_layout.html#a3b9185144bd39a539c360f92ce88f528',1,'pu::Layout']]]
+  ['textblock',['TextBlock',['../d0/d38/classpu_1_1element_1_1_text_block.html#a4d250dba8925edcf38cc11b12915b2a0',1,'pu::element::TextBlock']]],
+  ['toast',['Toast',['../d0/d3a/classpu_1_1overlay_1_1_toast.html#a2332d8dccb4bb3986c7b29fefe5cab0a',1,'pu::overlay::Toast']]],
+  ['toggle',['Toggle',['../d9/d2a/classpu_1_1element_1_1_toggle.html#a422f6752cf977d4ed94c6cf9b6722f59',1,'pu::element::Toggle']]]
 ];

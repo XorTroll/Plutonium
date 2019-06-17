@@ -28,16 +28,16 @@ namespace pu::render
             bool HasRomFs();
             void InitializeRender(draw::Color Color);
             void FinalizeRender();
-            void RenderTexture(NativeTexture Texture, u32 X, u32 Y, int AlphaMod = -1);
-            void RenderTextureScaled(NativeTexture Texture, u32 X, u32 Y, u32 Width, u32 Height, int AlphaMod = -1);
-            void RenderRectangle(draw::Color Color, u32 X, u32 Y, u32 Width, u32 Height);
-            void RenderRectangleFill(draw::Color Color, u32 X, u32 Y, u32 Width, u32 Height);
-            void RenderRoundedRectangle(draw::Color Color, u32 X, u32 Y, u32 Width, u32 Height, u32 Radius);
-            void RenderRoundedRectangleFill(draw::Color Color, u32 X, u32 Y, u32 Width, u32 Height, u32 Radius);
-            void RenderCircle(draw::Color Color, u32 X, u32 Y, u32 Radius);
-            void RenderCircleFill(draw::Color Color, u32 X, u32 Y, u32 Radius);
-            void RenderShadowSimple(u32 X, u32 Y, u32 Width, u32 Height, u32 BaseAlpha, u8 MainAlpha = 255);
-            void SetBaseRenderPosition(u32 X, u32 Y);
+            void RenderTexture(NativeTexture Texture, s32 X, s32 Y, int AlphaMod = -1);
+            void RenderTextureScaled(NativeTexture Texture, s32 X, s32 Y, s32 Width, s32 Height, int AlphaMod = -1);
+            void RenderRectangle(draw::Color Color, s32 X, s32 Y, s32 Width, s32 Height);
+            void RenderRectangleFill(draw::Color Color, s32 X, s32 Y, s32 Width, s32 Height);
+            void RenderRoundedRectangle(draw::Color Color, s32 X, s32 Y, s32 Width, s32 Height, s32 Radius);
+            void RenderRoundedRectangleFill(draw::Color Color, s32 X, s32 Y, s32 Width, s32 Height, s32 Radius);
+            void RenderCircle(draw::Color Color, s32 X, s32 Y, s32 Radius);
+            void RenderCircleFill(draw::Color Color, s32 X, s32 Y, s32 Radius);
+            void RenderShadowSimple(s32 X, s32 Y, s32 Width, s32 Height, s32 BaseAlpha, u8 MainAlpha = 255);
+            void SetBaseRenderPosition(s32 X, s32 Y);
             void UnsetBaseRenderPosition();
             void SetBaseRenderAlpha(u8 Alpha);
             void UnsetBaseRenderAlpha();
@@ -46,8 +46,8 @@ namespace pu::render
             bool initialized;
             NativeWindow rendwd;
             NativeSurface rendsf;
-            u32 basex;
-            u32 basey;
+            s32 basex;
+            s32 basey;
             int basea;
     };
 

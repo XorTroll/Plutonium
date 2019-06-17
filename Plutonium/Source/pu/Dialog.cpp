@@ -6,9 +6,9 @@ namespace pu
 {
     Dialog::Dialog(std::string Title, std::string Content)
     {
-        this->tfont = render::LoadSharedFont(render::SharedFont::Standard, 30);
-        this->cfont = render::LoadSharedFont(render::SharedFont::Standard, 20);
-        this->ofont = render::LoadSharedFont(render::SharedFont::Standard, 18);
+        this->tfont = render::LoadDefaultFont(30);
+        this->cfont = render::LoadDefaultFont(20);
+        this->ofont = render::LoadDefaultFont(18);
         this->title = render::RenderText(this->tfont, Title, { 10, 10, 10, 255 });
         this->cnt = render::RenderText(this->cfont, Content, { 20, 20, 20, 255 });
         this->osel = 0;
@@ -53,7 +53,7 @@ namespace pu
             this->icon = NULL;
             this->hicon = false;
         }
-        if(!this->opts.empty()) for(u32 i = 0; i < this->opts.size(); i++) render::DeleteTexture(this->opts[i]);
+        if(!this->opts.empty()) for(s32 i = 0; i < this->opts.size(); i++) render::DeleteTexture(this->opts[i]);
         this->opts.clear();
         this->sopts.clear();
     }
@@ -93,27 +93,27 @@ namespace pu
         return this->hicon;
     }
 
-    u32 Dialog::Show(render::Renderer *Drawer, void *App)
+    s32 Dialog::Show(render::Renderer *Drawer, void *App)
     {
         if(this->hcancel) this->AddOption(this->scancel);
         if(this->opts.empty()) return 0;
-        u32 dw = (20 * (this->opts.size() - 1)) + 250;
-        for(u32 i = 0; i < this->opts.size(); i++)
+        s32 dw = (20 * (this->opts.size() - 1)) + 250;
+        for(s32 i = 0; i < this->opts.size(); i++)
         {
-            u32 tw = render::GetTextWidth(this->ofont, this->sopts[i]);
+            s32 tw = render::GetTextWidth(this->ofont, this->sopts[i]);
             dw += tw + 20;
         }
         if(dw > 1280) dw = 1280;
-        u32 icm = 30;
-        u32 elemh = 60;
-        u32 tdw = render::GetTextureWidth(this->cnt) + 90;
+        s32 icm = 30;
+        s32 elemh = 60;
+        s32 tdw = render::GetTextureWidth(this->cnt) + 90;
         if(tdw > dw) dw = tdw;
         tdw = render::GetTextureWidth(this->title) + 90;
         if(tdw > dw) dw = tdw;
-        u32 ely = render::GetTextureHeight(this->title) + render::GetTextureHeight(this->cnt) + 140;
+        s32 ely = render::GetTextureHeight(this->title) + render::GetTextureHeight(this->cnt) + 140;
         if(this->hicon)
         {
-            u32 tely = render::GetTextureHeight(this->icon) + icm + 25;
+            s32 tely = render::GetTextureHeight(this->icon) + icm + 25;
             if(tely > ely) ely = tely;
             tdw = render::GetTextureWidth(this->cnt) + 90 + render::GetTextureWidth(this->icon) + 20;
             if(tdw > dw) dw = tdw;
@@ -121,17 +121,17 @@ namespace pu
             if(tdw > dw) dw = tdw;
         }
         if(dw > 1280) dw = 1280;
-        u32 dh = ely + elemh + 30;
+        s32 dh = ely + elemh + 30;
         if(dh > 720) dh = 720;
-        u32 dx = (1280 - dw) / 2;
-        u32 dy = (720 - dh) / 2;
+        s32 dx = (1280 - dw) / 2;
+        s32 dy = (720 - dh) / 2;
         ely += dy;
-        u32 elemw = ((dw - (20 * (this->opts.size() + 1))) / this->opts.size());
-        u32 elx = dx + ((dw - ((elemw * this->opts.size()) + (20 * (this->opts.size() - 1)))) / 2);
-        u32 r = 35;
-        u32 nr = 180;
-        u32 ng = 180;
-        u32 nb = 200;
+        s32 elemw = ((dw - (20 * (this->opts.size() + 1))) / this->opts.size());
+        s32 elx = dx + ((dw - ((elemw * this->opts.size()) + (20 * (this->opts.size() - 1)))) / 2);
+        s32 r = 35;
+        s32 nr = 180;
+        s32 ng = 180;
+        s32 nb = 200;
         bool end = false;
         s32 initfact = 0;
         while(true)
@@ -146,7 +146,7 @@ namespace pu
                     {
                         this->prevosel = this->osel;
                         this->osel--;
-                        for(u32 i = 0; i < this->opts.size(); i++)
+                        for(s32 i = 0; i < this->opts.size(); i++)
                         {
                             if(i == this->osel) this->selfact = 0;
                             else if(i == this->prevosel) this->pselfact = 255;
@@ -159,7 +159,7 @@ namespace pu
                     {
                         this->prevosel = this->osel;
                         this->osel++;
-                        for(u32 i = 0; i < this->opts.size(); i++)
+                        for(s32 i = 0; i < this->opts.size(); i++)
                         {
                             if(i == this->osel) this->selfact = 0;
                             else if(i == this->prevosel) this->pselfact = 255;
@@ -180,11 +180,11 @@ namespace pu
                 {
                     touchPosition tch;
                     hidTouchRead(&tch, 0);
-                    for(u32 i = 0; i < this->opts.size(); i++)
+                    for(s32 i = 0; i < this->opts.size(); i++)
                     {
                         std::string txt = this->sopts[i];
-                        u32 rx = elx + ((elemw + 20) * i);
-                        u32 ry = ely;
+                        s32 rx = elx + ((elemw + 20) * i);
+                        s32 ry = ely;
                         if(((rx + elemw) > tch.px) && (tch.px > rx) && ((ry + elemh) > tch.py) && (tch.py > ry))
                         {
                             this->osel = i;
@@ -193,10 +193,10 @@ namespace pu
                         }
                     }
                 }
-                u32 bw = dw;
-                u32 bh = dh;
-                u32 fw = bw - (r * 2);
-                u32 fh = bh - (r * 2);
+                s32 bw = dw;
+                s32 bh = dh;
+                s32 fw = bw - (r * 2);
+                s32 fh = bh - (r * 2);
                 draw::Color clr = { 225, 225, 225, initfact };
                 s32 aclr = initfact;
                 if(aclr < 0) aclr = 0;
@@ -209,21 +209,21 @@ namespace pu
                 Drawer->RenderTexture(this->cnt, (dx + 45), (dy + 140));
                 if(this->hicon)
                 {
-                    u32 icw = render::GetTextureWidth(this->icon);
-                    u32 icx = dx + (dw - (icw + icm));
-                    u32 icy = dy + icm;
+                    s32 icw = render::GetTextureWidth(this->icon);
+                    s32 icx = dx + (dw - (icw + icm));
+                    s32 icy = dy + icm;
                     Drawer->RenderTexture(this->icon, icx, icy, initfact);
                 }
-                for(u32 i = 0; i < this->opts.size(); i++)
+                for(s32 i = 0; i < this->opts.size(); i++)
                 {
                     std::string txt = this->sopts[i];
-                    u32 tw = render::GetTextWidth(this->ofont, txt);
-                    u32 th = render::GetTextHeight(this->ofont, txt);
-                    u32 tx = elx + ((elemw - tw) / 2) + ((elemw + 20) * i);
-                    u32 ty = ely + ((elemh - th) / 2);
-                    u32 rx = elx + ((elemw + 20) * i);
-                    u32 ry = ely;
-                    u32 rr = (elemh / 2);
+                    s32 tw = render::GetTextWidth(this->ofont, txt);
+                    s32 th = render::GetTextHeight(this->ofont, txt);
+                    s32 tx = elx + ((elemw - tw) / 2) + ((elemw + 20) * i);
+                    s32 ty = ely + ((elemh - th) / 2);
+                    s32 rx = elx + ((elemw + 20) * i);
+                    s32 ry = ely;
+                    s32 rr = (elemh / 2);
                     draw::Color dclr = { nr, ng, nb, initfact };
                     if(this->osel == i)
                     {

@@ -4,7 +4,7 @@
 
 namespace pu::overlay
 {
-    Overlay::Overlay(u32 X, u32 Y, u32 Width, u32 Height, draw::Color Background, bool Rounded) : Container(X, Y, Width, Height)
+    Overlay::Overlay(s32 X, s32 Y, s32 Width, s32 Height, draw::Color Background, bool Rounded) : Container(X, Y, Width, Height)
     {
         this->bg = Background;
         this->round = Rounded;
@@ -18,12 +18,12 @@ namespace pu::overlay
         this->Clear();
     }
 
-    void Overlay::SetRadius(u32 Radius)
+    void Overlay::SetRadius(s32 Radius)
     {
         this->rad = Radius;
     }
 
-    u32 Overlay::GetRadius()
+    s32 Overlay::GetRadius()
     {
         return this->rad;
     }
@@ -43,7 +43,7 @@ namespace pu::overlay
         if(this->round) Drawer->RenderRoundedRectangleFill(this->bg, this->x, this->y, this->w, this->h, this->rad);
         else Drawer->RenderRectangleFill(this->bg, this->x, this->y, this->w, this->h);
         this->PreRender();
-        if(!this->elms.empty()) for(u32 i = 0; i < this->elms.size(); i++)
+        if(!this->elms.empty()) for(s32 i = 0; i < this->elms.size(); i++)
         {
             element::Element *elm = this->elms[i];
             if(elm->IsVisible()) elm->OnRender(Drawer);

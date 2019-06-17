@@ -27,7 +27,7 @@ namespace pu::web
     static std::string CreateDocDir()
     {
         if(!EnsureWebDir()) return "";
-        u32 n = rand();
+        s32 n = rand();
         std::string docdir = "PuWeb-" + std::to_string(n) + ".htdocs";
         mkdir((webDir + "/html-document/" + docdir).c_str(), 777);
         return docdir;

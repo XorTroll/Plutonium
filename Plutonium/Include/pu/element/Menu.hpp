@@ -15,7 +15,6 @@
 #include <pu/element/Element.hpp>
 #include <vector>
 #include <functional>
-#include <chrono>
 
 namespace pu::element
 {
@@ -29,9 +28,9 @@ namespace pu::element
             draw::Color GetColor();
             void SetColor(draw::Color Color);
             void AddOnClick(std::function<void()> Callback, u64 Key = KEY_A);
-            u32 GetCallbackCount();
-            std::function<void()> GetCallback(u32 Index);
-            u64 GetCallbackKey(u32 Index);
+            s32 GetCallbackCount();
+            std::function<void()> GetCallback(s32 Index);
+            u64 GetCallbackKey(s32 Index);
             std::string GetIcon();
             void SetIcon(std::string Icon);
             bool HasIcon();
@@ -53,19 +52,19 @@ namespace pu::element
     class Menu : public Element
     {
         public:
-            Menu(u32 X, u32 Y, u32 Width, draw::Color OptionColor, u32 ItemSize, u32 ItemsToShow);
+            Menu(s32 X, s32 Y, s32 Width, draw::Color OptionColor, s32 ItemSize, s32 ItemsToShow);
             ~Menu();
-            u32 GetX();
-            void SetX(u32 X);
-            u32 GetY();
-            void SetY(u32 Y);
-            u32 GetWidth();
-            void SetWidth(u32 Width);
-            u32 GetHeight();
-            u32 GetItemSize();
-            void SetItemSize(u32 ItemSize);
-            u32 GetNumberOfItemsToShow();
-            void SetNumberOfItemsToShow(u32 ItemsToShow);
+            s32 GetX();
+            void SetX(s32 X);
+            s32 GetY();
+            void SetY(s32 Y);
+            s32 GetWidth();
+            void SetWidth(s32 Width);
+            s32 GetHeight();
+            s32 GetItemSize();
+            void SetItemSize(s32 ItemSize);
+            s32 GetNumberOfItemsToShow();
+            void SetNumberOfItemsToShow(s32 ItemsToShow);
             draw::Color GetColor();
             void SetColor(draw::Color Color);
             draw::Color GetOnFocusColor();
@@ -77,21 +76,20 @@ namespace pu::element
             void ClearItems();
             void SetCooldownEnabled(bool Cooldown);
             MenuItem *GetSelectedItem();
-            u32 GetSelectedIndex();
-            void SetSelectedIndex(u32 Index);
+            s32 GetSelectedIndex();
+            void SetSelectedIndex(s32 Index);
             void OnRender(render::Renderer *Drawer);
             void OnInput(u64 Down, u64 Up, u64 Held, bool Touch, bool Focus);
-			void SetDrawShadow(bool drawShadow);
         private:
             bool dtouch;
-            u32 x;
-            u32 y;
-            u32 w;
-            u32 isize;
-            u32 ishow;
-            u32 previsel;
-            u32 fisel;
-            u32 isel;
+            s32 x;
+            s32 y;
+            s32 w;
+            s32 isize;
+            s32 ishow;
+            s32 previsel;
+            s32 fisel;
+            s32 isel;
             s32 pselfact;
             s32 selfact;
             draw::Color scb;
@@ -100,12 +98,5 @@ namespace pu::element
             bool icdown;
             std::function<void()> onselch;
             std::vector<MenuItem*> itms;
-            bool uptime;
-            bool uphold;
-            std::chrono::time_point<std::chrono::steady_clock> uptp;
-            bool downtime;
-            bool downhold;
-            std::chrono::time_point<std::chrono::steady_clock> downtp;
-			bool drawShadow;
     };
 }

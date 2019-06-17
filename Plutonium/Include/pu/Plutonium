@@ -17,7 +17,9 @@
 #include <pu/draw.hpp>
 #include <pu/element.hpp>
 #include <pu/Layout.hpp>
+#include <pu/music.hpp>
 #include <pu/overlay.hpp>
 #include <pu/render.hpp>
+#include <pu/sfx.hpp>
 #include <pu/util.hpp>
 #include <pu/web.hpp>

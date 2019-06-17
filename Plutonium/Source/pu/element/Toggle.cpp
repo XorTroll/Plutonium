@@ -2,14 +2,14 @@
 
 namespace pu::element
 {
-    Toggle::Toggle(u32 X, u32 Y, std::string Content, u64 Key, draw::Color Color) : Element::Element()
+    Toggle::Toggle(s32 X, s32 Y, std::string Content, u64 Key, draw::Color Color) : Element::Element()
     {
         this->x = X;
         this->y = Y;
         this->key = Key;
         this->cnt = Content;
         this->clr = Color;
-        this->fnt = render::LoadSharedFont(render::SharedFont::Standard, 25);
+        this->fnt = render::LoadDefaultFont(25);
         this->fsize = 25;
         this->togfact = 255;
         this->checked = false;
@@ -30,32 +30,32 @@ namespace pu::element
         }
     }
 
-    u32 Toggle::GetX()
+    s32 Toggle::GetX()
     {
         return this->x;
     }
 
-    void Toggle::SetX(u32 X)
+    void Toggle::SetX(s32 X)
     {
         this->x = X;
     }
 
-    u32 Toggle::GetY()
+    s32 Toggle::GetY()
     {
         return this->y;
     }
 
-    void Toggle::SetY(u32 Y)
+    void Toggle::SetY(s32 Y)
     {
         this->y = Y;
     }
 
-    u32 Toggle::GetWidth()
+    s32 Toggle::GetWidth()
     {
         return 0;
     }
 
-    u32 Toggle::GetHeight()
+    s32 Toggle::GetHeight()
     {
         return 0;
     }
@@ -108,14 +108,14 @@ namespace pu::element
 
     void Toggle::OnRender(render::Renderer *Drawer)
     {
-        u32 tw = render::GetTextWidth(this->fnt, this->cnt);
-        u32 th = render::GetTextHeight(this->fnt, this->cnt);
-        u32 rw = th;
-        u32 rh = (2 * th);
-        u32 rx = this->GetProcessedX();
-        u32 ry = this->GetProcessedY();
-        u32 tx = rx + rw + (th / 2);
-        u32 ty = ry + (th / 2);
+        s32 tw = render::GetTextWidth(this->fnt, this->cnt);
+        s32 th = render::GetTextHeight(this->fnt, this->cnt);
+        s32 rw = th;
+        s32 rh = (2 * th);
+        s32 rx = this->GetProcessedX();
+        s32 ry = this->GetProcessedY();
+        s32 tx = rx + rw + (th / 2);
+        s32 ty = ry + (th / 2);
         if(this->checked)
         {
             Drawer->RenderRectangleFill({ 130, 130, 130, 255 }, rx, ry, rw, rh);

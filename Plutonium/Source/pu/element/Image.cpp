@@ -2,7 +2,7 @@
 
 namespace pu::element
 {
-    Image::Image(u32 X, u32 Y, std::string Image) : Element::Element()
+    Image::Image(s32 X, s32 Y, std::string Image) : Element::Element()
     {
         this->x = X;
         this->y = Y;
@@ -13,6 +13,8 @@ namespace pu::element
         {
             this->img = Image;
             this->ntex = render::LoadImage(Image);
+            this->w = render::GetTextureWidth(this->ntex);
+            this->h = render::GetTextureHeight(this->ntex);
         }
         ifs.close();
     }
@@ -26,42 +28,42 @@ namespace pu::element
         }
     }
 
-    u32 Image::GetX()
+    s32 Image::GetX()
     {
         return this->x;
     }
 
-    void Image::SetX(u32 X)
+    void Image::SetX(s32 X)
     {
         this->x = X;
     }
 
-    u32 Image::GetY()
+    s32 Image::GetY()
     {
         return this->y;
     }
 
-    void Image::SetY(u32 Y)
+    void Image::SetY(s32 Y)
     {
         this->y = Y;
     }
 
-    u32 Image::GetWidth()
+    s32 Image::GetWidth()
     {
         return this->w;
     }
 
-    void Image::SetWidth(u32 Width)
+    void Image::SetWidth(s32 Width)
     {
         this->w = Width;
     }
 
-    u32 Image::GetHeight()
+    s32 Image::GetHeight()
     {
         return this->h;
     }
 
-    void Image::SetHeight(u32 Height)
+    void Image::SetHeight(s32 Height)
     {
         this->h = Height;
     }
@@ -93,12 +95,9 @@ namespace pu::element
 
     void Image::OnRender(render::Renderer *Drawer)
     {
-        u32 rdx = this->GetProcessedX();
-        u32 rdy = this->GetProcessedY();
-        u32 iw = this->w;
-        u32 ih = this->h;
-        if((iw == 0) || (ih == 0)) Drawer->RenderTexture(this->ntex, rdx, rdy);
-        else Drawer->RenderTextureScaled(this->ntex, rdx, rdy, iw, ih);
+        s32 rdx = this->GetProcessedX();
+        s32 rdy = this->GetProcessedY();
+        Drawer->RenderTextureScaled(this->ntex, rdx, rdy, w, h);
     }
 
     void Image::OnInput(u64 Down, u64 Up, u64 Held, bool Touch, bool Focus)

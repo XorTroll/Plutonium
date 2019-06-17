@@ -7,6 +7,9 @@ namespace pu
         this->onipt = [&](u64 Down, u64 Up, u64 Held, bool Touch){};
         this->efocus = NULL;
         this->ufocus = UseFocus;
+        this->hasimage = false;
+        this->overbgtex = NULL;
+        this->overbgcolor = { 225, 225, 225, 255 };
     }
 
     bool Layout::HasChilds()
@@ -52,5 +55,34 @@ namespace pu
     void Layout::SetUseFocus(bool Focus)
     {
         this->ufocus = Focus;
+    }
+
+    void Layout::SetBackgroundImage(std::string Path)
+    {
+        if(this->overbgtex != NULL) render::DeleteTexture(this->overbgtex);
+        this->hasimage = true;
+        this->overbgtex = render::LoadImage(Path);
+    }
+
+    void Layout::SetBackgroundColor(draw::Color Color)
+    {
+        if(this->overbgtex != NULL) render::DeleteTexture(this->overbgtex);
+        this->hasimage = false;
+        this->overbgcolor = Color;
+    }
+
+    render::NativeTexture Layout::GetBackgroundImageTexture()
+    {
+        return this->overbgtex;
+    }
+
+    draw::Color Layout::GetBackgroundColor()
+    {
+        return this->overbgcolor;
+    }
+
+    bool Layout::HasBackgroundImage()
+    {
+        return this->hasimage;
     }
 }

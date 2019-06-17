@@ -2,7 +2,7 @@
 
 namespace pu::element
 {
-    Button::Button(u32 X, u32 Y, u32 Width, u32 Height, std::string Content, draw::Color TextColor, draw::Color Color) : Element::Element()
+    Button::Button(s32 X, s32 Y, s32 Width, s32 Height, std::string Content, draw::Color TextColor, draw::Color Color) : Element::Element()
     {
         this->x = X;
         this->y = Y;
@@ -12,7 +12,7 @@ namespace pu::element
         this->clr = Color;
         this->hover = false;
         this->hoverfact = 255;
-        this->fnt = render::LoadSharedFont(render::SharedFont::Standard, 25);
+        this->fnt = render::LoadDefaultFont(25);
         this->ntex = render::RenderText(this->fnt, Content, TextColor);
         this->clickcb = [](){};
     }
@@ -31,42 +31,42 @@ namespace pu::element
         }
     }
 
-    u32 Button::GetX()
+    s32 Button::GetX()
     {
         return this->x;
     }
 
-    void Button::SetX(u32 X)
+    void Button::SetX(s32 X)
     {
         this->x = X;
     }
 
-    u32 Button::GetY()
+    s32 Button::GetY()
     {
         return this->y;
     }
 
-    void Button::SetY(u32 Y)
+    void Button::SetY(s32 Y)
     {
         this->y = Y;
     }
 
-    u32 Button::GetWidth()
+    s32 Button::GetWidth()
     {
         return this->w;
     }
 
-    void Button::SetWidth(u32 Width)
+    void Button::SetWidth(s32 Width)
     {
         this->w = Width;
     }
 
-    u32 Button::GetHeight()
+    s32 Button::GetHeight()
     {
         return this->h;
     }
 
-    void Button::SetHeight(u32 Height)
+    void Button::SetHeight(s32 Height)
     {
         this->h = Height;
     }
@@ -110,8 +110,8 @@ namespace pu::element
 
     void Button::OnRender(render::Renderer *Drawer)
     {
-        u32 rdx = this->GetProcessedX();
-        u32 rdy = this->GetProcessedY();
+        s32 rdx = this->GetProcessedX();
+        s32 rdy = this->GetProcessedY();
         s32 clrr = this->clr.R;
         s32 clrg = this->clr.G;
         s32 clrb = this->clr.B;
@@ -142,10 +142,10 @@ namespace pu::element
             }
             else Drawer->RenderRectangleFill(this->clr, rdx, rdy, this->w, this->h);
         }
-        u32 xw = render::GetTextWidth(this->fnt, this->cnt);
-        u32 xh = render::GetTextHeight(this->fnt, this->cnt);
-        u32 tx = ((this->w - xw) / 2) + rdx;
-        u32 ty = ((this->h - xh) / 2) + rdy;
+        s32 xw = render::GetTextWidth(this->fnt, this->cnt);
+        s32 xh = render::GetTextHeight(this->fnt, this->cnt);
+        s32 tx = ((this->w - xw) / 2) + rdx;
+        s32 ty = ((this->h - xh) / 2) + rdy;
         Drawer->RenderTexture(this->ntex, tx, ty);
     }
 

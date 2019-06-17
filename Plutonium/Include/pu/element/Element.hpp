@@ -43,10 +43,10 @@ namespace pu::element
         public:
             Element();
             virtual ~Element();
-            virtual u32 GetX() = 0;
-            virtual u32 GetY() = 0;
-            virtual u32 GetWidth() = 0;
-            virtual u32 GetHeight() = 0;
+            virtual s32 GetX() = 0;
+            virtual s32 GetY() = 0;
+            virtual s32 GetWidth() = 0;
+            virtual s32 GetHeight() = 0;
             virtual void OnRender(render::Renderer *Drawer) = 0;
             virtual void OnInput(u64 Down, u64 Up, u64 Held, bool Touch, bool Focus) = 0;
             void ProcessInput(void *Lyt, u64 Down, u64 Up, u64 Held, bool Touch);
@@ -63,8 +63,8 @@ namespace pu::element
             void SetVerticalAlign(VerticalAlign Align);
             VerticalAlign GetVerticalAlign();
             bool HasParent();
-            u32 GetProcessedX();
-            u32 GetProcessedY();
+            s32 GetProcessedX();
+            s32 GetProcessedY();
         protected:
             bool visible;
             bool afocus;

@@ -19,6 +19,8 @@ namespace pu::render
             SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "2");
             IMG_Init(IMG_INIT_PNG | IMG_INIT_JPG | IMG_INIT_TIF | IMG_INIT_WEBP);
             TTF_Init();
+            Mix_Init(MIX_INIT_FLAC | MIX_INIT_MOD | MIX_INIT_MP3 | MIX_INIT_OGG);
+            Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, MIX_DEFAULT_CHANNELS, 4096);
             this->initialized = true;
             this->basea = -1;
             this->basex = 0;
@@ -63,7 +65,7 @@ namespace pu::render
         SDL_RenderPresent(purend);
     }
 
-    void Renderer::RenderTexture(NativeTexture Texture, u32 X, u32 Y, int AlphaMod)
+    void Renderer::RenderTexture(NativeTexture Texture, s32 X, s32 Y, int AlphaMod)
     {
         SDL_Rect pos;
         pos.x = X + this->basex;
@@ -74,7 +76,7 @@ namespace pu::render
         SDL_RenderCopy(purend, Texture, NULL, &pos);
     }
 
-    void Renderer::RenderTextureScaled(NativeTexture Texture, u32 X, u32 Y, u32 Width, u32 Height, int AlphaMod)
+    void Renderer::RenderTextureScaled(NativeTexture Texture, s32 X, s32 Y, s32 Width, s32 Height, int AlphaMod)
     {
         SDL_Rect pos;
         pos.x = X + this->basex;
@@ -86,7 +88,7 @@ namespace pu::render
         SDL_RenderCopyEx(purend, Texture, NULL, &pos, 0, NULL, SDL_FLIP_NONE);
     }
 
-    void Renderer::RenderRectangle(draw::Color Color, u32 X, u32 Y, u32 Width, u32 Height)
+    void Renderer::RenderRectangle(draw::Color Color, s32 X, s32 Y, s32 Width, s32 Height)
     {
         SDL_Rect rect;
         rect.x = X + this->basex;
@@ -99,7 +101,7 @@ namespace pu::render
         SDL_RenderDrawRect(purend, &rect);
     }
 
-    void Renderer::RenderRectangleFill(draw::Color Color, u32 X, u32 Y, u32 Width, u32 Height)
+    void Renderer::RenderRectangleFill(draw::Color Color, s32 X, s32 Y, s32 Width, s32 Height)
     {
         SDL_Rect rect;
         rect.x = X + this->basex;
@@ -112,7 +114,7 @@ namespace pu::render
         SDL_RenderFillRect(purend, &rect);
     }
 	
-    void Renderer::RenderRoundedRectangle(draw::Color Color, u32 X, u32 Y, u32 Width, u32 Height, u32 Radius)
+    void Renderer::RenderRoundedRectangle(draw::Color Color, s32 X, s32 Y, s32 Width, s32 Height, s32 Radius)
     {
         u8 alpha = Color.A;
         if(this->basea >= 0) alpha = (u8)this->basea;
@@ -120,7 +122,7 @@ namespace pu::render
         SDL_SetRenderDrawBlendMode(purend, SDL_BLENDMODE_BLEND);
     }
 
-    void Renderer::RenderRoundedRectangleFill(draw::Color Color, u32 X, u32 Y, u32 Width, u32 Height, u32 Radius)
+    void Renderer::RenderRoundedRectangleFill(draw::Color Color, s32 X, s32 Y, s32 Width, s32 Height, s32 Radius)
     {
         u8 alpha = Color.A;
         if(this->basea >= 0) alpha = (u8)this->basea;
@@ -128,7 +130,7 @@ namespace pu::render
         SDL_SetRenderDrawBlendMode(purend, SDL_BLENDMODE_BLEND);
     }
 
-    void Renderer::RenderCircle(draw::Color Color, u32 X, u32 Y, u32 Radius)
+    void Renderer::RenderCircle(draw::Color Color, s32 X, s32 Y, s32 Radius)
     {
         u8 alpha = Color.A;
         if(this->basea >= 0) alpha = (u8)this->basea;
@@ -136,7 +138,7 @@ namespace pu::render
         aacircleRGBA(purend, X + this->basex, Y + this->basey, Radius - 1, Color.R, Color.G, Color.B, alpha);
     }
 
-    void Renderer::RenderCircleFill(draw::Color Color, u32 X, u32 Y, u32 Radius)
+    void Renderer::RenderCircleFill(draw::Color Color, s32 X, s32 Y, s32 Radius)
     {
         u8 alpha = Color.A;
         if(this->basea >= 0) alpha = (u8)this->basea;
@@ -144,12 +146,12 @@ namespace pu::render
         aacircleRGBA(purend, X + this->basex, Y + this->basey, Radius - 1, Color.R, Color.G, Color.B, alpha);
     }
 
-    void Renderer::RenderShadowSimple(u32 X, u32 Y, u32 Width, u32 Height, u32 BaseAlpha, u8 MainAlpha)
+    void Renderer::RenderShadowSimple(s32 X, s32 Y, s32 Width, s32 Height, s32 BaseAlpha, u8 MainAlpha)
     {
         bool crop = false;
-        u32 shw = Width;
-        u32 shx = X;
-        u32 shy = Y;
+        s32 shw = Width;
+        s32 shx = X;
+        s32 shy = Y;
         for(s32 al = BaseAlpha; al > 0; al -= (180 / Height))
         {
             this->RenderRectangleFill({ 130, 130, 130, (al * (MainAlpha / 255)) }, shx + this->basex, shy + this->basey, shw, 1);
@@ -163,7 +165,7 @@ namespace pu::render
         }
     }
 
-    void Renderer::SetBaseRenderPosition(u32 X, u32 Y)
+    void Renderer::SetBaseRenderPosition(s32 X, s32 Y)
     {
         this->basex = X;
         this->basey = Y;

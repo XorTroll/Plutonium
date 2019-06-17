@@ -2,7 +2,7 @@
 
 // Implement all the layout/application functions here
 // This variable needs to be global, but it can be a member of a class too (easier to define it here tho)
-u32 count = 0;
+s32 count = 0;
 
 Layout1::Layout1()
 {

@@ -20,26 +20,26 @@ namespace pu
     class Container
     {
         public:
-            Container(u32 X, u32 Y, u32 Width, u32 Height);
+            Container(s32 X, s32 Y, s32 Width, s32 Height);
             void Add(element::Element *Elm);
-            element::Element *At(u32 Index);
+            element::Element *At(s32 Index);
             bool Has(element::Element *Elm);
             void Clear();
-            u32 GetCount();
-            void SetX(u32 X);
-            u32 GetX();
-            void SetY(u32 Y);
-            u32 GetY();
-            void SetWidth(u32 Width);
-            u32 GetWidth();
-            void SetHeight(u32 Height);
-            u32 GetHeight();
+            s32 GetCount();
+            void SetX(s32 X);
+            s32 GetX();
+            void SetY(s32 Y);
+            s32 GetY();
+            void SetWidth(s32 Width);
+            s32 GetWidth();
+            void SetHeight(s32 Height);
+            s32 GetHeight();
             void PreRender();
         protected:
-            u32 x;
-            u32 y;
-            u32 w;
-            u32 h;
+            s32 x;
+            s32 y;
+            s32 w;
+            s32 h;
             std::vector<element::Element*> elms;
     };
 }

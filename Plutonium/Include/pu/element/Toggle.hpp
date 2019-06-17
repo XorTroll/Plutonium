@@ -19,14 +19,14 @@ namespace pu::element
     class Toggle : public Element
     {
         public:
-            Toggle(u32 X, u32 Y, std::string Content, u64 Key, draw::Color Color);
+            Toggle(s32 X, s32 Y, std::string Content, u64 Key, draw::Color Color);
             ~Toggle();
-            u32 GetX();
-            void SetX(u32 X);
-            u32 GetY();
-            void SetY(u32 Y);
-            u32 GetWidth();
-            u32 GetHeight();
+            s32 GetX();
+            void SetX(s32 X);
+            s32 GetY();
+            void SetY(s32 Y);
+            s32 GetWidth();
+            s32 GetHeight();
             std::string GetContent();
             void SetContent(std::string Content);
             void SetFont(render::NativeFont Font);
@@ -39,13 +39,13 @@ namespace pu::element
             void OnInput(u64 Down, u64 Up, u64 Held, bool Touch, bool Focus);
         private:
             std::string cnt;
-            u32 x;
-            u32 y;
+            s32 x;
+            s32 y;
             u64 key;
             bool checked;
             draw::Color clr;
             render::NativeFont fnt;
-            u32 fsize;
+            s32 fsize;
             s32 togfact;
             render::NativeTexture ntex;
     };
