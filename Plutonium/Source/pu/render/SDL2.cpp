@@ -1,8 +1,13 @@
 #include <pu/render/SDL2.hpp>
 #include <pu/render/Renderer.hpp>
+#include <vector>
+#include <tuple>
 
 namespace pu::render
 {
+    static std::vector<std::tuple<u32, std::string, NativeFont>> filefonts;
+    static std::vector<std::tuple<u32, SharedFont, NativeFont>> shfonts;
+
     static SharedFont shfont = SharedFont::Standard;
     static std::string fontpth;
 
@@ -27,6 +32,12 @@ namespace pu::render
 
     NativeFont LoadSharedFont(SharedFont Type, s32 Size)
     {
+        for(u32 i = 0; i < shfonts.size(); i++)
+        {
+            auto size = std::get<0>(shfonts[i]);
+            auto shtype = std::get<1>(shfonts[i]);
+            if((size == Size) && (shtype == Type)) return std::get<2>(shfonts[i]);
+        }
         PlFontData plfont;
         NativeFont font = NULL;
         SDL_RWops *mem = NULL;
@@ -36,12 +47,21 @@ namespace pu::render
             mem = SDL_RWFromMem(plfont.address, plfont.size);
             font = TTF_OpenFontRW(mem, 1, Size);
         }
+        if(font != NULL) shfonts.push_back(std::make_tuple(Size, Type, font));
         return font;
     }
 
     NativeFont LoadFont(std::string Path, s32 Size)
     {
-        return TTF_OpenFont(Path.c_str(), Size);
+        for(u32 i = 0; i < filefonts.size(); i++)
+        {
+            auto size = std::get<0>(filefonts[i]);
+            auto path = std::get<1>(filefonts[i]);
+            if((size == Size) && (path == Path)) return std::get<2>(filefonts[i]);
+        }
+        auto font = TTF_OpenFont(Path.c_str(), Size);
+        if(font != NULL) filefonts.push_back(std::make_tuple(Size, Path, font));
+        return font;
     }
 
     void SetDefaultFont(std::string Path)
