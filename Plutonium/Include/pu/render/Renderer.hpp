@@ -22,7 +22,7 @@ namespace pu::render
     class Renderer
     {
         public:
-            void Initialize();
+            void Initialize(bool RenderAccel = true);
             void Finalize();
             bool HasInitialized();
             bool HasRomFs();

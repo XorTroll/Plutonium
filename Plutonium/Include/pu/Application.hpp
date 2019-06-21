@@ -24,7 +24,7 @@ namespace pu
     class Application
     {
         public:
-            Application();
+            Application(bool RenderAccel = true);
             ~Application();
             void LoadLayout(Layout *Layout);
             void AddThread(std::function<void()> Callback);

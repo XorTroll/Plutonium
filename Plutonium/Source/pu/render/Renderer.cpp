@@ -8,7 +8,7 @@ namespace pu::render
     extern std::unordered_map<u32, std::pair<std::string, NativeFont>> filefonts;
     extern std::unordered_map<u32, std::pair<SharedFont, NativeFont>> shfonts;
 
-    void Renderer::Initialize()
+    void Renderer::Initialize(bool RenderAccel)
     {
         if(!this->initialized)
         {
@@ -17,7 +17,9 @@ namespace pu::render
             plInitialize();
             SDL_Init(SDL_INIT_EVERYTHING);
             this->rendwd = SDL_CreateWindow("Plutonium", 0, 0, 1280, 720, 0);
-            purend = SDL_CreateRenderer(this->rendwd, -1, (SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC));
+            u32 flags = SDL_RENDERER_SOFTWARE;
+            if(RenderAccel) flags = (SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
+            purend = SDL_CreateRenderer(this->rendwd, -1, flags);
             this->rendsf = SDL_GetWindowSurface(this->rendwd);
             SDL_SetRenderDrawBlendMode(purend, SDL_BLENDMODE_BLEND);
             SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "2");

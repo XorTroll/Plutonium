@@ -2,10 +2,10 @@
 
 namespace pu
 {
-    Application::Application()
+    Application::Application(bool RenderAccel)
     {
         this->rend = new render::Renderer();
-        this->rend->Initialize();
+        this->rend->Initialize(RenderAccel);
         this->show = false;
         this->cbipt = [&](u64 Down, u64 Up, u64 Held, bool Touch){};
         this->rover = false;
