@@ -15,11 +15,6 @@ namespace pu::element
 
     TextBlock::~TextBlock()
     {
-        if(this->fnt != NULL)
-        {
-            render::DeleteFont(this->fnt);
-            this->fnt = NULL;
-        }
         if(this->ntex != NULL)
         {
             render::DeleteTexture(this->ntex);
@@ -81,7 +76,6 @@ namespace pu::element
 
     void TextBlock::SetFont(render::NativeFont Font)
     {
-        render::DeleteFont(this->fnt);
         this->fnt = Font;
         render::DeleteTexture(this->ntex);
         this->ntex = render::RenderText(Font, this->text, this->clr);

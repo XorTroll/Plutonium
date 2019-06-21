@@ -19,11 +19,6 @@ namespace pu::element
 
     Button::~Button()
     {
-        if(this->fnt != NULL)
-        {
-            render::DeleteFont(this->fnt);
-            this->fnt = NULL;
-        }
         if(this->ntex != NULL)
         {
             render::DeleteTexture(this->ntex);
@@ -97,7 +92,6 @@ namespace pu::element
 
     void Button::SetContentFont(render::NativeFont Font)
     {
-        render::DeleteFont(this->fnt);
         this->fnt = Font;
         render::DeleteTexture(this->ntex);
         this->ntex = render::RenderText(this->fnt, this->cnt, this->clr);

@@ -15,7 +15,7 @@ namespace pu
         this->ffovl = false;
         this->lyt = NULL;
         this->rof = [](render::Renderer *Drawer){ return true; };
-        this->fadea = 0;
+        this->fadea = 255;
         this->aapf = 35;
     }
 

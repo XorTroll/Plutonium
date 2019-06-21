@@ -22,21 +22,6 @@ namespace pu
 
     Dialog::~Dialog()
     {
-        if(this->tfont != NULL)
-        {
-            render::DeleteFont(this->tfont);
-            this->tfont = NULL;
-        }
-        if(this->cfont != NULL)
-        {
-            render::DeleteFont(this->cfont);
-            this->cfont = NULL;
-        }
-        if(this->ofont != NULL)
-        {
-            render::DeleteFont(this->ofont);
-            this->ofont = NULL;
-        }
         if(this->title != NULL)
         {
             render::DeleteTexture(this->title);

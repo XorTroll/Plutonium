@@ -13,11 +13,6 @@ namespace pu::element
 
     MenuItem::~MenuItem()
     {
-        if(this->font != NULL)
-        {
-            render::DeleteFont(this->font);
-            this->font = NULL;
-        }
         if(this->ntex != NULL)
         {
             render::DeleteTexture(this->ntex);

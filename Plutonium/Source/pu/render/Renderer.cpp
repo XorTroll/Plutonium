@@ -1,8 +1,12 @@
 #include <pu/render/Renderer.hpp>
+#include <unordered_map>
 
 namespace pu::render
 {
     NativeRenderer purend = NULL;
+
+    extern std::unordered_map<u32, std::pair<std::string, NativeFont>> filefonts;
+    extern std::unordered_map<u32, std::pair<SharedFont, NativeFont>> shfonts;
 
     void Renderer::Initialize()
     {
@@ -30,6 +34,14 @@ namespace pu::render
 
     void Renderer::Finalize()
     {
+        for(auto font: shfonts)
+        {
+            render::DeleteFont(font.second.second);
+        }
+        for(auto font: filefonts)
+        {
+            render::DeleteFont(font.second.second);
+        }
         if(this->initialized)
         {
             TTF_Quit();

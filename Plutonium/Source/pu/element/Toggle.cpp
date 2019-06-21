@@ -18,11 +18,6 @@ namespace pu::element
 
     Toggle::~Toggle()
     {
-        if(this->fnt != NULL)
-        {
-            render::DeleteFont(this->fnt);
-            this->fnt = NULL;
-        }
         if(this->ntex != NULL)
         {
             render::DeleteTexture(this->ntex);
@@ -74,7 +69,6 @@ namespace pu::element
 
     void Toggle::SetFont(render::NativeFont Font)
     {
-        render::DeleteFont(this->fnt);
         this->fnt = Font;
         this->ntex = render::RenderText(Font, this->cnt, this->clr);
     }
