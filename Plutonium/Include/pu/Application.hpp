@@ -24,7 +24,7 @@ namespace pu
     class Application
     {
         public:
-            Application(bool RenderAccel = true);
+            Application(u32 Flags = SDL_INIT_EVERYTHING, bool RenderAccel = true);
             ~Application();
             void LoadLayout(Layout *Layout);
             void AddThread(std::function<void()> Callback);

@@ -8,14 +8,14 @@ namespace pu::render
     extern std::unordered_map<u32, std::pair<std::string, NativeFont>> filefonts;
     extern std::unordered_map<u32, std::pair<SharedFont, NativeFont>> shfonts;
 
-    void Renderer::Initialize(bool RenderAccel)
+    void Renderer::Initialize(u32 SdlFlags, bool RenderAccel)
     {
         if(!this->initialized)
         {
             Result rc = romfsInit();
             this->okromfs = (rc == 0);
             plInitialize();
-            SDL_Init(SDL_INIT_EVERYTHING);
+            SDL_Init(SdlFlags);
             this->rendwd = SDL_CreateWindow("Plutonium", 0, 0, 1280, 720, 0);
             u32 flags = SDL_RENDERER_SOFTWARE;
             if(RenderAccel) flags = (SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
