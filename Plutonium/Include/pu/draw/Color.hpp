@@ -13,6 +13,7 @@
 
 #pragma once
 #include <switch.h>
+#include <string>
 
 namespace pu::draw
 {
@@ -24,5 +25,7 @@ namespace pu::draw
         u8 G;
         u8 B;
         u8 A;
+
+        static Color FromHex(std::string HexFmt);
     };
 }

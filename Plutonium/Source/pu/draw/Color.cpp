@@ -17,4 +17,25 @@ namespace pu::draw
         this->B = B;
         this->A = A;
     }
+
+    Color Color::FromHex(std::string HexFmt)
+    {
+        Color clr;
+        if(HexFmt[0] == '#')
+        {
+            std::string r = "00", g = "00", b = "00", a = "ff";
+            if(HexFmt.length() == 7)
+            {
+                r = HexFmt.substr(1, 2);
+                g = HexFmt.substr(3, 2);
+                b = HexFmt.substr(5, 2);
+            }
+            if(HexFmt.length() >= 9) a = HexFmt.substr(7, 2);
+            clr.R = std::stoul(r, NULL, 16);
+            clr.G = std::stoul(g, NULL, 16);
+            clr.B = std::stoul(b, NULL, 16);
+            clr.A = std::stoul(a, NULL, 16);
+        }
+        return clr;
+    }
 }
