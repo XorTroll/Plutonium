@@ -25,6 +25,7 @@ namespace pu
             String(std::string UTF8);
             String(std::u16string UTF16);
             const char16_t *CStr();
+            const char *CStr8();
         private:
             std::u16string base;
     };

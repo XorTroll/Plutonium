@@ -35,4 +35,11 @@ namespace pu
     {
         return this->base.c_str();
     }
+
+    const char *String::CStr8()
+    {
+        std::wstring_convert<std::codecvt_utf8_utf16<char16_t>, char16_t> converter;
+        std::string utf8 = converter.to_bytes(this->base);
+        return utf8.c_str();
+    }
 }
