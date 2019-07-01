@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['r',['R',['../d4/d7e/structpu_1_1draw_1_1_color.html#afd21e6f39fa7381c65ea0c5603480e9e',1,'pu::draw::Color']]],
-  ['rend',['rend',['../d7/d15/classpu_1_1_application.html#aaaf19c794db3dfadba9f70425253a40d',1,'pu::Application']]],
-  ['rof',['rof',['../d7/d15/classpu_1_1_application.html#a97f79494695fc8f1cb94c9bbbcea083a',1,'pu::Application']]],
-  ['rover',['rover',['../d7/d15/classpu_1_1_application.html#afe5228b05730453ab1a802216f0de94e',1,'pu::Application']]]
+  ['r',['R',['../d7/d0c/structpu_1_1ui_1_1_color.html#a14eb93e64415d07ed6f5f04bbca54067',1,'pu::ui::Color']]],
+  ['rend',['rend',['../da/dc0/classpu_1_1ui_1_1_application.html#a44af57775561ca8b7a293beaaaebba75',1,'pu::ui::Application']]],
+  ['rof',['rof',['../da/dc0/classpu_1_1ui_1_1_application.html#a6d7e4b3238425fc5019c1b9299aeca69',1,'pu::ui::Application']]],
+  ['rover',['rover',['../da/dc0/classpu_1_1ui_1_1_application.html#afe06ab458cf3eb5c8ea8d2fc653fc649',1,'pu::ui::Application']]]
 ];

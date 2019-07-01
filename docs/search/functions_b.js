@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['notifyending',['NotifyEnding',['../d4/d46/classpu_1_1overlay_1_1_overlay.html#a7afe927a5e3de1e7a5c295c9f12de402',1,'pu::overlay::Overlay']]]
+  ['notifyending',['NotifyEnding',['../d6/d8f/classpu_1_1ui_1_1_overlay.html#a4b40990cb8ec59de07d6e50be7e09569',1,'pu::ui::Overlay']]]
 ];

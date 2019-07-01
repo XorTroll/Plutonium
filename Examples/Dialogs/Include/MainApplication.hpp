@@ -6,17 +6,17 @@
 #include <pu/Plutonium>
 
 // Define your main layout as a class inheriting from pu::Layout
-class Layout1 : public pu::Layout
+class Layout1 : public pu::ui::Layout
 {
     public:
         Layout1();
     private:
         // An easy way to keep objects is to have them as private pointer members
-        pu::element::TextBlock *helloText;
+        pu::ui::elm::TextBlock *helloText;
 };
 
 // Define your application as a class too
-class MainApplication : public pu::Application
+class MainApplication : public pu::ui::Application
 {
     public:
         MainApplication();

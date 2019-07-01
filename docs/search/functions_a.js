@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['menu',['Menu',['../d5/d9b/classpu_1_1element_1_1_menu.html#a01773908e584f3d79cb6c42585285917',1,'pu::element::Menu']]],
-  ['menuitem',['MenuItem',['../d0/dcd/classpu_1_1element_1_1_menu_item.html#a0f99ed60e7f7ff8061f3485852df2ab9',1,'pu::element::MenuItem']]]
+  ['menu',['Menu',['../dc/d6c/classpu_1_1ui_1_1elm_1_1_menu.html#addd828dd7d3da2c35b13b6505414ecef',1,'pu::ui::elm::Menu']]],
+  ['menuitem',['MenuItem',['../de/dbb/classpu_1_1ui_1_1elm_1_1_menu_item.html#a35f33a57c480d3dc4af1873ead604f1e',1,'pu::ui::elm::MenuItem']]]
 ];

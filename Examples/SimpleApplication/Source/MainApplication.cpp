@@ -5,7 +5,7 @@
 Layout1::Layout1()
 {
     // Create the textblock with the text we want
-    this->helloText = new pu::element::TextBlock(300, 300, "Hello world!");
+    this->helloText = new pu::ui::elm::TextBlock(300, 300, "Hello world!");
     // Add the textblock to the layout's element container. IMPORTANT! this MUST be done, having them as members is not enough (just a simple way to keep them)
     this->Add(this->helloText);
 }

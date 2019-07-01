@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['textblock',['TextBlock',['../d0/d38/classpu_1_1element_1_1_text_block.html#a4d250dba8925edcf38cc11b12915b2a0',1,'pu::element::TextBlock']]],
-  ['toast',['Toast',['../d0/d3a/classpu_1_1overlay_1_1_toast.html#a2332d8dccb4bb3986c7b29fefe5cab0a',1,'pu::overlay::Toast']]],
-  ['toggle',['Toggle',['../d9/d2a/classpu_1_1element_1_1_toggle.html#a422f6752cf977d4ed94c6cf9b6722f59',1,'pu::element::Toggle']]]
+  ['textblock',['TextBlock',['../df/d21/classpu_1_1ui_1_1elm_1_1_text_block.html#a5e1316105b4498acc275910ab98c7463',1,'pu::ui::elm::TextBlock']]],
+  ['toast',['Toast',['../dc/d49/classpu_1_1ui_1_1extras_1_1_toast.html#a87cf1be5c36364967982e0ca843ce457',1,'pu::ui::extras::Toast']]],
+  ['toggle',['Toggle',['../d5/d51/classpu_1_1ui_1_1elm_1_1_toggle.html#aeb586923764a8e09a69f5479cbc20794',1,'pu::ui::elm::Toggle']]]
 ];

@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['a',['A',['../d4/d7e/structpu_1_1draw_1_1_color.html#ad15e70ec5a51cf1b0d1829a724cb6ee6',1,'pu::draw::Color']]],
-  ['aapf',['aapf',['../d7/d15/classpu_1_1_application.html#a2e475ae643a11b5e3097d975c53b0986',1,'pu::Application']]],
-  ['afocus',['afocus',['../d6/d14/classpu_1_1element_1_1_element.html#a2a4f36f06093693307adccabe76c3385',1,'pu::element::Element']]]
+  ['a',['A',['../d7/d0c/structpu_1_1ui_1_1_color.html#aeb0115096a046691abc14999a368ad2c',1,'pu::ui::Color']]],
+  ['aapf',['aapf',['../da/dc0/classpu_1_1ui_1_1_application.html#afc5195faa35db0e1bce36a88fabd2049',1,'pu::ui::Application']]],
+  ['afocus',['afocus',['../d9/d0e/classpu_1_1ui_1_1elm_1_1_element.html#ab04bfa5f0dee56592b0b55eab3570e48',1,'pu::ui::elm::Element']]]
 ];

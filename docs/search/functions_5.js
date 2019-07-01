@@ -1,8 +1,9 @@
 var searchData=
 [
-  ['fadein',['FadeIn',['../d7/d15/classpu_1_1_application.html#a6c1fb053fbf54a5b2b7fbcd83347d618',1,'pu::Application']]],
-  ['fadeout',['FadeOut',['../d7/d15/classpu_1_1_application.html#a68bf6f8b9e0081b2ec0bbf49f18bfa4a',1,'pu::Application::FadeOut()'],['../d6/d90/namespacepu_1_1pu_1_1music.html#ae3a6ed2c7f3e3dc3884248dafec5b137',1,'pu::pu::music::FadeOut()'],['../db/db7/namespacepu_1_1music.html#ad5fa845d5150c2b9d64772ce915e2b86',1,'pu::music::FadeOut()']]],
-  ['fillprogress',['FillProgress',['../d1/d83/classpu_1_1element_1_1_progress_bar.html#acdeca8fd3deede1b7a8ae140d20f9e37',1,'pu::element::ProgressBar']]],
-  ['finalize',['Finalize',['../d6/dba/classpu_1_1render_1_1_renderer.html#a14a1bff3f1a8053ac54f50756d98118b',1,'pu::render::Renderer']]],
-  ['finalizerender',['FinalizeRender',['../d6/dba/classpu_1_1render_1_1_renderer.html#a188d630315ac2dccb6e8f12bb27382ff',1,'pu::render::Renderer']]]
+  ['fadein',['FadeIn',['../da/dc0/classpu_1_1ui_1_1_application.html#a5e4ce9356c5a450b89dfe13ef222c7e1',1,'pu::ui::Application']]],
+  ['fadeout',['FadeOut',['../da/dc0/classpu_1_1ui_1_1_application.html#a5c81b0f1930c4f66288c4c1587e48ef9',1,'pu::ui::Application::FadeOut()'],['../d8/d8f/namespacepu_1_1audio.html#aa0cb8040d0c59e2ce98e51622d2a26ed',1,'pu::audio::FadeOut()']]],
+  ['fillprogress',['FillProgress',['../d2/dcc/classpu_1_1ui_1_1elm_1_1_progress_bar.html#abbb7edaaf5b35ed7a0bb1ed39cea4dff',1,'pu::ui::elm::ProgressBar']]],
+  ['finalize',['Finalize',['../d0/d27/classpu_1_1ui_1_1render_1_1_renderer.html#a15df7905cffacb178961b93b87d990dc',1,'pu::ui::render::Renderer']]],
+  ['finalizerender',['FinalizeRender',['../d0/d27/classpu_1_1ui_1_1render_1_1_renderer.html#ab6e04837ac0ea0a08eeab90ec1d27df6',1,'pu::ui::render::Renderer']]],
+  ['fromhex',['FromHex',['../d7/d0c/structpu_1_1ui_1_1_color.html#aa7eae46122422c6fa3cffec4cdea15b2',1,'pu::ui::Color']]]
 ];
