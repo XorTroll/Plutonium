@@ -15,6 +15,7 @@
 #include <pu/pu_String.hpp>
 #include <pu/ui/elm/elm_Element.hpp>
 #include <vector>
+#include <chrono>
 #include <functional>
 
 namespace pu::ui::elm
@@ -97,6 +98,8 @@ namespace pu::ui::elm
             Color clr;
             Color fcs;
             bool icdown;
+            int basestatus;
+            std::chrono::time_point<std::chrono::steady_clock> basetime;
             std::function<void()> onselch;
             std::vector<MenuItem*> itms;
     };

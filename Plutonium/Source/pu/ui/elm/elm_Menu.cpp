@@ -345,6 +345,15 @@ namespace pu::ui::elm
 
     void Menu::OnInput(u64 Down, u64 Up, u64 Held, bool Touch, bool Focus)
     {
+        if(basestatus == 1)
+        {
+            auto curtime = std::chrono::steady_clock::now();
+            auto diff = std::chrono::duration_cast<std::chrono::milliseconds>(curtime - basetime).count();
+            if(diff >= 150)
+            {
+                basestatus = 2;
+            }
+        }
         if(Touch)
         {
             touchPosition tch;
@@ -383,58 +392,94 @@ namespace pu::ui::elm
         {
             if((Down & KEY_DDOWN) || (Down & KEY_LSTICK_DOWN) || (Held & KEY_RSTICK_DOWN))
             {
-                if(this->isel < (this->itms.size() - 1))
+                bool move = true;
+                if(Held & KEY_RSTICK_DOWN)
                 {
-                    if((this->isel - this->fisel) == (this->ishow - 1))
+                    move = false;
+                    if(basestatus == 0)
                     {
-                        this->fisel++;
-                        this->isel++;
-                        (this->onselch)();
+                        basetime = std::chrono::steady_clock::now();
+                        basestatus = 1;
+                    }
+                    else if(basestatus == 2)
+                    {
+                        basestatus = 0;
+                        move = true;
+                    }
+                }
+                if(move)
+                {
+                    if(this->isel < (this->itms.size() - 1))
+                    {
+                        if((this->isel - this->fisel) == (this->ishow - 1))
+                        {
+                            this->fisel++;
+                            this->isel++;
+                            (this->onselch)();
+                        }
+                        else
+                        {
+                            this->previsel = this->isel;
+                            this->isel++;
+                            (this->onselch)();
+                            if(!this->itms.empty()) for(s32 i = 0; i < this->itms.size(); i++)
+                            {
+                                if(i == this->isel) this->selfact = 0;
+                                else if(i == this->previsel) this->pselfact = 255;
+                            }
+                        }
                     }
                     else
                     {
-                        this->previsel = this->isel;
-                        this->isel++;
-                        (this->onselch)();
-                        if(!this->itms.empty()) for(s32 i = 0; i < this->itms.size(); i++)
-                        {
-                            if(i == this->isel) this->selfact = 0;
-                            else if(i == this->previsel) this->pselfact = 255;
-                        }
+                        this->isel = 0;
+                        this->fisel = 0;
                     }
-                }
-                else
-                {
-                    this->isel = 0;
-                    this->fisel = 0;
                 }
             }
             else if((Down & KEY_DUP) || (Down & KEY_LSTICK_UP) || (Held & KEY_RSTICK_UP))
             {
-                if(this->isel > 0)
+                bool move = true;
+                if(Held & KEY_RSTICK_UP)
                 {
-                    if(this->isel == this->fisel)
+                    move = false;
+                    if(basestatus == 0)
                     {
-                        this->fisel--;
-                        this->isel--;
-                        (this->onselch)();
+                        basetime = std::chrono::steady_clock::now();
+                        basestatus = 1;
+                    }
+                    else if(basestatus == 2)
+                    {
+                        basestatus = 0;
+                        move = true;
+                    }
+                }
+                if(move)
+                {
+                    if(this->isel > 0)
+                    {
+                        if(this->isel == this->fisel)
+                        {
+                            this->fisel--;
+                            this->isel--;
+                            (this->onselch)();
+                        }
+                        else
+                        {
+                            this->previsel = this->isel;
+                            this->isel--;
+                            (this->onselch)();
+                            if(!this->itms.empty()) for(s32 i = 0; i < this->itms.size(); i++)
+                            {
+                                if(i == this->isel) this->selfact = 0;
+                                else if(i == this->previsel) this->pselfact = 255;
+                            }
+                        }
                     }
                     else
                     {
-                        this->previsel = this->isel;
-                        this->isel--;
-                        (this->onselch)();
-                        if(!this->itms.empty()) for(s32 i = 0; i < this->itms.size(); i++)
-                        {
-                            if(i == this->isel) this->selfact = 0;
-                            else if(i == this->previsel) this->pselfact = 255;
-                        }
+                        this->isel = this->itms.size() - 1;
+                        this->fisel = this->itms.size() - this->ishow;
                     }
-                }
-                else
-                {
-                    this->isel = this->itms.size() - 1;
-                    this->fisel = this->itms.size() - this->ishow;
                 }
             }
             else
