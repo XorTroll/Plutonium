@@ -20,7 +20,7 @@ namespace pu::ui::render
 
     NativeTexture RenderText(NativeFont Font, String Text, Color Color)
     {
-        NativeSurface txsrf = TTF_RenderUNICODE_Blended(Font, (const u16*)Text.CStr(), { Color.R, Color.G, Color.B, Color.A });
+        NativeSurface txsrf = TTF_RenderUNICODE_Blended_Wrapped(Font, (const u16*)Text.CStr(), { Color.R, Color.G, Color.B, Color.A }, 1280);
         SDL_SetSurfaceAlphaMod(txsrf, 255);
         return ConvertToTexture(txsrf);
     }
