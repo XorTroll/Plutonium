@@ -20,7 +20,7 @@ namespace pu::ui::render
 
     NativeTexture RenderText(NativeFont Font, String Text, Color Color)
     {
-        NativeSurface txsrf = TTF_RenderUNICODE_Blended_Wrapped(Font, (const u16*)Text.CStr(), { Color.R, Color.G, Color.B, Color.A }, 1280);
+        NativeSurface txsrf = TTF_RenderUNICODE_Blended_Wrapped(Font, (const u16*)Text.AsUTF16().c_str(), { Color.R, Color.G, Color.B, Color.A }, 1280);
         SDL_SetSurfaceAlphaMod(txsrf, 255);
         return ConvertToTexture(txsrf);
     }
@@ -93,14 +93,14 @@ namespace pu::ui::render
     s32 GetTextWidth(NativeFont Font, String Text)
     {
         int tw = 0;
-        TTF_SizeUNICODE(Font, (const u16*)Text.CStr(), &tw, NULL);
+        TTF_SizeUNICODE(Font, (const u16*)Text.AsUTF16().c_str(), &tw, NULL);
         return (s32)tw;
     }
 
     s32 GetTextHeight(NativeFont Font, String Text)
     {
         int th = 0;
-        TTF_SizeUNICODE(Font, (const u16*)Text.CStr(), NULL, &th);
+        TTF_SizeUNICODE(Font, (const u16*)Text.AsUTF16().c_str(), NULL, &th);
         return (s32)th;
     }
 

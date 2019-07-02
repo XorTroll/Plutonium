@@ -31,15 +31,14 @@ namespace pu
         this->base = UTF16;
     }
 
-    const char16_t *String::CStr()
-    {
-        return this->base.c_str();
-    }
-
-    const char *String::CStr8()
+    std::string String::AsUTF8()
     {
         std::wstring_convert<std::codecvt_utf8_utf16<char16_t>, char16_t> converter;
-        std::string utf8 = converter.to_bytes(this->base);
-        return utf8.c_str();
+        return converter.to_bytes(this->base);
+    }
+
+    std::u16string String::AsUTF16()
+    {
+        return this->base;
     }
 }
