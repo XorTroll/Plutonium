@@ -271,6 +271,7 @@ namespace pu::ui::elm
             s32 ch = this->isize;
             s32 its = this->ishow;
             if(its > this->itms.size()) its = this->itms.size();
+            if((its + this->fisel) > this->itms.size()) its = this->itms.size() - this->fisel;
             for(s32 i = this->fisel; i < (its + this->fisel); i++)
             {
                 s32 clrr = this->clr.R;
