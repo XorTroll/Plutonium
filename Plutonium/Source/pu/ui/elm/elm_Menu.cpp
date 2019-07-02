@@ -126,6 +126,7 @@ namespace pu::ui::elm
         this->icdown = false;
         this->dtouch = false;
         this->fcs = { 40, 40, 40, 255 };
+        this->basestatus = 0;
     }
 
     Menu::~Menu()
@@ -254,7 +255,7 @@ namespace pu::ui::elm
         if(this->itms.size() > Index)
         {
             this->isel = Index;
-            this->fisel = 0;
+            this->fisel = isel;
             this->selfact = 255;
             this->pselfact = 0;
         }
@@ -478,7 +479,8 @@ namespace pu::ui::elm
                     else
                     {
                         this->isel = this->itms.size() - 1;
-                        this->fisel = this->itms.size() - this->ishow;
+                        this->fisel = 0;
+                        if(this->itms.size() >= this->ishow) this->fisel = this->itms.size() - this->ishow;
                     }
                 }
             }

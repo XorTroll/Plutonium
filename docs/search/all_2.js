@@ -17,5 +17,6 @@ var searchData=
   ['container',['Container',['../dc/dcd/classpu_1_1ui_1_1_container.html',1,'pu::ui::Container'],['../dc/dcd/classpu_1_1ui_1_1_container.html#ada2489b8eed3626a18f7e47be5fb2fca',1,'pu::ui::Container::Container()']]],
   ['converttotexture',['ConvertToTexture',['../da/d54/namespacepu_1_1ui_1_1render.html#a31131b0e2872370e24aaa53fe83d59c1',1,'pu::ui::render']]],
   ['createshowdialog',['CreateShowDialog',['../da/dc0/classpu_1_1ui_1_1_application.html#ad9774699dca6bbb73f8fdc697d50e138',1,'pu::ui::Application']]],
-  ['cstr',['CStr',['../d2/de5/classpu_1_1_string.html#a64742a1103312db708f43136a34044ed',1,'pu::String']]]
+  ['cstr',['CStr',['../d2/de5/classpu_1_1_string.html#a64742a1103312db708f43136a34044ed',1,'pu::String']]],
+  ['cstr8',['CStr8',['../d2/de5/classpu_1_1_string.html#a60f7176931ded66e67e6405c43f3dc98',1,'pu::String']]]
 ];
