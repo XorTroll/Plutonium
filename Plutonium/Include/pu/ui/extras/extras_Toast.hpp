@@ -17,7 +17,7 @@
 
 namespace pu::ui::extras
 {
-    class Toast : public Overlay
+    class Toast final : public Overlay
     {
         public:
             Toast(String Text, s32 FontSize, Color TextColor, Color BaseColor);
