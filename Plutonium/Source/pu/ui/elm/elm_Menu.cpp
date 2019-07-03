@@ -255,7 +255,19 @@ namespace pu::ui::elm
         if(this->itms.size() > Index)
         {
             this->isel = Index;
-            this->fisel = isel;
+            this->fisel = 0;
+            if(this->isel > 0)
+            {
+                u32 div = (this->itms.size() + this->ishow - 1) / this->ishow;
+                for(u32 i = 0; i < div; i++)
+                {
+                    if((this->ishow * i) > this->isel)
+                    {
+                        this->fisel = this->ishow * (i - 1);
+                        break;
+                    }
+                }
+            }
             this->selfact = 255;
             this->pselfact = 0;
         }
