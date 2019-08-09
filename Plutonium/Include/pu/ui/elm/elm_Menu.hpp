@@ -24,7 +24,6 @@ namespace pu::ui::elm
     {
         public:
             MenuItem(String Name);
-            ~MenuItem();
             String GetName();
             void SetName(String Name);
             Color GetColor();
@@ -36,9 +35,6 @@ namespace pu::ui::elm
             std::string GetIcon();
             void SetIcon(std::string Icon);
             bool HasIcon();
-            render::NativeFont GetFont();
-            render::NativeTexture GetNameTexture();
-            render::NativeTexture GetIconTexture();
         private:
             String name;
             Color clr;
@@ -46,9 +42,6 @@ namespace pu::ui::elm
             std::string icon;
             std::vector<std::function<void()>> cbs;
             std::vector<u64> cbipts;
-            render::NativeFont font;
-            render::NativeTexture itex;
-            render::NativeTexture ntex;
     };
 
     class Menu : public Element
@@ -83,6 +76,7 @@ namespace pu::ui::elm
             void OnRender(render::Renderer *Drawer);
             void OnInput(u64 Down, u64 Up, u64 Held, bool Touch, bool Focus);
         private:
+            void ReloadItemRenders();
             bool dtouch;
             s32 x;
             s32 y;
@@ -102,5 +96,8 @@ namespace pu::ui::elm
             std::chrono::time_point<std::chrono::steady_clock> basetime;
             std::function<void()> onselch;
             std::vector<MenuItem*> itms;
+            render::NativeFont font;
+            std::vector<render::NativeTexture> loadednames;
+            std::vector<render::NativeTexture> loadedicons;
     };
 }

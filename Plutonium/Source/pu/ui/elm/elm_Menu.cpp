@@ -4,25 +4,9 @@ namespace pu::ui::elm
 {
     MenuItem::MenuItem(String Name)
     {
-        this->font = render::LoadDefaultFont(25);
         this->clr = { 10, 10, 10, 255 };
         this->name = Name;
-        this->ntex = render::RenderText(this->font, Name, this->clr);
         this->hasicon = false;
-    }
-
-    MenuItem::~MenuItem()
-    {
-        if(this->ntex != NULL)
-        {
-            render::DeleteTexture(this->ntex);
-            this->ntex = NULL;
-        }
-        if(this->hasicon && (this->itex != NULL))
-        {
-            render::DeleteTexture(this->itex);
-            this->itex = NULL;
-        }
     }
 
     String MenuItem::GetName()
@@ -33,8 +17,6 @@ namespace pu::ui::elm
     void MenuItem::SetName(String Name)
     {
         this->name = Name;
-        render::DeleteTexture(this->ntex);
-        this->ntex = render::RenderText(this->font, Name, this->clr);
     }
 
     Color MenuItem::GetColor()
@@ -45,8 +27,6 @@ namespace pu::ui::elm
     void MenuItem::SetColor(Color Color)
     {
         this->clr = Color;
-        render::DeleteTexture(this->ntex);
-        this->ntex = render::RenderText(this->font, this->name, Color);
     }
 
     void MenuItem::AddOnClick(std::function<void()> Callback, u64 Key)
@@ -62,6 +42,7 @@ namespace pu::ui::elm
 
     std::function<void()> MenuItem::GetCallback(s32 Index)
     {
+        if(this->cbs.empty()) return [&](){};
         return this->cbs[Index];
     }
 
@@ -81,8 +62,6 @@ namespace pu::ui::elm
         if(ifs.good())
         {
             this->icon = Icon;
-            if(this->hasicon) render::DeleteTexture(this->itex);
-            this->itex = render::LoadImage(Icon);
             this->hasicon = true;
         }
         ifs.close();
@@ -91,21 +70,6 @@ namespace pu::ui::elm
     bool MenuItem::HasIcon()
     {
         return this->hasicon;
-    }
-
-    render::NativeFont MenuItem::GetFont()
-    {
-        return this->font;
-    }
-
-    render::NativeTexture MenuItem::GetNameTexture()
-    {
-        return this->ntex;
-    }
-
-    render::NativeTexture MenuItem::GetIconTexture()
-    {
-        return this->itex;
     }
 
     Menu::Menu(s32 X, s32 Y, s32 Width, Color OptionColor, s32 ItemSize, s32 ItemsToShow) : Element::Element()
@@ -127,6 +91,7 @@ namespace pu::ui::elm
         this->dtouch = false;
         this->fcs = { 40, 40, 40, 255 };
         this->basestatus = 0;
+        this->font = render::LoadDefaultFont(25);
     }
 
     Menu::~Menu()
@@ -268,6 +233,7 @@ namespace pu::ui::elm
                     }
                 }
             }
+            ReloadItemRenders();
             this->selfact = 255;
             this->pselfact = 0;
         }
@@ -284,6 +250,7 @@ namespace pu::ui::elm
             s32 its = this->ishow;
             if(its > this->itms.size()) its = this->itms.size();
             if((its + this->fisel) > this->itms.size()) its = this->itms.size() - this->fisel;
+            if(this->loadednames.empty()) ReloadItemRenders();
             for(s32 i = this->fisel; i < (its + this->fisel); i++)
             {
                 s32 clrr = this->clr.R;
@@ -296,6 +263,9 @@ namespace pu::ui::elm
                 s32 nb = clrb - 70;
                 if(nb < 0) nb = 0;
                 Color nclr(nr, ng, nb, this->clr.A);
+                auto loadedidx = i - this->fisel;
+                auto curname = this->loadednames[loadedidx];
+                auto curicon = this->loadedicons[loadedidx];
                 if(this->isel == i)
                 {
                     Drawer->RenderRectangleFill(this->clr, cx, cy, cw, ch);
@@ -318,7 +288,7 @@ namespace pu::ui::elm
                 }
                 else Drawer->RenderRectangleFill(this->clr, cx, cy, cw, ch);
                 MenuItem *itm = this->itms[i];
-                s32 xh = render::GetTextHeight(itm->GetFont(), itm->GetName());
+                s32 xh = render::GetTextHeight(this->font, itm->GetName());
                 s32 tx = (cx + 25);
                 s32 ty = ((ch - xh) / 2) + cy;
                 if(itm->HasIcon())
@@ -327,9 +297,9 @@ namespace pu::ui::elm
                     s32 icx = (cx + 25);
                     s32 icy = (cy + 5);
                     tx = (icx + icd + 25);
-                    Drawer->RenderTextureScaled(itm->GetIconTexture(), icx, icy, icd, icd);
+                    Drawer->RenderTextureScaled(curicon, icx, icy, icd, icd);
                 }
-                Drawer->RenderTexture(itm->GetNameTexture(), tx, ty);
+                Drawer->RenderTexture(curname, tx, ty);
                 cy += ch;
             }
             if(this->ishow < this->itms.size())
@@ -378,6 +348,7 @@ namespace pu::ui::elm
             s32 ch = this->isize;
             s32 its = this->ishow;
             if(its > this->itms.size()) its = this->itms.size();
+            if((its + this->fisel) > this->itms.size()) its = this->itms.size() - this->fisel;
             for(s32 i = this->fisel; i < (this->fisel + its); i++)
             {
                 if(((cx + cw) > tch.px) && (tch.px > cx) && ((cy + ch) > tch.py) && (tch.py > cy))
@@ -430,6 +401,7 @@ namespace pu::ui::elm
                             this->fisel++;
                             this->isel++;
                             (this->onselch)();
+                            ReloadItemRenders();
                         }
                         else
                         {
@@ -441,12 +413,14 @@ namespace pu::ui::elm
                                 if(i == this->isel) this->selfact = 0;
                                 else if(i == this->previsel) this->pselfact = 255;
                             }
+                            ReloadItemRenders();
                         }
                     }
                     else
                     {
                         this->isel = 0;
                         this->fisel = 0;
+                        ReloadItemRenders();
                     }
                 }
             }
@@ -476,6 +450,7 @@ namespace pu::ui::elm
                             this->fisel--;
                             this->isel--;
                             (this->onselch)();
+                            ReloadItemRenders();
                         }
                         else
                         {
@@ -487,6 +462,7 @@ namespace pu::ui::elm
                                 if(i == this->isel) this->selfact = 0;
                                 else if(i == this->previsel) this->pselfact = 255;
                             }
+                            ReloadItemRenders();
                         }
                     }
                     else
@@ -494,6 +470,7 @@ namespace pu::ui::elm
                         this->isel = this->itms.size() - 1;
                         this->fisel = 0;
                         if(this->itms.size() >= this->ishow) this->fisel = this->itms.size() - this->ishow;
+                        ReloadItemRenders();
                     }
                 }
             }
@@ -509,6 +486,30 @@ namespace pu::ui::elm
                     }
                 }
             }
+        }
+    }
+    
+    void Menu::ReloadItemRenders()
+    {
+        for(u32 i = 0; i < this->loadednames.size(); i++) render::DeleteTexture(this->loadednames[i]);
+        for(u32 i = 0; i < this->loadedicons.size(); i++) render::DeleteTexture(this->loadedicons[i]);
+        this->loadednames.clear();
+        this->loadedicons.clear();
+        s32 its = this->ishow;
+        if(its > this->itms.size()) its = this->itms.size();
+        if((its + this->fisel) > this->itms.size()) its = this->itms.size() - this->fisel;
+        for(s32 i = this->fisel; i < (its + this->fisel); i++)
+        {
+            auto strname = this->itms[i]->GetName();
+            auto tex = render::RenderText(this->font, strname, this->itms[i]->GetColor());
+            this->loadednames.push_back(tex);
+            if(this->itms[i]->HasIcon())
+            {
+                auto stricon = this->itms[i]->GetIcon();
+                auto icontex = render::LoadImage(stricon);
+                this->loadedicons.push_back(icontex);
+            }
+            else this->loadedicons.push_back(NULL);
         }
     }
 }
