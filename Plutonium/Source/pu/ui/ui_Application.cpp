@@ -17,7 +17,6 @@ namespace pu::ui
         this->rof = [](render::Renderer *Drawer){ return true; };
         this->fadea = 255;
         this->aapf = 35;
-        this->prelytfade = 0;
     }
 
     Application::~Application()
@@ -27,7 +26,6 @@ namespace pu::ui
 
     void Application::LoadLayout(Layout *Layout)
     {
-        this->prelyt = this->lyt;
         this->lyt = Layout;
     }
 
@@ -194,28 +192,6 @@ namespace pu::ui
             {
                 elm->OnRender(this->rend);
                 if(!this->rover) elm->ProcessInput((void*)this->lyt, d, u, h, touch);
-            }
-        }
-        if(this->prelyt != NULL)
-        {
-            if(this->prelytfade == 0) this->prelytfade = 275;
-            this->prelytfade -= 20;
-            if(this->prelytfade < 0) this->prelytfade = 0;
-            rend->SetBaseRenderAlpha((u8)this->prelytfade);
-            if(this->prelyt->HasBackgroundImage()) this->rend->RenderTexture(this->prelyt->GetBackgroundImageTexture(), 0, 0);
-            if(this->prelyt->HasChilds()) for(s32 i = 0; i < this->prelyt->GetCount(); i++)
-            {
-                elm::Element *elm = this->prelyt->At(i);
-                if(elm->IsVisible())
-                {
-                    elm->OnRender(this->rend);
-                }
-            }
-            rend->UnsetBaseRenderAlpha();
-            if(this->prelytfade <= 0)
-            {
-                this->prelyt = NULL;
-                this->prelytfade = 0;
             }
         }
         if(this->ovl != NULL)

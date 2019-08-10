@@ -54,8 +54,6 @@ namespace pu::ui
             s32 fadea;
             bool closefact;
             Layout *lyt;
-            Layout *prelyt;
-            s32 prelytfade;
             u64 tmillis;
             std::chrono::steady_clock::time_point tclock;
             bool fovl;
