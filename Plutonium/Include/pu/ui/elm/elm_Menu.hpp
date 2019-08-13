@@ -26,8 +26,6 @@ namespace pu::ui::elm
             MenuItem(String Name);
             String GetName();
             void SetName(String Name);
-            String GetExtend();
-            void SetExtend(String Name);
             Color GetColor();
             void SetColor(Color Color);
             void AddOnClick(std::function<void()> Callback, u64 Key = KEY_A);
@@ -36,20 +34,12 @@ namespace pu::ui::elm
             u64 GetCallbackKey(s32 Index);
             std::string GetIcon();
             void SetIcon(std::string Icon);
-            std::string GetExtendIcon();
-            void SetExtendIcon(std::string ExtendedIcon);
             bool HasIcon();
-            bool HasExtend();
-            bool HasExtendIcon();
         private:
             String name;
-            String extend;
             Color clr;
             bool hasicon;
-            bool hasextend;
-            bool hasextendicon;
             std::string icon;
-            std::string extendIcon;
             std::vector<std::function<void()>> cbs;
             std::vector<u64> cbipts;
     };
@@ -109,7 +99,5 @@ namespace pu::ui::elm
             render::NativeFont font;
             std::vector<render::NativeTexture> loadednames;
             std::vector<render::NativeTexture> loadedicons;
-            std::vector<render::NativeTexture> loadedext;
-            std::vector<render::NativeTexture> loadedexticons;
     };
 }

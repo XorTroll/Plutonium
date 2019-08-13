@@ -7,8 +7,6 @@ namespace pu::ui::elm
         this->clr = { 10, 10, 10, 255 };
         this->name = Name;
         this->hasicon = false;
-        this->hasextend = false;
-        this->hasextendicon = false;
     }
 
     String MenuItem::GetName()
@@ -19,17 +17,6 @@ namespace pu::ui::elm
     void MenuItem::SetName(String Name)
     {
         this->name = Name;
-    }
-
-    String MenuItem::GetExtend()
-    {
-        return this->extend;
-    }
-
-    void MenuItem::SetExtend(String Extend)
-    {
-        this->extend = Extend;
-        this->hasextend = true;
     }
 
     Color MenuItem::GetColor()
@@ -80,35 +67,9 @@ namespace pu::ui::elm
         ifs.close();
     }
 
-    std::string MenuItem::GetExtendIcon()
-    {
-        return this->extendIcon;
-    }
-
-    void MenuItem::SetExtendIcon(std::string ExtendedIcon)
-    {
-        std::ifstream ifs(ExtendedIcon);
-        if(ifs.good())
-        {
-            this->extendIcon = ExtendedIcon;
-            this->hasextendicon = true;
-        }
-        ifs.close();
-    }
-
     bool MenuItem::HasIcon()
     {
         return this->hasicon;
-    }
-
-    bool MenuItem::HasExtend()
-    {
-        return this->hasextend;
-    }
-
-    bool MenuItem::HasExtendIcon()
-    {
-        return this->hasextendicon;
     }
 
     Menu::Menu(s32 X, s32 Y, s32 Width, Color OptionColor, s32 ItemSize, s32 ItemsToShow) : Element::Element()
@@ -305,8 +266,6 @@ namespace pu::ui::elm
                 auto loadedidx = i - this->fisel;
                 auto curname = this->loadednames[loadedidx];
                 auto curicon = this->loadedicons[loadedidx];
-                auto curext = this->loadedext[loadedidx];
-                auto curexticon = this->loadedexticons[loadedidx];
                 if(this->isel == i)
                 {
                     Drawer->RenderRectangleFill(this->clr, cx, cy, cw, ch);
@@ -350,32 +309,6 @@ namespace pu::ui::elm
                         icx = icx+((this->isize-icw)/2);
                     }
                     Drawer->RenderTextureScaled(curicon, icx, icy, icw, ich);
-                }
-                if(itm->HasExtend())
-                {
-                    s32 exh = render::GetTextHeight(this->font, itm->GetExtend());
-                    s32 ex = tx;
-                    s32 ey = (((ch - exh) / 4) * 3) + cy;
-                    if(itm->HasExtendIcon())
-                    {
-                        float efactor = (float)render::GetTextureHeight(curexticon)/(float)render::GetTextureWidth(curexticon);
-                        s32 eicw = (this->isize/3 - 10);
-                        s32 eich = eicw;
-                        s32 eicx = tx;
-                        s32 eicy = ey - this->isize/8;
-                        if(efactor < 1)
-                        {
-                            eich = eich*efactor;
-                            eicy = eicy+((eicw-eich)/2);
-                        } else
-                        {
-                            eicw = eicw/efactor;
-                            eicx = eicx+((eicw-eicw)/2);
-                        }
-                        ex = (eicx + eicw + 25);
-                        Drawer->RenderTextureScaled(curicon, eicx, eicy, eicw, eich);
-                    }
-                    Drawer->RenderTexture(curext, ex, ey);
                 }
                 Drawer->RenderTexture(curname, tx, ty);
                 cy += ch;
@@ -571,12 +504,8 @@ namespace pu::ui::elm
     {
         for(u32 i = 0; i < this->loadednames.size(); i++) render::DeleteTexture(this->loadednames[i]);
         for(u32 i = 0; i < this->loadedicons.size(); i++) render::DeleteTexture(this->loadedicons[i]);
-        for(u32 i = 0; i < this->loadedext.size(); i++) render::DeleteTexture(this->loadedext[i]);
-        for(u32 i = 0; i < this->loadedexticons.size(); i++) render::DeleteTexture(this->loadedexticons[i]);
         this->loadednames.clear();
         this->loadedicons.clear();
-        this->loadedext.clear();
-        this->loadedexticons.clear();
         s32 its = this->ishow;
         if(its > this->itms.size()) its = this->itms.size();
         if((its + this->fisel) > this->itms.size()) its = this->itms.size() - this->fisel;
@@ -592,23 +521,6 @@ namespace pu::ui::elm
                 this->loadedicons.push_back(icontex);
             }
             else this->loadedicons.push_back(NULL);
-            if(this->itms[i]->HasExtend())
-            {
-                auto strext = this->itms[i]->GetExtend();
-                auto exttex = render::RenderText(this->font, strext, this->itms[i]->GetColor());
-                this->loadedext.push_back(exttex);
-                if(this->itms[i]->HasExtendIcon())
-                {
-                    auto strexticon = this->itms[i]->GetExtendIcon();
-                    auto exticontex = render::LoadImage(strexticon);
-                    this->loadedexticons.push_back(exticontex);
-                }
-                else this->loadedexticons.push_back(NULL);
-            }
-            else {
-                this->loadedext.push_back(NULL);
-                this->loadedexticons.push_back(NULL);
-            }
         }
     }
 }
