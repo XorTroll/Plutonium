@@ -293,11 +293,20 @@ namespace pu::ui::elm
                 s32 ty = ((ch - xh) / 2) + cy;
                 if(itm->HasIcon())
                 {
-                    s32 icd = (this->isize - 10);
+                    float factor = (float)render::GetTextureHeight(curicon)/(float)render::GetTextureWidth(curicon);
+                    s32 icw = (this->isize - 10);
+                    s32 ich = icw;
                     s32 icx = (cx + 25);
                     s32 icy = (cy + 5);
-                    tx = (icx + icd + 25);
-                    Drawer->RenderTextureScaled(curicon, icx, icy, icd, icd);
+                    tx = (icx + icw + 25);
+                    if(factor < 1){
+                        ich = ich*factor;
+                        icy = icy+((this->isize-ich)/2);
+                    } else {
+                        icw = icw/factor;
+                        icx = icx+((this->isize-icw)/2);
+                    }
+                    Drawer->RenderTextureScaled(curicon, icx, icy, icw, ich);
                 }
                 Drawer->RenderTexture(curname, tx, ty);
                 cy += ch;
