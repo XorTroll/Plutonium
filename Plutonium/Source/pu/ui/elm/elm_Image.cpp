@@ -81,6 +81,8 @@ namespace pu::ui::elm
             this->img = Image;
             render::DeleteTexture(this->ntex);
             this->ntex = render::LoadImage(Image);
+            this->w = render::GetTextureWidth(this->ntex);
+            this->h = render::GetTextureHeight(this->ntex);
         }
         ifs.close();
     }
