@@ -299,10 +299,12 @@ namespace pu::ui::elm
                     s32 icx = (cx + 25);
                     s32 icy = (cy + 5);
                     tx = (icx + icw + 25);
-                    if(factor < 1){
+                    if(factor < 1)
+                    {
                         ich = ich*factor;
                         icy = icy+((this->isize-ich)/2);
-                    } else {
+                    } else
+                    {
                         icw = icw/factor;
                         icx = icx+((this->isize-icw)/2);
                     }
