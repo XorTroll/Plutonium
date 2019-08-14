@@ -198,6 +198,8 @@ namespace pu::ui::elm
     {
         if(!this->itms.empty()) for(s32 i = 0; i < this->itms.size(); i++) delete this->itms[i];
         this->itms.clear();
+        this->loadednames.clear();
+        this->loadedicons.clear();
     }
 
     void Menu::SetCooldownEnabled(bool Cooldown)
