@@ -121,6 +121,21 @@ namespace pu
         return this->base;
     }
 
+    bool String::operator==(String &Str)
+    {
+        return (this->AsUTF16() == Str.AsUTF16());
+    }
+
+    bool String::operator!=(String &Str)
+    {
+        return !(*this == Str);
+    }
+
+    String String::operator+(String &Str)
+    {
+        return String(this->AsUTF16() + Str.AsUTF16());
+    }
+
     bool String::StartsWith(String Str)
     {
         return (this->base.rfind(Str.AsUTF16(), 0) == 0);
@@ -134,5 +149,30 @@ namespace pu
     bool String::HasAny()
     {
         return !this->IsEmpty();
+    }
+
+    size_t String::GetLength()
+    {
+        return this->base.length();
+    }
+
+    pu::String String::Substring(size_t Index, size_t Length)
+    {
+        return this->base.substr(Index, Length);
+    }
+
+    bool String::empty()
+    {
+        return this->IsEmpty();
+    }
+
+    size_t String::length()
+    {
+        return this->GetLength();
+    }
+
+    pu::String String::substr(size_t Offset, size_t Length)
+    {
+        return this->Substring(Offset, Length);
     }
 }

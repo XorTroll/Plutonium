@@ -45,9 +45,21 @@ namespace pu
             String operator+(std::u16string &UTF16);
             std::u16string AsUTF16();
 
+            bool operator==(String &Str);
+            bool operator!=(String &Str);
+            String operator+(String &Str);
+
             bool StartsWith(String Str);
             bool IsEmpty();
             bool HasAny();
+            size_t GetLength();
+            pu::String Substring(size_t Index, size_t Length);
+
+            // C++ string compatibility
+            
+            bool empty();
+            size_t length();
+            pu::String substr(size_t Offset, size_t Length = std::u16string::npos);
         private:
             std::u16string base;
     };
