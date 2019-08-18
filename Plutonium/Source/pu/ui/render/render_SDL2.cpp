@@ -20,7 +20,7 @@ namespace pu::ui::render
 
     NativeTexture RenderText(NativeFont Font, String Text, Color Color)
     {
-        NativeSurface txsrf = TTF_RenderUNICODE_Blended_Wrapped(Font, (const u16*)Text.AsUTF16().c_str(), { Color.R, Color.G, Color.B, Color.A }, 1280);
+        NativeSurface txsrf = TTF_RenderUNICODE_Blended_Wrapped(Font, reinterpret_cast<const u16*>(Text.AsCUTF16()), { Color.R, Color.G, Color.B, Color.A }, 1280);
         SDL_SetSurfaceAlphaMod(txsrf, 255);
         return ConvertToTexture(txsrf);
     }
@@ -32,10 +32,8 @@ namespace pu::ui::render
 
     NativeFont LoadSharedFont(SharedFont Type, s32 Size)
     {
-        for(auto font: shfonts)
-        {
-            if((font.first == Size) && (font.second.first == Type)) return font.second.second;
-        }
+        auto it = shfonts.find(Size);
+        if((it != shfonts.end()) && (it->second.first == Type)) return it->second.second;
         PlFontData plfont;
         NativeFont font = NULL;
         SDL_RWops *mem = NULL;
@@ -51,10 +49,8 @@ namespace pu::ui::render
 
     NativeFont LoadFont(std::string Path, s32 Size)
     {
-        for(auto font: filefonts)
-        {
-            if((font.first == Size) && (font.second.first == Path)) return font.second.second;
-        }
+        auto it = filefonts.find(Size);
+        if((it != filefonts.end()) && (it->second.first == Path)) return it->second.second;
         auto font = TTF_OpenFont(Path.c_str(), Size);
         if(font != NULL) filefonts.insert(std::make_pair(Size, std::make_pair(Path, font)));
         return font;
