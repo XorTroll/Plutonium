@@ -62,7 +62,7 @@ namespace pu
             bool empty();
             size_t length();
             pu::String substr(size_t Offset, size_t Length = npos);
-            size_t find_first_of(pu::String Str, size_t Position = npos);
+            size_t find_first_of(pu::String Str, size_t Position = 0);
             size_t find_last_of(pu::String Str, size_t Position = npos);
             void erase(size_t Offset, size_t Length = npos);
             iterator begin();
