@@ -86,17 +86,39 @@ namespace pu::ui::render
         return (s32)h;
     }
 
+    #define PROCESS_TMP_STR { \
+        int tmpw = 0; \
+        TTF_SizeUNICODE(Font, (const u16*)tmpstr.c_str(), &tmpw, NULL); \
+        if(tmpw > tw) tw = tmpw; \
+        int tmph = 0; \
+        TTF_SizeUNICODE(Font, (const u16*)tmpstr.c_str(), NULL, &tmph); \
+        th += tmph; \
+        tmpstr = u""; \
+    }
+
+    #define TEXT_SIZE_BASE std::u16string tmpstr; \
+        int tw = 0; \
+        int th = 0; \
+        for(auto &ch: Text.AsUTF16()) \
+        { \
+            if(ch == u'\n') \
+            PROCESS_TMP_STR \
+            else tmpstr += ch; \
+        } \
+        if(!tmpstr.empty()) \
+        PROCESS_TMP_STR
+
     s32 GetTextWidth(NativeFont Font, String Text)
     {
-        int tw = 0;
-        TTF_SizeUNICODE(Font, (const u16*)Text.AsUTF16().c_str(), &tw, NULL);
+        TEXT_SIZE_BASE
+
         return (s32)tw;
     }
 
     s32 GetTextHeight(NativeFont Font, String Text)
     {
-        int th = 0;
-        TTF_SizeUNICODE(Font, (const u16*)Text.AsUTF16().c_str(), NULL, &th);
+        TEXT_SIZE_BASE
+
         return (s32)th;
     }
 
