@@ -38,6 +38,8 @@ namespace pu::ui
             render::NativeFont tfont;
             render::NativeFont cfont;
             render::NativeFont ofont;
+            String stitle;
+            String scnt;
             render::NativeTexture title;
             render::NativeTexture cnt;
             std::vector<String> sopts;

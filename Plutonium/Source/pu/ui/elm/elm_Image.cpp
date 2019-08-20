@@ -2,21 +2,14 @@
 
 namespace pu::ui::elm
 {
-    Image::Image(s32 X, s32 Y, std::string Image) : Element::Element()
+    Image::Image(s32 X, s32 Y, String Image) : Element::Element()
     {
         this->x = X;
         this->y = Y;
         this->w = 0;
         this->h = 0;
-        std::ifstream ifs(Image);
-        if(ifs.good())
-        {
-            this->img = Image;
-            this->ntex = render::LoadImage(Image);
-            this->w = render::GetTextureWidth(this->ntex);
-            this->h = render::GetTextureHeight(this->ntex);
-        }
-        ifs.close();
+        this->ntex = NULL;
+        this->SetImage(Image);
     }
 
     Image::~Image()
@@ -68,19 +61,21 @@ namespace pu::ui::elm
         this->h = Height;
     }
 
-    std::string Image::GetImage()
+    String Image::GetImage()
     {
         return this->img;
     }
 
-    void Image::SetImage(std::string Image)
+    void Image::SetImage(String Image)
     {
-        std::ifstream ifs(Image);
+        if(this->ntex != NULL) render::DeleteTexture(this->ntex);
+        this->ntex = NULL;
+        std::ifstream ifs(Image.AsUTF8());
         if(ifs.good())
         {
+            ifs.close();
             this->img = Image;
-            render::DeleteTexture(this->ntex);
-            this->ntex = render::LoadImage(Image);
+            this->ntex = render::LoadImage(Image.AsUTF8());
             this->w = render::GetTextureWidth(this->ntex);
             this->h = render::GetTextureHeight(this->ntex);
         }
@@ -89,10 +84,7 @@ namespace pu::ui::elm
 
     bool Image::IsImageValid()
     {
-        std::ifstream ifs(this->img);
-        bool ok = ifs.good();
-        ifs.close();
-        return ok;
+        return ((ntex != NULL) && this->img.HasAny());
     }
 
     void Image::OnRender(render::Renderer *Drawer)

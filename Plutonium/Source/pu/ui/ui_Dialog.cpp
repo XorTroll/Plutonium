@@ -9,6 +9,8 @@ namespace pu::ui
         this->tfont = render::LoadDefaultFont(30);
         this->cfont = render::LoadDefaultFont(20);
         this->ofont = render::LoadDefaultFont(18);
+        this->stitle = Title;
+        this->scnt = Content;
         this->title = render::RenderText(this->tfont, Title, { 10, 10, 10, 255 });
         this->cnt = render::RenderText(this->cfont, Content, { 20, 20, 20, 255 });
         this->osel = 0;
@@ -91,18 +93,18 @@ namespace pu::ui
         if(dw > 1280) dw = 1280;
         s32 icm = 30;
         s32 elemh = 60;
-        s32 tdw = render::GetTextureWidth(this->cnt) + 90;
+        s32 tdw = render::GetTextWidth(this->cfont, this->scnt) + 90;
         if(tdw > dw) dw = tdw;
-        tdw = render::GetTextureWidth(this->title) + 90;
+        tdw = render::GetTextWidth(this->tfont, this->stitle) + 90;
         if(tdw > dw) dw = tdw;
-        s32 ely = render::GetTextureHeight(this->title) + render::GetTextureHeight(this->cnt) + 140;
+        s32 ely = render::GetTextHeight(this->tfont, this->stitle) + render::GetTextHeight(this->cfont, this->scnt) + 140;
         if(this->hicon)
         {
             s32 tely = render::GetTextureHeight(this->icon) + icm + 25;
             if(tely > ely) ely = tely;
-            tdw = render::GetTextureWidth(this->cnt) + 90 + render::GetTextureWidth(this->icon) + 20;
+            tdw = render::GetTextWidth(this->cfont, this->scnt) + 90 + render::GetTextureWidth(this->icon) + 20;
             if(tdw > dw) dw = tdw;
-            tdw = render::GetTextureWidth(this->title) + 90 + render::GetTextureWidth(this->icon) + 20;
+            tdw = render::GetTextWidth(this->tfont, this->stitle) + 90 + render::GetTextureWidth(this->icon) + 20;
             if(tdw > dw) dw = tdw;
         }
         if(dw > 1280) dw = 1280;

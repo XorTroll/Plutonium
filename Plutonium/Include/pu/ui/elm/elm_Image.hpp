@@ -19,7 +19,7 @@ namespace pu::ui::elm
     class Image : public Element
     {
         public:
-            Image(s32 X, s32 Y, std::string Image);
+            Image(s32 X, s32 Y, String Image);
             ~Image();
             s32 GetX();
             void SetX(s32 X);
@@ -29,13 +29,13 @@ namespace pu::ui::elm
             void SetWidth(s32 Width);
             s32 GetHeight();
             void SetHeight(s32 Height);
-            std::string GetImage();
-            void SetImage(std::string Image);
+            String GetImage();
+            void SetImage(String Image);
             bool IsImageValid();
             void OnRender(render::Renderer *Drawer);
             void OnInput(u64 Down, u64 Up, u64 Held, bool Touch, bool Focus);
         private:
-            std::string img;
+            String img;
             render::NativeTexture ntex;
             s32 x;
             s32 y;
