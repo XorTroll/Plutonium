@@ -55,20 +55,20 @@ namespace pu
             bool IsEmpty();
             bool HasAny();
             size_t GetLength();
-            pu::String Substring(size_t Index, size_t Length);
+            String Substring(size_t Index, size_t Length);
 
             // C++ string compatibility
             
             bool empty();
             size_t length();
-            pu::String substr(size_t Offset, size_t Length = npos);
-            size_t find_first_of(pu::String Str, size_t Position = 0);
-            size_t find_last_of(pu::String Str, size_t Position = npos);
+            String substr(size_t Offset, size_t Length = npos);
+            size_t find_first_of(String Str, size_t Position = 0);
+            size_t find_last_of(String Str, size_t Position = npos);
             void erase(size_t Offset, size_t Length = npos);
             iterator begin();
             iterator end();
-            size_t find(pu::String Str, size_t Position = 0);
-            String replace(size_t Position, size_t Length, pu::String Str);
+            size_t find(String Str, size_t Position = 0);
+            String replace(size_t Position, size_t Length, String Str);
             void reserve(size_t Length);
 
             friend String operator+(const String &L, char R);

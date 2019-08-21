@@ -71,6 +71,7 @@ namespace pu::ui::elm
             void ClearItems();
             void SetCooldownEnabled(bool Cooldown);
             MenuItem *GetSelectedItem();
+            std::vector<MenuItem*> &GetItems();
             s32 GetSelectedIndex();
             void SetSelectedIndex(s32 Index);
             void OnRender(render::Renderer *Drawer);
