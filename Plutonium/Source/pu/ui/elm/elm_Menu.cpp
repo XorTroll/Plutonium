@@ -189,14 +189,13 @@ namespace pu::ui::elm
         this->onselch = Callback;
     }
 
-    void Menu::AddItem(MenuItem *Item)
+    void Menu::AddItem(std::shared_ptr<MenuItem> &Item)
     {
         this->itms.push_back(Item);
     }
 
     void Menu::ClearItems()
     {
-        if(!this->itms.empty()) for(s32 i = 0; i < this->itms.size(); i++) delete this->itms[i];
         this->itms.clear();
     }
 
@@ -205,12 +204,12 @@ namespace pu::ui::elm
         this->icdown = Cooldown;
     }
 
-    MenuItem *Menu::GetSelectedItem()
+    std::shared_ptr<MenuItem> &Menu::GetSelectedItem()
     {
         return this->itms[this->isel];
     }
 
-    std::vector<MenuItem*> &Menu::GetItems()
+    std::vector<std::shared_ptr<MenuItem>> &Menu::GetItems()
     {
         return this->itms;
     }
@@ -236,12 +235,12 @@ namespace pu::ui::elm
         }
     }
 
-    void Menu::OnRender(render::Renderer *Drawer)
+    void Menu::OnRender(std::shared_ptr<render::Renderer> &Drawer, s32 X, s32 Y)
     {
         if(!this->itms.empty())
         {
-            s32 cx = this->x;
-            s32 cy = this->y;
+            s32 cx = X;
+            s32 cy = Y;
             s32 cw = this->w;
             s32 ch = this->isize;
             s32 its = this->ishow;
@@ -284,7 +283,7 @@ namespace pu::ui::elm
                     else Drawer->RenderRectangleFill(this->clr, cx, cy, cw, ch);
                 }
                 else Drawer->RenderRectangleFill(this->clr, cx, cy, cw, ch);
-                MenuItem *itm = this->itms[i];
+                auto itm = this->itms[i];
                 s32 xh = render::GetTextHeight(this->font, itm->GetName());
                 s32 tx = (cx + 25);
                 s32 ty = ((ch - xh) / 2) + cy;
@@ -311,8 +310,8 @@ namespace pu::ui::elm
                 s32 snb = sccb - 30;
                 if(snb < 0) snb = 0;
                 Color sclr(snr, sng, snb, this->scb.A);
-                s32 scx = this->x + (this->w - 20);
-                s32 scy = this->y;
+                s32 scx = X + (this->w - 20);
+                s32 scy = Y;
                 s32 scw = 20;
                 s32 sch = (this->ishow * this->isize);
                 Drawer->RenderRectangleFill(this->scb, scx, scy, scw, sch);
@@ -324,7 +323,7 @@ namespace pu::ui::elm
         }
     }
 
-    void Menu::OnInput(u64 Down, u64 Up, u64 Held, bool Touch, bool Focus)
+    void Menu::OnInput(u64 Down, u64 Up, u64 Held, bool Touch)
     {
         if(basestatus == 1)
         {
@@ -339,8 +338,8 @@ namespace pu::ui::elm
         {
             touchPosition tch;
             hidTouchRead(&tch, 0);
-            s32 cx = this->x;
-            s32 cy = this->y;
+            s32 cx = this->GetProcessedX();
+            s32 cy = this->GetProcessedY();
             s32 cw = this->w;
             s32 ch = this->isize;
             s32 its = this->ishow;

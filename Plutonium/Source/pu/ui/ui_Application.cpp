@@ -4,17 +4,17 @@ namespace pu::ui
 {
     Application::Application(u32 Flags, bool RenderAccel)
     {
-        this->rend = new render::Renderer();
+        this->rend = render::Renderer::New();
         this->rend->Initialize(Flags, RenderAccel);
         this->show = false;
         this->cbipt = [&](u64 Down, u64 Up, u64 Held, bool Touch){};
         this->rover = false;
-        this->ovl = NULL;
+        this->ovl = nullptr;
         this->closefact = false;
         this->fovl = false;
         this->ffovl = false;
-        this->lyt = NULL;
-        this->rof = [](render::Renderer *Drawer){ return true; };
+        this->lyt = nullptr;
+        this->rof = [](std::shared_ptr<render::Renderer> &Drawer) -> bool { return true; };
         this->fadea = 255;
         this->aapf = 35;
     }
@@ -22,11 +22,6 @@ namespace pu::ui
     Application::~Application()
     {
         this->rend->Finalize();
-    }
-
-    void Application::LoadLayout(Layout *Layout)
-    {
-        this->lyt = Layout;
     }
 
     void Application::AddThread(std::function<void()> Callback)
@@ -39,14 +34,14 @@ namespace pu::ui
         this->cbipt = Callback;
     }
 
-    s32 Application::ShowDialog(Dialog *ToShow)
+    s32 Application::ShowDialog(std::shared_ptr<Dialog> &ToShow)
     {
         return ToShow->Show(this->rend, this);
     }
 
     int Application::CreateShowDialog(String Title, String Content, std::vector<String> Options, bool UseLastOptionAsCancel, std::string Icon)
     {
-        Dialog *dlg = new Dialog(Title, Content);
+        auto dlg = Dialog::New(Title, Content);
         for(s32 i = 0; i < Options.size(); i++)
         {
             if(UseLastOptionAsCancel && (i == Options.size() - 1)) dlg->SetCancelOption(Options[i]);
@@ -56,18 +51,17 @@ namespace pu::ui
         int opt = this->ShowDialog(dlg);
         if(dlg->UserCancelled()) opt = -1;
         else if(!dlg->IsOk()) opt = -2;
-        delete dlg;
         return opt;
     }
 
-    void Application::StartOverlay(Overlay *Ovl)
+    void Application::StartOverlay(std::shared_ptr<Overlay> &Ovl)
     {
-        if(this->ovl == NULL) this->ovl = Ovl;
+        if(this->ovl == nullptr) this->ovl = Ovl;
     }
 
-    void Application::StartOverlayWithTimeout(Overlay *Ovl, u64 Milli)
+    void Application::StartOverlayWithTimeout(std::shared_ptr<Overlay> &Ovl, u64 Milli)
     {
-        if(this->ovl == NULL)
+        if(this->ovl == nullptr)
         {
             this->ovl = Ovl;
             this->tmillis = Milli;
@@ -77,11 +71,11 @@ namespace pu::ui
 
     void Application::EndOverlay()
     {
-        if(this->ovl != NULL)
+        if(this->ovl != nullptr)
         {
             this->ovl->NotifyEnding(false);
             this->tmillis = 0;
-            this->ovl = NULL;
+            this->ovl = nullptr;
             this->fovl = false;
             this->ffovl = false;
         }
@@ -89,7 +83,7 @@ namespace pu::ui
 
     void Application::Show()
     {
-        if(this->lyt == NULL) return;
+        if(this->lyt == nullptr) return;
         this->show = true;
         while(this->show) this->CallForRender();
     }
@@ -114,13 +108,13 @@ namespace pu::ui
         {
             c = (this->rof)(this->rend);
             this->rover = false;
-            this->rof = [](render::Renderer *Drawer){ return true; };
+            this->rof = [](std::shared_ptr<render::Renderer> &Drawer) -> bool { return true; };
         }
         this->rend->FinalizeRender();
         return c;
     }
 
-    bool Application::CallForRenderWithRenderOver(std::function<bool(render::Renderer *Drawer)> RenderFunc)
+    bool Application::CallForRenderWithRenderOver(std::function<bool(std::shared_ptr<render::Renderer> &Drawer)> RenderFunc)
     {
         this->rover = true;
         this->rof = RenderFunc;
@@ -171,7 +165,6 @@ namespace pu::ui
 
     void Application::OnRender()
     {
-
         hidScanInput();
         u64 d = hidKeysDown(CONTROLLER_P1_AUTO);
         u64 u = hidKeysUp(CONTROLLER_P1_AUTO);
@@ -180,18 +173,18 @@ namespace pu::ui
         bool touch = (th & KEY_TOUCH);
         if(!this->thds.empty()) for(s32 i = 0; i < this->thds.size(); i++) (this->thds[i])();
         this->lyt->PreRender();
-        std::vector<std::function<void()>> lyth = this->lyt->GetAllThreads();
+        auto lyth = this->lyt->GetAllThreads();
         if(!lyth.empty()) for(s32 i = 0; i < lyth.size(); i++) (lyth[i])();
         if(!this->rover) (this->cbipt)(d, u, h, touch);
         if(this->lyt->HasBackgroundImage()) this->rend->RenderTexture(this->lyt->GetBackgroundImageTexture(), 0, 0);
         if(!this->rover) (this->lyt->GetOnInput())(d, u, h, touch);
         if(this->lyt->HasChilds()) for(s32 i = 0; i < this->lyt->GetCount(); i++)
         {
-            elm::Element *elm = this->lyt->At(i);
+            auto elm = this->lyt->At(i);
             if(elm->IsVisible())
             {
-                elm->OnRender(this->rend);
-                if(!this->rover) elm->ProcessInput((void*)this->lyt, d, u, h, touch);
+                elm->OnRender(this->rend, elm->GetProcessedX(), elm->GetProcessedY());
+                if(!this->rover) elm->OnInput(d, u, h, touch);
             }
         }
         if(this->ovl != NULL)

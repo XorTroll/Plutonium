@@ -20,12 +20,14 @@ namespace pu::ui
     {
         public:
             Overlay(s32 X, s32 Y, s32 Width, s32 Height, Color Background, bool Rounded = true);
+            PU_SMART_CTOR(Overlay)
             ~Overlay();
+
             void SetRadius(s32 Radius);
             s32 GetRadius();
-            virtual void OnPreRender(render::Renderer *Drawer);
-            virtual void OnPostRender(render::Renderer *Drawer);
-            bool Render(render::Renderer *Drawer);
+            virtual void OnPreRender(std::shared_ptr<render::Renderer> &Drawer);
+            virtual void OnPostRender(std::shared_ptr<render::Renderer> &Drawer);
+            bool Render(std::shared_ptr<render::Renderer> &Drawer);
             void NotifyEnding(bool End);
         private:
             s32 fadea;

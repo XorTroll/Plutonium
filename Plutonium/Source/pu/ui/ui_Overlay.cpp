@@ -28,25 +28,24 @@ namespace pu::ui
         return this->rad;
     }
 
-    void Overlay::OnPreRender(render::Renderer *Drawer)
+    void Overlay::OnPreRender(std::shared_ptr<render::Renderer> &Drawer)
     {
     }
 
-    void Overlay::OnPostRender(render::Renderer *Drawer)
+    void Overlay::OnPostRender(std::shared_ptr<render::Renderer> &Drawer)
     {
     }
 
-    bool Overlay::Render(render::Renderer *Drawer)
+    bool Overlay::Render(std::shared_ptr<render::Renderer> &Drawer)
     {
         this->OnPreRender(Drawer);
         Drawer->SetBaseRenderAlpha(this->fadea);
         if(this->round) Drawer->RenderRoundedRectangleFill(this->bg, this->x, this->y, this->w, this->h, this->rad);
         else Drawer->RenderRectangleFill(this->bg, this->x, this->y, this->w, this->h);
         this->PreRender();
-        if(!this->elms.empty()) for(s32 i = 0; i < this->elms.size(); i++)
+        for(auto &elm: this->elms)
         {
-            elm::Element *elm = this->elms[i];
-            if(elm->IsVisible()) elm->OnRender(Drawer);
+            if(elm->IsVisible()) elm->OnRender(Drawer, elm->GetProcessedX(), elm->GetProcessedY());
         }
         Drawer->UnsetBaseRenderAlpha();
         if(this->end)

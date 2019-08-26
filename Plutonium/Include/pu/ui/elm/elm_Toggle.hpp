@@ -21,7 +21,9 @@ namespace pu::ui::elm
     {
         public:
             Toggle(s32 X, s32 Y, String Content, u64 Key, Color Color);
+            PU_SMART_CTOR(Toggle)
             ~Toggle();
+
             s32 GetX();
             void SetX(s32 X);
             s32 GetY();
@@ -36,8 +38,8 @@ namespace pu::ui::elm
             u64 GetKey();
             void SetKey(u64 Key);
             bool IsChecked();
-            void OnRender(render::Renderer *Drawer);
-            void OnInput(u64 Down, u64 Up, u64 Held, bool Touch, bool Focus);
+            void OnRender(std::shared_ptr<render::Renderer> &Drawer, s32 X, s32 Y);
+            void OnInput(u64 Down, u64 Up, u64 Held, bool Touch);
         private:
             String cnt;
             s32 x;

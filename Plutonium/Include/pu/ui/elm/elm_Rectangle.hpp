@@ -20,6 +20,8 @@ namespace pu::ui::elm
     {
         public:
             Rectangle(s32 X, s32 Y, s32 Width, s32 Height, Color RecColor, s32 BorderRadius = 0);
+            PU_SMART_CTOR(Rectangle)
+
             s32 GetX();
             void SetX(s32 X);
             s32 GetY();
@@ -32,8 +34,8 @@ namespace pu::ui::elm
             void SetBorderRadius(s32 Radius);
             Color GetColor();
             void SetColor(Color RecColor);
-            void OnRender(render::Renderer *Drawer);
-            void OnInput(u64 Down, u64 Up, u64 Held, bool Touch, bool Focus);
+            void OnRender(std::shared_ptr<render::Renderer> &Drawer, s32 X, s32 Y);
+            void OnInput(u64 Down, u64 Up, u64 Held, bool Touch);
         private:
             s32 borderr;
             s32 x;

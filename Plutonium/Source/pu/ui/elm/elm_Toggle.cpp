@@ -100,14 +100,14 @@ namespace pu::ui::elm
         return this->checked;
     }
 
-    void Toggle::OnRender(render::Renderer *Drawer)
+    void Toggle::OnRender(std::shared_ptr<render::Renderer> &Drawer, s32 X, s32 Y)
     {
         s32 tw = render::GetTextWidth(this->fnt, this->cnt);
         s32 th = render::GetTextHeight(this->fnt, this->cnt);
         s32 rw = th;
         s32 rh = (2 * th);
-        s32 rx = this->GetProcessedX();
-        s32 ry = this->GetProcessedY();
+        s32 rx = X;
+        s32 ry = Y;
         s32 tx = rx + rw + (th / 2);
         s32 ty = ry + (th / 2);
         if(this->checked)
@@ -133,7 +133,7 @@ namespace pu::ui::elm
         Drawer->RenderTexture(this->ntex, tx, ty);
     }
 
-    void Toggle::OnInput(u64 Down, u64 Up, u64 Held, bool Touch, bool Focus)
+    void Toggle::OnInput(u64 Down, u64 Up, u64 Held, bool Touch)
     {
         if((Down & this->key) || ((this->key == KEY_TOUCH) && Touch)) this->checked = !this->checked;
     }

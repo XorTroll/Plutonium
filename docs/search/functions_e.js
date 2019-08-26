@@ -2,7 +2,7 @@ var searchData=
 [
   ['rectangle',['Rectangle',['../d5/dea/classpu_1_1ui_1_1elm_1_1_rectangle.html#a2d6bd9b0d1b7ea36fa5bded5adb93d1c',1,'pu::ui::elm::Rectangle']]],
   ['removecanceloption',['RemoveCancelOption',['../d6/de9/classpu_1_1ui_1_1_dialog.html#a9caa4a55531254c6eecff4a04076f7fb',1,'pu::ui::Dialog']]],
-  ['render',['Render',['../d6/d8f/classpu_1_1ui_1_1_overlay.html#a32b0930a7a28af2fa91c465c746a49aa',1,'pu::ui::Overlay']]],
+  ['render',['Render',['../d6/d8f/classpu_1_1ui_1_1_overlay.html#af4f7378933dad509eba1cf65a2189c23',1,'pu::ui::Overlay']]],
   ['rendercircle',['RenderCircle',['../d0/d27/classpu_1_1ui_1_1render_1_1_renderer.html#a5c787490522d1269b48aa23ed516e0ed',1,'pu::ui::render::Renderer']]],
   ['rendercirclefill',['RenderCircleFill',['../d0/d27/classpu_1_1ui_1_1render_1_1_renderer.html#a963f9616f401a805674d75bc332c9abb',1,'pu::ui::render::Renderer']]],
   ['renderrectangle',['RenderRectangle',['../d0/d27/classpu_1_1ui_1_1render_1_1_renderer.html#a2deef9bfe0f5f0256b279f0bca249820',1,'pu::ui::render::Renderer']]],
@@ -13,6 +13,8 @@ var searchData=
   ['rendertext',['RenderText',['../da/d54/namespacepu_1_1ui_1_1render.html#a066541be036a5a846622f812dbdd2642',1,'pu::ui::render']]],
   ['rendertexture',['RenderTexture',['../d0/d27/classpu_1_1ui_1_1render_1_1_renderer.html#a504b0473b2f29d6d54e1cc6251b0f8ce',1,'pu::ui::render::Renderer']]],
   ['rendertexturescaled',['RenderTextureScaled',['../d0/d27/classpu_1_1ui_1_1render_1_1_renderer.html#ad32f3c0cf33d9b04e51900d5379602e8',1,'pu::ui::render::Renderer']]],
+  ['replace',['replace',['../d2/de5/classpu_1_1_string.html#a894891d32c3e37e53a9c6c4a0faf8c49',1,'pu::String']]],
+  ['reserve',['reserve',['../d2/de5/classpu_1_1_string.html#a3086eb66b434dd54ee271083055025ca',1,'pu::String']]],
   ['resume',['Resume',['../d8/d8f/namespacepu_1_1audio.html#a985b002067d57f00d6228b15eb17c060',1,'pu::audio']]],
   ['rewind',['Rewind',['../d8/d8f/namespacepu_1_1audio.html#ac6000d5f48fcf60acccacff1044d0e28',1,'pu::audio']]]
 ];

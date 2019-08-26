@@ -14,6 +14,7 @@
 #pragma once
 #include <string>
 #include <switch.h>
+#include <pu/pu_Macros.hpp>
 
 namespace pu
 {

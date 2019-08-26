@@ -21,9 +21,18 @@ namespace pu::ui
     {
         public:
             Container(s32 X, s32 Y, s32 Width, s32 Height);
-            void Add(elm::Element *Elm);
-            elm::Element *At(s32 Index);
-            bool Has(elm::Element *Elm);
+            PU_SMART_CTOR(Container)
+
+            template<typename Elem>
+            void Add(std::shared_ptr<Elem> &Elm)
+            {
+                static_assert(std::is_base_of<elm::Element, Elem>::value, "Elements must inherit from pu::ui::elm::Element!");
+
+                elms.push_back(std::dynamic_pointer_cast<elm::Element>(Elm));
+            }
+
+            std::shared_ptr<elm::Element> &At(s32 Index);
+            bool Has(std::shared_ptr<elm::Element> &Elm);
             void Clear();
             s32 GetCount();
             void SetX(s32 X);
@@ -40,6 +49,6 @@ namespace pu::ui
             s32 y;
             s32 w;
             s32 h;
-            std::vector<elm::Element*> elms;
+            std::vector<std::shared_ptr<elm::Element>> elms;
     };
 }

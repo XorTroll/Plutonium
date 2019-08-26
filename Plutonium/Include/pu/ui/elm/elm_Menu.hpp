@@ -24,6 +24,8 @@ namespace pu::ui::elm
     {
         public:
             MenuItem(String Name);
+            PU_SMART_CTOR(MenuItem)
+
             String GetName();
             void SetName(String Name);
             Color GetColor();
@@ -48,7 +50,9 @@ namespace pu::ui::elm
     {
         public:
             Menu(s32 X, s32 Y, s32 Width, Color OptionColor, s32 ItemSize, s32 ItemsToShow);
+            PU_SMART_CTOR(Menu)
             ~Menu();
+
             s32 GetX();
             void SetX(s32 X);
             s32 GetY();
@@ -67,15 +71,15 @@ namespace pu::ui::elm
             Color GetScrollbarColor();
             void SetScrollbarColor(Color Color);
             void SetOnSelectionChanged(std::function<void()> Callback);
-            void AddItem(MenuItem *Item);
+            void AddItem(std::shared_ptr<MenuItem> &Item);
             void ClearItems();
             void SetCooldownEnabled(bool Cooldown);
-            MenuItem *GetSelectedItem();
-            std::vector<MenuItem*> &GetItems();
+            std::shared_ptr<MenuItem> &GetSelectedItem();
+            std::vector<std::shared_ptr<MenuItem>> &GetItems();
             s32 GetSelectedIndex();
             void SetSelectedIndex(s32 Index);
-            void OnRender(render::Renderer *Drawer);
-            void OnInput(u64 Down, u64 Up, u64 Held, bool Touch, bool Focus);
+            void OnRender(std::shared_ptr<render::Renderer> &Drawer, s32 X, s32 Y);
+            void OnInput(u64 Down, u64 Up, u64 Held, bool Touch);
         private:
             void ReloadItemRenders();
             bool dtouch;
@@ -96,7 +100,7 @@ namespace pu::ui::elm
             int basestatus;
             std::chrono::time_point<std::chrono::steady_clock> basetime;
             std::function<void()> onselch;
-            std::vector<MenuItem*> itms;
+            std::vector<std::shared_ptr<MenuItem>> itms;
             render::NativeFont font;
             std::vector<render::NativeTexture> loadednames;
             std::vector<render::NativeTexture> loadedicons;

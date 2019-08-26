@@ -87,14 +87,14 @@ namespace pu::ui::elm
         return ((ntex != NULL) && this->img.HasAny());
     }
 
-    void Image::OnRender(render::Renderer *Drawer)
+    void Image::OnRender(std::shared_ptr<render::Renderer> &Drawer, s32 X, s32 Y)
     {
-        s32 rdx = this->GetProcessedX();
-        s32 rdy = this->GetProcessedY();
+        s32 rdx = X;
+        s32 rdy = Y;
         Drawer->RenderTextureScaled(this->ntex, rdx, rdy, w, h);
     }
 
-    void Image::OnInput(u64 Down, u64 Up, u64 Held, bool Touch, bool Focus)
+    void Image::OnInput(u64 Down, u64 Up, u64 Held, bool Touch)
     {
     }
 }
