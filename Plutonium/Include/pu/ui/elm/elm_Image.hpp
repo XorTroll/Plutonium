@@ -34,7 +34,7 @@ namespace pu::ui::elm
             String GetImage();
             void SetImage(String Image);
             bool IsImageValid();
-            void OnRender(std::shared_ptr<render::Renderer> &Drawer, s32 X, s32 Y);
+            void OnRender(render::Renderer::Ref &Drawer, s32 X, s32 Y);
             void OnInput(u64 Down, u64 Up, u64 Held, bool Touch);
         private:
             String img;

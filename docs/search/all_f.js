@@ -4,8 +4,8 @@ var searchData=
   ['rectangle',['Rectangle',['../d5/dea/classpu_1_1ui_1_1elm_1_1_rectangle.html',1,'pu::ui::elm']]],
   ['rectangle',['Rectangle',['../d5/dea/classpu_1_1ui_1_1elm_1_1_rectangle.html#a2d6bd9b0d1b7ea36fa5bded5adb93d1c',1,'pu::ui::elm::Rectangle']]],
   ['removecanceloption',['RemoveCancelOption',['../d6/de9/classpu_1_1ui_1_1_dialog.html#a9caa4a55531254c6eecff4a04076f7fb',1,'pu::ui::Dialog']]],
-  ['rend',['rend',['../da/dc0/classpu_1_1ui_1_1_application.html#a196ed503e41fef28e6924519cf3fd4c6',1,'pu::ui::Application']]],
-  ['render',['Render',['../d6/d8f/classpu_1_1ui_1_1_overlay.html#af4f7378933dad509eba1cf65a2189c23',1,'pu::ui::Overlay']]],
+  ['rend',['rend',['../da/dc0/classpu_1_1ui_1_1_application.html#aa7675aec0dba2da7ce17ba3ccc682fa0',1,'pu::ui::Application']]],
+  ['render',['Render',['../d6/d8f/classpu_1_1ui_1_1_overlay.html#aceb659dd8ef47819cd7669fea868ba69',1,'pu::ui::Overlay']]],
   ['render_5frenderer_2ehpp',['render_Renderer.hpp',['../d4/dbe/render___renderer_8hpp.html',1,'']]],
   ['render_5fsdl2_2ehpp',['render_SDL2.hpp',['../db/db1/render___s_d_l2_8hpp.html',1,'']]],
   ['rendercircle',['RenderCircle',['../d0/d27/classpu_1_1ui_1_1render_1_1_renderer.html#a5c787490522d1269b48aa23ed516e0ed',1,'pu::ui::render::Renderer']]],
@@ -24,6 +24,6 @@ var searchData=
   ['resume',['Resume',['../d8/d8f/namespacepu_1_1audio.html#a985b002067d57f00d6228b15eb17c060',1,'pu::audio']]],
   ['rewind',['Rewind',['../d8/d8f/namespacepu_1_1audio.html#ac6000d5f48fcf60acccacff1044d0e28',1,'pu::audio']]],
   ['right',['Right',['../d2/d5e/namespacepu_1_1ui_1_1elm.html#ac2066021dbc53818c251c446b6d7f864a92b09c7c48c520c3c55e497875da437c',1,'pu::ui::elm']]],
-  ['rof',['rof',['../da/dc0/classpu_1_1ui_1_1_application.html#a48f114208c0eb5b1fc025f5710f24be3',1,'pu::ui::Application']]],
+  ['rof',['rof',['../da/dc0/classpu_1_1ui_1_1_application.html#a1ea5ab29c20bc04e284faeeba16091c9',1,'pu::ui::Application']]],
   ['rover',['rover',['../da/dc0/classpu_1_1ui_1_1_application.html#afe06ab458cf3eb5c8ea8d2fc653fc649',1,'pu::ui::Application']]]
 ];

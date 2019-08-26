@@ -38,7 +38,7 @@ namespace pu::ui::elm
             u64 GetKey();
             void SetKey(u64 Key);
             bool IsChecked();
-            void OnRender(std::shared_ptr<render::Renderer> &Drawer, s32 X, s32 Y);
+            void OnRender(render::Renderer::Ref &Drawer, s32 X, s32 Y);
             void OnInput(u64 Down, u64 Up, u64 Held, bool Touch);
         private:
             String cnt;

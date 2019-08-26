@@ -35,6 +35,7 @@ namespace pu::ui::elm
     {
         public:
             Element();
+            PU_SMART_CTOR(Element)
             virtual ~Element();
 
             // In order to make custom UI Elements, need to implement this functions
@@ -42,7 +43,7 @@ namespace pu::ui::elm
             virtual s32 GetY() = 0;
             virtual s32 GetWidth() = 0;
             virtual s32 GetHeight() = 0;
-            virtual void OnRender(std::shared_ptr<render::Renderer> &Drawer, s32 X, s32 Y) = 0;
+            virtual void OnRender(render::Renderer::Ref &Drawer, s32 X, s32 Y) = 0;
             virtual void OnInput(u64 Down, u64 Up, u64 Held, bool Touch) = 0;
 
             bool IsVisible();

@@ -28,15 +28,15 @@ namespace pu::ui
         return this->rad;
     }
 
-    void Overlay::OnPreRender(std::shared_ptr<render::Renderer> &Drawer)
+    void Overlay::OnPreRender(render::Renderer::Ref &Drawer)
     {
     }
 
-    void Overlay::OnPostRender(std::shared_ptr<render::Renderer> &Drawer)
+    void Overlay::OnPostRender(render::Renderer::Ref &Drawer)
     {
     }
 
-    bool Overlay::Render(std::shared_ptr<render::Renderer> &Drawer)
+    bool Overlay::Render(render::Renderer::Ref &Drawer)
     {
         this->OnPreRender(Drawer);
         Drawer->SetBaseRenderAlpha(this->fadea);

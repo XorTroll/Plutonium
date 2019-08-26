@@ -31,7 +31,7 @@ namespace pu::ui
             bool HasCancelOption();
             void SetIcon(std::string Icon);
             bool Hasicon();
-            s32 Show(std::shared_ptr<render::Renderer> &Drawer, void *App);
+            s32 Show(render::Renderer::Ref &Drawer, void *App);
             bool UserCancelled();
             bool IsOk();
         private:

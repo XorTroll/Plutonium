@@ -87,7 +87,7 @@ namespace pu::ui::elm
         return ((ntex != NULL) && this->img.HasAny());
     }
 
-    void Image::OnRender(std::shared_ptr<render::Renderer> &Drawer, s32 X, s32 Y)
+    void Image::OnRender(render::Renderer::Ref &Drawer, s32 X, s32 Y)
     {
         s32 rdx = X;
         s32 rdy = Y;

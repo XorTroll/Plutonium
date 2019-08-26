@@ -25,9 +25,9 @@ namespace pu::ui
 
             void SetRadius(s32 Radius);
             s32 GetRadius();
-            virtual void OnPreRender(std::shared_ptr<render::Renderer> &Drawer);
-            virtual void OnPostRender(std::shared_ptr<render::Renderer> &Drawer);
-            bool Render(std::shared_ptr<render::Renderer> &Drawer);
+            virtual void OnPreRender(render::Renderer::Ref &Drawer);
+            virtual void OnPostRender(render::Renderer::Ref &Drawer);
+            bool Render(render::Renderer::Ref &Drawer);
             void NotifyEnding(bool End);
         private:
             s32 fadea;

@@ -71,14 +71,14 @@ namespace pu::ui::elm
             Color GetScrollbarColor();
             void SetScrollbarColor(Color Color);
             void SetOnSelectionChanged(std::function<void()> Callback);
-            void AddItem(std::shared_ptr<MenuItem> &Item);
+            void AddItem(MenuItem::Ref &Item);
             void ClearItems();
             void SetCooldownEnabled(bool Cooldown);
-            std::shared_ptr<MenuItem> &GetSelectedItem();
-            std::vector<std::shared_ptr<MenuItem>> &GetItems();
+            MenuItem::Ref &GetSelectedItem();
+            std::vector<MenuItem::Ref> &GetItems();
             s32 GetSelectedIndex();
             void SetSelectedIndex(s32 Index);
-            void OnRender(std::shared_ptr<render::Renderer> &Drawer, s32 X, s32 Y);
+            void OnRender(render::Renderer::Ref &Drawer, s32 X, s32 Y);
             void OnInput(u64 Down, u64 Up, u64 Held, bool Touch);
         private:
             void ReloadItemRenders();
@@ -100,7 +100,7 @@ namespace pu::ui::elm
             int basestatus;
             std::chrono::time_point<std::chrono::steady_clock> basetime;
             std::function<void()> onselch;
-            std::vector<std::shared_ptr<MenuItem>> itms;
+            std::vector<MenuItem::Ref> itms;
             render::NativeFont font;
             std::vector<render::NativeTexture> loadednames;
             std::vector<render::NativeTexture> loadedicons;

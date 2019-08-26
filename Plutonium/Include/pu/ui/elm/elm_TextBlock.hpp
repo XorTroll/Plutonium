@@ -37,7 +37,7 @@ namespace pu::ui::elm
             void SetFont(render::NativeFont Font);
             Color GetColor();
             void SetColor(Color Color);
-            void OnRender(std::shared_ptr<render::Renderer> &Drawer, s32 X, s32 Y);
+            void OnRender(render::Renderer::Ref &Drawer, s32 X, s32 Y);
             void OnInput(u64 Down, u64 Up, u64 Held, bool Touch);
         private:
             String text;

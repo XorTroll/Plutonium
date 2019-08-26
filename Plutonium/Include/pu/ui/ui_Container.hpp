@@ -31,8 +31,8 @@ namespace pu::ui
                 elms.push_back(std::dynamic_pointer_cast<elm::Element>(Elm));
             }
 
-            std::shared_ptr<elm::Element> &At(s32 Index);
-            bool Has(std::shared_ptr<elm::Element> &Elm);
+            elm::Element::Ref &At(s32 Index);
+            bool Has(elm::Element::Ref &Elm);
             void Clear();
             s32 GetCount();
             void SetX(s32 X);
@@ -49,6 +49,6 @@ namespace pu::ui
             s32 y;
             s32 w;
             s32 h;
-            std::vector<std::shared_ptr<elm::Element>> elms;
+            std::vector<elm::Element::Ref> elms;
     };
 }

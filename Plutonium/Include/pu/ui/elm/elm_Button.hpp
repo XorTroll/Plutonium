@@ -39,7 +39,7 @@ namespace pu::ui::elm
             void SetColor(Color Color);
             void SetContentFont(render::NativeFont Font);
             void SetOnClick(std::function<void()> ClickCallback);
-            void OnRender(std::shared_ptr<render::Renderer> &Drawer, s32 X, s32 Y);
+            void OnRender(render::Renderer::Ref &Drawer, s32 X, s32 Y);
             void OnInput(u64 Down, u64 Up, u64 Held, bool Touch);
         private:
             s32 x;

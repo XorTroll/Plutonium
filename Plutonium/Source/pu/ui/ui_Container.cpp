@@ -11,12 +11,12 @@ namespace pu::ui
         this->h = Height;
     }
 
-    std::shared_ptr<elm::Element> &Container::At(s32 Index)
+    elm::Element::Ref &Container::At(s32 Index)
     {
         return this->elms.at(Index);
     }
 
-    bool Container::Has(std::shared_ptr<elm::Element> &Elm)
+    bool Container::Has(elm::Element::Ref &Elm)
     {
         auto it = std::find(this->elms.begin(), this->elms.end(), Elm);
         return (it != this->elms.end());

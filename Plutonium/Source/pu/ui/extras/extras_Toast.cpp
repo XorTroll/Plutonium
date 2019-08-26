@@ -30,12 +30,12 @@ namespace pu::ui::extras
         this->SetHeight(toasth);
     }
 
-    void Toast::OnPreRender(std::shared_ptr<render::Renderer> &Drawer)
+    void Toast::OnPreRender(render::Renderer::Ref &Drawer)
     {
         Drawer->SetBaseRenderAlpha(200);
     }
 
-    void Toast::OnPostRender(std::shared_ptr<render::Renderer> &Drawer)
+    void Toast::OnPostRender(render::Renderer::Ref &Drawer)
     {
         Drawer->UnsetBaseRenderAlpha();
     }

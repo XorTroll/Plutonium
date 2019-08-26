@@ -93,7 +93,7 @@ namespace pu::ui::elm
         this->ntex = render::RenderText(this->fnt, this->text, Color);
     }
 
-    void TextBlock::OnRender(std::shared_ptr<render::Renderer> &Drawer, s32 X, s32 Y)
+    void TextBlock::OnRender(render::Renderer::Ref &Drawer, s32 X, s32 Y)
     {
         s32 rdx = X;
         s32 rdy = Y;

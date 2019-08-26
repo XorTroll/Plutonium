@@ -38,16 +38,16 @@ namespace pu::ui
 
             void AddThread(std::function<void()> Callback);
             void SetOnInput(std::function<void(u64 Down, u64 Up, u64 Held, bool Touch)> Callback);
-            s32 ShowDialog(std::shared_ptr<Dialog> &ToShow);
+            s32 ShowDialog(Dialog::Ref &ToShow);
             int CreateShowDialog(String Title, String Content, std::vector<String> Options, bool UseLastOptionAsCancel, std::string Icon = "");
-            void StartOverlay(std::shared_ptr<Overlay> &Ovl);
-            void StartOverlayWithTimeout(std::shared_ptr<Overlay> &Ovl, u64 Milli);
+            void StartOverlay(Overlay::Ref &Ovl);
+            void StartOverlayWithTimeout(Overlay::Ref &Ovl, u64 Milli);
             void EndOverlay();
             void Show();
             void ShowWithFadeIn();
             bool IsShown();
             bool CallForRender();
-            bool CallForRenderWithRenderOver(std::function<bool(std::shared_ptr<render::Renderer>&)> RenderFunc);
+            bool CallForRenderWithRenderOver(std::function<bool(render::Renderer::Ref&)> RenderFunc);
             void FadeIn();
             void FadeOut();
             bool IsFadedIn();
@@ -57,19 +57,19 @@ namespace pu::ui
             void CloseWithFadeOut();
         protected:
             bool rover;
-            std::function<bool(std::shared_ptr<render::Renderer>&)> rof;
+            std::function<bool(render::Renderer::Ref&)> rof;
             bool show;
             u8 aapf;
             s32 fadea;
             bool closefact;
-            std::shared_ptr<Layout> lyt;
+            Layout::Ref lyt;
             u64 tmillis;
             std::chrono::steady_clock::time_point tclock;
             bool fovl;
             bool ffovl;
-            std::shared_ptr<Overlay> ovl;
+            Overlay::Ref ovl;
             std::vector<std::function<void()>> thds;
             std::function<void(u64, u64, u64, bool)> cbipt;
-            std::shared_ptr<render::Renderer> rend;
+            render::Renderer::Ref rend;
     };
 }

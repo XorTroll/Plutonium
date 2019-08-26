@@ -1,5 +1,4 @@
 
-
 #pragma once
 
 // Include Plutonium
@@ -15,7 +14,7 @@ class Layout1 : public pu::ui::Layout
         PU_SMART_CTOR(Layout1)
     private:
         // An easy way to keep objects is to have them as private members
-        std::shared_ptr<pu::ui::elm::TextBlock> helloText;
+        pu::ui::elm::TextBlock::Ref helloText;
 };
 
 // Define your application as a class too
@@ -27,5 +26,5 @@ class MainApplication : public pu::ui::Application
         PU_SMART_CTOR(MainApplication)
     private:
         // Layout instance
-        std::shared_ptr<Layout1> layout1;
+        Layout1::Ref layout1;
 };

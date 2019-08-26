@@ -14,7 +14,7 @@ namespace pu::ui
         this->fovl = false;
         this->ffovl = false;
         this->lyt = nullptr;
-        this->rof = [](std::shared_ptr<render::Renderer> &Drawer) -> bool { return true; };
+        this->rof = [](render::Renderer::Ref &Drawer) -> bool { return true; };
         this->fadea = 255;
         this->aapf = 35;
     }
@@ -34,7 +34,7 @@ namespace pu::ui
         this->cbipt = Callback;
     }
 
-    s32 Application::ShowDialog(std::shared_ptr<Dialog> &ToShow)
+    s32 Application::ShowDialog(Dialog::Ref &ToShow)
     {
         return ToShow->Show(this->rend, this);
     }
@@ -54,12 +54,12 @@ namespace pu::ui
         return opt;
     }
 
-    void Application::StartOverlay(std::shared_ptr<Overlay> &Ovl)
+    void Application::StartOverlay(Overlay::Ref &Ovl)
     {
         if(this->ovl == nullptr) this->ovl = Ovl;
     }
 
-    void Application::StartOverlayWithTimeout(std::shared_ptr<Overlay> &Ovl, u64 Milli)
+    void Application::StartOverlayWithTimeout(Overlay::Ref &Ovl, u64 Milli)
     {
         if(this->ovl == nullptr)
         {
@@ -108,13 +108,13 @@ namespace pu::ui
         {
             c = (this->rof)(this->rend);
             this->rover = false;
-            this->rof = [](std::shared_ptr<render::Renderer> &Drawer) -> bool { return true; };
+            this->rof = [](render::Renderer::Ref &Drawer) -> bool { return true; };
         }
         this->rend->FinalizeRender();
         return c;
     }
 
-    bool Application::CallForRenderWithRenderOver(std::function<bool(std::shared_ptr<render::Renderer> &Drawer)> RenderFunc)
+    bool Application::CallForRenderWithRenderOver(std::function<bool(render::Renderer::Ref &Drawer)> RenderFunc)
     {
         this->rover = true;
         this->rof = RenderFunc;

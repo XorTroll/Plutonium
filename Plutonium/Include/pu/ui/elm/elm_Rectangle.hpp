@@ -34,7 +34,7 @@ namespace pu::ui::elm
             void SetBorderRadius(s32 Radius);
             Color GetColor();
             void SetColor(Color RecColor);
-            void OnRender(std::shared_ptr<render::Renderer> &Drawer, s32 X, s32 Y);
+            void OnRender(render::Renderer::Ref &Drawer, s32 X, s32 Y);
             void OnInput(u64 Down, u64 Up, u64 Held, bool Touch);
         private:
             s32 borderr;

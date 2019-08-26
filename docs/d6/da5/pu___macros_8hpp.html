@@ -134,7 +134,7 @@ Macros</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<b>Value:</b><div class="fragment"><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> ...Args&gt; \</div><div class="line">static std::shared_ptr&lt;type&gt; New(Args &amp;&amp;...args) \</div><div class="line">{ \</div><div class="line">    return std::move(std::make_shared&lt;type&gt;(std::forward&lt;Args&gt;(args)...)); \</div><div class="line">}</div></div><!-- fragment -->
+<b>Value:</b><div class="fragment"><div class="line"><span class="keyword">using</span> Ref = std::shared_ptr&lt;type&gt;; \</div><div class="line">template&lt;<span class="keyword">typename</span> ...Args&gt; \</div><div class="line">static Ref New(Args &amp;&amp;...CtorArgs) \</div><div class="line">{ \</div><div class="line">    return std::move(std::make_shared&lt;type&gt;(std::forward&lt;Args&gt;(CtorArgs)...)); \</div><div class="line">}</div></div><!-- fragment -->
 </div>
 </div>
 </div><!-- contents -->

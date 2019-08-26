@@ -7,7 +7,7 @@ s32 count = 0;
 Layout1::Layout1()
 {
     // Create the textblock (that text is a placeholder tho)
-    this->sampleText = new pu::ui::elm::TextBlock(300, 300, "Count: ");
+    this->sampleText = pu::ui::elm::TextBlock::New(300, 300, "Count: ");
     // Add the textblock to the layout's element container. IMPORTANT! this MUST be done, having them as members is not enough (just a simple way to keep them)
     this->Add(this->sampleText);
 }
@@ -24,7 +24,7 @@ void Layout1::Update()
 MainApplication::MainApplication()
 {
     // Create the layout (calling the constructor above)
-    this->layout1 = new Layout1();
+    this->layout1 = Layout1::New();
     // Add the loop function to the application via std::bind
     this->AddThread(std::bind(&Layout1::Update, this->layout1));
     // Load the layout. In applications layouts are loaded, not added into a container (you don't select a added layout, just load it from this function)

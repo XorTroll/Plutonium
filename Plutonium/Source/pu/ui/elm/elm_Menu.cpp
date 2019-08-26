@@ -189,7 +189,7 @@ namespace pu::ui::elm
         this->onselch = Callback;
     }
 
-    void Menu::AddItem(std::shared_ptr<MenuItem> &Item)
+    void Menu::AddItem(MenuItem::Ref &Item)
     {
         this->itms.push_back(Item);
     }
@@ -204,12 +204,12 @@ namespace pu::ui::elm
         this->icdown = Cooldown;
     }
 
-    std::shared_ptr<MenuItem> &Menu::GetSelectedItem()
+    MenuItem::Ref &Menu::GetSelectedItem()
     {
         return this->itms[this->isel];
     }
 
-    std::vector<std::shared_ptr<MenuItem>> &Menu::GetItems()
+    std::vector<MenuItem::Ref> &Menu::GetItems()
     {
         return this->itms;
     }
@@ -235,7 +235,7 @@ namespace pu::ui::elm
         }
     }
 
-    void Menu::OnRender(std::shared_ptr<render::Renderer> &Drawer, s32 X, s32 Y)
+    void Menu::OnRender(render::Renderer::Ref &Drawer, s32 X, s32 Y)
     {
         if(!this->itms.empty())
         {

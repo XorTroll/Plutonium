@@ -24,9 +24,9 @@ namespace pu::ui::extras
             PU_SMART_CTOR(Toast)
 
             void SetText(String Text);
-            void OnPreRender(std::shared_ptr<render::Renderer> &Drawer);
-            void OnPostRender(std::shared_ptr<render::Renderer> &Drawer);
+            void OnPreRender(render::Renderer::Ref &Drawer);
+            void OnPostRender(render::Renderer::Ref &Drawer);
         private:
-            std::shared_ptr<pu::ui::elm::TextBlock> text;
+            pu::ui::elm::TextBlock::Ref text;
     };
 }

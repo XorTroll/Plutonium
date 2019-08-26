@@ -100,7 +100,7 @@ namespace pu::ui::elm
         return this->checked;
     }
 
-    void Toggle::OnRender(std::shared_ptr<render::Renderer> &Drawer, s32 X, s32 Y)
+    void Toggle::OnRender(render::Renderer::Ref &Drawer, s32 X, s32 Y)
     {
         s32 tw = render::GetTextWidth(this->fnt, this->cnt);
         s32 th = render::GetTextHeight(this->fnt, this->cnt);

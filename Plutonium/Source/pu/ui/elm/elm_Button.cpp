@@ -102,7 +102,7 @@ namespace pu::ui::elm
         this->clickcb = ClickCallback;
     }
 
-    void Button::OnRender(std::shared_ptr<render::Renderer> &Drawer, s32 X, s32 Y)
+    void Button::OnRender(render::Renderer::Ref &Drawer, s32 X, s32 Y)
     {
         s32 rdx = X;
         s32 rdy = Y;
