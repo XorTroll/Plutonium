@@ -7,21 +7,16 @@ namespace pu::ui
         this->rend = render::Renderer::New();
         this->rend->Initialize(Flags, RenderAccel);
         this->show = false;
-        this->cbipt = [&](u64 Down, u64 Up, u64 Held, bool Touch){};
+        this->cbipt = [&](u64,u64,u64,bool){};
         this->rover = false;
         this->ovl = nullptr;
         this->closefact = false;
         this->fovl = false;
         this->ffovl = false;
         this->lyt = nullptr;
-        this->rof = [](render::Renderer::Ref &Drawer) -> bool { return true; };
+        this->rof = [](render::Renderer::Ref&) -> bool { return true; };
         this->fadea = 255;
         this->aapf = 35;
-    }
-
-    Application::~Application()
-    {
-        this->rend->Finalize();
     }
 
     void Application::AddThread(std::function<void()> Callback)
@@ -41,32 +36,17 @@ namespace pu::ui
 
     int Application::CreateShowDialog(String Title, String Content, std::vector<String> Options, bool UseLastOptionAsCancel, std::string Icon)
     {
-        auto dlg = Dialog::New(Title, Content);
+        Dialog dlg(Title, Content);
         for(s32 i = 0; i < Options.size(); i++)
         {
-            if(UseLastOptionAsCancel && (i == Options.size() - 1)) dlg->SetCancelOption(Options[i]);
-            else dlg->AddOption(Options[i]);
+            if(UseLastOptionAsCancel && (i == Options.size() - 1)) dlg.SetCancelOption(Options[i]);
+            else dlg.AddOption(Options[i]);
         }
-        if(!Icon.empty()) dlg->SetIcon(Icon);
-        int opt = this->ShowDialog(dlg);
-        if(dlg->UserCancelled()) opt = -1;
-        else if(!dlg->IsOk()) opt = -2;
+        if(!Icon.empty()) dlg.SetIcon(Icon);
+        int opt = dlg.Show(this->rend, this);
+        if(dlg.UserCancelled()) opt = -1;
+        else if(!dlg.IsOk()) opt = -2;
         return opt;
-    }
-
-    void Application::StartOverlay(Overlay::Ref &Ovl)
-    {
-        if(this->ovl == nullptr) this->ovl = Ovl;
-    }
-
-    void Application::StartOverlayWithTimeout(Overlay::Ref &Ovl, u64 Milli)
-    {
-        if(this->ovl == nullptr)
-        {
-            this->ovl = Ovl;
-            this->tmillis = Milli;
-            this->tclock = std::chrono::steady_clock::now();
-        }
     }
 
     void Application::EndOverlay()
@@ -204,6 +184,7 @@ namespace pu::ui
     void Application::Close()
     {
         this->show = false;
+        this->rend->Finalize();
     }
 
     void Application::CloseWithFadeOut()

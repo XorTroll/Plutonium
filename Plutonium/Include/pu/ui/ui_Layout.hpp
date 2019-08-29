@@ -22,6 +22,7 @@ namespace pu::ui
         public:
             Layout();
             PU_SMART_CTOR(Layout)
+            ~Layout();
 
             bool HasChilds();
             void SetOnInput(std::function<void(u64 Down, u64 Up, u64 Held, bool Touch)> Callback);

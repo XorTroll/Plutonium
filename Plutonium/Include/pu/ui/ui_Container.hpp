@@ -24,7 +24,7 @@ namespace pu::ui
             PU_SMART_CTOR(Container)
 
             template<typename Elem>
-            void Add(std::shared_ptr<Elem> &Elm)
+            void Add(std::shared_ptr<Elem> Elm)
             {
                 static_assert(std::is_base_of<elm::Element, Elem>::value, "Elements must inherit from pu::ui::elm::Element!");
 

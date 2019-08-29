@@ -10,6 +10,11 @@ namespace pu::ui
         this->overbgcolor = { 225, 225, 225, 255 };
     }
 
+    Layout::~Layout()
+    {
+        if(this->overbgtex != NULL) render::DeleteTexture(this->overbgtex);
+    }
+
     bool Layout::HasChilds()
     {
         return !this->elms.empty();

@@ -26,10 +26,9 @@ namespace pu::ui
         public:
             Application(u32 Flags = SDL_INIT_EVERYTHING, bool RenderAccel = true);
             PU_SMART_CTOR(Application)
-            ~Application();
 
             template<typename Lyt>
-            void LoadLayout(std::shared_ptr<Lyt> &Layout)
+            void LoadLayout(std::shared_ptr<Lyt> Layout)
             {
                 static_assert(std::is_base_of<ui::Layout, Lyt>::value, "Layouts must inherit from pu::ui::Layout!");
 
@@ -40,8 +39,28 @@ namespace pu::ui
             void SetOnInput(std::function<void(u64 Down, u64 Up, u64 Held, bool Touch)> Callback);
             s32 ShowDialog(Dialog::Ref &ToShow);
             int CreateShowDialog(String Title, String Content, std::vector<String> Options, bool UseLastOptionAsCancel, std::string Icon = "");
-            void StartOverlay(Overlay::Ref &Ovl);
-            void StartOverlayWithTimeout(Overlay::Ref &Ovl, u64 Milli);
+            
+            template<typename Ovl>
+            void StartOverlay(std::shared_ptr<Ovl> Overlay)
+            {
+                static_assert(std::is_base_of<ui::Overlay, Ovl>::value, "Overlays must inherit from pu::ui::Overlay!");
+
+                if(this->ovl == nullptr) this->ovl = std::dynamic_pointer_cast<ui::Overlay>(Overlay);
+            }
+
+            template<typename Ovl>
+            void StartOverlayWithTimeout(std::shared_ptr<Ovl> Overlay, u64 Milli)
+            {
+                static_assert(std::is_base_of<ui::Overlay, Ovl>::value, "Overlays must inherit from pu::ui::Overlay!");
+
+                if(this->ovl == nullptr)
+                {
+                    this->ovl = std::dynamic_pointer_cast<ui::Overlay>(Overlay);
+                    this->tmillis = Milli;
+                    this->tclock = std::chrono::steady_clock::now();
+                }
+            }
+
             void EndOverlay();
             void Show();
             void ShowWithFadeIn();

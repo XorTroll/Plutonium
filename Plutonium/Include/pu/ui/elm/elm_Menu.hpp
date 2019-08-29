@@ -51,7 +51,6 @@ namespace pu::ui::elm
         public:
             Menu(s32 X, s32 Y, s32 Width, Color OptionColor, s32 ItemSize, s32 ItemsToShow);
             PU_SMART_CTOR(Menu)
-            ~Menu();
 
             s32 GetX();
             void SetX(s32 X);

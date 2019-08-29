@@ -13,11 +13,6 @@ namespace pu::ui
         this->end = false;
     }
 
-    Overlay::~Overlay()
-    {
-        this->Clear();
-    }
-
     void Overlay::SetRadius(s32 Radius)
     {
         this->rad = Radius;

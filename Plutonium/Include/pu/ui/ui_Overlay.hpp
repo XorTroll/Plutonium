@@ -21,7 +21,6 @@ namespace pu::ui
         public:
             Overlay(s32 X, s32 Y, s32 Width, s32 Height, Color Background, bool Rounded = true);
             PU_SMART_CTOR(Overlay)
-            ~Overlay();
 
             void SetRadius(s32 Radius);
             s32 GetRadius();

@@ -94,11 +94,6 @@ namespace pu::ui::elm
         this->font = render::LoadDefaultFont(25);
     }
 
-    Menu::~Menu()
-    {
-        this->ClearItems();
-    }
-
     s32 Menu::GetX()
     {
         return this->x;
