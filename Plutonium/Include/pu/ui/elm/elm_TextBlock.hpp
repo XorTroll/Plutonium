@@ -21,7 +21,9 @@ namespace pu::ui::elm
     {
         public:
             TextBlock(s32 X, s32 Y, String Text, s32 FontSize = 25);
+            PU_SMART_CTOR(TextBlock)
             ~TextBlock();
+
             s32 GetX();
             void SetX(s32 X);
             s32 GetY();
@@ -35,8 +37,8 @@ namespace pu::ui::elm
             void SetFont(render::NativeFont Font);
             Color GetColor();
             void SetColor(Color Color);
-            void OnRender(render::Renderer *Drawer);
-            void OnInput(u64 Down, u64 Up, u64 Held, bool Touch, bool Focus);
+            void OnRender(render::Renderer::Ref &Drawer, s32 X, s32 Y);
+            void OnInput(u64 Down, u64 Up, u64 Held, bool Touch);
         private:
             String text;
             s32 x;

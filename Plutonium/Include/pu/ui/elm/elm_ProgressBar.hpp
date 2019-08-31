@@ -20,6 +20,8 @@ namespace pu::ui::elm
     {
         public:
             ProgressBar(s32 X, s32 Y, s32 Width, s32 Height, double MaxValue);
+            PU_SMART_CTOR(ProgressBar)
+
             s32 GetX();
             void SetX(s32 X);
             s32 GetY();
@@ -41,8 +43,8 @@ namespace pu::ui::elm
             void FillProgress();
             void ClearProgress();
             bool IsCompleted();
-            void OnRender(render::Renderer *Drawer);
-            void OnInput(u64 Down, u64 Up, u64 Held, bool Touch, bool Focus);
+            void OnRender(render::Renderer::Ref &Drawer, s32 X, s32 Y);
+            void OnInput(u64 Down, u64 Up, u64 Held, bool Touch);
         private:
             s32 x;
             s32 y;

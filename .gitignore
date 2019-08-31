@@ -1,0 +1,10 @@
+.vscode/
+Build/
+build/
+Output/
+Test/
+*.elf
+*.nso
+*.nro
+*.pfs0
+*.nacp

@@ -20,7 +20,9 @@ namespace pu::ui::elm
     {
         public:
             Image(s32 X, s32 Y, String Image);
+            PU_SMART_CTOR(Image)
             ~Image();
+
             s32 GetX();
             void SetX(s32 X);
             s32 GetY();
@@ -32,8 +34,8 @@ namespace pu::ui::elm
             String GetImage();
             void SetImage(String Image);
             bool IsImageValid();
-            void OnRender(render::Renderer *Drawer);
-            void OnInput(u64 Down, u64 Up, u64 Held, bool Touch, bool Focus);
+            void OnRender(render::Renderer::Ref &Drawer, s32 X, s32 Y);
+            void OnInput(u64 Down, u64 Up, u64 Held, bool Touch);
         private:
             String img;
             render::NativeTexture ntex;

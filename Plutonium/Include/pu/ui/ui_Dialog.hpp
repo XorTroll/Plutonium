@@ -22,14 +22,16 @@ namespace pu::ui
     {
         public:
             Dialog(String Title, String Content);
+            PU_SMART_CTOR(Dialog)
             ~Dialog();
+
             void AddOption(String Name);
             void SetCancelOption(String Name = "Cancel");
             void RemoveCancelOption();
             bool HasCancelOption();
             void SetIcon(std::string Icon);
             bool Hasicon();
-            s32 Show(render::Renderer *Drawer, void *App);
+            s32 Show(render::Renderer::Ref &Drawer, void *App);
             bool UserCancelled();
             bool IsOk();
         private:

@@ -123,17 +123,17 @@ namespace pu::ui::elm
         return (this->val >= this->maxval);
     }
 
-    void ProgressBar::OnRender(render::Renderer *Drawer)
+    void ProgressBar::OnRender(render::Renderer::Ref &Drawer, s32 X, s32 Y)
     {
-        s32 rdx = this->GetProcessedX();
-        s32 rdy = this->GetProcessedY();
+        s32 rdx = X;
+        s32 rdy = Y;
         s32 pcw = (s32)((this->val / this->maxval) * (double)this->w);
         s32 rad = (this->h / 3);
         Drawer->RenderRoundedRectangleFill(this->clr, rdx, rdy, this->w, this->h, rad);
         Drawer->RenderRoundedRectangleFill(this->oclr, rdx, rdy, std::max(this->h, pcw), this->h, rad);
     }
 
-    void ProgressBar::OnInput(u64 Down, u64 Up, u64 Held, bool Touch, bool Focus)
+    void ProgressBar::OnInput(u64 Down, u64 Up, u64 Held, bool Touch)
     {
     }
 }

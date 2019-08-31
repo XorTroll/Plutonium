@@ -1,4 +1,5 @@
 #include <pu/ui/ui_Container.hpp>
+#include <algorithm>
 
 namespace pu::ui
 {
@@ -10,29 +11,19 @@ namespace pu::ui
         this->h = Height;
     }
 
-    void Container::Add(elm::Element *Elm)
+    elm::Element::Ref &Container::At(s32 Index)
     {
-        this->elms.push_back(Elm);
+        return this->elms.at(Index);
     }
 
-    elm::Element *Container::At(s32 Index)
+    bool Container::Has(elm::Element::Ref &Elm)
     {
-        if(Index < this->elms.size()) return this->elms[Index];
-        return NULL;
-    }
-
-    bool Container::Has(elm::Element *Elm)
-    {
-        if(!this->elms.empty()) for(s32 i = 0; i < this->elms.size(); i++)
-        {
-            if(this->elms[i] == Elm) return true;
-        }
-        return false;
+        auto it = std::find(this->elms.begin(), this->elms.end(), Elm);
+        return (it != this->elms.end());
     }
 
     void Container::Clear()
     {
-        if(!this->elms.empty()) for(s32 i = 0; i < this->elms.size(); i++) delete this->elms[i];
         this->elms.clear();
     }
 
@@ -83,9 +74,9 @@ namespace pu::ui
 
     void Container::PreRender()
     {
-        if(!this->elms.empty()) for(s32 i = 0; i < this->elms.size(); i++)
+        for(auto &elm : this->elms)
         {
-            this->elms[i]->SetParent(this);
+            elm->SetParent(this);
         }
     }
 }

@@ -22,6 +22,8 @@ namespace pu::ui::render
     class Renderer
     {
         public:
+            PU_SMART_CTOR(Renderer)
+
             void Initialize(u32 SdlFlags, bool RenderAccel = true);
             void Finalize();
             bool HasInitialized();

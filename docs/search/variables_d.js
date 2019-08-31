@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['valign',['valign',['../d9/d0e/classpu_1_1ui_1_1elm_1_1_element.html#a9d42548072b5ee72d6d0d27b965fb8b1',1,'pu::ui::elm::Element']]],
-  ['visible',['visible',['../d9/d0e/classpu_1_1ui_1_1elm_1_1_element.html#ad46fad870d47414f843f2f35d099f1da',1,'pu::ui::elm::Element']]]
+  ['tclock',['tclock',['../da/dc0/classpu_1_1ui_1_1_application.html#a277617a3618491307691a511886e8b1f',1,'pu::ui::Application']]],
+  ['thds',['thds',['../da/dc0/classpu_1_1ui_1_1_application.html#abc06725a55c872fc57d9537cbee15965',1,'pu::ui::Application']]],
+  ['tmillis',['tmillis',['../da/dc0/classpu_1_1ui_1_1_application.html#a03818bb039c4a73563c32a60f08b39b3',1,'pu::ui::Application']]]
 ];

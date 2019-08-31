@@ -1,10 +1,11 @@
 var searchData=
 [
   ['r',['R',['../d7/d0c/structpu_1_1ui_1_1_color.html#a14eb93e64415d07ed6f5f04bbca54067',1,'pu::ui::Color']]],
-  ['rectangle',['Rectangle',['../d5/dea/classpu_1_1ui_1_1elm_1_1_rectangle.html',1,'pu::ui::elm::Rectangle'],['../d5/dea/classpu_1_1ui_1_1elm_1_1_rectangle.html#a2d6bd9b0d1b7ea36fa5bded5adb93d1c',1,'pu::ui::elm::Rectangle::Rectangle()']]],
+  ['rectangle',['Rectangle',['../d5/dea/classpu_1_1ui_1_1elm_1_1_rectangle.html',1,'pu::ui::elm']]],
+  ['rectangle',['Rectangle',['../d5/dea/classpu_1_1ui_1_1elm_1_1_rectangle.html#a2d6bd9b0d1b7ea36fa5bded5adb93d1c',1,'pu::ui::elm::Rectangle']]],
   ['removecanceloption',['RemoveCancelOption',['../d6/de9/classpu_1_1ui_1_1_dialog.html#a9caa4a55531254c6eecff4a04076f7fb',1,'pu::ui::Dialog']]],
-  ['rend',['rend',['../da/dc0/classpu_1_1ui_1_1_application.html#a44af57775561ca8b7a293beaaaebba75',1,'pu::ui::Application']]],
-  ['render',['Render',['../d6/d8f/classpu_1_1ui_1_1_overlay.html#a32b0930a7a28af2fa91c465c746a49aa',1,'pu::ui::Overlay']]],
+  ['rend',['rend',['../da/dc0/classpu_1_1ui_1_1_application.html#aa7675aec0dba2da7ce17ba3ccc682fa0',1,'pu::ui::Application']]],
+  ['render',['Render',['../d6/d8f/classpu_1_1ui_1_1_overlay.html#aceb659dd8ef47819cd7669fea868ba69',1,'pu::ui::Overlay']]],
   ['render_5frenderer_2ehpp',['render_Renderer.hpp',['../d4/dbe/render___renderer_8hpp.html',1,'']]],
   ['render_5fsdl2_2ehpp',['render_SDL2.hpp',['../db/db1/render___s_d_l2_8hpp.html',1,'']]],
   ['rendercircle',['RenderCircle',['../d0/d27/classpu_1_1ui_1_1render_1_1_renderer.html#a5c787490522d1269b48aa23ed516e0ed',1,'pu::ui::render::Renderer']]],
@@ -18,9 +19,11 @@ var searchData=
   ['rendertext',['RenderText',['../da/d54/namespacepu_1_1ui_1_1render.html#a066541be036a5a846622f812dbdd2642',1,'pu::ui::render']]],
   ['rendertexture',['RenderTexture',['../d0/d27/classpu_1_1ui_1_1render_1_1_renderer.html#a504b0473b2f29d6d54e1cc6251b0f8ce',1,'pu::ui::render::Renderer']]],
   ['rendertexturescaled',['RenderTextureScaled',['../d0/d27/classpu_1_1ui_1_1render_1_1_renderer.html#ad32f3c0cf33d9b04e51900d5379602e8',1,'pu::ui::render::Renderer']]],
+  ['replace',['replace',['../d2/de5/classpu_1_1_string.html#a894891d32c3e37e53a9c6c4a0faf8c49',1,'pu::String']]],
+  ['reserve',['reserve',['../d2/de5/classpu_1_1_string.html#a3086eb66b434dd54ee271083055025ca',1,'pu::String']]],
   ['resume',['Resume',['../d8/d8f/namespacepu_1_1audio.html#a985b002067d57f00d6228b15eb17c060',1,'pu::audio']]],
   ['rewind',['Rewind',['../d8/d8f/namespacepu_1_1audio.html#ac6000d5f48fcf60acccacff1044d0e28',1,'pu::audio']]],
-  ['right',['Right',['../d2/d5e/namespacepu_1_1ui_1_1elm.html#a8a4cf8287673049110581c138f532b90a92b09c7c48c520c3c55e497875da437c',1,'pu::ui::elm::Right()'],['../d2/d5e/namespacepu_1_1ui_1_1elm.html#ac2066021dbc53818c251c446b6d7f864a92b09c7c48c520c3c55e497875da437c',1,'pu::ui::elm::Right()']]],
-  ['rof',['rof',['../da/dc0/classpu_1_1ui_1_1_application.html#a6d7e4b3238425fc5019c1b9299aeca69',1,'pu::ui::Application']]],
+  ['right',['Right',['../d2/d5e/namespacepu_1_1ui_1_1elm.html#ac2066021dbc53818c251c446b6d7f864a92b09c7c48c520c3c55e497875da437c',1,'pu::ui::elm']]],
+  ['rof',['rof',['../da/dc0/classpu_1_1ui_1_1_application.html#a1ea5ab29c20bc04e284faeeba16091c9',1,'pu::ui::Application']]],
   ['rover',['rover',['../da/dc0/classpu_1_1ui_1_1_application.html#afe06ab458cf3eb5c8ea8d2fc653fc649',1,'pu::ui::Application']]]
 ];

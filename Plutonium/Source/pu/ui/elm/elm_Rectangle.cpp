@@ -72,14 +72,14 @@ namespace pu::ui::elm
         this->clr = RecColor;
     }
 
-    void Rectangle::OnRender(render::Renderer *Drawer)
+    void Rectangle::OnRender(render::Renderer::Ref &Drawer, s32 X, s32 Y)
     {
-        s32 rdx = this->GetProcessedX();
-        s32 rdy = this->GetProcessedY();
+        s32 rdx = X;
+        s32 rdy = Y;
         Drawer->RenderRectangleFill(this->clr, rdx, rdy, this->w, this->h);
     }
 
-    void Rectangle::OnInput(u64 Down, u64 Up, u64 Held, bool Touch, bool Focus)
+    void Rectangle::OnInput(u64 Down, u64 Up, u64 Held, bool Touch)
     {
     }
 }

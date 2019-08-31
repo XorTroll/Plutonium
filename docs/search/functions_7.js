@@ -1,6 +1,7 @@
 var searchData=
 [
-  ['has',['Has',['../dc/dcd/classpu_1_1ui_1_1_container.html#aff7d1b7d572ec282d38de8e974d77808',1,'pu::ui::Container']]],
+  ['has',['Has',['../dc/dcd/classpu_1_1ui_1_1_container.html#afff1c4dbb325ee5d789886ef9ad25c6d',1,'pu::ui::Container']]],
+  ['hasany',['HasAny',['../d2/de5/classpu_1_1_string.html#a0f7c2e701e1f6f2824e9ce67a093575f',1,'pu::String']]],
   ['hasbackgroundimage',['HasBackgroundImage',['../d6/d11/classpu_1_1ui_1_1_layout.html#a162283529f76efb15db628752da72876',1,'pu::ui::Layout']]],
   ['hascanceloption',['HasCancelOption',['../d6/de9/classpu_1_1ui_1_1_dialog.html#a13c6ba3d67a7f552b43557928c2b6ea3',1,'pu::ui::Dialog']]],
   ['haschilds',['HasChilds',['../d6/d11/classpu_1_1ui_1_1_layout.html#a0447113a6aad1d0f5d691db062265d8c',1,'pu::ui::Layout']]],

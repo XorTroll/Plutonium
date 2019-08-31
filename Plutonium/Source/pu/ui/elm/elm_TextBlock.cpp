@@ -93,14 +93,14 @@ namespace pu::ui::elm
         this->ntex = render::RenderText(this->fnt, this->text, Color);
     }
 
-    void TextBlock::OnRender(render::Renderer *Drawer)
+    void TextBlock::OnRender(render::Renderer::Ref &Drawer, s32 X, s32 Y)
     {
-        s32 rdx = this->GetProcessedX();
-        s32 rdy = this->GetProcessedY();
+        s32 rdx = X;
+        s32 rdy = Y;
         Drawer->RenderTexture(this->ntex, rdx, rdy);
     }
 
-    void TextBlock::OnInput(u64 Down, u64 Up, u64 Held, bool Touch, bool Focus)
+    void TextBlock::OnInput(u64 Down, u64 Up, u64 Held, bool Touch)
     {
     }
 }

@@ -4,7 +4,7 @@ namespace pu::ui::extras
 {
     Toast::Toast(String Text, s32 FontSize, Color TextColor, Color BaseColor) : Overlay(0, 550, 0, 0, BaseColor)
     {
-        this->text = new elm::TextBlock(0, 0, Text, FontSize);
+        this->text = elm::TextBlock::New(0, 0, Text, FontSize);
         this->text->SetColor(TextColor);
         this->text->SetHorizontalAlign(pu::ui::elm::HorizontalAlign::Center);
         this->text->SetVerticalAlign(pu::ui::elm::VerticalAlign::Center);
@@ -30,12 +30,12 @@ namespace pu::ui::extras
         this->SetHeight(toasth);
     }
 
-    void Toast::OnPreRender(render::Renderer *Drawer)
+    void Toast::OnPreRender(render::Renderer::Ref &Drawer)
     {
         Drawer->SetBaseRenderAlpha(200);
     }
 
-    void Toast::OnPostRender(render::Renderer *Drawer)
+    void Toast::OnPostRender(render::Renderer::Ref &Drawer)
     {
         Drawer->UnsetBaseRenderAlpha();
     }

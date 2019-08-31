@@ -40,9 +40,7 @@ namespace pu::ui
             this->icon = NULL;
             this->hicon = false;
         }
-        if(!this->opts.empty()) for(s32 i = 0; i < this->opts.size(); i++) render::DeleteTexture(this->opts[i]);
-        this->opts.clear();
-        this->sopts.clear();
+        for(auto &opt: this->opts) render::DeleteTexture(opt);
     }
 
     void Dialog::AddOption(String Name)
@@ -80,7 +78,7 @@ namespace pu::ui
         return this->hicon;
     }
 
-    s32 Dialog::Show(render::Renderer *Drawer, void *App)
+    s32 Dialog::Show(render::Renderer::Ref &Drawer, void *App)
     {
         if(this->hcancel) this->AddOption(this->scancel);
         if(this->opts.empty()) return 0;
@@ -123,7 +121,7 @@ namespace pu::ui
         s32 initfact = 0;
         while(true)
         {
-            bool ok = ((Application*)App)->CallForRenderWithRenderOver([&](render::Renderer *Drawer) -> bool
+            bool ok = ((Application*)App)->CallForRenderWithRenderOver([&](render::Renderer::Ref &Drawer) -> bool
             {
                 u64 k = hidKeysDown(CONTROLLER_P1_AUTO);
                 u64 h = hidKeysHeld(CONTROLLER_P1_AUTO);
@@ -253,7 +251,7 @@ namespace pu::ui
             });
             if(!ok)
             {
-                ((Application*)App)->CallForRenderWithRenderOver([&](render::Renderer *Drawer) -> bool {});
+                ((Application*)App)->CallForRenderWithRenderOver([&](render::Renderer::Ref &Drawer) -> bool {});
                 break;
             }
         }

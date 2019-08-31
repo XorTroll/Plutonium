@@ -21,10 +21,12 @@ namespace pu::ui::extras
     {
         public:
             Toast(String Text, s32 FontSize, Color TextColor, Color BaseColor);
+            PU_SMART_CTOR(Toast)
+
             void SetText(String Text);
-            void OnPreRender(render::Renderer *Drawer);
-            void OnPostRender(render::Renderer *Drawer);
+            void OnPreRender(render::Renderer::Ref &Drawer);
+            void OnPostRender(render::Renderer::Ref &Drawer);
         private:
-            pu::ui::elm::TextBlock *text;
+            pu::ui::elm::TextBlock::Ref text;
     };
 }

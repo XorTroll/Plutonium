@@ -13,11 +13,6 @@ namespace pu::ui
         this->end = false;
     }
 
-    Overlay::~Overlay()
-    {
-        this->Clear();
-    }
-
     void Overlay::SetRadius(s32 Radius)
     {
         this->rad = Radius;
@@ -28,25 +23,24 @@ namespace pu::ui
         return this->rad;
     }
 
-    void Overlay::OnPreRender(render::Renderer *Drawer)
+    void Overlay::OnPreRender(render::Renderer::Ref &Drawer)
     {
     }
 
-    void Overlay::OnPostRender(render::Renderer *Drawer)
+    void Overlay::OnPostRender(render::Renderer::Ref &Drawer)
     {
     }
 
-    bool Overlay::Render(render::Renderer *Drawer)
+    bool Overlay::Render(render::Renderer::Ref &Drawer)
     {
         this->OnPreRender(Drawer);
         Drawer->SetBaseRenderAlpha(this->fadea);
         if(this->round) Drawer->RenderRoundedRectangleFill(this->bg, this->x, this->y, this->w, this->h, this->rad);
         else Drawer->RenderRectangleFill(this->bg, this->x, this->y, this->w, this->h);
         this->PreRender();
-        if(!this->elms.empty()) for(s32 i = 0; i < this->elms.size(); i++)
+        for(auto &elm: this->elms)
         {
-            elm::Element *elm = this->elms[i];
-            if(elm->IsVisible()) elm->OnRender(Drawer);
+            if(elm->IsVisible()) elm->OnRender(Drawer, elm->GetProcessedX(), elm->GetProcessedY());
         }
         Drawer->UnsetBaseRenderAlpha();
         if(this->end)
