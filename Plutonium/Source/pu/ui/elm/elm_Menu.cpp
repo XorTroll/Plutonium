@@ -320,6 +320,7 @@ namespace pu::ui::elm
 
     void Menu::OnInput(u64 Down, u64 Up, u64 Held, bool Touch)
     {
+        if(GetItems().size() == 0) return;
         if(basestatus == 1)
         {
             auto curtime = std::chrono::steady_clock::now();
