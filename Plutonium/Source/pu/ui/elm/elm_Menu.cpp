@@ -404,14 +404,16 @@ namespace pu::ui::elm
                                 if(i == this->isel) this->selfact = 0;
                                 else if(i == this->previsel) this->pselfact = 255;
                             }
-                            ReloadItemRenders();
                         }
                     }
                     else
                     {
                         this->isel = 0;
                         this->fisel = 0;
-                        ReloadItemRenders();
+                        if(this->itms.size() >= this->ishow)
+                        {
+                            ReloadItemRenders();
+                        }
                     }
                 }
             }
@@ -453,15 +455,16 @@ namespace pu::ui::elm
                                 if(i == this->isel) this->selfact = 0;
                                 else if(i == this->previsel) this->pselfact = 255;
                             }
-                            ReloadItemRenders();
                         }
                     }
                     else
                     {
                         this->isel = this->itms.size() - 1;
                         this->fisel = 0;
-                        if(this->itms.size() >= this->ishow) this->fisel = this->itms.size() - this->ishow;
-                        ReloadItemRenders();
+                        if(this->itms.size() >= this->ishow) {
+                            this->fisel = this->itms.size() - this->ishow;
+                            ReloadItemRenders();
+                        }
                     }
                 }
             }
