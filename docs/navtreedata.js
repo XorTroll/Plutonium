@@ -35,7 +35,7 @@ var NAVTREEINDEX =
 [
 "annotated.html",
 "d6/de9/classpu_1_1ui_1_1_dialog.html",
-"dir_d600b330a989706fba55e73f9eeaf49c.html"
+"files.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

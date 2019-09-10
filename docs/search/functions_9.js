@@ -10,6 +10,6 @@ var searchData=
   ['loadfromhtml',['LoadFromHTML',['../d8/d05/namespacepu_1_1web.html#ab333e56df999a7897f3e820c8f7c98b6',1,'pu::web']]],
   ['loadfromvideo',['LoadFromVideo',['../d8/d05/namespacepu_1_1web.html#a23c36dacb5bee076dc6ed47186183421',1,'pu::web']]],
   ['loadimage',['LoadImage',['../da/d54/namespacepu_1_1ui_1_1render.html#afe8f3988142e9c5995a3bcf3a0b2cd6e',1,'pu::ui::render']]],
-  ['loadlayout',['LoadLayout',['../da/dc0/classpu_1_1ui_1_1_application.html#acc4e648d3a80865a1b80f990078d0986',1,'pu::ui::Application']]],
+  ['loadlayout',['LoadLayout',['../da/dc0/classpu_1_1ui_1_1_application.html#a50c5006e6be62cf602197fbede960180',1,'pu::ui::Application']]],
   ['loadsharedfont',['LoadSharedFont',['../da/d54/namespacepu_1_1ui_1_1render.html#a9639f4223b62da864d41205cd58633ed',1,'pu::ui::render']]]
 ];

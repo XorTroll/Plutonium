@@ -1,7 +1,6 @@
 var classpu_1_1ui_1_1elm_1_1_menu =
 [
     [ "Menu", "dc/d6c/classpu_1_1ui_1_1elm_1_1_menu.html#addd828dd7d3da2c35b13b6505414ecef", null ],
-    [ "~Menu", "dc/d6c/classpu_1_1ui_1_1elm_1_1_menu.html#a83718bcbff7ffca3c791980709241fd1", null ],
     [ "AddItem", "dc/d6c/classpu_1_1ui_1_1elm_1_1_menu.html#a3436d037b44fb8bd7f21ba53ffe06caf", null ],
     [ "ClearItems", "dc/d6c/classpu_1_1ui_1_1elm_1_1_menu.html#abf94e076df3b81e5f35a22afcf8e59a2", null ],
     [ "GetColor", "dc/d6c/classpu_1_1ui_1_1elm_1_1_menu.html#ae23541ce0583e038f4d8f0c0deba9497", null ],
