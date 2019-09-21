@@ -25,20 +25,23 @@ namespace pu::ui
             ~Layout();
 
             bool HasChilds();
-            void SetOnInput(std::function<void(u64 Down, u64 Up, u64 Held, bool Touch)> Callback);
-            std::function<void(u64 Down, u64 Up, u64 Held, bool Touch)> GetOnInput();
+            void SetOnInput(std::function<void(u64 Down, u64 Up, u64 Held, Touch Pos)> Callback);
+            std::function<void(u64 Down, u64 Up, u64 Held, Touch Pos)> GetOnInput();
             void AddThread(std::function<void()> Callback);
             std::vector<std::function<void()>> GetAllThreads();
             void SetBackgroundImage(std::string Path);
             void SetBackgroundColor(Color Color);
+            void SimulateTouch(Touch Custom);
+            Touch GetSimulatedTouch();
             render::NativeTexture GetBackgroundImageTexture();
             Color GetBackgroundColor();
             bool HasBackgroundImage();
         private:
             bool hasimage;
             Color overbgcolor;
+            Touch simtouch;
             render::NativeTexture overbgtex;
-            std::function<void(u64, u64, u64, bool)> onipt;
+            std::function<void(u64, u64, u64, Touch)> onipt;
             std::vector<std::function<void()>> thds;
     };
 }

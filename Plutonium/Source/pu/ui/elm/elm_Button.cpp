@@ -143,11 +143,11 @@ namespace pu::ui::elm
         Drawer->RenderTexture(this->ntex, tx, ty);
     }
 
-    void Button::OnInput(u64 Down, u64 Up, u64 Held, bool Touch)
+    void Button::OnInput(u64 Down, u64 Up, u64 Held, Touch Pos)
     {
         if(this->hover)
         {
-            if(!Touch)
+            if(Pos.IsEmpty())
             {
                 (this->clickcb)();
                 this->hover = false;
@@ -156,11 +156,9 @@ namespace pu::ui::elm
         }
         else
         {
-            if(Touch)
+            if(!Pos.IsEmpty())
             {
-                touchPosition tch;
-                hidTouchRead(&tch, 0);
-                if(((s32)tch.px >= x) && ((s32)tch.px < (x + w)) && ((s32)tch.py >= y) && ((s32)tch.py < (y + h)))
+                if((Pos.X >= x) && (Pos.X < (x + w)) && (Pos.Y >= y) && (Pos.Y < (y + h)))
                 {
                     this->hover = true;
                     this->hoverfact = 0;

@@ -8,5 +8,6 @@ var namespacepu_1_1ui =
     [ "Container", "dc/dcd/classpu_1_1ui_1_1_container.html", "dc/dcd/classpu_1_1ui_1_1_container" ],
     [ "Dialog", "d6/de9/classpu_1_1ui_1_1_dialog.html", "d6/de9/classpu_1_1ui_1_1_dialog" ],
     [ "Layout", "d6/d11/classpu_1_1ui_1_1_layout.html", "d6/d11/classpu_1_1ui_1_1_layout" ],
-    [ "Overlay", "d6/d8f/classpu_1_1ui_1_1_overlay.html", "d6/d8f/classpu_1_1ui_1_1_overlay" ]
+    [ "Overlay", "d6/d8f/classpu_1_1ui_1_1_overlay.html", "d6/d8f/classpu_1_1ui_1_1_overlay" ],
+    [ "Touch", "df/d81/structpu_1_1ui_1_1_touch.html", "df/d81/structpu_1_1ui_1_1_touch" ]
 ];

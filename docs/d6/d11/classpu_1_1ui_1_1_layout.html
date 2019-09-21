@@ -134,10 +134,10 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:ac93ddffcf6624205a0ba26e9d1ca513e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0447113a6aad1d0f5d691db062265d8c"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d11/classpu_1_1ui_1_1_layout.html#a0447113a6aad1d0f5d691db062265d8c">HasChilds</a> ()</td></tr>
 <tr class="separator:a0447113a6aad1d0f5d691db062265d8c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2ec13e4f6eff18dd7e258fa22fcfb5bd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d11/classpu_1_1ui_1_1_layout.html#a2ec13e4f6eff18dd7e258fa22fcfb5bd">SetOnInput</a> (std::function&lt; void(u64 Down, u64 Up, u64 Held, bool Touch)&gt; Callback)</td></tr>
-<tr class="separator:a2ec13e4f6eff18dd7e258fa22fcfb5bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a99bd46c5a130a2ce00177f320834252a"><td class="memItemLeft" align="right" valign="top">std::function&lt; void(u64 Down, u64 Up, u64 Held, bool Touch)&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d11/classpu_1_1ui_1_1_layout.html#a99bd46c5a130a2ce00177f320834252a">GetOnInput</a> ()</td></tr>
-<tr class="separator:a99bd46c5a130a2ce00177f320834252a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7ae11b4155d3f9075a31aebae4f5c082"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d11/classpu_1_1ui_1_1_layout.html#a7ae11b4155d3f9075a31aebae4f5c082">SetOnInput</a> (std::function&lt; void(u64 Down, u64 Up, u64 Held, <a class="el" href="../../df/d81/structpu_1_1ui_1_1_touch.html">Touch</a> Pos)&gt; Callback)</td></tr>
+<tr class="separator:a7ae11b4155d3f9075a31aebae4f5c082"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5ecb0759cdf8e751c57b4bdd0e9b52f7"><td class="memItemLeft" align="right" valign="top">std::function&lt; void(u64 Down, u64 Up, u64 Held, <a class="el" href="../../df/d81/structpu_1_1ui_1_1_touch.html">Touch</a> Pos)&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d11/classpu_1_1ui_1_1_layout.html#a5ecb0759cdf8e751c57b4bdd0e9b52f7">GetOnInput</a> ()</td></tr>
+<tr class="separator:a5ecb0759cdf8e751c57b4bdd0e9b52f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a77cf5068d395925c0016f1aa137779ec"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d11/classpu_1_1ui_1_1_layout.html#a77cf5068d395925c0016f1aa137779ec">AddThread</a> (std::function&lt; void()&gt; Callback)</td></tr>
 <tr class="separator:a77cf5068d395925c0016f1aa137779ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4c86f0851ff2f94ef436ab444e98f2db"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::function&lt; void()&gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d11/classpu_1_1ui_1_1_layout.html#a4c86f0851ff2f94ef436ab444e98f2db">GetAllThreads</a> ()</td></tr>
@@ -146,6 +146,10 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a272091e3b143aabe600922e8ea99d18b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a41292d1243a117bff050a872f64791d3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d11/classpu_1_1ui_1_1_layout.html#a41292d1243a117bff050a872f64791d3">SetBackgroundColor</a> (<a class="el" href="../../d7/d0c/structpu_1_1ui_1_1_color.html">Color</a> <a class="el" href="../../d7/d0c/structpu_1_1ui_1_1_color.html">Color</a>)</td></tr>
 <tr class="separator:a41292d1243a117bff050a872f64791d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa2e57187e7414c1f594c1f0059b1735f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d11/classpu_1_1ui_1_1_layout.html#aa2e57187e7414c1f594c1f0059b1735f">SimulateTouch</a> (<a class="el" href="../../df/d81/structpu_1_1ui_1_1_touch.html">Touch</a> Custom)</td></tr>
+<tr class="separator:aa2e57187e7414c1f594c1f0059b1735f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a600687faf3d4e6a0a4d951a57746c9c5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../df/d81/structpu_1_1ui_1_1_touch.html">Touch</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d11/classpu_1_1ui_1_1_layout.html#a600687faf3d4e6a0a4d951a57746c9c5">GetSimulatedTouch</a> ()</td></tr>
+<tr class="separator:a600687faf3d4e6a0a4d951a57746c9c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a48e5f55a443dab8c30fc70640e778022"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../da/d54/namespacepu_1_1ui_1_1render.html#ad62e479b598863654eefad922d71469b">render::NativeTexture</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d11/classpu_1_1ui_1_1_layout.html#a48e5f55a443dab8c30fc70640e778022">GetBackgroundImageTexture</a> ()</td></tr>
 <tr class="separator:a48e5f55a443dab8c30fc70640e778022"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8aa3e5d0448ffb6ec3e91f85beaaeec7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../d7/d0c/structpu_1_1ui_1_1_color.html">Color</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d11/classpu_1_1ui_1_1_layout.html#a8aa3e5d0448ffb6ec3e91f85beaaeec7">GetBackgroundColor</a> ()</td></tr>
@@ -292,12 +296,27 @@ Additional Inherited Members</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a99bd46c5a130a2ce00177f320834252a"></a>
+<a class="anchor" id="a5ecb0759cdf8e751c57b4bdd0e9b52f7"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">std::function&lt;void(u64 Down, u64 Up, u64 Held, bool Touch)&gt; pu::ui::Layout::GetOnInput </td>
+          <td class="memname">std::function&lt;void(u64 Down, u64 Up, u64 Held, <a class="el" href="../../df/d81/structpu_1_1ui_1_1_touch.html">Touch</a> Pos)&gt; pu::ui::Layout::GetOnInput </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a600687faf3d4e6a0a4d951a57746c9c5"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="../../df/d81/structpu_1_1ui_1_1_touch.html">Touch</a> pu::ui::Layout::GetSimulatedTouch </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -369,15 +388,31 @@ Additional Inherited Members</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a2ec13e4f6eff18dd7e258fa22fcfb5bd"></a>
+<a class="anchor" id="a7ae11b4155d3f9075a31aebae4f5c082"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">void pu::ui::Layout::SetOnInput </td>
           <td>(</td>
-          <td class="paramtype">std::function&lt; void(u64 Down, u64 Up, u64 Held, bool Touch)&gt;&#160;</td>
+          <td class="paramtype">std::function&lt; void(u64 Down, u64 Up, u64 Held, <a class="el" href="../../df/d81/structpu_1_1ui_1_1_touch.html">Touch</a> Pos)&gt;&#160;</td>
           <td class="paramname"><em>Callback</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="aa2e57187e7414c1f594c1f0059b1735f"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void pu::ui::Layout::SimulateTouch </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="../../df/d81/structpu_1_1ui_1_1_touch.html">Touch</a>&#160;</td>
+          <td class="paramname"><em>Custom</em></td><td>)</td>
           <td></td>
         </tr>
       </table>

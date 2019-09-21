@@ -78,7 +78,7 @@ namespace pu::ui::elm
             s32 GetSelectedIndex();
             void SetSelectedIndex(s32 Index);
             void OnRender(render::Renderer::Ref &Drawer, s32 X, s32 Y);
-            void OnInput(u64 Down, u64 Up, u64 Held, bool Touch);
+            void OnInput(u64 Down, u64 Up, u64 Held, Touch Pos);
         private:
             void ReloadItemRenders();
             bool dtouch;

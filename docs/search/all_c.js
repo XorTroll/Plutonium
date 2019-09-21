@@ -1,11 +1,12 @@
 var searchData=
 [
-  ['nativefont',['NativeFont',['../da/d54/namespacepu_1_1ui_1_1render.html#aa68f3581ebc714cac7960d3836a8fcc0',1,'pu::ui::render']]],
-  ['nativerenderer',['NativeRenderer',['../da/d54/namespacepu_1_1ui_1_1render.html#a5e63a217a555727935dc65c4d0fac351',1,'pu::ui::render']]],
-  ['nativesurface',['NativeSurface',['../da/d54/namespacepu_1_1ui_1_1render.html#a78e6ccc079496086ec2bb7bd64ac530a',1,'pu::ui::render']]],
-  ['nativetexture',['NativeTexture',['../da/d54/namespacepu_1_1ui_1_1render.html#ad62e479b598863654eefad922d71469b',1,'pu::ui::render']]],
-  ['nativewindow',['NativeWindow',['../da/d54/namespacepu_1_1ui_1_1render.html#aa7d1f6535eccef6c4fd7111202ce32a5',1,'pu::ui::render']]],
-  ['nintendoextended',['NintendoExtended',['../da/d54/namespacepu_1_1ui_1_1render.html#a3c7c58449d392444ecb914962de801c7aadd3aaa442ec389ba2cc8db983f48a69',1,'pu::ui::render']]],
-  ['notifyending',['NotifyEnding',['../d6/d8f/classpu_1_1ui_1_1_overlay.html#a4b40990cb8ec59de07d6e50be7e09569',1,'pu::ui::Overlay']]],
-  ['npos',['npos',['../d2/de5/classpu_1_1_string.html#a2f156053865706f5be03b8b1eb405ac3',1,'pu::String']]]
+  ['menu',['Menu',['../dc/d6c/classpu_1_1ui_1_1elm_1_1_menu.html',1,'pu::ui::elm']]],
+  ['menu',['Menu',['../dc/d6c/classpu_1_1ui_1_1elm_1_1_menu.html#addd828dd7d3da2c35b13b6505414ecef',1,'pu::ui::elm::Menu']]],
+  ['menuitem',['MenuItem',['../de/dbb/classpu_1_1ui_1_1elm_1_1_menu_item.html',1,'pu::ui::elm']]],
+  ['menuitem',['MenuItem',['../de/dbb/classpu_1_1ui_1_1elm_1_1_menu_item.html#a35f33a57c480d3dc4af1873ead604f1e',1,'pu::ui::elm::MenuItem']]],
+  ['mixerallflags',['MixerAllFlags',['../da/d54/namespacepu_1_1ui_1_1render.html#a0955ba96cbd635c6bc387fcb51088555',1,'pu::ui::render']]],
+  ['mixerflags',['MixerFlags',['../df/d6f/structpu_1_1ui_1_1render_1_1_renderer_init_options.html#ad17069cb76d367ba3958988e7e50fcc6',1,'pu::ui::render::RendererInitOptions']]],
+  ['motioncursor',['MotionCursor',['../da/df9/classpu_1_1ui_1_1elm_1_1_motion_cursor.html#a36dfde0ed34a7dd8d70adbb75dc7c695',1,'pu::ui::elm::MotionCursor']]],
+  ['motioncursor',['MotionCursor',['../da/df9/classpu_1_1ui_1_1elm_1_1_motion_cursor.html',1,'pu::ui::elm']]],
+  ['music',['Music',['../d8/d8f/namespacepu_1_1audio.html#a906d9108700d72278291d79c10fc99e0',1,'pu::audio']]]
 ];

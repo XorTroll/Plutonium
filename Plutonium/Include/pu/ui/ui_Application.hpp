@@ -24,7 +24,7 @@ namespace pu::ui
     class Application
     {
         public:
-            Application(u32 Flags = SDL_INIT_EVERYTHING, bool RenderAccel = true);
+            Application(render::Renderer::Ref Renderer);
             PU_SMART_CTOR(Application)
 
             template<typename Lyt>
@@ -35,8 +35,12 @@ namespace pu::ui
                 this->lyt = std::dynamic_pointer_cast<ui::Layout>(Layout);
             }
 
+            void Prepare();
+            // Force create a derived Application which should initialize everything here
+            virtual void OnLoad() = 0;
+
             void AddThread(std::function<void()> Callback);
-            void SetOnInput(std::function<void(u64 Down, u64 Up, u64 Held, bool Touch)> Callback);
+            void SetOnInput(std::function<void(u64 Down, u64 Up, u64 Held, Touch Pos)> Callback);
             s32 ShowDialog(Dialog::Ref &ToShow);
             int CreateShowDialog(String Title, String Content, std::vector<String> Options, bool UseLastOptionAsCancel, std::string Icon = "");
             
@@ -75,6 +79,7 @@ namespace pu::ui
             void Close();
             void CloseWithFadeOut();
         protected:
+            bool loaded;
             bool rover;
             std::function<bool(render::Renderer::Ref&)> rof;
             bool show;
@@ -88,7 +93,7 @@ namespace pu::ui
             bool ffovl;
             Overlay::Ref ovl;
             std::vector<std::function<void()>> thds;
-            std::function<void(u64, u64, u64, bool)> cbipt;
+            std::function<void(u64, u64, u64, Touch)> cbipt;
             render::Renderer::Ref rend;
     };
 }

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['overlay',['Overlay',['../d6/d8f/classpu_1_1ui_1_1_overlay.html',1,'pu::ui']]]
+  ['nativetexturerenderoptions',['NativeTextureRenderOptions',['../d5/d24/structpu_1_1ui_1_1render_1_1_native_texture_render_options.html',1,'pu::ui::render']]]
 ];

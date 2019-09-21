@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['korean',['Korean',['../da/d54/namespacepu_1_1ui_1_1render.html#a3c7c58449d392444ecb914962de801c7ad0bdb3cde477d82e766da05ebda50ccb',1,'pu::ui::render']]]
+  ['joycon',['JoyCon',['../d2/d5e/namespacepu_1_1ui_1_1elm.html#a47232d7aa879d65f144b1c4767f4a949',1,'pu::ui::elm']]]
 ];

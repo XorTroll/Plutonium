@@ -2,21 +2,31 @@
 
 namespace pu::ui
 {
-    Application::Application(u32 Flags, bool RenderAccel)
+    Application::Application(render::Renderer::Ref Renderer)
     {
-        this->rend = render::Renderer::New();
-        this->rend->Initialize(Flags, RenderAccel);
+        this->rend = Renderer;
+        this->rend->Initialize();
         this->show = false;
-        this->cbipt = [&](u64,u64,u64,bool){};
+        this->cbipt = [&](u64,u64,u64,Touch){};
         this->rover = false;
         this->ovl = nullptr;
         this->closefact = false;
         this->fovl = false;
         this->ffovl = false;
         this->lyt = nullptr;
+        this->loaded = false;
         this->rof = [](render::Renderer::Ref&) -> bool { return true; };
         this->fadea = 255;
         this->aapf = 35;
+    }
+
+    void Application::Prepare()
+    {
+        if(!this->loaded)
+        {
+            this->OnLoad();
+            this->loaded = true;
+        }
     }
 
     void Application::AddThread(std::function<void()> Callback)
@@ -24,7 +34,7 @@ namespace pu::ui
         this->thds.push_back(Callback);
     }
 
-    void Application::SetOnInput(std::function<void(u64 Down, u64 Up, u64 Held, bool Touch)> Callback)
+    void Application::SetOnInput(std::function<void(u64 Down, u64 Up, u64 Held, Touch Pos)> Callback)
     {
         this->cbipt = Callback;
     }
@@ -63,6 +73,7 @@ namespace pu::ui
 
     void Application::Show()
     {
+        if(!this->loaded) return;
         if(this->lyt == nullptr) return;
         this->show = true;
         while(this->show) this->CallForRender();
@@ -81,6 +92,8 @@ namespace pu::ui
 
     bool Application::CallForRender()
     {
+        if(!this->loaded) return false;
+        if(this->lyt == nullptr) return false;
         bool c = true;
         this->rend->InitializeRender(this->lyt->GetBackgroundColor());
         this->OnRender();
@@ -150,21 +163,30 @@ namespace pu::ui
         u64 u = hidKeysUp(CONTROLLER_P1_AUTO);
         u64 h = hidKeysHeld(CONTROLLER_P1_AUTO);
         u64 th = hidKeysDown(CONTROLLER_HANDHELD);
-        bool touch = (th & KEY_TOUCH);
+        Touch tch = Touch::Empty;
+        if(th & KEY_TOUCH)
+        {
+            touchPosition nxtch;
+            hidTouchRead(&nxtch, 0);
+            tch.X = nxtch.px;
+            tch.Y = nxtch.py;
+        }
+        auto simtch = this->lyt->GetSimulatedTouch();
+        if(!simtch.IsEmpty()) tch = simtch;
         if(!this->thds.empty()) for(s32 i = 0; i < this->thds.size(); i++) (this->thds[i])();
         this->lyt->PreRender();
         auto lyth = this->lyt->GetAllThreads();
         if(!lyth.empty()) for(s32 i = 0; i < lyth.size(); i++) (lyth[i])();
-        if(!this->rover) (this->cbipt)(d, u, h, touch);
+        if(!this->rover) (this->cbipt)(d, u, h, tch);
         if(this->lyt->HasBackgroundImage()) this->rend->RenderTexture(this->lyt->GetBackgroundImageTexture(), 0, 0);
-        if(!this->rover) (this->lyt->GetOnInput())(d, u, h, touch);
+        if(!this->rover) (this->lyt->GetOnInput())(d, u, h, tch);
         if(this->lyt->HasChilds()) for(s32 i = 0; i < this->lyt->GetCount(); i++)
         {
             auto elm = this->lyt->At(i);
             if(elm->IsVisible())
             {
                 elm->OnRender(this->rend, elm->GetProcessedX(), elm->GetProcessedY());
-                if(!this->rover) elm->OnInput(d, u, h, touch);
+                if(!this->rover) elm->OnInput(d, u, h, tch);
             }
         }
         if(this->ovl != NULL)

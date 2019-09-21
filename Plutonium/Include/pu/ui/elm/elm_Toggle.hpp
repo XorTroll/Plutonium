@@ -39,7 +39,7 @@ namespace pu::ui::elm
             void SetKey(u64 Key);
             bool IsChecked();
             void OnRender(render::Renderer::Ref &Drawer, s32 X, s32 Y);
-            void OnInput(u64 Down, u64 Up, u64 Held, bool Touch);
+            void OnInput(u64 Down, u64 Up, u64 Held, Touch Pos);
         private:
             String cnt;
             s32 x;

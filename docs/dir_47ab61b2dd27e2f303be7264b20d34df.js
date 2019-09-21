@@ -11,6 +11,7 @@ var dir_47ab61b2dd27e2f303be7264b20d34df =
       [ "MenuItem", "de/dbb/classpu_1_1ui_1_1elm_1_1_menu_item.html", "de/dbb/classpu_1_1ui_1_1elm_1_1_menu_item" ],
       [ "Menu", "dc/d6c/classpu_1_1ui_1_1elm_1_1_menu.html", "dc/d6c/classpu_1_1ui_1_1elm_1_1_menu" ]
     ] ],
+    [ "elm_MotionCursor.hpp", "d8/de8/elm___motion_cursor_8hpp.html", "d8/de8/elm___motion_cursor_8hpp" ],
     [ "elm_ProgressBar.hpp", "d3/dd7/elm___progress_bar_8hpp.html", [
       [ "ProgressBar", "d2/dcc/classpu_1_1ui_1_1elm_1_1_progress_bar.html", "d2/dcc/classpu_1_1ui_1_1elm_1_1_progress_bar" ]
     ] ],

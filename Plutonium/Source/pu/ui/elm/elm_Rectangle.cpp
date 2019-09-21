@@ -79,7 +79,7 @@ namespace pu::ui::elm
         Drawer->RenderRectangleFill(this->clr, rdx, rdy, this->w, this->h);
     }
 
-    void Rectangle::OnInput(u64 Down, u64 Up, u64 Held, bool Touch)
+    void Rectangle::OnInput(u64 Down, u64 Up, u64 Held, Touch Pos)
     {
     }
 }

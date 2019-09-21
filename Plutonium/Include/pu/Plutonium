@@ -19,7 +19,7 @@
 #include <pu/audio/audio_Sfx.hpp>
 
 #include <pu/ui/ui_Application.hpp>
-#include <pu/ui/ui_Color.hpp>
+#include <pu/ui/ui_Types.hpp>
 #include <pu/ui/ui_Container.hpp>
 #include <pu/ui/ui_Dialog.hpp>
 #include <pu/ui/ui_Layout.hpp>
@@ -29,6 +29,7 @@
 #include <pu/ui/elm/elm_Element.hpp>
 #include <pu/ui/elm/elm_Image.hpp>
 #include <pu/ui/elm/elm_Menu.hpp>
+#include <pu/ui/elm/elm_MotionCursor.hpp>
 #include <pu/ui/elm/elm_ProgressBar.hpp>
 #include <pu/ui/elm/elm_Rectangle.hpp>
 #include <pu/ui/elm/elm_TextBlock.hpp>

@@ -14,7 +14,7 @@ pacman -S switch-sdl2 switch-sdl2_ttf switch-sdl2_image switch-sdl2_gfx switch-s
 
 ## Internal structure and performance
 
-Plutonium uses SDL2 (SDL2 via OpenGL) rendering.
+Plutonium uses SDL2 for UI rendering.
 
 Plutonium's performance is based on WPF's system. The user doesn't directly interact with the rendering, as it's done via a main rendering system and different objects to render.
 

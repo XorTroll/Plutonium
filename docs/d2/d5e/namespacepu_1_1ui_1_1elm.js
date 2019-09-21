@@ -5,6 +5,7 @@ var namespacepu_1_1ui_1_1elm =
     [ "Image", "d6/d63/classpu_1_1ui_1_1elm_1_1_image.html", "d6/d63/classpu_1_1ui_1_1elm_1_1_image" ],
     [ "Menu", "dc/d6c/classpu_1_1ui_1_1elm_1_1_menu.html", "dc/d6c/classpu_1_1ui_1_1elm_1_1_menu" ],
     [ "MenuItem", "de/dbb/classpu_1_1ui_1_1elm_1_1_menu_item.html", "de/dbb/classpu_1_1ui_1_1elm_1_1_menu_item" ],
+    [ "MotionCursor", "da/df9/classpu_1_1ui_1_1elm_1_1_motion_cursor.html", "da/df9/classpu_1_1ui_1_1elm_1_1_motion_cursor" ],
     [ "ProgressBar", "d2/dcc/classpu_1_1ui_1_1elm_1_1_progress_bar.html", "d2/dcc/classpu_1_1ui_1_1elm_1_1_progress_bar" ],
     [ "Rectangle", "d5/dea/classpu_1_1ui_1_1elm_1_1_rectangle.html", "d5/dea/classpu_1_1ui_1_1elm_1_1_rectangle" ],
     [ "TextBlock", "df/d21/classpu_1_1ui_1_1elm_1_1_text_block.html", "df/d21/classpu_1_1ui_1_1elm_1_1_text_block" ],

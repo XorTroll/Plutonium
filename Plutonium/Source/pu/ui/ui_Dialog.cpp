@@ -197,7 +197,7 @@ namespace pu::ui
                     s32 icw = render::GetTextureWidth(this->icon);
                     s32 icx = dx + (dw - (icw + icm));
                     s32 icy = dy + icm;
-                    Drawer->RenderTexture(this->icon, icx, icy, initfact);
+                    Drawer->RenderTexture(this->icon, icx, icy, { initfact, -1, -1, -1.0f });
                 }
                 for(s32 i = 0; i < this->opts.size(); i++)
                 {

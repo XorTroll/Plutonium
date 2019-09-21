@@ -301,7 +301,7 @@ namespace pu::ui::elm
                         icw = icw/factor;
                         icx = icx+((this->isize-icw)/2);
                     }
-                    Drawer->RenderTextureScaled(curicon, icx, icy, icw, ich);
+                    Drawer->RenderTexture(curicon, icx, icy, { -1, icw, ich, -1.0f });
                 }
                 Drawer->RenderTexture(curname, tx, ty);
                 cy += ch;
@@ -331,7 +331,7 @@ namespace pu::ui::elm
         }
     }
 
-    void Menu::OnInput(u64 Down, u64 Up, u64 Held, bool Touch)
+    void Menu::OnInput(u64 Down, u64 Up, u64 Held, Touch Pos)
     {
         if(itms.empty()) return;
         if(basestatus == 1)
@@ -343,10 +343,8 @@ namespace pu::ui::elm
                 basestatus = 2;
             }
         }
-        if(Touch)
+        if(!Pos.IsEmpty())
         {
-            touchPosition tch;
-            hidTouchRead(&tch, 0);
             s32 cx = this->GetProcessedX();
             s32 cy = this->GetProcessedY();
             s32 cw = this->w;
@@ -356,7 +354,7 @@ namespace pu::ui::elm
             if((its + this->fisel) > this->itms.size()) its = this->itms.size() - this->fisel;
             for(s32 i = this->fisel; i < (this->fisel + its); i++)
             {
-                if(((cx + cw) > tch.px) && (tch.px > cx) && ((cy + ch) > tch.py) && (tch.py > cy))
+                if(((cx + cw) > Pos.X) && (Pos.X > cx) && ((cy + ch) > Pos.Y) && (Pos.Y > cy))
                 {
                     this->dtouch = true;
                     this->previsel = this->isel;

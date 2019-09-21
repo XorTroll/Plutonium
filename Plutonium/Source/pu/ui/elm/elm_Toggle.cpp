@@ -133,8 +133,8 @@ namespace pu::ui::elm
         Drawer->RenderTexture(this->ntex, tx, ty);
     }
 
-    void Toggle::OnInput(u64 Down, u64 Up, u64 Held, bool Touch)
+    void Toggle::OnInput(u64 Down, u64 Up, u64 Held, Touch Pos)
     {
-        if((Down & this->key) || ((this->key == KEY_TOUCH) && Touch)) this->checked = !this->checked;
+        if((Down & this->key) || ((this->key == KEY_TOUCH) && !Pos.IsEmpty())) this->checked = !this->checked;
     }
 }

@@ -6,9 +6,8 @@ namespace pu::ui::elm
     {
         this->x = X;
         this->y = Y;
-        this->w = 0;
-        this->h = 0;
         this->ntex = NULL;
+        this->rendopts = render::NativeTextureRenderOptions::Default;
         this->SetImage(Image);
     }
 
@@ -43,22 +42,32 @@ namespace pu::ui::elm
 
     s32 Image::GetWidth()
     {
-        return this->w;
+        return this->rendopts.Width;
     }
 
     void Image::SetWidth(s32 Width)
     {
-        this->w = Width;
+        this->rendopts.Width = Width;
     }
 
     s32 Image::GetHeight()
     {
-        return this->h;
+        return this->rendopts.Height;
     }
 
     void Image::SetHeight(s32 Height)
     {
-        this->h = Height;
+        this->rendopts.Height = Height;
+    }
+
+    float Image::GetRotation()
+    {
+        return this->rendopts.Angle;
+    }
+
+    void Image::SetRotation(float Angle)
+    {
+        this->rendopts.Angle = Angle;
     }
 
     String Image::GetImage()
@@ -71,15 +80,15 @@ namespace pu::ui::elm
         if(this->ntex != NULL) render::DeleteTexture(this->ntex);
         this->ntex = NULL;
         std::ifstream ifs(Image.AsUTF8());
-        if(ifs.good())
+        bool ok = ifs.good();
+        ifs.close();
+        if(ok)    
         {
-            ifs.close();
             this->img = Image;
             this->ntex = render::LoadImage(Image.AsUTF8());
-            this->w = render::GetTextureWidth(this->ntex);
-            this->h = render::GetTextureHeight(this->ntex);
+            this->rendopts.Width = render::GetTextureWidth(this->ntex);
+            this->rendopts.Height = render::GetTextureHeight(this->ntex);
         }
-        ifs.close();
     }
 
     bool Image::IsImageValid()
@@ -89,12 +98,10 @@ namespace pu::ui::elm
 
     void Image::OnRender(render::Renderer::Ref &Drawer, s32 X, s32 Y)
     {
-        s32 rdx = X;
-        s32 rdy = Y;
-        Drawer->RenderTextureScaled(this->ntex, rdx, rdy, w, h);
+        Drawer->RenderTexture(this->ntex, X, Y, this->rendopts);
     }
 
-    void Image::OnInput(u64 Down, u64 Up, u64 Held, bool Touch)
+    void Image::OnInput(u64 Down, u64 Up, u64 Held, Touch Pos)
     {
     }
 }

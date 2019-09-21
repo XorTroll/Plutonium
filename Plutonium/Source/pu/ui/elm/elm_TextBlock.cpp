@@ -100,7 +100,7 @@ namespace pu::ui::elm
         Drawer->RenderTexture(this->ntex, rdx, rdy);
     }
 
-    void TextBlock::OnInput(u64 Down, u64 Up, u64 Held, bool Touch)
+    void TextBlock::OnInput(u64 Down, u64 Up, u64 Held, Touch Pos)
     {
     }
 }

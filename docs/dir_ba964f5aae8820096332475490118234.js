@@ -6,9 +6,6 @@ var dir_ba964f5aae8820096332475490118234 =
     [ "ui_Application.hpp", "db/d52/ui___application_8hpp.html", [
       [ "Application", "da/dc0/classpu_1_1ui_1_1_application.html", "da/dc0/classpu_1_1ui_1_1_application" ]
     ] ],
-    [ "ui_Color.hpp", "d6/d2e/ui___color_8hpp.html", [
-      [ "Color", "d7/d0c/structpu_1_1ui_1_1_color.html", "d7/d0c/structpu_1_1ui_1_1_color" ]
-    ] ],
     [ "ui_Container.hpp", "d9/dc7/ui___container_8hpp.html", [
       [ "Container", "dc/dcd/classpu_1_1ui_1_1_container.html", "dc/dcd/classpu_1_1ui_1_1_container" ]
     ] ],
@@ -20,5 +17,9 @@ var dir_ba964f5aae8820096332475490118234 =
     ] ],
     [ "ui_Overlay.hpp", "d6/d08/ui___overlay_8hpp.html", [
       [ "Overlay", "d6/d8f/classpu_1_1ui_1_1_overlay.html", "d6/d8f/classpu_1_1ui_1_1_overlay" ]
+    ] ],
+    [ "ui_Types.hpp", "df/d13/ui___types_8hpp.html", [
+      [ "Color", "d7/d0c/structpu_1_1ui_1_1_color.html", "d7/d0c/structpu_1_1ui_1_1_color" ],
+      [ "Touch", "df/d81/structpu_1_1ui_1_1_touch.html", "df/d81/structpu_1_1ui_1_1_touch" ]
     ] ]
 ];

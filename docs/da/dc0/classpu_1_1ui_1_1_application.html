@@ -112,7 +112,7 @@ $(document).ready(function(){initNavTree('da/dc0/classpu_1_1ui_1_1_application.h
 <a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="../../dc/de9/classpu_1_1ui_1_1_application-members.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">pu::ui::Application Class Reference</div>  </div>
+<div class="title">pu::ui::Application Class Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div>  </div>
 </div><!--header-->
 <div class="contents">
 
@@ -120,15 +120,19 @@ $(document).ready(function(){initNavTree('da/dc0/classpu_1_1ui_1_1_application.h
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a322c55128cefc9e9ad74962d85105909"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../da/dc0/classpu_1_1ui_1_1_application.html#a322c55128cefc9e9ad74962d85105909">Application</a> (u32 Flags=SDL_INIT_EVERYTHING, bool RenderAccel=true)</td></tr>
-<tr class="separator:a322c55128cefc9e9ad74962d85105909"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae362740d6eb99c737d072f00d363b0ec"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../da/dc0/classpu_1_1ui_1_1_application.html#ae362740d6eb99c737d072f00d363b0ec">Application</a> (render::Renderer::Ref Renderer)</td></tr>
+<tr class="separator:ae362740d6eb99c737d072f00d363b0ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a50c5006e6be62cf602197fbede960180"><td class="memTemplParams" colspan="2">template&lt;typename Lyt &gt; </td></tr>
 <tr class="memitem:a50c5006e6be62cf602197fbede960180"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="../../da/dc0/classpu_1_1ui_1_1_application.html#a50c5006e6be62cf602197fbede960180">LoadLayout</a> (std::shared_ptr&lt; Lyt &gt; <a class="el" href="../../d6/d11/classpu_1_1ui_1_1_layout.html">Layout</a>)</td></tr>
 <tr class="separator:a50c5006e6be62cf602197fbede960180"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab46adc854979e5692c5b91344f1c40c5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../da/dc0/classpu_1_1ui_1_1_application.html#ab46adc854979e5692c5b91344f1c40c5">Prepare</a> ()</td></tr>
+<tr class="separator:ab46adc854979e5692c5b91344f1c40c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a293c44edb540457ba28f96be672fecb2"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../da/dc0/classpu_1_1ui_1_1_application.html#a293c44edb540457ba28f96be672fecb2">OnLoad</a> ()=0</td></tr>
+<tr class="separator:a293c44edb540457ba28f96be672fecb2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1082e42765018b3160505e8469c7669b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../da/dc0/classpu_1_1ui_1_1_application.html#a1082e42765018b3160505e8469c7669b">AddThread</a> (std::function&lt; void()&gt; Callback)</td></tr>
 <tr class="separator:a1082e42765018b3160505e8469c7669b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3a2b5c759785ddb68a22a4f99a58ac82"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../da/dc0/classpu_1_1ui_1_1_application.html#a3a2b5c759785ddb68a22a4f99a58ac82">SetOnInput</a> (std::function&lt; void(u64 Down, u64 Up, u64 Held, bool Touch)&gt; Callback)</td></tr>
-<tr class="separator:a3a2b5c759785ddb68a22a4f99a58ac82"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8caaa727dff48ca7e4955284294bf86e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../da/dc0/classpu_1_1ui_1_1_application.html#a8caaa727dff48ca7e4955284294bf86e">SetOnInput</a> (std::function&lt; void(u64 Down, u64 Up, u64 Held, <a class="el" href="../../df/d81/structpu_1_1ui_1_1_touch.html">Touch</a> Pos)&gt; Callback)</td></tr>
+<tr class="separator:a8caaa727dff48ca7e4955284294bf86e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1e8a11e81612943e4de84a0b65c73e63"><td class="memItemLeft" align="right" valign="top">s32&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../da/dc0/classpu_1_1ui_1_1_application.html#a1e8a11e81612943e4de84a0b65c73e63">ShowDialog</a> (Dialog::Ref &amp;ToShow)</td></tr>
 <tr class="separator:a1e8a11e81612943e4de84a0b65c73e63"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad9774699dca6bbb73f8fdc697d50e138"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../da/dc0/classpu_1_1ui_1_1_application.html#ad9774699dca6bbb73f8fdc697d50e138">CreateShowDialog</a> (<a class="el" href="../../d2/de5/classpu_1_1_string.html">String</a> Title, <a class="el" href="../../d2/de5/classpu_1_1_string.html">String</a> Content, std::vector&lt; <a class="el" href="../../d2/de5/classpu_1_1_string.html">String</a> &gt; Options, bool UseLastOptionAsCancel, std::string Icon=&quot;&quot;)</td></tr>
@@ -168,6 +172,8 @@ Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
+<tr class="memitem:aab06d178dbe6d404fe274b18824cfc3c"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../da/dc0/classpu_1_1ui_1_1_application.html#aab06d178dbe6d404fe274b18824cfc3c">loaded</a></td></tr>
+<tr class="separator:aab06d178dbe6d404fe274b18824cfc3c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afe06ab458cf3eb5c8ea8d2fc653fc649"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../da/dc0/classpu_1_1ui_1_1_application.html#afe06ab458cf3eb5c8ea8d2fc653fc649">rover</a></td></tr>
 <tr class="separator:afe06ab458cf3eb5c8ea8d2fc653fc649"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1ea5ab29c20bc04e284faeeba16091c9"><td class="memItemLeft" align="right" valign="top">std::function&lt; bool(render::Renderer::Ref &amp;)&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../da/dc0/classpu_1_1ui_1_1_application.html#a1ea5ab29c20bc04e284faeeba16091c9">rof</a></td></tr>
@@ -194,32 +200,22 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:abc8b77634ba4b551e42d69e66f6bacf4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abc06725a55c872fc57d9537cbee15965"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::function&lt; void()&gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../da/dc0/classpu_1_1ui_1_1_application.html#abc06725a55c872fc57d9537cbee15965">thds</a></td></tr>
 <tr class="separator:abc06725a55c872fc57d9537cbee15965"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a534847452046c22e5202b48d2b771e97"><td class="memItemLeft" align="right" valign="top">std::function&lt; void(u64, u64, u64, bool)&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../da/dc0/classpu_1_1ui_1_1_application.html#a534847452046c22e5202b48d2b771e97">cbipt</a></td></tr>
-<tr class="separator:a534847452046c22e5202b48d2b771e97"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab6bd67df783e81dd1c109ef0f7b96cf9"><td class="memItemLeft" align="right" valign="top">std::function&lt; void(u64, u64, u64, <a class="el" href="../../df/d81/structpu_1_1ui_1_1_touch.html">Touch</a>)&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../da/dc0/classpu_1_1ui_1_1_application.html#ab6bd67df783e81dd1c109ef0f7b96cf9">cbipt</a></td></tr>
+<tr class="separator:ab6bd67df783e81dd1c109ef0f7b96cf9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa7675aec0dba2da7ce17ba3ccc682fa0"><td class="memItemLeft" align="right" valign="top">render::Renderer::Ref&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../da/dc0/classpu_1_1ui_1_1_application.html#aa7675aec0dba2da7ce17ba3ccc682fa0">rend</a></td></tr>
 <tr class="separator:aa7675aec0dba2da7ce17ba3ccc682fa0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a class="anchor" id="a322c55128cefc9e9ad74962d85105909"></a>
+<a class="anchor" id="ae362740d6eb99c737d072f00d363b0ec"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">pu::ui::Application::Application </td>
           <td>(</td>
-          <td class="paramtype">u32&#160;</td>
-          <td class="paramname"><em>Flags</em> = <code>SDL_INIT_EVERYTHING</code>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
+          <td class="paramtype">render::Renderer::Ref&#160;</td>
+          <td class="paramname"><em>Renderer</em></td><td>)</td>
           <td></td>
-          <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>RenderAccel</em> = <code>true</code>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -449,12 +445,50 @@ template&lt;typename Lyt &gt; </div>
 
 </div>
 </div>
+<a class="anchor" id="a293c44edb540457ba28f96be672fecb2"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void pu::ui::Application::OnLoad </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="a036ff0bfa3f7232d9f8864891e56fbd6"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">void pu::ui::Application::OnRender </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ab46adc854979e5692c5b91344f1c40c5"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void pu::ui::Application::Prepare </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -480,14 +514,14 @@ template&lt;typename Lyt &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a3a2b5c759785ddb68a22a4f99a58ac82"></a>
+<a class="anchor" id="a8caaa727dff48ca7e4955284294bf86e"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">void pu::ui::Application::SetOnInput </td>
           <td>(</td>
-          <td class="paramtype">std::function&lt; void(u64 Down, u64 Up, u64 Held, bool Touch)&gt;&#160;</td>
+          <td class="paramtype">std::function&lt; void(u64 Down, u64 Up, u64 Held, <a class="el" href="../../df/d81/structpu_1_1ui_1_1_touch.html">Touch</a> Pos)&gt;&#160;</td>
           <td class="paramname"><em>Callback</em></td><td>)</td>
           <td></td>
         </tr>
@@ -625,7 +659,7 @@ template&lt;typename Ovl &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a534847452046c22e5202b48d2b771e97"></a>
+<a class="anchor" id="ab6bd67df783e81dd1c109ef0f7b96cf9"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -633,7 +667,7 @@ template&lt;typename Ovl &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::function&lt;void(u64, u64, u64, bool)&gt; pu::ui::Application::cbipt</td>
+          <td class="memname">std::function&lt;void(u64, u64, u64, <a class="el" href="../../df/d81/structpu_1_1ui_1_1_touch.html">Touch</a>)&gt; pu::ui::Application::cbipt</td>
         </tr>
       </table>
   </td>
@@ -714,6 +748,26 @@ template&lt;typename Ovl &gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">bool pu::ui::Application::fovl</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="aab06d178dbe6d404fe274b18824cfc3c"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool pu::ui::Application::loaded</td>
         </tr>
       </table>
   </td>

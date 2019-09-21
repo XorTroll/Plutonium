@@ -38,7 +38,7 @@ namespace pu::ui::elm
             Color GetColor();
             void SetColor(Color Color);
             void OnRender(render::Renderer::Ref &Drawer, s32 X, s32 Y);
-            void OnInput(u64 Down, u64 Up, u64 Held, bool Touch);
+            void OnInput(u64 Down, u64 Up, u64 Held, Touch Pos);
         private:
             String text;
             s32 x;

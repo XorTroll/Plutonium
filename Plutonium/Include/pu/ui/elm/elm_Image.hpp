@@ -31,17 +31,18 @@ namespace pu::ui::elm
             void SetWidth(s32 Width);
             s32 GetHeight();
             void SetHeight(s32 Height);
+            float GetRotation();
+            void SetRotation(float Angle);
             String GetImage();
             void SetImage(String Image);
             bool IsImageValid();
             void OnRender(render::Renderer::Ref &Drawer, s32 X, s32 Y);
-            void OnInput(u64 Down, u64 Up, u64 Held, bool Touch);
+            void OnInput(u64 Down, u64 Up, u64 Held, Touch Pos);
         private:
             String img;
             render::NativeTexture ntex;
+            render::NativeTextureRenderOptions rendopts;
             s32 x;
             s32 y;
-            s32 w;
-            s32 h;
     };
 }

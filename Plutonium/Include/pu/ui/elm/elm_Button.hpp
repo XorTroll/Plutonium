@@ -40,7 +40,7 @@ namespace pu::ui::elm
             void SetContentFont(render::NativeFont Font);
             void SetOnClick(std::function<void()> ClickCallback);
             void OnRender(render::Renderer::Ref &Drawer, s32 X, s32 Y);
-            void OnInput(u64 Down, u64 Up, u64 Held, bool Touch);
+            void OnInput(u64 Down, u64 Up, u64 Held, Touch Pos);
         private:
             s32 x;
             s32 y;

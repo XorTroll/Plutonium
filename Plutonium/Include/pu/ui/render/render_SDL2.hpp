@@ -15,7 +15,7 @@
 #include <string>
 #include <switch.h>
 #include <pu/pu_String.hpp>
-#include <pu/ui/ui_Color.hpp>
+#include <pu/ui/ui_Types.hpp>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_ttf.h>

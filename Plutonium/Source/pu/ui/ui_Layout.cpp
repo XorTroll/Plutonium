@@ -4,10 +4,10 @@ namespace pu::ui
 {
     Layout::Layout() : Container(0, 0, 1280, 720)
     {
-        this->onipt = [&](u64 Down, u64 Up, u64 Held, bool Touch){};
+        this->onipt = [&](u64,u64,u64,Touch){};
         this->hasimage = false;
         this->overbgtex = NULL;
-        this->overbgcolor = { 225, 225, 225, 255 };
+        this->overbgcolor = Color(225, 225, 225, 255);
     }
 
     Layout::~Layout()
@@ -20,12 +20,12 @@ namespace pu::ui
         return !this->elms.empty();
     }
 
-    void Layout::SetOnInput(std::function<void(u64 Down, u64 Up, u64 Held, bool Touch)> Callback)
+    void Layout::SetOnInput(std::function<void(u64 Down, u64 Up, u64 Held, Touch Pos)> Callback)
     {
         this->onipt = Callback;
     }
 
-    std::function<void(u64 Down, u64 Up, u64 Held, bool Touch)> Layout::GetOnInput()
+    std::function<void(u64 Down, u64 Up, u64 Held, Touch Pos)> Layout::GetOnInput()
     {
         return this->onipt;
     }
@@ -52,6 +52,18 @@ namespace pu::ui
         if(this->overbgtex != NULL) render::DeleteTexture(this->overbgtex);
         this->hasimage = false;
         this->overbgcolor = Color;
+    }
+
+    void Layout::SimulateTouch(Touch Custom)
+    {
+        this->simtouch = Custom;
+    }
+
+    Touch Layout::GetSimulatedTouch()
+    {
+        Touch simcpy = this->simtouch;
+        this->simtouch = Touch::Empty;
+        return simcpy; // Getting simulated touch resets it
     }
 
     render::NativeTexture Layout::GetBackgroundImageTexture()
