@@ -3,6 +3,7 @@ Build/
 build/
 Output/
 Test/
+Testris/
 *.elf
 *.nso
 *.nro
