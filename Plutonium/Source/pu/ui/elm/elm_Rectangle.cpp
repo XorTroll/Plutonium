@@ -76,7 +76,7 @@ namespace pu::ui::elm
     {
         s32 rdx = X;
         s32 rdy = Y;
-        Drawer->RenderRectangleFill(this->clr, rdx, rdy, this->w, this->h);
+        Drawer->RenderRoundedRectangleFill(this->clr, rdx, rdy, this->w, this->h, this->borderr);
     }
 
     void Rectangle::OnInput(u64 Down, u64 Up, u64 Held, Touch Pos)
