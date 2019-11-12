@@ -22,7 +22,7 @@ Same way WPF does, you can create an UI by making a custom Application class inh
 
 The main function to initialize the application is `Show()`.
 
-Check the [examples](Examples) for a basic usage of the libraries. In case you want to see a really powerful app which really shows what Plutonium is capable of, take a look at [Goldleaf](https://github.com/XorTroll/Goldleaf).
+Check the [examples](example) for a basic usage of the libraries. In case you want to see a really powerful app which really shows what Plutonium is capable of, take a look at [Goldleaf](https://github.com/XorTroll/Goldleaf).
 
 Check the [documentation](https://XorTroll.github.io/Plutonium/) for a more detailed explanation of the library's usage.
 
