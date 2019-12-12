@@ -22,7 +22,6 @@ namespace pu::ui::render
     {
         if(!this->initialized)
         {
-
             this->okromfs = false;
             if(this->initopts.InitRomFs)
             {

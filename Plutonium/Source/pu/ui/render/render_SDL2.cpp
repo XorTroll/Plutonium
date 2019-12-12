@@ -37,7 +37,7 @@ namespace pu::ui::render
         PlFontData plfont;
         NativeFont font = NULL;
         SDL_RWops *mem = NULL;
-        Result rc = plGetSharedFontByType(&plfont, static_cast<s32>(Type));
+        Result rc = plGetSharedFontByType(&plfont, static_cast<PlSharedFontType>(Type));
         if(rc == 0)
         {
             mem = SDL_RWFromMem(plfont.address, plfont.size);

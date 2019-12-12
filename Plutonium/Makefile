@@ -30,7 +30,7 @@ CFLAGS	:=	-g -w -D__SWITCH__ \
 			-fdata-sections \
 			$(ARCH) \
 
-CFLAGS	+=	$(INCLUDE)
+CFLAGS	+=	$(INCLUDE) -DPU_MAJOR=$(PU_MAJOR) -DPU_MINOR=$(PU_MINOR) -DPU_MICRO=$(PU_MICRO) -DPU_VERSION=\"$(PU_MAJOR).$(PU_MINOR).$(PU_MICRO)\"
 
 CXXFLAGS	:= $(CFLAGS) -fno-rtti -fno-exceptions -std=gnu++17
 
@@ -99,6 +99,7 @@ $(BUILD):
 #---------------------------------------------------------------------------------
 clean:
 	@echo clean ...
+	@rm -fr $(CURDIR)/Output
 	@rm -fr $(BUILD) $(OUTPUT).a
 
 #---------------------------------------------------------------------------------

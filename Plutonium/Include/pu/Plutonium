@@ -29,7 +29,6 @@
 #include <pu/ui/elm/elm_Element.hpp>
 #include <pu/ui/elm/elm_Image.hpp>
 #include <pu/ui/elm/elm_Menu.hpp>
-#include <pu/ui/elm/elm_MotionCursor.hpp>
 #include <pu/ui/elm/elm_ProgressBar.hpp>
 #include <pu/ui/elm/elm_Rectangle.hpp>
 #include <pu/ui/elm/elm_TextBlock.hpp>
@@ -39,6 +38,3 @@
 
 #include <pu/ui/render/render_Renderer.hpp>
 #include <pu/ui/render/render_SDL2.hpp>
-
-#include <pu/web/web_Content.hpp>
-#include <pu/web/web_Display.hpp>
