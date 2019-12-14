@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['korean',['Korean',['../da/d54/namespacepu_1_1ui_1_1render.html#a3c7c58449d392444ecb914962de801c7ad0bdb3cde477d82e766da05ebda50ccb',1,'pu::ui::render']]]
+  ['nintendoextended',['NintendoExtended',['../da/d54/namespacepu_1_1ui_1_1render.html#a3c7c58449d392444ecb914962de801c7aadd3aaa442ec389ba2cc8db983f48a69',1,'pu::ui::render']]]
 ];

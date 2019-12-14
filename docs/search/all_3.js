@@ -6,8 +6,7 @@ var searchData=
   ['deletefont',['DeleteFont',['../da/d54/namespacepu_1_1ui_1_1render.html#a8700caa759f09c84aa6006613b7f6bca',1,'pu::ui::render']]],
   ['deletesfx',['DeleteSfx',['../d8/d8f/namespacepu_1_1audio.html#a5b22d95674df1aea26de78714ff482f3',1,'pu::audio']]],
   ['deletetexture',['DeleteTexture',['../da/d54/namespacepu_1_1ui_1_1render.html#a630da147d5f8ac31f346e2735fc09287',1,'pu::ui::render']]],
-  ['dialog',['Dialog',['../d6/de9/classpu_1_1ui_1_1_dialog.html',1,'pu::ui']]],
   ['dialog',['Dialog',['../d6/de9/classpu_1_1ui_1_1_dialog.html#a0bb4015d411e91ecebaae59591ac3477',1,'pu::ui::Dialog']]],
-  ['directory',['Directory',['../d8/d05/namespacepu_1_1web.html#a915a525f0544adb754530aa17ca18a17ae73cda510e8bb947f7e61089e5581494',1,'pu::web']]],
+  ['dialog',['Dialog',['../d6/de9/classpu_1_1ui_1_1_dialog.html',1,'pu::ui']]],
   ['down',['Down',['../d2/d5e/namespacepu_1_1ui_1_1elm.html#ac33e06ac84db60b2dd5b56b4a1276e92a08a38277b0309070706f6652eeae9a53',1,'pu::ui::elm']]]
 ];
