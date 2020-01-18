@@ -57,7 +57,7 @@ namespace pu::ui {
 
             template<typename T>
             std::shared_ptr<T> GetByName(const std::string &name) {
-                static_assert(std::is_same_v<Layout, T> || std::is_base_of_v<Layout, T>, "Demo");
+                static_assert(std::is_same_v<Layout, T> || std::is_base_of_v<Layout, T>, "Return type must be Layout or a derived class!");
                 auto f = this->layout_table.find(name);
                 if(f != this->layout_table.end()) {
                     return std::static_pointer_cast<T>(f->second);
