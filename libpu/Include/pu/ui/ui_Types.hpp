@@ -64,14 +64,16 @@ namespace pu::ui {
 
     struct Position {
 
-        s32 x;
-        s32 y;
+        i32 x;
+        i32 y;
 
         constexpr inline bool IsOutsideScreen() {
             // Negative positions are allowed in SDL :P
             return (x < 0) && (y < 0);
         }
     };
+
+    #define PU_UI_FORWARD_POSITION(pos) pos.x, pos.y
 
     struct Size {
 
@@ -83,6 +85,8 @@ namespace pu::ui {
             return (w > 0) && (h > 0);
         }
     };
+
+    #define PU_UI_FORWARD_SIZE(sz) sz.w, sz.h
 
     struct PositionAndSize : public Position, public Size {
         // Convenience type inheriting from both
@@ -96,4 +100,6 @@ namespace pu::ui {
             return rect;
         }
     };
+
+    #define PU_UI_FORWARD_POSITION_AND_SIZE(pas) pas.x, pas.y, pas.w, pas.h
 }

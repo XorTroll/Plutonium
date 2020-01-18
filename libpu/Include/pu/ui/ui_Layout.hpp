@@ -42,9 +42,9 @@ namespace pu::ui {
                 return nullptr;
             }
 
-            void DoRender(render::Renderer &renderer) PU_LOCKED_SCOPE(this->lock, {
+            void DoRender() PU_LOCKED_SCOPE(this->lock, {
                 for(auto &[name, obj] : this->object_table) {
-                    obj->DoRender(renderer);
+                    obj->DoRender();
                 }
             })
 

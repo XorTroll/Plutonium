@@ -39,7 +39,7 @@ namespace pu::ttf {
         return LoadFont(name, font);
     }
 
-    std::shared_ptr<Font> GetFontByName(const std::string &name, s32 size) {
+    std::shared_ptr<Font> GetFontByName(const std::string &name, i32 size) {
         auto f = g_font_table.find(name);
         if(f != g_font_table.end()) {
             auto font = f->second;

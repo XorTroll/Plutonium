@@ -13,17 +13,17 @@ namespace pu::ttf {
         }
     }
 
-    s32 Font::LoadFromMemory(void *ptr, size_t size) {
+    i32 Font::LoadFromMemory(void *ptr, size_t size) {
         FontFace font;
         font.AssignData(ptr, size);
         font.Load(this->base_fnt_size);
         TTF_CppWrap_SetCppPtrRef(font.font, reinterpret_cast<void*>(this));
-        s32 idx = rand();
+        i32 idx = rand();
         this->font_faces.insert(std::make_pair(idx, font));
         return idx;
     }
 
-    s32 Font::LoadFromFile(const std::string &path) {
+    i32 Font::LoadFromFile(const std::string &path) {
         FILE *f = fopen(path.c_str(), "rb");
         if(f) {
             fseek(f, 0, SEEK_END);
@@ -42,7 +42,7 @@ namespace pu::ttf {
         return InvalidFontFaceIndex;
     }
 
-    void Font::Unload(s32 font_idx) {
+    void Font::Unload(i32 font_idx) {
         auto it = this->font_faces.find(font_idx);
         if(it != this->font_faces.end()) {
             this->font_faces.erase(it);
@@ -76,8 +76,7 @@ namespace pu::ttf {
         if(app) {
             auto [w, _h] = app->GetDimensions();
             auto srf = TTF_RenderUTF8_Blended_Wrapped(font, str.c_str(), color, w);
-            auto tex = render::ConvertToTexture(app->GetRenderer(), srf);
-            return tex;
+            return render::ConvertToTexture(srf);
         }
         return nullptr;
     }

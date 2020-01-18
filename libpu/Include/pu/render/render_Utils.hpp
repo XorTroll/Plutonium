@@ -1,14 +1,14 @@
 
 #pragma once
 #include <pu/sdl2/sdl2_Types.hpp>
-#include <pu/render/render_Renderer.hpp>
 #include <pu/ui/ui_Types.hpp>
 #include <utility>
-#include <map>
 
 namespace pu::render {
 
     void DisposeTexture(sdl2::Texture texture);
+    std::pair<u32, u32> GetTextureSize(sdl2::Texture texture);
+    sdl2::Texture ConvertToTexture(sdl2::Surface surface);
 
     #if _PU_SDL2_IMAGE
 
@@ -16,14 +16,24 @@ namespace pu::render {
 
     #endif
 
-    std::pair<s32, s32> GetTextureSize(sdl2::Texture texture);
+    void DrawRectangle(ui::Color color, i32 x, i32 y, u32 w, u32 h, bool fill);
+    
+    inline void DrawRectangleOutline(ui::Color color, i32 x, i32 y, u32 w, u32 h, i32 border_w) {
+        DrawRectangle(color, x - border_w, y - border_w, w + (border_w * 2), h + (border_w * 2), true);
+    }
+    
+    #if _PU_SDL2_GFX
 
-    // These below require a renderer
+    void DrawRoundedRectangle(ui::Color color, i32 x, i32 y, u32 w, u32 h, i32 rad, bool fill);
+    void DrawCircle(ui::Color color, i32 x, i32 y, i32 rad, bool fill);
 
-    sdl2::Texture ConvertToTexture(render::Renderer &renderer, sdl2::Surface surface);
-    void DrawRectangle(ui::Color color, s32 x, s32 y, s32 w, s32 h, bool fill);
-    void DrawRectangleOutline(ui::Color color, s32 x, s32 y, s32 w, s32 h, s32 border_w);
-    void DrawRoundedRectangle(ui::Color color, s32 x, s32 y, s32 w, s32 h, s32 rad, bool fill);
-    void DrawCircle(ui::Color, s32 x, s32 y, s32 rad, bool fill);
+    #endif
+
+    void SetBasePosition(ui::Position pos);
+    void ResetBasePosition();
+
+    void SetForcedAlphaValue(u8 val);
+    bool IsForcedAlphaValueSet();
+    void ResetForcedAlphaValue();
     
 }

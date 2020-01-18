@@ -6,13 +6,13 @@ namespace pu::ui {
     static bool g_application_instance_created = false;
     static std::shared_ptr<Application> g_application_instance;
 
-    Result Application::Initialize(render::Renderer renderer) {
+    Result Application::Initialize(render::Renderer renderer) PU_LOCKED_SCOPE(g_application_instance_lock, {
         if(!g_application_instance_created) {
             g_application_instance = std::make_shared<Application>(new Application(renderer));
             g_application_instance_created = true;
         }
         return Success;
-    }
+    })
 
     std::shared_ptr<Application> Application::Get() PU_LOCKED_SCOPE(g_application_instance_lock, {
         if(g_application_instance_created) {

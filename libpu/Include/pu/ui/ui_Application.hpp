@@ -35,7 +35,7 @@ namespace pu::ui {
                     auto flyt = this->layout_table.find(this->current_layout_name);
                     if(flyt != this->layout_table.end()) {
                         auto lyt = flyt->second;
-                        lyt->DoRender(renderer);
+                        lyt->DoRender();
                     }
                     SDL_RenderPresent(renderer.renderer);
                 }
@@ -69,16 +69,16 @@ namespace pu::ui {
                 return this->renderer;
             }
 
-            std::pair<s32, s32> GetDimensions() {
-                s32 w = 0;
-                s32 h = 0;
+            std::pair<u32, u32> GetDimensions() {
+                i32 w = 0;
+                i32 h = 0;
                 if(this->renderer.IsValid()) {
                     SDL_GetWindowSize(renderer.window, &w, &h);
                 }
-                return std::make_pair(w, h);
+                return std::make_pair((u32)w, (u32)h);
             }
 
-            void SetDimensions(s32 w, s32 h) {
+            void SetDimensions(i32 w, i32 h) {
                 if(this->renderer.IsValid()) {
                     SDL_SetWindowSize(renderer.window, w, h);
                 }

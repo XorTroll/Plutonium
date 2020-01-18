@@ -9,7 +9,7 @@ namespace pu::ttf {
     struct FontFace {
         TTF_Font *font;
         SDL_RWops *data;
-        s32 font_size;
+        i32 font_size;
 
         FontFace() : font(nullptr), data(nullptr), font_size(0) {}
 
@@ -39,22 +39,22 @@ namespace pu::ttf {
     class Font {
 
         private:
-            std::map<s32, FontFace> font_faces;
+            std::map<i32, FontFace> font_faces;
             u32 base_fnt_size;
 
         public:
-            static constexpr s32 InvalidFontFaceIndex = -1;
+            static constexpr i32 InvalidFontFaceIndex = -1;
 
-            NX_CONSTEXPR bool IsValidFontFaceIndex(s32 index) {
+            NX_CONSTEXPR bool IsValidFontFaceIndex(i32 index) {
                 return index != InvalidFontFaceIndex;
             }
 
             Font(u32 base_font_size = 20);
             ~Font();
 
-            s32 LoadFromMemory(void *ptr, size_t size);
-            s32 LoadFromFile(const std::string &path);
-            void Unload(s32 font_idx);
+            i32 LoadFromMemory(void *ptr, size_t size);
+            i32 LoadFromFile(const std::string &path);
+            void Unload(i32 font_idx);
             void SetSize(u32 size);
 
             sdl2::Font FindValidFontFor(char16_t ch);

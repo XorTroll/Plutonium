@@ -14,10 +14,10 @@ namespace pu::ui {
             Object() : lock(CreateMutex()) {}
 
             virtual PositionAndSize GetPositionAndSize() = 0;
-            virtual void Render(render::Renderer &renderer) = 0;
+            virtual void Render() = 0;
 
-            void DoRender(render::Renderer &renderer) PU_LOCKED_SCOPE(this->lock, {
-                this->Render(renderer);
+            void DoRender() PU_LOCKED_SCOPE(this->lock, {
+                this->Render();
             })
 
             template<typename O, typename ...Args>

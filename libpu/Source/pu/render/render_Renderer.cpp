@@ -2,7 +2,7 @@
 
 namespace pu::render {
 
-    Result CreateRenderer(Renderer &renderer, const std::string &window_title, s32 width, s32 height, u32 flags) {
+    Result CreateRenderer(Renderer &renderer, const std::string &window_title, i32 width, i32 height, u32 flags) {
         auto window = SDL_CreateWindow(window_title.c_str(), 0, 0, width, height, 0);
         PU_RESULT_UNLESS(window != nullptr, result::ResultSDLWindowCreationFailure);
 
