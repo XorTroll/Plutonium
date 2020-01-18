@@ -1926,6 +1926,7 @@ SDL_Surface *TTF_RenderUTF8_Blended_Wrapped(TTF_Font *ttf_font,
     int line, numLines, rowSize;
     char *str, **strLines;
     size_t textlen;
+    int max_width;
 
     TTF_CHECKPOINTER(text, NULL);
 
@@ -1935,6 +1936,7 @@ SDL_Surface *TTF_RenderUTF8_Blended_Wrapped(TTF_Font *ttf_font,
         return(NULL);
     }
 
+    max_width = 0;
     numLines = 1;
     str = NULL;
     strLines = NULL;
@@ -1997,6 +1999,8 @@ SDL_Surface *TTF_RenderUTF8_Blended_Wrapped(TTF_Font *ttf_font,
 
                 TTF_SizeUTF8(ttf_font, tok, &w, &h);
                 if ((Uint32)w <= wrapLength) {
+                    if (w > max_width)
+                        max_width = w;
                     break;
                 } else {
                     /* Back up and try again... */
@@ -2017,7 +2021,7 @@ SDL_Surface *TTF_RenderUTF8_Blended_Wrapped(TTF_Font *ttf_font,
 
     /* Create the target surface */
     textbuf = SDL_CreateRGBSurface(SDL_SWSURFACE,
-            (numLines > 1) ? wrapLength : width,
+            (numLines > 1) ? max_width : width,
             height * numLines + (lineSpace * (numLines - 1)),
             32, 0x00FF0000, 0x0000FF00, 0x000000FF, 0xFF000000);
     if ( textbuf == NULL ) {
