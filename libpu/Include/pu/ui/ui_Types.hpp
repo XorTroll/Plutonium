@@ -86,5 +86,14 @@ namespace pu::ui {
 
     struct PositionAndSize : public Position, public Size {
         // Convenience type inheriting from both
+
+        inline SDL_Rect ToSDLRect() {
+            SDL_Rect rect = {};
+            rect.x = this->x;
+            rect.y = this->y;
+            rect.w = this->w;
+            rect.h = this->h;
+            return rect;
+        }
     };
 }

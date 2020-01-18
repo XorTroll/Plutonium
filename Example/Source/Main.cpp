@@ -23,11 +23,7 @@ namespace custom {
 
             virtual void Render(pu::render::Renderer &renderer) override {
                 SDL_SetRenderDrawColor(renderer.renderer, clr.r, clr.g, clr.b, clr.a);
-                SDL_Rect rect = {};
-                rect.x = this->x;
-                rect.y = this->y;
-                rect.w = this->w;
-                rect.h = this->h;
+                SDL_Rect rect = this->GetPositionAndSize().ToSDLRect();
                 SDL_RenderFillRect(renderer.renderer, &rect);
             }
 
