@@ -8,35 +8,14 @@ namespace custom {
 
     class Rectangle : public pu::ui::Object {
 
-        private:
-            s32 x;
-            s32 y;
-            s32 w;
-            s32 h;
-            pu::ui::Color clr;
+        PU_CLASS_PROPERTY_GS(x, s32, X)
+        PU_CLASS_PROPERTY_GS(y, s32, Y)
+        PU_CLASS_PROPERTY_GS(w, s32, Width)
+        PU_CLASS_PROPERTY_GS(h, s32, Height)
+        PU_CLASS_PROPERTY_GS(clr, pu::ui::Color, Color)
 
         public:
             Rectangle(s32 x, s32 y, s32 w, s32 h, pu::ui::Color clr) : x(x), y(y), w(w), h(h), clr(clr) {}
-
-            virtual s32 GetX() override {
-                return x;
-            }
-
-            virtual s32 GetY() override {
-                return y;
-            }
-
-            virtual s32 GetWidth() override {
-                return w;
-            }
-
-            virtual s32 GetHeight() override {
-                return h;
-            }
-
-            void SetColor(pu::ui::Color clr) {
-                this->clr = clr;
-            }
 
             virtual void Render(pu::render::Renderer &renderer) override {
                 SDL_SetRenderDrawColor(renderer.renderer, clr.r, clr.g, clr.b, clr.a);

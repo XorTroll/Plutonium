@@ -91,3 +91,35 @@ namespace pu  {
 */
 
 #define PU_LOCKED_SCOPE(mtx, ...) __VA_ARGS__
+
+#define _PU_CLASS_PROPERTY_INNER_VAR(name, type) \
+private: \
+type name; \
+
+#define _PU_CLASS_PROPERTY_SETTER(inner_var, type, name) \
+public: \
+void Set##name(type var) { \
+    this->inner_var = var; \
+}
+
+#define _PU_CLASS_PROPERTY_GETTER(inner_var, type, name) \
+public: \
+type Get##name() { \
+    return this->inner_var; \
+}
+
+// Creates a private variable and a Get* method to access it
+#define PU_CLASS_PROPERTY_G(inner_var, type, name) \
+_PU_CLASS_PROPERTY_INNER_VAR(inner_var, type) \
+_PU_CLASS_PROPERTY_GETTER(inner_var, type, name)
+
+// Creates a private variable and a Set* method to modify it
+#define PU_CLASS_PROPERTY_S(inner_var, type, name) \
+_PU_CLASS_PROPERTY_INNER_VAR(inner_var, type) \
+_PU_CLASS_PROPERTY_SETTER(inner_var, type, name)
+
+// Creates a private variable, a Get* method to access it and a Set* method to modify it
+#define PU_CLASS_PROPERTY_GS(inner_var, type, name) \
+_PU_CLASS_PROPERTY_INNER_VAR(inner_var, type) \
+_PU_CLASS_PROPERTY_SETTER(inner_var, type, name) \
+_PU_CLASS_PROPERTY_GETTER(inner_var, type, name)
