@@ -1,5 +1,6 @@
 
 #pragma once
+#include <pu/ui/ui_Types.hpp>
 #include <pu/render/render_Renderer.hpp>
 
 namespace pu::ui {
@@ -12,11 +13,7 @@ namespace pu::ui {
         public:
             Object() : lock(CreateMutex()) {}
 
-            virtual s32 GetX() = 0;
-            virtual s32 GetY() = 0;
-            virtual s32 GetWidth() = 0;
-            virtual s32 GetHeight() = 0;
-
+            virtual PositionAndSize GetPositionAndSize() = 0;
             virtual void Render(render::Renderer &renderer) = 0;
 
             void DoRender(render::Renderer &renderer) PU_LOCKED_SCOPE(this->lock, {

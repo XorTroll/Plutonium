@@ -62,4 +62,29 @@ namespace pu::ui {
 
     static_assert(sizeof(Color) == sizeof(u32), "Invalid RGBA8 color");
 
+    struct Position {
+
+        s32 x;
+        s32 y;
+
+        constexpr inline bool IsOutsideScreen() {
+            // Negative positions are allowed in SDL :P
+            return (x < 0) && (y < 0);
+        }
+    };
+
+    struct Size {
+
+        u32 w;
+        u32 h;
+
+        constexpr inline bool IsValid() {
+            // Let's consider 0 width/height is invalid
+            return (w > 0) && (h > 0);
+        }
+    };
+
+    struct PositionAndSize : public Position, public Size {
+        // Convenience type inheriting from both
+    };
 }

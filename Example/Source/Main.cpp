@@ -10,20 +10,24 @@ namespace custom {
 
         PU_CLASS_PROPERTY_GS(x, s32, X)
         PU_CLASS_PROPERTY_GS(y, s32, Y)
-        PU_CLASS_PROPERTY_GS(w, s32, Width)
-        PU_CLASS_PROPERTY_GS(h, s32, Height)
+        PU_CLASS_PROPERTY_GS(w, u32, Width)
+        PU_CLASS_PROPERTY_GS(h, u32, Height)
         PU_CLASS_PROPERTY_GS(clr, pu::ui::Color, Color)
 
         public:
-            Rectangle(s32 x, s32 y, s32 w, s32 h, pu::ui::Color clr) : x(x), y(y), w(w), h(h), clr(clr) {}
+            Rectangle(s32 x, s32 y, u32 w, u32 h, pu::ui::Color clr) : x(x), y(y), w(w), h(h), clr(clr) {}
+
+            virtual pu::ui::PositionAndSize GetPositionAndSize() override {
+                return { this->x, this->y, this->w, this->h };
+            }
 
             virtual void Render(pu::render::Renderer &renderer) override {
                 SDL_SetRenderDrawColor(renderer.renderer, clr.r, clr.g, clr.b, clr.a);
                 SDL_Rect rect = {};
-                rect.x = x;
-                rect.y = y;
-                rect.w = w;
-                rect.h = h;
+                rect.x = this->x;
+                rect.y = this->y;
+                rect.w = this->w;
+                rect.h = this->h;
                 SDL_RenderFillRect(renderer.renderer, &rect);
             }
 
