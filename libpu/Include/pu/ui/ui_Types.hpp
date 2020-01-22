@@ -99,6 +99,7 @@ namespace pu::ui {
             rect.h = this->h;
             return rect;
         }
+        
     };
 
     #define PU_UI_FORWARD_POSITION_AND_SIZE(pas) pas.x, pas.y, pas.w, pas.h

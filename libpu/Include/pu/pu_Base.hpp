@@ -4,6 +4,12 @@
 #include <memory>
 #include <string>
 
+#define tmplog(fmt, ...) { \
+    char buf[0x800] = {0}; \
+    sprintf(buf, fmt, ##__VA_ARGS__); \
+    svcOutputDebugString(buf, strlen(buf)); \
+}
+
 #include <pu/pu_Results.hpp>
 
 // Feature macros
@@ -109,17 +115,23 @@ type Get##name() { \
 }
 
 // Creates a private variable and a Get* method to access it
-#define PU_CLASS_PROPERTY_G(inner_var, type, name) \
+#define PU_CLASS_PROPERTY_G(inner_var, type, g_type, name) \
 _PU_CLASS_PROPERTY_INNER_VAR(inner_var, type) \
-_PU_CLASS_PROPERTY_GETTER(inner_var, type, name)
+_PU_CLASS_PROPERTY_GETTER(inner_var, g_type, name)
 
 // Creates a private variable and a Set* method to modify it
-#define PU_CLASS_PROPERTY_S(inner_var, type, name) \
+#define PU_CLASS_PROPERTY_S(inner_var, type, s_type, name) \
 _PU_CLASS_PROPERTY_INNER_VAR(inner_var, type) \
-_PU_CLASS_PROPERTY_SETTER(inner_var, type, name)
+_PU_CLASS_PROPERTY_SETTER(inner_var, s_type, name)
 
 // Creates a private variable, a Get* method to access it and a Set* method to modify it
-#define PU_CLASS_PROPERTY_GS(inner_var, type, name) \
+#define PU_CLASS_PROPERTY_GS(inner_var, type, g_type, s_type, name) \
 _PU_CLASS_PROPERTY_INNER_VAR(inner_var, type) \
-_PU_CLASS_PROPERTY_SETTER(inner_var, type, name) \
-_PU_CLASS_PROPERTY_GETTER(inner_var, type, name)
+_PU_CLASS_PROPERTY_SETTER(inner_var, s_type, name) \
+_PU_CLASS_PROPERTY_GETTER(inner_var, g_type, name)
+
+#define PU_CLASS_PROPERTY_SIMPLE_G(inner_var, type, name) PU_CLASS_PROPERTY_G(inner_var, type, type, name)
+
+#define PU_CLASS_PROPERTY_SIMPLE_S(inner_var, type, name) PU_CLASS_PROPERTY_S(inner_var, type, type, name)
+
+#define PU_CLASS_PROPERTY_SIMPLE_GS(inner_var, type, name) PU_CLASS_PROPERTY_GS(inner_var, type, type, type, name)

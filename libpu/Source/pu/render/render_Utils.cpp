@@ -18,20 +18,23 @@ namespace pu::render {
     static bool g_forced_alpha_set = false;
 
     void DisposeTexture(sdl2::Texture texture) {
-        SDL_DestroyTexture(texture);
+        if(texture != nullptr) {
+            SDL_DestroyTexture(texture);
+        }
     }
 
-    std::pair<u32, u32> GetTextureSize(sdl2::Texture texture) {
+    ui::Size GetTextureSize(sdl2::Texture texture) {
         i32 w = 0;
         i32 h = 0;
         SDL_QueryTexture(texture, nullptr, nullptr, &w, &h);
-        return std::make_pair((u32)w, (u32)h);
+        return { (u32)w, (u32)h };
     }
 
     sdl2::Texture ConvertToTexture(sdl2::Surface surface) {
         _PU_RENDER_DO_WITH_RENDERER({
             auto tex = SDL_CreateTextureFromSurface(renderer.renderer, surface);
             if(tex != nullptr) {
+                SDL_SetTextureBlendMode(tex, SDL_BLENDMODE_BLEND);
                 SDL_FreeSurface(surface);
                 return tex;
             }
@@ -69,6 +72,23 @@ namespace pu::render {
     static inline SDL_Rect MakeRect(i32 x, i32 y, u32 w, u32 h) {
         auto pos = MakePosition(x, y);
         return ui::PositionAndSize{ pos.x, pos.y, w, h }.ToSDLRect();
+    }
+
+    void DrawTexture(sdl2::Texture texture, i32 x, i32 y, TextureDrawing drawing) {
+        if(texture != nullptr) {
+            _PU_RENDER_DO_WITH_RENDERER({
+                auto sz = GetTextureSize(texture);
+                if(drawing.custom_size.IsValid()) {
+                    sz.w = drawing.custom_size.w;
+                    sz.h = drawing.custom_size.h;
+                }
+                auto rect = MakeRect(x, y, PU_UI_FORWARD_SIZE(sz));
+                if(drawing.use_custom_alpha) {
+                    SDL_SetTextureAlphaMod(texture, drawing.custom_alpha);
+                }
+                SDL_RenderCopyEx(renderer.renderer, texture, nullptr, &rect, drawing.angle, nullptr, SDL_FLIP_NONE);
+            })
+        }
     }
 
     void DrawRectangle(ui::Color color, i32 x, i32 y, u32 w, u32 h, bool fill) {

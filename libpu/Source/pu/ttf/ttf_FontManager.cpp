@@ -3,6 +3,7 @@
 namespace pu::ttf {
 
     static std::map<std::string, std::shared_ptr<Font>> g_font_table;
+    static bool g_pl_initialized = false;
 
     Result LoadFont(const std::string &name, std::shared_ptr<Font> font) {
         PU_RESULT_UNLESS(sdl2::ttf::IsInitialized(), result::ResultTTFNotInitialized);
@@ -15,25 +16,22 @@ namespace pu::ttf {
     }
 
     Result LoadSystemSharedFont(const std::string &name) {
+        PU_RESULT_UNLESS(sdl2::ttf::IsInitialized(), result::ResultTTFNotInitialized);
+
         auto font = NewInstance<Font>(20);
-        auto rc = plInitialize();
-        if(R_SUCCEEDED(rc)) {
-            for(u32 i = 0; i < PlSharedFontType_Total; i++) {
-                PlFontData data = {};
-                rc = plGetSharedFontByType(&data, (PlSharedFontType)i);
-                if(R_SUCCEEDED(rc)) {
-                    font->LoadFromMemory(data.address, data.size);
-                }
+        for(u32 i = 0; i < PlSharedFontType_Total; i++) {
+            PlFontData data = {};
+            auto rc = plGetSharedFontByType(&data, (PlSharedFontType)i);
+            if(R_SUCCEEDED(rc)) {
+                font->LoadFromMemory(data.address, data.size, &EmptyFontFaceDisposingFunction);
             }
-            plExit();
         }
-        if(R_SUCCEEDED(rc)) {
-            return LoadFont(name, font);
-        }
-        return rc;
+        return LoadFont(name, font);
     }
 
     Result LoadExternalFont(const std::string &name, const std::string &path) {
+        PU_RESULT_UNLESS(sdl2::ttf::IsInitialized(), result::ResultTTFNotInitialized);
+        
         auto font = NewInstance<Font>(20);
         font->LoadFromFile(path);
         return LoadFont(name, font);

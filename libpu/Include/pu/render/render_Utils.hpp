@@ -7,7 +7,7 @@
 namespace pu::render {
 
     void DisposeTexture(sdl2::Texture texture);
-    std::pair<u32, u32> GetTextureSize(sdl2::Texture texture);
+    ui::Size GetTextureSize(sdl2::Texture texture);
     sdl2::Texture ConvertToTexture(sdl2::Surface surface);
 
     #if _PU_SDL2_IMAGE
@@ -16,6 +16,34 @@ namespace pu::render {
 
     #endif
 
+    struct TextureDrawing {
+
+        ui::Size custom_size;
+        float angle;
+        u8 custom_alpha;
+        bool use_custom_alpha;
+
+        TextureDrawing() : custom_size({ 0, 0 }), angle(0.0f), custom_alpha(0), use_custom_alpha(false) {}
+
+        inline TextureDrawing WithCustomSize(u32 w, u32 h) {
+            this->custom_size = { w, h };
+            return *this;
+        }
+
+        inline TextureDrawing WithAngle(float angle) {
+            this->angle = angle;
+            return *this;
+        }
+
+        inline TextureDrawing WithCustomAlphaValue(u8 value) {
+            this->custom_alpha = value;
+            this->use_custom_alpha = true;
+            return *this;
+        }
+
+    };
+
+    void DrawTexture(sdl2::Texture texture, i32 x, i32 y, TextureDrawing drawing = {});
     void DrawRectangle(ui::Color color, i32 x, i32 y, u32 w, u32 h, bool fill);
     
     inline void DrawRectangleOutline(ui::Color color, i32 x, i32 y, u32 w, u32 h, i32 border_w) {

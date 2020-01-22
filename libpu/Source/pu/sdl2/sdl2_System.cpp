@@ -29,10 +29,12 @@ namespace pu::sdl2 {
     namespace ttf {
 
         static bool g_initialized = false;
+        // TTF also initializes PL services for shared font handling
 
         Result Initialize() {
             if(!g_initialized) {
                 PU_TRY_SDL2_RETURN(TTF_Init(), result::ResultTTFInitializationFailure)
+                PU_RESULT_TRY(plInitialize())
                 g_initialized = true;
             }
             return Success;
@@ -44,6 +46,7 @@ namespace pu::sdl2 {
 
         void Exit() {
             if(g_initialized) {
+                plExit();
                 TTF_Quit();
             }
         }

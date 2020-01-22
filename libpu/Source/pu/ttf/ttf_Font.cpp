@@ -9,15 +9,14 @@ namespace pu::ttf {
 
     Font::~Font() {
         for(auto &[idx, font] : this->font_faces) {
-            font.Dispose();
+            font.DisposeAll();
         }
     }
 
-    i32 Font::LoadFromMemory(void *ptr, size_t size) {
+    i32 Font::LoadFromMemory(void *ptr, size_t size, FontFaceDisposingFunction disp_fn) {
         FontFace font;
-        font.AssignData(ptr, size);
-        font.Load(this->base_fnt_size);
-        TTF_CppWrap_SetCppPtrRef(font.font, reinterpret_cast<void*>(this));
+        font.Prepare(ptr, size, disp_fn);
+        font.Load(this->base_fnt_size, reinterpret_cast<void*>(this));
         i32 idx = rand();
         this->font_faces.insert(std::make_pair(idx, font));
         return idx;
@@ -32,10 +31,13 @@ namespace pu::ttf {
 
             if(size > 0) {
                 // C malloc since SDL will call free()
-                auto fontbuf = malloc(size);
+                auto fontbuf = new u8[size]();
                 fread(fontbuf, 1, size, f);
                 fclose(f);
-                return this->LoadFromMemory(fontbuf, size);
+                return this->LoadFromMemory(fontbuf, size, [](void *ptr) {
+                    u8 *file_buf = reinterpret_cast<u8*>(ptr);
+                    delete[] file_buf;
+                });
             }
         }
 
@@ -51,7 +53,7 @@ namespace pu::ttf {
 
     void Font::SetSize(u32 size) {
         for(auto &[idx, font]: this->font_faces) {
-            font.Load(size);
+            font.Load(size, reinterpret_cast<void*>(this));
         }
     }
 
@@ -64,7 +66,7 @@ namespace pu::ttf {
         return nullptr;
     }
 
-    sdl2::Texture Font::RenderText(const std::string &str, SDL_Color color) {
+    sdl2::Texture Font::RenderText(const std::string &str, ui::Color color) {
         if(this->font_faces.empty()) {
             return nullptr;
         }
@@ -75,7 +77,7 @@ namespace pu::ttf {
         auto app = pu::ui::GetApplication();
         if(app) {
             auto [w, _h] = app->GetDimensions();
-            auto srf = TTF_RenderUTF8_Blended_Wrapped(font, str.c_str(), color, w);
+            auto srf = TTF_RenderUTF8_Blended_Wrapped(font, str.c_str(), color.ToSDLColor(), w);
             return render::ConvertToTexture(srf);
         }
         return nullptr;
