@@ -49,7 +49,7 @@ namespace pu::ttf {
 
         void DisposeFont() {
             if(this->font != nullptr) {
-                TTF_CloseFont(this->font);
+                // TTF_CloseFont(this->font);
                 this->font = nullptr;
             }
         }

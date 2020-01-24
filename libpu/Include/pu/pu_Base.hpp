@@ -65,24 +65,20 @@ namespace pu  {
         Mutex mtx;
 
         ScopedLock(Mutex mutex) : mtx(mutex) {
-            // mutexLock(&this->mtx);
+            mutexLock(&this->mtx);
         }
 
         ~ScopedLock() {
-            // mutexUnlock(&this->mtx);
+            mutexUnlock(&this->mtx);
         }
     };
 
 }
 
-/*
 #define PU_LOCKED_SCOPE(mtx, ...) { \
     pu::ScopedLock _lk(mtx); \
     __VA_ARGS__ \
 }
-*/
-
-#define PU_LOCKED_SCOPE(mtx, ...) __VA_ARGS__
 
 #define _PU_CLASS_PROPERTY_INNER_VAR(name, type) \
 private: \

@@ -6,7 +6,25 @@ namespace pu::res {
 
     #if _PU_SDL2_IMAGE
 
-    static std::map<std::string, sdl2::Texture> g_image_table;
+    struct InnerTextureHolder {
+
+        sdl2::Texture tex;
+
+        InnerTextureHolder(sdl2::Texture texture) : tex(texture) {}
+
+        ~InnerTextureHolder() {
+            if(this->tex != nullptr) {
+                render::DisposeTexture(this->tex);
+            }
+        }
+
+        static std::shared_ptr<InnerTextureHolder> WrapTexture(sdl2::Texture tex) {
+            return NewInstance<InnerTextureHolder>(tex);
+        }
+
+    };
+
+    static std::map<std::string, std::shared_ptr<InnerTextureHolder>> g_image_table;
 
     static inline Result LoadImageSurface(sdl2::Surface srf, const std::string &name) {
         PU_RESULT_UNLESS(sdl2::image::IsInitialized(), result::ResultImageNotInitialized);
@@ -19,9 +37,10 @@ namespace pu::res {
         if(tex == nullptr) {
             return result::ResultSDLTextureConversionFailure;
         }
+        auto texwrap = InnerTextureHolder::WrapTexture(tex);
         auto f = g_image_table.find(name);
         if(f == g_image_table.end()) {
-            g_image_table.insert(std::make_pair(name, tex));
+            g_image_table.insert(std::make_pair(name, texwrap));
         }
         return Success;
     }
@@ -43,7 +62,7 @@ namespace pu::res {
     sdl2::Texture GetImageByName(const std::string &name) {
         auto f = g_image_table.find(name);
         if(f != g_image_table.end()) {
-            return f->second;
+            return f->second->tex;
         } 
         return nullptr;
     }

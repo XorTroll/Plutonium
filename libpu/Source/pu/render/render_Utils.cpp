@@ -33,9 +33,9 @@ namespace pu::render {
     sdl2::Texture ConvertToTexture(sdl2::Surface surface) {
         _PU_RENDER_DO_WITH_RENDERER({
             auto tex = SDL_CreateTextureFromSurface(renderer.renderer, surface);
+            SDL_FreeSurface(surface);
             if(tex != nullptr) {
                 SDL_SetTextureBlendMode(tex, SDL_BLENDMODE_BLEND);
-                SDL_FreeSurface(surface);
                 return tex;
             }
         })
