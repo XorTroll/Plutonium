@@ -11,9 +11,6 @@ namespace pu {
 
         static constexpr u32 Module = 399;
 
-        PU_DEFINE_RESULT_MODULE(Base, 0)
-        PU_DEFINE_RESULT(Base, InvalidResultTypeCast, 1)
-
         PU_DEFINE_RESULT_MODULE(Color, 1)
         PU_DEFINE_RESULT(Color, InvalidColorHexString, 1)
 
@@ -21,10 +18,20 @@ namespace pu {
         PU_DEFINE_RESULT(SDL, SDLInitializationFailure, 1)
         PU_DEFINE_RESULT(SDL, SDLWindowCreationFailure, 2)
         PU_DEFINE_RESULT(SDL, SDLRendererCreationFailure, 3)
+        PU_DEFINE_RESULT(SDL, SDLTextureConversionFailure, 3)
 
         PU_DEFINE_RESULT_MODULE(TTF, 3)
         PU_DEFINE_RESULT(TTF, TTFInitializationFailure, 1)
         PU_DEFINE_RESULT(TTF, TTFNotInitialized, 2)
+
+        PU_DEFINE_RESULT_MODULE(Image, 4)
+        PU_DEFINE_RESULT(Image, ImageInitializationFailure, 1)
+        PU_DEFINE_RESULT(Image, ImageNotInitialized, 2)
+        PU_DEFINE_RESULT(Image, ImageBadImageLoad, 3)
+
+        PU_DEFINE_RESULT_MODULE(Mixer, 5)
+        PU_DEFINE_RESULT(Mixer, MixerInitializationFailure, 1)
+        PU_DEFINE_RESULT(Mixer, MixerNotInitialized, 2)
 
     }
 

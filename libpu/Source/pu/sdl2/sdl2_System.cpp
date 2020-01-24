@@ -21,6 +21,7 @@ namespace pu::sdl2 {
         void Exit() {
             if(g_initialized) {
                 SDL_Quit();
+                g_initialized = false;
             }
         }
 
@@ -48,6 +49,7 @@ namespace pu::sdl2 {
             if(g_initialized) {
                 plExit();
                 TTF_Quit();
+                g_initialized = false;
             }
         }
 
@@ -61,7 +63,7 @@ namespace pu::sdl2 {
 
         Result Initialize(u32 flags) {
             if(!g_initialized) {
-                PU_TRY_SDL2_RETURN(Mix_Init(flags), result::ResultSDLInitializationFailure)
+                PU_TRY_SDL2_RETURN_VAL(Mix_Init(flags), flags, result::ResultMixerInitializationFailure)
                 g_initialized = true;
             }
             return Success;
@@ -74,6 +76,7 @@ namespace pu::sdl2 {
         void Exit() {
             if(g_initialized) {
                 Mix_Quit();
+                g_initialized = false;
             }
         }
 
@@ -89,7 +92,8 @@ namespace pu::sdl2 {
 
         Result Initialize(u32 flags) {
             if(!g_initialized) {
-                PU_TRY_SDL2_RETURN(IMG_Init(flags), result::ResultSDLInitializationFailure)
+                PU_TRY_SDL2_RETURN_VAL(IMG_Init(flags), flags, result::ResultImageInitializationFailure)
+                g_initialized = true;
             }
             return Success;
         }
@@ -101,6 +105,7 @@ namespace pu::sdl2 {
         void Exit() {
             if(g_initialized) {
                 IMG_Quit();
+                g_initialized = false;
             }
         }
 

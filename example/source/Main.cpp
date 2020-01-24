@@ -1,7 +1,8 @@
 #include <pu/sdl2/sdl2_System.hpp>
 #include <pu/ui/ui_Application.hpp>
 #include <pu/render/render_Utils.hpp>
-#include <pu/ttf/ttf_FontManager.hpp>
+#include <pu/res/res_FontManager.hpp>
+#include <pu/res/res_ImageManager.hpp>
 #include <thread>
 
 namespace custom {
@@ -46,7 +47,7 @@ namespace custom {
 
             void RenderText() {
                 pu::render::DisposeTexture(this->txt_tex);
-                auto font = pu::ttf::GetFontByName(this->fname, this->fsize);
+                auto font = pu::res::GetFontByName(this->fname, this->fsize);
                 if(font) {
                     this->txt_tex = font->RenderText(txt, this->clr);
                 }
@@ -69,7 +70,7 @@ namespace custom {
             }
 
         public:
-            Text(i32 x, i32 y, pu::ui::Color clr, const std::string &font_name, u32 font_size, const std::string &text) : x(x), y(y), clr(clr), fname(font_name), fsize(font_size) {
+            Text(i32 x, i32 y, pu::ui::Color clr, const std::string &font_name, u32 font_size, const std::string &text) : x(x), y(y), clr(clr), fname(font_name), fsize(font_size), txt_tex(nullptr) {
                 this->SetText(text);
             }
 
@@ -88,6 +89,12 @@ namespace custom {
             virtual void OnRender() override {
                 auto pas = this->GetPositionAndSize();
                 pu::render::DrawTexture(this->txt_tex, PU_UI_FORWARD_POSITION(pas));
+
+                auto imgtex = pu::res::GetImageByName("DemoImg");
+                tmplog("imgtex: %p", imgtex)
+                if(imgtex != nullptr) {
+                    pu::render::DrawTexture(imgtex, 100, 100);
+                }
             }
 
     };
@@ -98,12 +105,12 @@ void another_thread(void *arg) {
     srand(time(nullptr));
     auto app = pu::ui::GetApplication();
     while(true) {
-        hidScanInput();
         auto lyt = app->GetByName<pu::ui::Layout>("MainLayout");
         auto obj = lyt->GetByName<custom::Rectangle>("Rect1");
         auto clr = pu::ui::Color::FromRGBA(rand() % 0xff, rand() % 0xff, rand() % 0xff, 0xff);
         obj->SetColor(clr);
-        if(hidKeysDown(CONTROLLER_P1_AUTO) & KEY_PLUS) {
+        auto input = pu::ui::Input::LoadCurrentInput<pu::ui::InputControllerMode::All>();
+        if(input.MatchesAll<pu::ui::InputMode::Down, KEY_PLUS>()) {
             app->Close();
             break;
         }
@@ -113,9 +120,18 @@ void another_thread(void *arg) {
 
 Thread another_thread_v;
 
+Result LoadResources()
+{
+    PU_RESULT_TRY(romfsInit());
+    PU_RESULT_TRY(pu::res::LoadSystemSharedFont("SharedFont"));
+    PU_RESULT_TRY(pu::res::LoadExternalImage("DemoImg", "romfs:/demoimg.png"));
+
+    return pu::Success;
+}
+
 int main()
 {
-    auto init = pu::sdl2::InitializeAll<SDL_INIT_VIDEO, true, pu::sdl2::flags::None, pu::sdl2::flags::None>();
+    auto init = pu::sdl2::InitializeAll<SDL_INIT_VIDEO, true, pu::sdl2::flags::None, IMG_INIT_PNG | IMG_INIT_JPG>();
 
     if(init) {
         tmplog("Good init...")
@@ -125,7 +141,7 @@ int main()
         if(R_SUCCEEDED(rc)) {
             rc = pu::ui::InitializeApplication(renderer);
             if(R_SUCCEEDED(rc)) {
-                rc = pu::ttf::LoadSystemSharedFont("SharedFont");
+                rc = LoadResources();
                 if(R_SUCCEEDED(rc)) {
                     auto app = pu::ui::GetApplication();
 
@@ -140,10 +156,14 @@ int main()
                     app->Add("MainLayout", layout);
                     app->SetCurrentLayout("MainLayout");
 
-                    threadCreate(&another_thread_v, &another_thread, nullptr, nullptr, 0x2000, 0x2b, -2);
-                    threadStart(&another_thread_v);
+                    auto rc = threadCreate(&another_thread_v, &another_thread, nullptr, nullptr, 0x2000, 0x2b, -2);
+                    if(R_FAILED(rc)) fatalThrow(rc);
+                    rc = threadStart(&another_thread_v);
+                    if(R_FAILED(rc)) fatalThrow(rc);
 
                     app->Show();
+
+                    romfsExit();
                 }
             }
         }

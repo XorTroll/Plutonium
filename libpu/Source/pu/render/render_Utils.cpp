@@ -42,20 +42,6 @@ namespace pu::render {
         return nullptr;
     }
 
-    #if _PU_SDL2_IMAGE
-
-    sdl2::Texture LoadImage(const std::string &path) {
-        _PU_RENDER_DO_WITH_RENDERER({
-            auto srf = IMG_Load(path.c_str());
-            if(srf != nullptr) {
-                return ConvertToTexture(srf);
-            }
-        })
-        return nullptr;
-    }
-
-    #endif
-
     static inline ui::Color AdaptColor(ui::Color clr) {
         if(g_forced_alpha_set) {
             auto newclr = clr;

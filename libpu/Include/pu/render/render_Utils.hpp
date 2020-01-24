@@ -10,12 +10,6 @@ namespace pu::render {
     ui::Size GetTextureSize(sdl2::Texture texture);
     sdl2::Texture ConvertToTexture(sdl2::Surface surface);
 
-    #if _PU_SDL2_IMAGE
-
-    sdl2::Texture LoadImage(const std::string &path);
-
-    #endif
-
     struct TextureDrawing {
 
         ui::Size custom_size;

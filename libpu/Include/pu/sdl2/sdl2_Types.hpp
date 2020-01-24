@@ -18,12 +18,14 @@
     #include <SDL2/SDL_image.h>
 #endif
 
-#define PU_TRY_SDL2_RETURN(val, rc) { \
+#define PU_TRY_SDL2_RETURN_VAL(val, expected, rc) { \
     const auto _tmp_val = (val); \
-    if(_tmp_val != 0) { \
+    if(_tmp_val != expected) { \
         return rc; \
     } \
 }
+
+#define PU_TRY_SDL2_RETURN(val, rc) PU_TRY_SDL2_RETURN_VAL(val, 0, rc)
 
 namespace pu::sdl2 {
 
@@ -32,5 +34,9 @@ namespace pu::sdl2 {
     using Renderer = SDL_Renderer*;
     using Window = SDL_Window*;
     using Font = TTF_Font*;
+
+    inline std::string GetErrorString() {
+        return SDL_GetError();
+    }
 
 }
