@@ -87,12 +87,15 @@ namespace pu::ttf {
 extern "C" {
     pu::sdl2::Font TTF_CppWrap_FindValidFont(pu::sdl2::Font font, Uint16 ch) {
         if(font != nullptr) {
-            auto font_ptr = reinterpret_cast<pu::ttf::Font*>(TTF_CppWrap_GetCppPtrRef(font));
-            auto nfont = font_ptr->FindValidFontFor(ch);
-            if(nfont == nullptr) {
-                return font;
+            auto raw_font_ptr = TTF_CppWrap_GetCppPtrRef(font);
+            if(raw_font_ptr != nullptr) {
+                auto font_ptr = reinterpret_cast<pu::ttf::Font*>(raw_font_ptr);
+                auto nfont = font_ptr->FindValidFontFor(ch);
+                if(nfont == nullptr) {
+                    return font;
+                }
+                return nfont;
             }
-            return nfont;
         }
         return font;
     }
