@@ -56,6 +56,10 @@ namespace pu  {
         return std::make_shared<T>(args...);
     }
 
+    // Mutex-related
+
+    static constexpr Mutex EmptyMutex = (Mutex)0;
+
     struct ScopedLock {
 
         Mutex mtx;
@@ -69,24 +73,6 @@ namespace pu  {
         }
     };
 
-    inline Mutex CreateMutex() {
-        Mutex mtx;
-        mutexInit(&mtx);
-        return mtx;
-    }
-
-    template<typename ...Args>
-    inline std::string Format(const std::string& fmt, Args &&...args)  {
-        std::string out;
-        size_t size = snprintf(nullptr, 0, fmt.c_str(), args...) + 1; // Extra space for '\0'
-        if(size > 0) {
-            char *tmp = new char[size]();
-            snprintf(tmp, size, fmt.c_str(), args...);
-            out.assign(tmp);
-            delete[] tmp;
-        }
-        return out;
-    }
 }
 
 /*

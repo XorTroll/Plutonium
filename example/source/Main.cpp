@@ -21,7 +21,11 @@ namespace custom {
                 return { this->x, this->y, this->w, this->h };
             }
 
-            virtual void Render() override {
+            virtual void OnInput() override {
+                
+            }
+
+            virtual void OnRender() override {
                 auto pas = this->GetPositionAndSize();
                 pu::render::DrawRoundedRectangle(clr, PU_UI_FORWARD_POSITION_AND_SIZE(pas), 25, true);
             }
@@ -74,7 +78,14 @@ namespace custom {
                 return { this->x, this->y, PU_UI_FORWARD_SIZE(txt_sz) };
             }
 
-            virtual void Render() override {
+            virtual void OnInput() override {
+                auto input = pu::ui::Input::LoadCurrentInput<pu::ui::InputControllerMode::All>();
+                if(input.MatchesAll<pu::ui::InputMode::Down, KEY_A, KEY_B, KEY_X, KEY_Y>()) {
+                    this->SetText("A-B-X-Y pressed!");
+                }
+            }
+
+            virtual void OnRender() override {
                 auto pas = this->GetPositionAndSize();
                 pu::render::DrawTexture(this->txt_tex, PU_UI_FORWARD_POSITION(pas));
             }

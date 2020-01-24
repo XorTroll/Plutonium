@@ -72,12 +72,13 @@ namespace pu::ttf {
 
         public:
             static constexpr i32 InvalidFontFaceIndex = -1;
+            static constexpr u32 DefaultFontSize = 25;
 
             NX_CONSTEXPR bool IsValidFontFaceIndex(i32 index) {
                 return index != InvalidFontFaceIndex;
             }
 
-            Font(u32 base_font_size = 20);
+            Font(u32 base_font_size = DefaultFontSize);
             ~Font();
 
             i32 LoadFromMemory(void *ptr, size_t size, FontFaceDisposingFunction disp_fn);

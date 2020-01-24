@@ -18,7 +18,7 @@ namespace pu::ttf {
     Result LoadSystemSharedFont(const std::string &name) {
         PU_RESULT_UNLESS(sdl2::ttf::IsInitialized(), result::ResultTTFNotInitialized);
 
-        auto font = NewInstance<Font>(20);
+        auto font = NewInstance<Font>();
         for(u32 i = 0; i < PlSharedFontType_Total; i++) {
             PlFontData data = {};
             auto rc = plGetSharedFontByType(&data, (PlSharedFontType)i);
@@ -32,7 +32,7 @@ namespace pu::ttf {
     Result LoadExternalFont(const std::string &name, const std::string &path) {
         PU_RESULT_UNLESS(sdl2::ttf::IsInitialized(), result::ResultTTFNotInitialized);
         
-        auto font = NewInstance<Font>(20);
+        auto font = NewInstance<Font>();
         font->LoadFromFile(path);
         return LoadFont(name, font);
     }

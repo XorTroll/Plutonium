@@ -11,13 +11,18 @@ namespace pu::ui {
             Mutex lock;
 
         public:
-            Object() : lock(CreateMutex()) {}
+            Object() : lock(EmptyMutex) {}
 
             virtual PositionAndSize GetPositionAndSize() = 0;
-            virtual void Render() = 0;
+            virtual void OnRender() = 0;
+            virtual void OnInput() = 0;
 
-            void DoRender() PU_LOCKED_SCOPE(this->lock, {
-                this->Render();
+            void OnRenderCall() PU_LOCKED_SCOPE(this->lock, {
+                this->OnRender();
+            })
+
+            void OnInputCall() PU_LOCKED_SCOPE(this->lock, {
+                this->OnInput();
             })
 
             template<typename O, typename ...Args>

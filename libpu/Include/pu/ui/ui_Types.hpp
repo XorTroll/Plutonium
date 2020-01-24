@@ -71,6 +71,16 @@ namespace pu::ui {
             // Negative positions are allowed in SDL :P
             return (x < 0) && (y < 0);
         }
+
+    };
+
+    struct TouchPosition : public Position {
+
+        constexpr inline bool IsValid() {
+            // For touch positions, negative coords = invalid
+            return !this->IsOutsideScreen();
+        }
+
     };
 
     #define PU_UI_FORWARD_POSITION(pos) pos.x, pos.y
@@ -103,4 +113,113 @@ namespace pu::ui {
     };
 
     #define PU_UI_FORWARD_POSITION_AND_SIZE(pas) pas.x, pas.y, pas.w, pas.h
+
+    // Input-related
+
+    enum class InputControllerMode {
+
+        All,
+        Any,
+        Auto,
+
+    };
+
+    enum class InputMode {
+
+        Down,
+        Up,
+        Held
+
+    };
+
+    static constexpr u32 ControllerCount = 10;
+
+    struct Input {
+
+        u64 hid_down;
+        u64 hid_up;
+        u64 hid_held;
+
+        template<InputControllerMode Mode>
+        static Input LoadCurrentInput() {
+
+            Input ipt = {};
+
+            switch(Mode) {
+                case InputControllerMode::All: {
+                    for(u32 i = 0; i < ControllerCount; i++) {
+                        HidControllerID ctrl_id = (HidControllerID)i;
+                        if(hidIsControllerConnected(ctrl_id)) {
+                            ipt.hid_down |= hidKeysDown(ctrl_id);
+                            ipt.hid_up |= hidKeysUp(ctrl_id);
+                            ipt.hid_held |= hidKeysHeld(ctrl_id);
+                        }
+                    }
+                    break;
+                }
+                case InputControllerMode::Any: {
+                    for(u32 i = 0; i < ControllerCount; i++) {
+                        HidControllerID ctrl_id = (HidControllerID)i;
+                        if(hidIsControllerConnected(ctrl_id)) {
+                            ipt.hid_down = hidKeysDown(ctrl_id);
+                            ipt.hid_up = hidKeysUp(ctrl_id);
+                            ipt.hid_held = hidKeysHeld(ctrl_id);
+                            break;
+                        }
+                    }
+                    break;
+                }
+                case InputControllerMode::Auto: {
+                    ipt.hid_down = hidKeysDown(CONTROLLER_P1_AUTO);
+                    ipt.hid_up = hidKeysUp(CONTROLLER_P1_AUTO);
+                    ipt.hid_held = hidKeysHeld(CONTROLLER_P1_AUTO);
+                    break;
+                }
+            }
+
+            return ipt;
+
+        }
+
+        template<u64 Key>
+        NX_CONSTEXPR bool Matches(u64 input) {
+            return input & Key;
+        }
+
+        template<InputMode Mode>
+        constexpr inline u64 GetInputValue() {
+            switch(Mode) {
+                case InputMode::Down:
+                    return this->hid_down;
+                case InputMode::Up:
+                    return this->hid_up;
+                case InputMode::Held:
+                    return this->hid_held;
+            }
+        }
+
+        template<InputMode Mode, u64 Key, u64 ...Keys>
+        constexpr inline bool MatchesAny() {
+            if(Matches<Key>(this->GetInputValue<Mode>())) {
+                return true;
+            }
+            if constexpr(sizeof...(Keys) > 0) {
+                return MatchesAny<Mode, Keys...>();
+            }
+            return false;
+        }
+
+        template<InputMode Mode, u64 Key, u64 ...Keys>
+        constexpr inline bool MatchesAll() {
+            if(!Matches<Key>(this->GetInputValue<Mode>())) {
+                return false;
+            }
+            if constexpr(sizeof...(Keys) > 0) {
+                return MatchesAll<Mode, Keys...>();
+            }
+            return true;
+        }
+
+    };
+
 }

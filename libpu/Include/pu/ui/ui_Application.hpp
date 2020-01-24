@@ -16,7 +16,7 @@ namespace pu::ui {
             std::map<std::string, std::shared_ptr<Layout>> layout_table;
             std::string current_layout_name;
 
-            Application(render::Renderer render) : running(false), lock(CreateMutex()), renderer(render) {}
+            Application(render::Renderer render) : running(false), lock(EmptyMutex), renderer(render) {}
 
             void DoAddLayout(const std::string &name, std::shared_ptr<Layout> layout) {
                 if(this->layout_table.empty()) {
@@ -28,14 +28,16 @@ namespace pu::ui {
                 }
             }
 
-            void DoRender() PU_LOCKED_SCOPE(this->lock, {
+            void OnRenderCall() PU_LOCKED_SCOPE(this->lock, {
                 if(renderer.IsValid()) {
                     SDL_SetRenderDrawColor(renderer.renderer, 0xff, 0xff, 0xff, 0xff);
                     SDL_RenderClear(renderer.renderer);
+                    hidScanInput();
                     auto flyt = this->layout_table.find(this->current_layout_name);
                     if(flyt != this->layout_table.end()) {
                         auto lyt = flyt->second;
-                        lyt->DoRender();
+                        lyt->OnInputCall();
+                        lyt->OnRenderCall();
                     }
                     SDL_RenderPresent(renderer.renderer);
                 }
@@ -94,7 +96,7 @@ namespace pu::ui {
             void Show() {
                 this->running = true;
                 while(appletMainLoop() && running) {
-                    this->DoRender();
+                    this->OnRenderCall();
                 }
             }
 

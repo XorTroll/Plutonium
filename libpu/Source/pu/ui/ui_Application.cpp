@@ -2,7 +2,7 @@
 
 namespace pu::ui {
 
-    static Mutex g_application_instance_lock = pu::CreateMutex();
+    static Mutex g_application_instance_lock = pu::EmptyMutex;
     static bool g_application_instance_created = false;
     static std::shared_ptr<Application> g_application_instance;
 

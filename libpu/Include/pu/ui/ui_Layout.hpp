@@ -16,11 +16,11 @@ namespace pu::ui {
                 auto f = this->object_table.find(name);
                 if(f == this->object_table.end()) {
                     this->object_table.insert(std::make_pair(name, object));
-                }  
+                }
             }
 
         public:
-            Layout() : lock(CreateMutex()) {}
+            Layout() : lock(EmptyMutex) {}
 
             void Add(const std::string &name, std::shared_ptr<Object> object) PU_LOCKED_SCOPE(this->lock, {
                 this->DoAddObject(name, object);
@@ -42,9 +42,19 @@ namespace pu::ui {
                 return nullptr;
             }
 
-            void DoRender() PU_LOCKED_SCOPE(this->lock, {
+            virtual void OnInput() {
+            }
+
+            void OnInputCall() PU_LOCKED_SCOPE(this->lock, {
+                this->OnInput();
                 for(auto &[name, obj] : this->object_table) {
-                    obj->DoRender();
+                    obj->OnInputCall();
+                }
+            })
+
+            void OnRenderCall() PU_LOCKED_SCOPE(this->lock, {
+                for(auto &[name, obj] : this->object_table) {
+                    obj->OnRenderCall();
                 }
             })
 
