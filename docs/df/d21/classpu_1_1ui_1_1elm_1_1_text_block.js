@@ -1,20 +1,20 @@
 var classpu_1_1ui_1_1elm_1_1_text_block =
 [
-    [ "TextBlock", "df/d21/classpu_1_1ui_1_1elm_1_1_text_block.html#a5e1316105b4498acc275910ab98c7463", null ],
+    [ "TextBlock", "df/d21/classpu_1_1ui_1_1elm_1_1_text_block.html#a9de4b5ada44bef5f1be351d2c2f045bb", null ],
     [ "~TextBlock", "df/d21/classpu_1_1ui_1_1elm_1_1_text_block.html#a50a27767538bd5f5d11dfe8917df2462", null ],
     [ "GetColor", "df/d21/classpu_1_1ui_1_1elm_1_1_text_block.html#a4df9ca024179ff31534463f57750c4c7", null ],
-    [ "GetHeight", "df/d21/classpu_1_1ui_1_1elm_1_1_text_block.html#a8d0141ecb578e057079215d9727e1cd4", null ],
+    [ "GetHeight", "df/d21/classpu_1_1ui_1_1elm_1_1_text_block.html#a0f04562bf79377feabe01c9c549a91e8", null ],
     [ "GetText", "df/d21/classpu_1_1ui_1_1elm_1_1_text_block.html#afcc01b6fe9024dcbef5e259e6ae3c4eb", null ],
-    [ "GetTextHeight", "df/d21/classpu_1_1ui_1_1elm_1_1_text_block.html#a81846605ca58916c2bb1e28066727c3b", null ],
-    [ "GetTextWidth", "df/d21/classpu_1_1ui_1_1elm_1_1_text_block.html#a4271390c6af05b5b6b8bc8b8453c2278", null ],
-    [ "GetWidth", "df/d21/classpu_1_1ui_1_1elm_1_1_text_block.html#aad9a227efde2dfc1bf851e2ccf08bc49", null ],
-    [ "GetX", "df/d21/classpu_1_1ui_1_1elm_1_1_text_block.html#a4539ec8e820496b02a9261f09fe134e4", null ],
-    [ "GetY", "df/d21/classpu_1_1ui_1_1elm_1_1_text_block.html#a85e86b1b4d239c80f2ed652d41e7c2db", null ],
+    [ "GetTextHeight", "df/d21/classpu_1_1ui_1_1elm_1_1_text_block.html#ac04cc607e86e44046466e2381f2a3504", null ],
+    [ "GetTextWidth", "df/d21/classpu_1_1ui_1_1elm_1_1_text_block.html#a3da6d5d1690a93eafce7497eb3163b06", null ],
+    [ "GetWidth", "df/d21/classpu_1_1ui_1_1elm_1_1_text_block.html#ac4d3733d122c2409343353ed11dbaab4", null ],
+    [ "GetX", "df/d21/classpu_1_1ui_1_1elm_1_1_text_block.html#a228923a91d2f00a75ef8a260aa694547", null ],
+    [ "GetY", "df/d21/classpu_1_1ui_1_1elm_1_1_text_block.html#a9041990fc0c165c0a6f6e969fac92523", null ],
     [ "OnInput", "df/d21/classpu_1_1ui_1_1elm_1_1_text_block.html#a9b62a117ad757e529d243910b25ebcc3", null ],
-    [ "OnRender", "df/d21/classpu_1_1ui_1_1elm_1_1_text_block.html#a43e0b9a517c9689e80064e615e88c510", null ],
+    [ "OnRender", "df/d21/classpu_1_1ui_1_1elm_1_1_text_block.html#ae3c63c67f4d999f116a78ac957ad294c", null ],
     [ "SetColor", "df/d21/classpu_1_1ui_1_1elm_1_1_text_block.html#ae4bcdf1cd435a364de473c117ea8d215", null ],
-    [ "SetFont", "df/d21/classpu_1_1ui_1_1elm_1_1_text_block.html#a76f55ca09ff06a6eb89a9bffd4c24bd5", null ],
+    [ "SetFontSize", "df/d21/classpu_1_1ui_1_1elm_1_1_text_block.html#a55d14b458acb00850465998e1fd37217", null ],
     [ "SetText", "df/d21/classpu_1_1ui_1_1elm_1_1_text_block.html#a6eef4a4ce8fc47d50d56cba7bdb52486", null ],
-    [ "SetX", "df/d21/classpu_1_1ui_1_1elm_1_1_text_block.html#a302b1f905c310361acb8b36faff5e3e5", null ],
-    [ "SetY", "df/d21/classpu_1_1ui_1_1elm_1_1_text_block.html#a995981795bfec01c9420b59fd7fdc020", null ]
+    [ "SetX", "df/d21/classpu_1_1ui_1_1elm_1_1_text_block.html#a74b38c9bbb7de615d41268a6e502c691", null ],
+    [ "SetY", "df/d21/classpu_1_1ui_1_1elm_1_1_text_block.html#a69a6ec4255dcd8d7ae445293aaf1429d", null ]
 ];

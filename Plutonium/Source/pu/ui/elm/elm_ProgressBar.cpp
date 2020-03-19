@@ -2,7 +2,7 @@
 
 namespace pu::ui::elm
 {
-    ProgressBar::ProgressBar(s32 X, s32 Y, s32 Width, s32 Height, double MaxValue) : Element::Element()
+    ProgressBar::ProgressBar(i32 X, i32 Y, i32 Width, i32 Height, double MaxValue) : Element::Element()
     {
         this->x = X;
         this->y = Y;
@@ -14,42 +14,42 @@ namespace pu::ui::elm
         this->maxval = MaxValue;
     }
 
-    s32 ProgressBar::GetX()
+    i32 ProgressBar::GetX()
     {
         return this->x;
     }
 
-    void ProgressBar::SetX(s32 X)
+    void ProgressBar::SetX(i32 X)
     {
         this->x = X;
     }
 
-    s32 ProgressBar::GetY()
+    i32 ProgressBar::GetY()
     {
         return this->y;
     }
 
-    void ProgressBar::SetY(s32 Y)
+    void ProgressBar::SetY(i32 Y)
     {
         this->y = Y;
     }
 
-    s32 ProgressBar::GetWidth()
+    i32 ProgressBar::GetWidth()
     {
         return this->w;
     }
 
-    void ProgressBar::SetWidth(s32 Width)
+    void ProgressBar::SetWidth(i32 Width)
     {
         this->w = Width;
     }
 
-    s32 ProgressBar::GetHeight()
+    i32 ProgressBar::GetHeight()
     {
         return this->h;
     }
 
-    void ProgressBar::SetHeight(s32 Height)
+    void ProgressBar::SetHeight(i32 Height)
     {
         this->h = Height;
     }
@@ -123,12 +123,12 @@ namespace pu::ui::elm
         return (this->val >= this->maxval);
     }
 
-    void ProgressBar::OnRender(render::Renderer::Ref &Drawer, s32 X, s32 Y)
+    void ProgressBar::OnRender(render::Renderer::Ref &Drawer, i32 X, i32 Y)
     {
-        s32 rdx = X;
-        s32 rdy = Y;
-        s32 pcw = (s32)((this->val / this->maxval) * (double)this->w);
-        s32 rad = (this->h / 3);
+        i32 rdx = X;
+        i32 rdy = Y;
+        i32 pcw = (i32)((this->val / this->maxval) * (double)this->w);
+        i32 rad = (this->h / 3);
         Drawer->RenderRoundedRectangleFill(this->clr, rdx, rdy, this->w, this->h, rad);
         Drawer->RenderRoundedRectangleFill(this->oclr, rdx, rdy, std::max(this->h, pcw), this->h, rad);
     }

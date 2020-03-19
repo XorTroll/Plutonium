@@ -37,12 +37,12 @@ APP_VERSION := Test
 
 # ICON := Icon.jpg
 TARGET		:=	Plutonium-example
-BUILD		:=	Build
+BUILD		:=	build
 SOURCES		:=	Source
 DATA		:=	Bin
 INCLUDES	:=	Include
 EXEFS_SRC	:=	exefs_src
-ROMFS		:=	RomFs
+# ROMFS		:=	RomFs
 
 #---------------------------------------------------------------------------------
 # options for code generation
@@ -66,8 +66,8 @@ LIBS	:= -lpu -lfreetype -lSDL2_mixer -lopusfile -lopus -lmodplug -lmpg123 -lvorb
 # include and lib
 #---------------------------------------------------------------------------------
 
-# IMPORTANT! Change "$(CURDIR)/../../Plutonium/Output" to the path in which you have Plutonium libs.
-LIBDIRS	:= $(PORTLIBS) $(LIBNX) $(CURDIR)/../../Plutonium/Output
+# IMPORTANT! Change "$(CURDIR)/../Plutonium/Output" to the path in which you have Plutonium libs.
+LIBDIRS	:= $(PORTLIBS) $(LIBNX) $(CURDIR)/../Plutonium/Output
 
 
 #---------------------------------------------------------------------------------

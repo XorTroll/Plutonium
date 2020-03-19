@@ -39,7 +39,7 @@ namespace pu::ui
         this->cbipt = Callback;
     }
 
-    s32 Application::ShowDialog(Dialog::Ref &ToShow)
+    i32 Application::ShowDialog(Dialog::Ref &ToShow)
     {
         return ToShow->Show(this->rend, this);
     }
@@ -47,7 +47,7 @@ namespace pu::ui
     int Application::CreateShowDialog(String Title, String Content, std::vector<String> Options, bool UseLastOptionAsCancel, std::string Icon)
     {
         Dialog dlg(Title, Content);
-        for(s32 i = 0; i < Options.size(); i++)
+        for(i32 i = 0; i < Options.size(); i++)
         {
             if(UseLastOptionAsCancel && (i == Options.size() - 1)) dlg.SetCancelOption(Options[i]);
             else dlg.AddOption(Options[i]);
@@ -173,14 +173,14 @@ namespace pu::ui
         }
         auto simtch = this->lyt->GetSimulatedTouch();
         if(!simtch.IsEmpty()) tch = simtch;
-        if(!this->thds.empty()) for(s32 i = 0; i < this->thds.size(); i++) (this->thds[i])();
+        if(!this->thds.empty()) for(i32 i = 0; i < this->thds.size(); i++) (this->thds[i])();
         this->lyt->PreRender();
         auto lyth = this->lyt->GetAllThreads();
-        if(!lyth.empty()) for(s32 i = 0; i < lyth.size(); i++) (lyth[i])();
+        if(!lyth.empty()) for(i32 i = 0; i < lyth.size(); i++) (lyth[i])();
         if(!this->rover) (this->cbipt)(d, u, h, tch);
         if(this->lyt->HasBackgroundImage()) this->rend->RenderTexture(this->lyt->GetBackgroundImageTexture(), 0, 0);
         if(!this->rover) (this->lyt->GetOnInput())(d, u, h, tch);
-        if(this->lyt->HasChilds()) for(s32 i = 0; i < this->lyt->GetCount(); i++)
+        if(this->lyt->HasChilds()) for(i32 i = 0; i < this->lyt->GetCount(); i++)
         {
             auto elm = this->lyt->At(i);
             if(elm->IsVisible())
@@ -189,7 +189,7 @@ namespace pu::ui
                 if(!this->rover) elm->OnInput(d, u, h, tch);
             }
         }
-        if(this->ovl != NULL)
+        if(this->ovl != nullptr)
         {
             bool rok = this->ovl->Render(this->rend);
             if(this->tmillis > 0)

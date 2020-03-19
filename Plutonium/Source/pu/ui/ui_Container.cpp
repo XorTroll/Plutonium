@@ -3,7 +3,7 @@
 
 namespace pu::ui
 {
-    Container::Container(s32 X, s32 Y, s32 Width, s32 Height)
+    Container::Container(i32 X, i32 Y, i32 Width, i32 Height)
     {
         this->x = X;
         this->y = Y;
@@ -11,7 +11,7 @@ namespace pu::ui
         this->h = Height;
     }
 
-    elm::Element::Ref &Container::At(s32 Index)
+    elm::Element::Ref &Container::At(i32 Index)
     {
         return this->elms.at(Index);
     }
@@ -27,47 +27,47 @@ namespace pu::ui
         this->elms.clear();
     }
 
-    s32 Container::GetCount()
+    i32 Container::GetCount()
     {
         return this->elms.size();
     }
 
-    void Container::SetX(s32 X)
+    void Container::SetX(i32 X)
     {
         this->x = X;
     }
 
-    s32 Container::GetX()
+    i32 Container::GetX()
     {
         return this->x;
     }
 
-    void Container::SetY(s32 Y)
+    void Container::SetY(i32 Y)
     {
         this->y = Y;
     }
 
-    s32 Container::GetY()
+    i32 Container::GetY()
     {
         return this->y;
     }
 
-    void Container::SetWidth(s32 Width)
+    void Container::SetWidth(i32 Width)
     {
         this->w = Width;
     }
 
-    s32 Container::GetWidth()
+    i32 Container::GetWidth()
     {
         return this->w;
     }
 
-    void Container::SetHeight(s32 Height)
+    void Container::SetHeight(i32 Height)
     {
         this->h = Height;
     }
 
-    s32 Container::GetHeight()
+    i32 Container::GetHeight()
     {
         return this->h;
     }

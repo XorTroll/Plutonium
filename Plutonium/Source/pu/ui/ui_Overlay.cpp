@@ -4,7 +4,7 @@
 
 namespace pu::ui
 {
-    Overlay::Overlay(s32 X, s32 Y, s32 Width, s32 Height, Color Background, bool Rounded) : Container(X, Y, Width, Height)
+    Overlay::Overlay(i32 X, i32 Y, i32 Width, i32 Height, Color Background, bool Rounded) : Container(X, Y, Width, Height)
     {
         this->bg = Background;
         this->round = Rounded;
@@ -13,12 +13,12 @@ namespace pu::ui
         this->end = false;
     }
 
-    void Overlay::SetRadius(s32 Radius)
+    void Overlay::SetRadius(i32 Radius)
     {
         this->rad = Radius;
     }
 
-    s32 Overlay::GetRadius()
+    i32 Overlay::GetRadius()
     {
         return this->rad;
     }

@@ -262,7 +262,7 @@ namespace pu
 
     String operator+(const String &L, s8 I)
     {
-        return String(L.base + MakeFromUTF8(std::to_string((s32)I)));
+        return String(L.base + MakeFromUTF8(std::to_string((i32)I)));
     }
 
     String operator+(const String &L, s16 I)
@@ -270,7 +270,7 @@ namespace pu
         return String(L.base + MakeFromUTF8(std::to_string(I)));
     }
 
-    String operator+(const String &L, s32 I)
+    String operator+(const String &L, i32 I)
     {
         return String(L.base + MakeFromUTF8(std::to_string(I)));
     }
@@ -311,7 +311,7 @@ namespace pu
     String String::operator+=(s16 I)
     BASE_RETURN_THIS_PLUS(I)
     
-    String String::operator+=(s32 I)
+    String String::operator+=(i32 I)
     BASE_RETURN_THIS_PLUS(I)
     
     String String::operator+=(s64 I)

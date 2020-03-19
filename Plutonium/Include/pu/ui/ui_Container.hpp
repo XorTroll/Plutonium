@@ -20,7 +20,7 @@ namespace pu::ui
     class Container
     {
         public:
-            Container(s32 X, s32 Y, s32 Width, s32 Height);
+            Container(i32 X, i32 Y, i32 Width, i32 Height);
             PU_SMART_CTOR(Container)
 
             template<typename Elem>
@@ -31,24 +31,24 @@ namespace pu::ui
                 elms.push_back(std::dynamic_pointer_cast<elm::Element>(Elm));
             }
 
-            elm::Element::Ref &At(s32 Index);
+            elm::Element::Ref &At(i32 Index);
             bool Has(elm::Element::Ref &Elm);
             void Clear();
-            s32 GetCount();
-            void SetX(s32 X);
-            s32 GetX();
-            void SetY(s32 Y);
-            s32 GetY();
-            void SetWidth(s32 Width);
-            s32 GetWidth();
-            void SetHeight(s32 Height);
-            s32 GetHeight();
+            i32 GetCount();
+            void SetX(i32 X);
+            i32 GetX();
+            void SetY(i32 Y);
+            i32 GetY();
+            void SetWidth(i32 Width);
+            i32 GetWidth();
+            void SetHeight(i32 Height);
+            i32 GetHeight();
             void PreRender();
         protected:
-            s32 x;
-            s32 y;
-            s32 w;
-            s32 h;
+            i32 x;
+            i32 y;
+            i32 w;
+            i32 h;
             std::vector<elm::Element::Ref> elms;
     };
 }

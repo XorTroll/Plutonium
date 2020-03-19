@@ -41,7 +41,7 @@ namespace pu::ui
 
             void AddThread(std::function<void()> Callback);
             void SetOnInput(std::function<void(u64 Down, u64 Up, u64 Held, Touch Pos)> Callback);
-            s32 ShowDialog(Dialog::Ref &ToShow);
+            i32 ShowDialog(Dialog::Ref &ToShow);
             int CreateShowDialog(String Title, String Content, std::vector<String> Options, bool UseLastOptionAsCancel, std::string Icon = "");
             
             template<typename Ovl>
@@ -84,7 +84,7 @@ namespace pu::ui
             std::function<bool(render::Renderer::Ref&)> rof;
             bool show;
             u8 aapf;
-            s32 fadea;
+            i32 fadea;
             bool closefact;
             Layout::Ref lyt;
             u64 tmillis;

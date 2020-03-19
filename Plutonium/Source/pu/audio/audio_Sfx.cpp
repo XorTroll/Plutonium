@@ -15,6 +15,6 @@ namespace pu::audio
     void DeleteSfx(Sfx Sfx)
     {
         Mix_FreeChunk(Sfx);
-        Sfx = NULL;
+        Sfx = nullptr;
     }
 }

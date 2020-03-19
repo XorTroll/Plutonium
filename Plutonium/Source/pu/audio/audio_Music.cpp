@@ -65,6 +65,6 @@ namespace pu::audio
     void Delete(Music Mus)
     {
         Mix_FreeMusic(Mus);
-        Mus = NULL;
+        Mus = nullptr;
     }
 }

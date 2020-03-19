@@ -18,8 +18,5 @@ var dir_ba964f5aae8820096332475490118234 =
     [ "ui_Overlay.hpp", "d6/d08/ui___overlay_8hpp.html", [
       [ "Overlay", "d6/d8f/classpu_1_1ui_1_1_overlay.html", "d6/d8f/classpu_1_1ui_1_1_overlay" ]
     ] ],
-    [ "ui_Types.hpp", "df/d13/ui___types_8hpp.html", [
-      [ "Color", "d7/d0c/structpu_1_1ui_1_1_color.html", "d7/d0c/structpu_1_1ui_1_1_color" ],
-      [ "Touch", "df/d81/structpu_1_1ui_1_1_touch.html", "df/d81/structpu_1_1ui_1_1_touch" ]
-    ] ]
+    [ "ui_Types.hpp", "df/d13/ui___types_8hpp.html", "df/d13/ui___types_8hpp" ]
 ];

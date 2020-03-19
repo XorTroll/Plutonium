@@ -19,29 +19,29 @@ namespace pu::ui::elm
     class Rectangle : public Element
     {
         public:
-            Rectangle(s32 X, s32 Y, s32 Width, s32 Height, Color RecColor, s32 BorderRadius = 0);
+            Rectangle(i32 X, i32 Y, i32 Width, i32 Height, Color RecColor, i32 BorderRadius = 0);
             PU_SMART_CTOR(Rectangle)
 
-            s32 GetX();
-            void SetX(s32 X);
-            s32 GetY();
-            void SetY(s32 Y);
-            s32 GetWidth();
-            void SetWidth(s32 Width);
-            s32 GetHeight();
-            void SetHeight(s32 Height);
-            s32 GetBorderRadius();
-            void SetBorderRadius(s32 Radius);
+            i32 GetX();
+            void SetX(i32 X);
+            i32 GetY();
+            void SetY(i32 Y);
+            i32 GetWidth();
+            void SetWidth(i32 Width);
+            i32 GetHeight();
+            void SetHeight(i32 Height);
+            i32 GetBorderRadius();
+            void SetBorderRadius(i32 Radius);
             Color GetColor();
             void SetColor(Color RecColor);
-            void OnRender(render::Renderer::Ref &Drawer, s32 X, s32 Y);
+            void OnRender(render::Renderer::Ref &Drawer, i32 X, i32 Y);
             void OnInput(u64 Down, u64 Up, u64 Held, Touch Pos);
         private:
-            s32 borderr;
-            s32 x;
-            s32 y;
-            s32 w;
-            s32 h;
+            i32 borderr;
+            i32 x;
+            i32 y;
+            i32 w;
+            i32 h;
             Color clr;
     };
 }

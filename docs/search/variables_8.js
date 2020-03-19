@@ -6,5 +6,6 @@ var searchData=
   ['initmixer',['InitMixer',['../df/d6f/structpu_1_1ui_1_1render_1_1_renderer_init_options.html#abb8a4c8c7f3d3066bb040c3f081f5286',1,'pu::ui::render::RendererInitOptions']]],
   ['initpl',['InitPL',['../df/d6f/structpu_1_1ui_1_1render_1_1_renderer_init_options.html#ae97111e9b34e9ac1c94433bfcf135aa3',1,'pu::ui::render::RendererInitOptions']]],
   ['initromfs',['InitRomFs',['../df/d6f/structpu_1_1ui_1_1render_1_1_renderer_init_options.html#a7e0400403e84c9d522126897d1184e88',1,'pu::ui::render::RendererInitOptions']]],
-  ['initttf',['InitTTF',['../df/d6f/structpu_1_1ui_1_1render_1_1_renderer_init_options.html#a05635d37049ebabf6464c9edce3f0f52',1,'pu::ui::render::RendererInitOptions']]]
+  ['initttf',['InitTTF',['../df/d6f/structpu_1_1ui_1_1render_1_1_renderer_init_options.html#a05635d37049ebabf6464c9edce3f0f52',1,'pu::ui::render::RendererInitOptions']]],
+  ['invalidfontfaceindex',['InvalidFontFaceIndex',['../dd/d76/classpu_1_1ttf_1_1_font.html#a99ce50e78019ea5a048d5f2f040e0f43',1,'pu::ttf::Font']]]
 ];

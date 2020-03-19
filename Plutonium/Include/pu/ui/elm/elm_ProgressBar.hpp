@@ -19,17 +19,17 @@ namespace pu::ui::elm
     class ProgressBar : public Element
     {
         public:
-            ProgressBar(s32 X, s32 Y, s32 Width, s32 Height, double MaxValue);
+            ProgressBar(i32 X, i32 Y, i32 Width, i32 Height, double MaxValue);
             PU_SMART_CTOR(ProgressBar)
 
-            s32 GetX();
-            void SetX(s32 X);
-            s32 GetY();
-            void SetY(s32 Y);
-            s32 GetWidth();
-            void SetWidth(s32 Width);
-            s32 GetHeight();
-            void SetHeight(s32 Height);
+            i32 GetX();
+            void SetX(i32 X);
+            i32 GetY();
+            void SetY(i32 Y);
+            i32 GetWidth();
+            void SetWidth(i32 Width);
+            i32 GetHeight();
+            void SetHeight(i32 Height);
             Color GetColor();
             void SetColor(Color Color);
             Color GetProgressColor();
@@ -43,13 +43,13 @@ namespace pu::ui::elm
             void FillProgress();
             void ClearProgress();
             bool IsCompleted();
-            void OnRender(render::Renderer::Ref &Drawer, s32 X, s32 Y);
+            void OnRender(render::Renderer::Ref &Drawer, i32 X, i32 Y);
             void OnInput(u64 Down, u64 Up, u64 Held, Touch Pos);
         private:
-            s32 x;
-            s32 y;
-            s32 w;
-            s32 h;
+            i32 x;
+            i32 y;
+            i32 w;
+            i32 h;
             double val;
             double maxval;
             Color clr;

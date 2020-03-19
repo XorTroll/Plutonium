@@ -20,32 +20,31 @@ namespace pu::ui::elm
     class TextBlock : public Element
     {
         public:
-            TextBlock(s32 X, s32 Y, String Text, s32 FontSize = 25);
+            TextBlock(i32 X, i32 Y, String Text);
             PU_SMART_CTOR(TextBlock)
             ~TextBlock();
 
-            s32 GetX();
-            void SetX(s32 X);
-            s32 GetY();
-            void SetY(s32 Y);
-            s32 GetWidth();
-            s32 GetHeight();
-            s32 GetTextWidth();
-            s32 GetTextHeight();
+            i32 GetX();
+            void SetX(i32 X);
+            i32 GetY();
+            void SetY(i32 Y);
+            i32 GetWidth();
+            i32 GetHeight();
+            i32 GetTextWidth();
+            i32 GetTextHeight();
             String GetText();
             void SetText(String Text);
-            void SetFont(render::NativeFont Font);
+            void SetFont(String font_name);
             Color GetColor();
             void SetColor(Color Color);
-            void OnRender(render::Renderer::Ref &Drawer, s32 X, s32 Y);
+            void OnRender(render::Renderer::Ref &Drawer, i32 X, i32 Y);
             void OnInput(u64 Down, u64 Up, u64 Held, Touch Pos);
         private:
             String text;
-            s32 x;
-            s32 y;
-            render::NativeFont fnt;
-            s32 fsize;
+            i32 x;
+            i32 y;
+            String fnt_name;
             Color clr;
-            render::NativeTexture ntex;
+            sdl2::Texture ntex;
     };
 }

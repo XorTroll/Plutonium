@@ -39,11 +39,11 @@ namespace pu::ui::elm
             virtual ~Element();
 
             // In order to make custom UI Elements, need to implement this functions
-            virtual s32 GetX() = 0;
-            virtual s32 GetY() = 0;
-            virtual s32 GetWidth() = 0;
-            virtual s32 GetHeight() = 0;
-            virtual void OnRender(render::Renderer::Ref &Drawer, s32 X, s32 Y) = 0;
+            virtual i32 GetX() = 0;
+            virtual i32 GetY() = 0;
+            virtual i32 GetWidth() = 0;
+            virtual i32 GetHeight() = 0;
+            virtual void OnRender(render::Renderer::Ref &Drawer, i32 X, i32 Y) = 0;
             virtual void OnInput(u64 Down, u64 Up, u64 Held, Touch Pos) = 0;
 
             bool IsVisible();
@@ -55,8 +55,8 @@ namespace pu::ui::elm
             void SetVerticalAlign(VerticalAlign Align);
             VerticalAlign GetVerticalAlign();
             bool HasParent();
-            s32 GetProcessedX();
-            s32 GetProcessedY();
+            i32 GetProcessedX();
+            i32 GetProcessedY();
         protected:
             bool visible;
             HorizontalAlign halign;

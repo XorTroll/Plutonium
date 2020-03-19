@@ -5,7 +5,7 @@ var classpu_1_1ui_1_1_layout =
     [ "AddThread", "d6/d11/classpu_1_1ui_1_1_layout.html#a77cf5068d395925c0016f1aa137779ec", null ],
     [ "GetAllThreads", "d6/d11/classpu_1_1ui_1_1_layout.html#a4c86f0851ff2f94ef436ab444e98f2db", null ],
     [ "GetBackgroundColor", "d6/d11/classpu_1_1ui_1_1_layout.html#a8aa3e5d0448ffb6ec3e91f85beaaeec7", null ],
-    [ "GetBackgroundImageTexture", "d6/d11/classpu_1_1ui_1_1_layout.html#a48e5f55a443dab8c30fc70640e778022", null ],
+    [ "GetBackgroundImageTexture", "d6/d11/classpu_1_1ui_1_1_layout.html#ac981b9782dcac12875b6b8e0cd9dbd47", null ],
     [ "GetOnInput", "d6/d11/classpu_1_1ui_1_1_layout.html#a5ecb0759cdf8e751c57b4bdd0e9b52f7", null ],
     [ "GetSimulatedTouch", "d6/d11/classpu_1_1ui_1_1_layout.html#a600687faf3d4e6a0a4d951a57746c9c5", null ],
     [ "HasBackgroundImage", "d6/d11/classpu_1_1ui_1_1_layout.html#a162283529f76efb15db628752da72876", null ],

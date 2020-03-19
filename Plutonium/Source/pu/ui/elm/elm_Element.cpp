@@ -8,7 +8,7 @@ namespace pu::ui::elm
         this->visible = true;
         this->halign = HorizontalAlign::Left;
         this->valign = VerticalAlign::Up;
-        this->parent = NULL;
+        this->parent = nullptr;
     }
 
     Element::~Element()
@@ -57,13 +57,13 @@ namespace pu::ui::elm
 
     bool Element::HasParent()
     {
-        return (this->parent != NULL);
+        return (this->parent != nullptr);
     }
 
-    s32 Element::GetProcessedX()
+    i32 Element::GetProcessedX()
     {
-        s32 rx = this->GetX();
-        if(this->parent != NULL)
+        i32 rx = this->GetX();
+        if(this->parent != nullptr)
         {
             Container *cont = (Container*)this->parent;
             rx += cont->GetX();
@@ -82,10 +82,10 @@ namespace pu::ui::elm
         return rx;
     }
 
-    s32 Element::GetProcessedY()
+    i32 Element::GetProcessedY()
     {
-        s32 ry = this->GetY();
-        if(this->parent != NULL)
+        i32 ry = this->GetY();
+        if(this->parent != nullptr)
         {
             Container *cont = (Container*)this->parent;
             ry += cont->GetY();

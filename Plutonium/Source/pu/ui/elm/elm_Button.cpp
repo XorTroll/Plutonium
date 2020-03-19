@@ -2,7 +2,7 @@
 
 namespace pu::ui::elm
 {
-    Button::Button(s32 X, s32 Y, s32 Width, s32 Height, String Content, Color TextColor, Color Color) : Element::Element()
+    Button::Button(i32 X, i32 Y, i32 Width, i32 Height, String Content, Color TextColor, Color Color) : Element::Element()
     {
         this->x = X;
         this->y = Y;
@@ -12,56 +12,56 @@ namespace pu::ui::elm
         this->clr = Color;
         this->hover = false;
         this->hoverfact = 255;
-        this->fnt = render::LoadDefaultFont(25);
-        this->ntex = render::RenderText(this->fnt, Content, TextColor);
+        this->fnt_name = "DefaultFont@25";
+        this->ntex = render::RenderText(this->fnt_name, Content, TextColor);
         this->clickcb = [](){};
     }
 
     Button::~Button()
     {
-        if(this->ntex != NULL)
+        if(this->ntex != nullptr)
         {
             render::DeleteTexture(this->ntex);
-            this->ntex = NULL;
+            this->ntex = nullptr;
         }
     }
 
-    s32 Button::GetX()
+    i32 Button::GetX()
     {
         return this->x;
     }
 
-    void Button::SetX(s32 X)
+    void Button::SetX(i32 X)
     {
         this->x = X;
     }
 
-    s32 Button::GetY()
+    i32 Button::GetY()
     {
         return this->y;
     }
 
-    void Button::SetY(s32 Y)
+    void Button::SetY(i32 Y)
     {
         this->y = Y;
     }
 
-    s32 Button::GetWidth()
+    i32 Button::GetWidth()
     {
         return this->w;
     }
 
-    void Button::SetWidth(s32 Width)
+    void Button::SetWidth(i32 Width)
     {
         this->w = Width;
     }
 
-    s32 Button::GetHeight()
+    i32 Button::GetHeight()
     {
         return this->h;
     }
 
-    void Button::SetHeight(s32 Height)
+    void Button::SetHeight(i32 Height)
     {
         this->h = Height;
     }
@@ -75,7 +75,7 @@ namespace pu::ui::elm
     {
         this->cnt = Content;
         render::DeleteTexture(this->ntex);
-        this->ntex = render::RenderText(this->fnt, Content, this->clr);
+        this->ntex = render::RenderText(this->fnt_name, Content, this->clr);
     }
 
     Color Button::GetColor()
@@ -87,14 +87,14 @@ namespace pu::ui::elm
     {
         this->clr = Color;
         render::DeleteTexture(this->ntex);
-        this->ntex = render::RenderText(this->fnt, this->cnt, Color);
+        this->ntex = render::RenderText(this->fnt_name, this->cnt, Color);
     }
 
-    void Button::SetContentFont(render::NativeFont Font)
+    void Button::SetContentFont(String font_name)
     {
-        this->fnt = Font;
+        this->fnt_name = font_name;
         render::DeleteTexture(this->ntex);
-        this->ntex = render::RenderText(this->fnt, this->cnt, this->clr);
+        this->ntex = render::RenderText(this->fnt_name, this->cnt, this->clr);
     }
 
     void Button::SetOnClick(std::function<void()> ClickCallback)
@@ -102,18 +102,18 @@ namespace pu::ui::elm
         this->clickcb = ClickCallback;
     }
 
-    void Button::OnRender(render::Renderer::Ref &Drawer, s32 X, s32 Y)
+    void Button::OnRender(render::Renderer::Ref &Drawer, i32 X, i32 Y)
     {
-        s32 rdx = X;
-        s32 rdy = Y;
-        s32 clrr = this->clr.R;
-        s32 clrg = this->clr.G;
-        s32 clrb = this->clr.B;
-        s32 nr = clrr - 70;
+        i32 rdx = X;
+        i32 rdy = Y;
+        i32 clrr = this->clr.R;
+        i32 clrg = this->clr.G;
+        i32 clrb = this->clr.B;
+        i32 nr = clrr - 70;
         if(nr < 0) nr = 0;
-        s32 ng = clrg - 70;
+        i32 ng = clrg - 70;
         if(ng < 0) ng = 0;
-        s32 nb = clrb - 70;
+        i32 nb = clrb - 70;
         if(nb < 0) nb = 0;
         Color nclr(nr, ng, nb, this->clr.A);
         if(this->hover)
@@ -136,10 +136,10 @@ namespace pu::ui::elm
             }
             else Drawer->RenderRectangleFill(this->clr, rdx, rdy, this->w, this->h);
         }
-        s32 xw = render::GetTextWidth(this->fnt, this->cnt);
-        s32 xh = render::GetTextHeight(this->fnt, this->cnt);
-        s32 tx = ((this->w - xw) / 2) + rdx;
-        s32 ty = ((this->h - xh) / 2) + rdy;
+        i32 xw = render::GetTextWidth(this->fnt_name, this->cnt);
+        i32 xh = render::GetTextHeight(this->fnt_name, this->cnt);
+        i32 tx = ((this->w - xw) / 2) + rdx;
+        i32 ty = ((this->h - xh) / 2) + rdy;
         Drawer->RenderTexture(this->ntex, tx, ty);
     }
 

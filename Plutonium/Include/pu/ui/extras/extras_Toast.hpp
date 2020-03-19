@@ -20,7 +20,7 @@ namespace pu::ui::extras
     class Toast final : public Overlay
     {
         public:
-            Toast(String Text, s32 FontSize, Color TextColor, Color BaseColor);
+            Toast(String Text, String font_name, Color TextColor, Color BaseColor);
             PU_SMART_CTOR(Toast)
 
             void SetText(String Text);

@@ -85,7 +85,7 @@ namespace pu
             friend String operator+(const String &L, u64 U);
             friend String operator+(const String &L, s8 I);
             friend String operator+(const String &L, s16 I);
-            friend String operator+(const String &L, s32 I);
+            friend String operator+(const String &L, i32 I);
             friend String operator+(const String &L, s64 I);
             friend String operator+(const String &L, float D);
             friend String operator+(const String &L, double D);
@@ -97,7 +97,7 @@ namespace pu
             String operator+=(u64 U);
             String operator+=(s8 I);
             String operator+=(s16 I);
-            String operator+=(s32 I);
+            String operator+=(i32 I);
             String operator+=(s64 I);
             String operator+=(float D);
             String operator+=(double D);

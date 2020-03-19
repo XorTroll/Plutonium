@@ -5,7 +5,7 @@
 CustomLayout::CustomLayout() : Layout::Layout()
 {
     // Create the TextBlock instance with the text we want
-    this->helloText = pu::ui::elm::TextBlock::New(300, 300, "Press X to answer my question.");
+    this->helloText = pu::ui::elm::TextBlock::New(300, 300, "Press X to answer my question");
     
     // Add the instance to the layout. IMPORTANT! this MUST be done for them to be used, having them as members is not enough (just a simple way to keep them)
     this->Add(this->helloText);
@@ -40,7 +40,7 @@ void MainApplication::OnLoad()
                         this->CreateShowDialog("Answer", "Really? I like apples too!", { "Ok" }, true); // Same here ^
                         break;
                     case 1: // "No" was selected
-                        this->CreateShowDialog("Answer", "Oh... Then I guess you won't have an iPod...", { "(damnit, he caught me)" }, true); // And here ^
+                        this->CreateShowDialog("Answer", "Oh, bad news then...", { "O" }, true); // And here ^
                         break;
                 }
             }
