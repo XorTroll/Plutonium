@@ -30,7 +30,7 @@ int main()
 
     // Show -> start rendering in an "infinite" loop
     // If wou would like to show with a "fade in" from black-screen to the UI, use instead ->ShowWithFadeIn();
-    main->ShowWithFadeIn();
+    main->Show();
 
     // Exit homebrew (Plutonium will handle all disposing of UI and renderer/application, don't worry!
 

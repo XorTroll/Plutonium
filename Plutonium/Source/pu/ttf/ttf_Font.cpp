@@ -5,13 +5,13 @@
 namespace pu::ttf
 {
 
-    Font::Font(u32 base_font_size) : font_size(base_font_size) {}
+    Font::Font(u32 font_sz) : font_size(font_sz) {}
 
     Font::~Font()
     {
         for(auto &[idx, font] : this->font_faces)
         {
-            font->DisposeAll();
+            font->Dispose();
         }
     }
 
@@ -55,15 +55,6 @@ namespace pu::ttf
     {
         auto it = this->font_faces.find(font_idx);
         if(it != this->font_faces.end()) this->font_faces.erase(it);
-    }
-
-    void Font::SetSize(u32 size)
-    {
-        this->font_size = size;
-        for(auto &[idx, font]: this->font_faces)
-        {
-            font->Load(this->font_size, reinterpret_cast<void*>(this));
-        }
     }
 
     sdl2::Font Font::FindValidFontFor(char16_t ch)

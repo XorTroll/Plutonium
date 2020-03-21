@@ -85,6 +85,8 @@ namespace pu::ui::render
     {
         if(this->initialized)
         {
+            // Close all the fonts before closing TTF
+            g_font_list.clear();
             if(this->initopts.InitTTF) TTF_Quit();
             if(this->initopts.InitIMG) IMG_Quit();
             if(this->initopts.InitMixer) Mix_CloseAudio();

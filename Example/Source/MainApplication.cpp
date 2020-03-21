@@ -40,7 +40,7 @@ void MainApplication::OnLoad()
                         this->CreateShowDialog("Answer", "Really? I like apples too!", { "Ok" }, true); // Same here ^
                         break;
                     case 1: // "No" was selected
-                        this->CreateShowDialog("Answer", "Oh, bad news then...", { "O" }, true); // And here ^
+                        this->CreateShowDialog("Answer", "Oh, bad news then...", { "OK" }, true); // And here ^
                         break;
                 }
             }

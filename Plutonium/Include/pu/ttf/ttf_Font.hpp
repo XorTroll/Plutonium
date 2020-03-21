@@ -31,7 +31,8 @@ namespace pu::ttf
 
                 FontFace(void *buf, size_t buf_size, FontFaceDisposingFunction disp_fn, u32 font_sz, void *font_class_ptr) : font(nullptr), ptr(buf), ptr_sz(buf_size), dispose_fn(disp_fn)
                 {
-                    this->Load(font_sz, font_class_ptr);
+                    this->font = TTF_OpenFontRW(SDL_RWFromMem(this->ptr, this->ptr_sz), 1, font_sz);
+                    if(this->font != nullptr) TTF_CppWrap_SetCppPtrRef(this->font, font_class_ptr);
                 }
 
                 FontFace() : font(nullptr), ptr(nullptr), ptr_sz(0), dispose_fn(&EmptyFontFaceDisposingFunction) {}
@@ -46,13 +47,6 @@ namespace pu::ttf
                     return false;
                 }
 
-                void Load(u32 f_size, void *font_class_ptr)
-                {
-                    this->DisposeFont();
-                    this->font = TTF_OpenFontRW(SDL_RWFromMem(this->ptr, this->ptr_sz), 1, f_size);
-                    if(this->font != nullptr) TTF_CppWrap_SetCppPtrRef(this->font, font_class_ptr);
-                }
-
                 void DisposeFont()
                 {
                     if(this->font != nullptr)
@@ -62,7 +56,7 @@ namespace pu::ttf
                     }
                 }
 
-                void DisposeAll()
+                void Dispose()
                 {
                     this->DisposeFont();
                     if(this->IsSourceValid())
@@ -88,13 +82,12 @@ namespace pu::ttf
                 return index != InvalidFontFaceIndex;
             }
 
-            Font(u32 base_font_size = DefaultFontSize);
+            Font(u32 font_sz);
             ~Font();
 
             i32 LoadFromMemory(void *ptr, size_t size, FontFaceDisposingFunction disp_fn);
             i32 LoadFromFile(String path);
             void Unload(i32 font_idx);
-            void SetSize(u32 size);
 
             u32 GetFontSize()
             {
