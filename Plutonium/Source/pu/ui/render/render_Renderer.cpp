@@ -265,6 +265,16 @@ namespace pu::ui::render
         return std::make_pair((u32)w, (u32)h);
     }
 
+    static inline bool AddSharedFontImpl(std::shared_ptr<ttf::Font> &font, PlSharedFontType type)
+    {
+        // Let's assume pl services are initialized, and return if anything unexpected happens
+        PlFontData data = {};
+        auto rc = plGetSharedFontByType(&data, type);
+        if(R_FAILED(rc)) return false;
+        if(!ttf::Font::IsValidFontFaceIndex(font->LoadFromMemory(data.address, data.size, pu::ttf::EmptyFontFaceDisposingFunction))) return false;
+        return true;
+    }
+
     void AddSharedFont(String font_name, u32 font_size, PlSharedFontType type)
     {
         for(auto &[name, font]: g_font_list)
@@ -274,14 +284,9 @@ namespace pu::ui::render
                 return;
             }
         }
-        // Let's assume pl services are initialized, and return if anything unexpected happens
-        PlFontData data = {};
-        auto rc = plGetSharedFontByType(&data, type);
-        if(R_FAILED(rc)) return;
+        
         auto font = std::make_shared<ttf::Font>(font_size);
-        // This address is not disposable, we haven't allocated it ourselves!
-        font->LoadFromMemory(data.address, data.size, pu::ttf::EmptyFontFaceDisposingFunction);
-        g_font_list.push_back(std::make_pair(font_name, std::move(font)));
+        if(AddSharedFontImpl(font, type)) g_font_list.push_back(std::make_pair(font_name, std::move(font)));
     }
 
     void AddAllSharedFonts(String font_name, u32 font_size)
@@ -293,16 +298,14 @@ namespace pu::ui::render
                 return;
             }
         }
-        // Let's assume pl services are initialized, and return if anything unexpected happens
+        
         auto font = std::make_shared<ttf::Font>(font_size);
-        for(u32 i = 0; i < PlSharedFontType_Total; i++)
-        {
-            PlFontData data = {};
-            auto rc = plGetSharedFontByType(&data, static_cast<PlSharedFontType>(i));
-            if(R_FAILED(rc)) continue;
-            // This address is not disposable, we haven't allocated it ourselves!
-            font->LoadFromMemory(data.address, data.size, pu::ttf::EmptyFontFaceDisposingFunction);
-        }
+        if(!AddSharedFontImpl(font, PlSharedFontType_Standard)) return;
+        if(!AddSharedFontImpl(font, PlSharedFontType_NintendoExt)) return;
+        if(!AddSharedFontImpl(font, PlSharedFontType_ChineseSimplified)) return;
+        if(!AddSharedFontImpl(font, PlSharedFontType_ExtChineseSimplified)) return;
+        if(!AddSharedFontImpl(font, PlSharedFontType_ChineseTraditional)) return;
+        if(!AddSharedFontImpl(font, PlSharedFontType_KO)) return;
         g_font_list.push_back(std::make_pair(font_name, std::move(font)));
     }
 
@@ -316,7 +319,7 @@ namespace pu::ui::render
             }
         }
         auto font = std::make_shared<ttf::Font>(font_size);
-        font->LoadFromFile(path);
+        if(!ttf::Font::IsValidFontFaceIndex(font->LoadFromFile(path))) return;
         g_font_list.push_back(std::make_pair(font_name, std::move(font)));
     }
 

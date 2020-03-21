@@ -19,7 +19,7 @@ namespace pu::ttf
     {
         i32 idx = rand();
         auto font = std::make_unique<FontFace>(ptr, size, disp_fn, this->font_size, reinterpret_cast<void*>(this));
-        this->font_faces.insert(std::make_pair(idx, std::move(font)));
+        this->font_faces.push_back(std::make_pair(idx, std::move(font)));
         return idx;
     }
 
@@ -53,8 +53,16 @@ namespace pu::ttf
 
     void Font::Unload(i32 font_idx)
     {
-        auto it = this->font_faces.find(font_idx);
-        if(it != this->font_faces.end()) this->font_faces.erase(it);
+        u32 i = 0;
+        for(auto &[idx, font]: this->font_faces)
+        {
+            if(idx == font_idx)
+            {
+                this->font_faces.erase(this->font_faces.begin() + i);
+                break;
+            }
+            i++;
+        }
     }
 
     sdl2::Font Font::FindValidFontFor(char16_t ch)

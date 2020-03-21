@@ -8,7 +8,6 @@
 
 namespace pu::ttf
 {
-
     using FontFaceDisposingFunction = std::function<void(void*)>;
 
     inline void EmptyFontFaceDisposingFunction(void*)
@@ -23,7 +22,6 @@ namespace pu::ttf
 
             struct FontFace
             {
-
                 sdl2::Font font;
                 void *ptr;
                 size_t ptr_sz;
@@ -69,7 +67,7 @@ namespace pu::ttf
 
             };
 
-            std::map<i32, std::unique_ptr<FontFace>> font_faces;
+            std::vector<std::pair<i32, std::unique_ptr<FontFace>>> font_faces;
             u32 font_size;
 
         public:
