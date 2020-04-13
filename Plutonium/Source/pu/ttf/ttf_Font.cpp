@@ -77,15 +77,37 @@ namespace pu::ttf
         return nullptr;
     }
 
+    static void ProcessStringImpl(sdl2::Font font, std::u16string &str, u32 &w, u32 &h) {
+        if(str.empty()) return;
+        int tw = 0;
+        int th = 0;
+        TTF_SizeUNICODE(font, reinterpret_cast<const u16*>(str.c_str()), &tw, &th);
+        u32 tuw = static_cast<u32>(tw);
+        u32 tuh = static_cast<u32>(th);
+        if(tuw > w) w = tuw;
+        h += tuh;
+        str = u"";
+    }
+
+    static std::pair<u32, u32> ProcessDimensionsImpl(sdl2::Font font, String str) {
+        u32 w = 0;
+        u32 h = 0;
+        std::u16string tmp_str;
+        for(auto &ch: str.AsUTF16())
+        {
+            if(ch == u'\n') ProcessStringImpl(font, tmp_str, w, h);
+            else tmp_str += ch;
+        }
+        ProcessStringImpl(font, tmp_str, w, h);
+        return std::make_pair(w, h);
+    }
+
     std::pair<u32, u32> Font::GetTextDimensions(String str)
     {
         if(this->font_faces.empty()) return std::make_pair(0, 0);
         auto font = this->font_faces.begin()->second->font;
         if(font == nullptr) return std::make_pair(0, 0);
-        i32 tw = 0;
-        i32 th = 0;
-        TTF_SizeUTF8(font, str.AsUTF8().c_str(), &tw, &th);
-        return std::make_pair((u32)tw, (u32)th);
+        return ProcessDimensionsImpl(font, str);
     }
 
     sdl2::Texture Font::RenderText(String str, ui::Color color)
@@ -94,7 +116,7 @@ namespace pu::ttf
         auto font = this->font_faces.begin()->second->font;
         if(font == nullptr) return nullptr;
         auto [w, _h] = ui::render::GetDimensions();
-        auto srf = TTF_RenderUTF8_Blended_Wrapped(font, str.AsUTF8().c_str(), { color.R, color.G, color.B, color.A }, w);
+        auto srf = TTF_RenderUNICODE_Blended_Wrapped(font, reinterpret_cast<const u16*>(str.AsUTF16().c_str()), { color.R, color.G, color.B, color.A }, w);
         return ui::render::ConvertToTexture(srf);
     }
 }

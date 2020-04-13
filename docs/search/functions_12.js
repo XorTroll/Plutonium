@@ -1,11 +1,8 @@
 var searchData=
 [
-  ['_7ebutton',['~Button',['../d4/de7/classpu_1_1ui_1_1elm_1_1_button.html#ad83b1b31e145b3aef21244c2ae0765b4',1,'pu::ui::elm::Button']]],
-  ['_7edialog',['~Dialog',['../d6/de9/classpu_1_1ui_1_1_dialog.html#a4dcf88722bf75361b54cb2cb6c91ba16',1,'pu::ui::Dialog']]],
-  ['_7eelement',['~Element',['../d9/d0e/classpu_1_1ui_1_1elm_1_1_element.html#a56d6fc9e9a6924ac904cb380d8c38909',1,'pu::ui::elm::Element']]],
-  ['_7efont',['~Font',['../dd/d76/classpu_1_1ttf_1_1_font.html#a5013c818d4c511e5a90e261e9c5e3323',1,'pu::ttf::Font']]],
-  ['_7eimage',['~Image',['../d6/d63/classpu_1_1ui_1_1elm_1_1_image.html#a9164026d1c48f9454fbe8973a8dd817c',1,'pu::ui::elm::Image']]],
-  ['_7elayout',['~Layout',['../d6/d11/classpu_1_1ui_1_1_layout.html#ac93ddffcf6624205a0ba26e9d1ca513e',1,'pu::ui::Layout']]],
-  ['_7etextblock',['~TextBlock',['../df/d21/classpu_1_1ui_1_1elm_1_1_text_block.html#a50a27767538bd5f5d11dfe8917df2462',1,'pu::ui::elm::TextBlock']]],
-  ['_7etoggle',['~Toggle',['../d5/d51/classpu_1_1ui_1_1elm_1_1_toggle.html#a28cb352af8e25b4e1a3539e67d49dcd4',1,'pu::ui::elm::Toggle']]]
+  ['withdefaultfontsize',['WithDefaultFontSize',['../df/d6f/structpu_1_1ui_1_1render_1_1_renderer_init_options.html#a0ee9d9d8df8bb9e3eaeab40d5560c7a4',1,'pu::ui::render::RendererInitOptions']]],
+  ['withimg',['WithIMG',['../df/d6f/structpu_1_1ui_1_1render_1_1_renderer_init_options.html#af350b605403ce65fc71ed60fecc56290',1,'pu::ui::render::RendererInitOptions']]],
+  ['withmixer',['WithMixer',['../df/d6f/structpu_1_1ui_1_1render_1_1_renderer_init_options.html#adff13ecdcc7cb3d3223802a5950cc988',1,'pu::ui::render::RendererInitOptions']]],
+  ['withromfs',['WithRomfs',['../df/d6f/structpu_1_1ui_1_1render_1_1_renderer_init_options.html#a468b864a81c1a19793916034a5f6e1f8',1,'pu::ui::render::RendererInitOptions']]],
+  ['withttf',['WithTTF',['../df/d6f/structpu_1_1ui_1_1render_1_1_renderer_init_options.html#a16f387c614eab664a5ad01787b716b50',1,'pu::ui::render::RendererInitOptions']]]
 ];

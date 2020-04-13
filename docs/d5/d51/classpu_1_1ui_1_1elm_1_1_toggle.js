@@ -14,7 +14,7 @@ var classpu_1_1ui_1_1elm_1_1_toggle =
     [ "OnRender", "d5/d51/classpu_1_1ui_1_1elm_1_1_toggle.html#a4cd5ea219972e994bf395e8bf30ee9ab", null ],
     [ "SetColor", "d5/d51/classpu_1_1ui_1_1elm_1_1_toggle.html#a377233227eb7f5dabf8007c3b4ba0e86", null ],
     [ "SetContent", "d5/d51/classpu_1_1ui_1_1elm_1_1_toggle.html#a9ebbcd42a556dbafb475d0d31d5cabfe", null ],
-    [ "SetFontSize", "d5/d51/classpu_1_1ui_1_1elm_1_1_toggle.html#ac1b0309238f7c25e8b76da3c9a86b313", null ],
+    [ "SetFont", "d5/d51/classpu_1_1ui_1_1elm_1_1_toggle.html#ac2f670f1b549ffbfaaffb6253c23de47", null ],
     [ "SetKey", "d5/d51/classpu_1_1ui_1_1elm_1_1_toggle.html#affb6993bb98a439aa0355776cf988942", null ],
     [ "SetX", "d5/d51/classpu_1_1ui_1_1elm_1_1_toggle.html#a478395569f2591baadcbb5a07660bcbb", null ],
     [ "SetY", "d5/d51/classpu_1_1ui_1_1elm_1_1_toggle.html#a49ac1879cc0a478afea3e5f4ec4cd68c", null ]

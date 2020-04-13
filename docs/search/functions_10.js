@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['textblock',['TextBlock',['../df/d21/classpu_1_1ui_1_1elm_1_1_text_block.html#a9de4b5ada44bef5f1be351d2c2f045bb',1,'pu::ui::elm::TextBlock']]],
-  ['toast',['Toast',['../dc/d49/classpu_1_1ui_1_1extras_1_1_toast.html#a9705a986161ef4462035d5856767122f',1,'pu::ui::extras::Toast']]],
+  ['textblock',['TextBlock',['../df/d21/classpu_1_1ui_1_1elm_1_1_text_block.html#aa84bf30ba0c6464fb3cc0b117c94963e',1,'pu::ui::elm::TextBlock']]],
+  ['toast',['Toast',['../dc/d49/classpu_1_1ui_1_1extras_1_1_toast.html#ad3304979846ccc38c84fe1315a922d92',1,'pu::ui::extras::Toast']]],
   ['toggle',['Toggle',['../d5/d51/classpu_1_1ui_1_1elm_1_1_toggle.html#a4ecf9c0d79f1bafa1ae2e6636ae2faf7',1,'pu::ui::elm::Toggle']]],
   ['ttf_5fbyteswappedunicode',['TTF_ByteSwappedUNICODE',['../d6/d5a/ttf___s_d_l__ttf_8h.html#ac5c76b0b95a972409c3a75bfda4049c1',1,'ttf_SDL_ttf.h']]],
   ['ttf_5fclosefont',['TTF_CloseFont',['../d6/d5a/ttf___s_d_l__ttf_8h.html#a006b7c83a8ff15bb9f9d453d48ba3e51',1,'ttf_SDL_ttf.h']]],

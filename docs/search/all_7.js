@@ -11,6 +11,6 @@ var searchData=
   ['hasinitialized',['HasInitialized',['../d0/d27/classpu_1_1ui_1_1render_1_1_renderer.html#afea5a6b3fe4e8b149fe97a3d6678e144',1,'pu::ui::render::Renderer']]],
   ['hasparent',['HasParent',['../d9/d0e/classpu_1_1ui_1_1elm_1_1_element.html#a5aeeee1fa5d41160610c5a90d30ea0c3',1,'pu::ui::elm::Element']]],
   ['hasromfs',['HasRomFs',['../d0/d27/classpu_1_1ui_1_1render_1_1_renderer.html#a7eadc0c749b995b0e4011c4e0d59984a',1,'pu::ui::render::Renderer']]],
-  ['height',['Height',['../dc/d32/structpu_1_1ui_1_1render_1_1_texture_render_options.html#a25123fb299435995072bbecd1781ffd1',1,'pu::ui::render::TextureRenderOptions']]],
+  ['height',['Height',['../df/d6f/structpu_1_1ui_1_1render_1_1_renderer_init_options.html#a18a90bc115b3ed4a715065279e0fbe96',1,'pu::ui::render::RendererInitOptions::Height()'],['../dc/d32/structpu_1_1ui_1_1render_1_1_texture_render_options.html#a25123fb299435995072bbecd1781ffd1',1,'pu::ui::render::TextureRenderOptions::Height()']]],
   ['horizontalalign',['HorizontalAlign',['../d2/d5e/namespacepu_1_1ui_1_1elm.html#ac2066021dbc53818c251c446b6d7f864',1,'pu::ui::elm']]]
 ];

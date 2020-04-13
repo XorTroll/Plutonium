@@ -12,7 +12,7 @@ var classpu_1_1ui_1_1elm_1_1_button =
     [ "OnRender", "d4/de7/classpu_1_1ui_1_1elm_1_1_button.html#ac602467f125c0d4c58b1a6703b842edf", null ],
     [ "SetColor", "d4/de7/classpu_1_1ui_1_1elm_1_1_button.html#a03f952e5c922407c3ea63c6ac927c756", null ],
     [ "SetContent", "d4/de7/classpu_1_1ui_1_1elm_1_1_button.html#a4f79d2a84843f179d7305f2444e3c64a", null ],
-    [ "SetContentFontSize", "d4/de7/classpu_1_1ui_1_1elm_1_1_button.html#aaf3053e556d5c54e19d975ec075b6ba7", null ],
+    [ "SetContentFont", "d4/de7/classpu_1_1ui_1_1elm_1_1_button.html#a4acbcc492facb04335b119142d30c9b3", null ],
     [ "SetHeight", "d4/de7/classpu_1_1ui_1_1elm_1_1_button.html#a9c1c705c1888f5d6e024c887558ebe93", null ],
     [ "SetOnClick", "d4/de7/classpu_1_1ui_1_1elm_1_1_button.html#a5462ca68673ae2bd60f87133802346b1", null ],
     [ "SetWidth", "d4/de7/classpu_1_1ui_1_1elm_1_1_button.html#a5a640c6ebc00cd42b132f63227fe67c4", null ],

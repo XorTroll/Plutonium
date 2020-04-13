@@ -35,14 +35,12 @@ APP_TITLE := Plutonium example
 APP_AUTHOR := XorTroll
 APP_VERSION := Test
 
-# ICON := Icon.jpg
 TARGET		:=	Plutonium-example
 BUILD		:=	build
 SOURCES		:=	Source
-DATA		:=	Bin
+DATA		:=	data
 INCLUDES	:=	Include
-EXEFS_SRC	:=	exefs_src
-# ROMFS		:=	RomFs
+#ROMFS	:=	romfs
 
 #---------------------------------------------------------------------------------
 # options for code generation
