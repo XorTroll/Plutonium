@@ -262,7 +262,7 @@ namespace pu::ui::render
         i32 w = 0;
         i32 h = 0;
         SDL_GetWindowSize(g_window, &w, &h);
-        return std::make_pair((u32)w, (u32)h);
+        return std::make_pair(static_cast<u32>(w), static_cast<u32>(h));
     }
 
     static inline bool AddSharedFontImpl(std::shared_ptr<ttf::Font> &font, PlSharedFontType type)
@@ -342,7 +342,7 @@ namespace pu::ui::render
             if(name == font_name)
             {
                 auto [w, _h] = font->GetTextDimensions(Text);
-            return (i32)w;
+                return static_cast<i32>(w);
             }
         }
         return 0;
@@ -355,7 +355,7 @@ namespace pu::ui::render
             if(name == font_name)
             {
                 auto [_w, h] = font->GetTextDimensions(Text);
-            return (i32)h;
+                return static_cast<i32>(h);
             }
         }
         return 0;

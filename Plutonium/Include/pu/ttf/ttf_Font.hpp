@@ -70,6 +70,15 @@ namespace pu::ttf
             std::vector<std::pair<i32, std::unique_ptr<FontFace>>> font_faces;
             u32 font_size;
 
+            inline sdl2::Font TryGetFirstFont()
+            {
+                if(!this->font_faces.empty())
+                {
+                    return this->font_faces.begin()->second->font;
+                }
+                return nullptr;
+            }
+
         public:
 
             static constexpr i32 InvalidFontFaceIndex = -1;

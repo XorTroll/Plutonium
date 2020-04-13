@@ -77,7 +77,8 @@ namespace pu::ttf
         return nullptr;
     }
 
-    static void ProcessStringImpl(sdl2::Font font, std::u16string &str, u32 &w, u32 &h) {
+    static void ProcessStringImpl(sdl2::Font font, std::u16string &str, u32 &w, u32 &h)
+    {
         if(str.empty()) return;
         int tw = 0;
         int th = 0;
@@ -89,31 +90,38 @@ namespace pu::ttf
         str = u"";
     }
 
-    static std::pair<u32, u32> ProcessDimensionsImpl(sdl2::Font font, String str) {
-        u32 w = 0;
-        u32 h = 0;
-        std::u16string tmp_str;
-        for(auto &ch: str.AsUTF16())
-        {
-            if(ch == u'\n') ProcessStringImpl(font, tmp_str, w, h);
-            else tmp_str += ch;
-        }
-        ProcessStringImpl(font, tmp_str, w, h);
-        return std::make_pair(w, h);
+    #define _PU_TTF_PROCESS_TMP_STR_IMPL(font, str, w, h) { \
+        i32 tw = 0; \
+        i32 th = 0; \
+        TTF_SizeUNICODE(font, reinterpret_cast<const u16*>(str.c_str()), &tw, &th); \
+        u32 uw = static_cast<u32>(tw); \
+        u32 uh = static_cast<u32>(th); \
+        if(uw > w) w = uw; \
+        h += uh; \
+        str = u""; \
     }
 
     std::pair<u32, u32> Font::GetTextDimensions(String str)
     {
-        if(this->font_faces.empty()) return std::make_pair(0, 0);
-        auto font = this->font_faces.begin()->second->font;
-        if(font == nullptr) return std::make_pair(0, 0);
-        return ProcessDimensionsImpl(font, str);
+        u32 w = 0;
+        u32 h = 0;
+        auto font = this->TryGetFirstFont();
+        if(font != nullptr)
+        {
+            std::u16string tmp_str;
+            for(auto &ch: str.AsUTF16())
+            {
+                if(ch == u'\n') _PU_TTF_PROCESS_TMP_STR_IMPL(font, tmp_str, w, h)
+                else tmp_str += ch;
+            }
+            if(!tmp_str.empty()) _PU_TTF_PROCESS_TMP_STR_IMPL(font, tmp_str, w, h)
+        }
+        return std::make_pair(w, h);
     }
 
     sdl2::Texture Font::RenderText(String str, ui::Color color)
     {
-        if(this->font_faces.empty()) return nullptr;
-        auto font = this->font_faces.begin()->second->font;
+        auto font = this->TryGetFirstFont();
         if(font == nullptr) return nullptr;
         auto [w, _h] = ui::render::GetDimensions();
         auto srf = TTF_RenderUNICODE_Blended_Wrapped(font, reinterpret_cast<const u16*>(str.AsUTF16().c_str()), { color.R, color.G, color.B, color.A }, w);

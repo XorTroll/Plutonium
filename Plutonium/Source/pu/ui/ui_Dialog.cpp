@@ -121,7 +121,7 @@ namespace pu::ui
         i32 initfact = 0;
         while(true)
         {
-            bool ok = ((Application*)App)->CallForRenderWithRenderOver([&](render::Renderer::Ref &Drawer) -> bool
+            bool ok = reinterpret_cast<Application*>(App)->CallForRenderWithRenderOver([&](render::Renderer::Ref &Drawer) -> bool
             {
                 u64 k = hidKeysDown(CONTROLLER_P1_AUTO);
                 u64 h = hidKeysHeld(CONTROLLER_P1_AUTO);
