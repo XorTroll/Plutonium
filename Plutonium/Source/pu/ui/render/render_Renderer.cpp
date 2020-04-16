@@ -28,7 +28,7 @@ namespace pu::ui::render
             this->okpl = false;
             if(this->initopts.InitPL)
             {
-                Result rc = plInitialize();
+                Result rc = plInitialize(PlServiceType_User);
                 this->okpl = R_SUCCEEDED(rc);
             }
 
