@@ -261,23 +261,19 @@ namespace pu::ui::elm
                 auto curicon = this->loadedicons[loadedidx];
                 if(this->isel == i)
                 {
-                    Drawer->RenderRectangleFill(this->clr, cx, cy, cw, ch);
+                    Drawer->RenderRectangleFill(this->fcs, cx, cy, cw, ch);
                     if(this->selfact < 255)
                     {
-                        Drawer->RenderRectangleFill(Color(this->fcs.R, this->fcs.G, this->fcs.B, this->selfact), cx, cy, cw, ch);
                         this->selfact += 48;
                     }
-                    else Drawer->RenderRectangleFill(this->fcs, cx, cy, cw, ch);
                 }
                 else if(this->previsel == i)
                 {
                     Drawer->RenderRectangleFill(this->clr, cx, cy, cw, ch);
                     if(this->pselfact > 0)
                     {
-                        Drawer->RenderRectangleFill(Color(this->fcs.R, this->fcs.G, this->fcs.B, this->pselfact), cx, cy, cw, ch);
                         this->pselfact -= 48;
                     }
-                    else Drawer->RenderRectangleFill(this->clr, cx, cy, cw, ch);
                 }
                 else Drawer->RenderRectangleFill(this->clr, cx, cy, cw, ch);
                 auto itm = this->itms[i];
