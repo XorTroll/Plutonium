@@ -124,10 +124,11 @@ namespace pu::ui
         {
             bool ok = app_ref->CallForRenderWithRenderOver([&](render::Renderer::Ref &Drawer) -> bool
             {
-                app_ref->UpdateButtons();
                 const auto k = app_ref->GetButtonsDown();
                 const auto h = app_ref->GetButtonsHeld();
                 const auto tch_state = app_ref->GetTouchState();
+                const auto tch_x = tch_state.touches[0].x;
+                const auto tch_y = tch_state.touches[0].y;
                 if(k & HidNpadButton_AnyLeft)
                 {
                     if(this->osel > 0)
@@ -154,22 +155,20 @@ namespace pu::ui
                         }
                     }
                 }
-                else if(k & HidNpadButton_A)
+                if(k & HidNpadButton_A)
                 {
                     this->cancel = false;
                     end = true;
                 }
-                else if(k & HidNpadButton_B)
+                if(k & HidNpadButton_B)
                 {
                     this->cancel = true;
                     end = true;
                 }
-                else if(tch_state.count > 0)
+                if(tch_state.count > 0)
                 {
                     for(i32 i = 0; i < this->opts.size(); i++)
                     {
-                        const auto tch_x = tch_state.touches[0].x;
-                        const auto tch_y = tch_state.touches[0].y;
                         String txt = this->sopts[i];
                         i32 rx = elx + ((elemw + 20) * i);
                         i32 ry = ely;
@@ -254,7 +253,7 @@ namespace pu::ui
             });
             if(!ok)
             {
-                ((Application*)App)->CallForRenderWithRenderOver([&](render::Renderer::Ref &Drawer) -> bool {});
+                app_ref->CallForRenderWithRenderOver([&](render::Renderer::Ref &Drawer) -> bool {});
                 break;
             }
         }
