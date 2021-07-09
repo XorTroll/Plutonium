@@ -32,9 +32,9 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Plutonium framework API
-   &#160;<span id="projectnumber">0.3</span>
+   &#160;<span id="projectnumber">0.3.0</span>
    </div>
-   <div id="projectbrief">Simple UI framework for libnx and SDL2</div>
+   <div id="projectbrief">UI framework libraries for libnx</div>
   </td>
  </tr>
  </tbody>
@@ -169,6 +169,16 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a9a4772b2d9c594eb0fffb264c21c8720"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4d70ac6b82dbe63b108b708a5ce64dab"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../da/dc0/classpu_1_1ui_1_1_application.html#a4d70ac6b82dbe63b108b708a5ce64dab">CloseWithFadeOut</a> ()</td></tr>
 <tr class="separator:a4d70ac6b82dbe63b108b708a5ce64dab"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3f56b32f87b644dd8dc2f731d41a890c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../da/dc0/classpu_1_1ui_1_1_application.html#a3f56b32f87b644dd8dc2f731d41a890c">UpdateButtons</a> ()</td></tr>
+<tr class="separator:a3f56b32f87b644dd8dc2f731d41a890c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4d4edf80918036ae380ef967f0a4090a"><td class="memItemLeft" align="right" valign="top">u64&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../da/dc0/classpu_1_1ui_1_1_application.html#a4d4edf80918036ae380ef967f0a4090a">GetButtonsDown</a> ()</td></tr>
+<tr class="separator:a4d4edf80918036ae380ef967f0a4090a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5a6d5b7eb26c33af458ca8b8b09677eb"><td class="memItemLeft" align="right" valign="top">u64&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../da/dc0/classpu_1_1ui_1_1_application.html#a5a6d5b7eb26c33af458ca8b8b09677eb">GetButtonsUp</a> ()</td></tr>
+<tr class="separator:a5a6d5b7eb26c33af458ca8b8b09677eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5b73c965d8feba01be3c39f217318953"><td class="memItemLeft" align="right" valign="top">u64&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../da/dc0/classpu_1_1ui_1_1_application.html#a5b73c965d8feba01be3c39f217318953">GetButtonsHeld</a> ()</td></tr>
+<tr class="separator:a5b73c965d8feba01be3c39f217318953"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a225ff9d81b7b01cda0686ff3fa5d05e1"><td class="memItemLeft" align="right" valign="top">HidTouchScreenState&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../da/dc0/classpu_1_1ui_1_1_application.html#a225ff9d81b7b01cda0686ff3fa5d05e1">GetTouchState</a> ()</td></tr>
+<tr class="separator:a225ff9d81b7b01cda0686ff3fa5d05e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
@@ -204,6 +214,8 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:ab6bd67df783e81dd1c109ef0f7b96cf9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa7675aec0dba2da7ce17ba3ccc682fa0"><td class="memItemLeft" align="right" valign="top">render::Renderer::Ref&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../da/dc0/classpu_1_1ui_1_1_application.html#aa7675aec0dba2da7ce17ba3ccc682fa0">rend</a></td></tr>
 <tr class="separator:aa7675aec0dba2da7ce17ba3ccc682fa0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7e6fadf805816037a2694f2cdee75734"><td class="memItemLeft" align="right" valign="top">PadState&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../da/dc0/classpu_1_1ui_1_1_application.html#a7e6fadf805816037a2694f2cdee75734">input_pad</a></td></tr>
+<tr class="separator:a7e6fadf805816037a2694f2cdee75734"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="ae362740d6eb99c737d072f00d363b0ec"></a>
@@ -385,6 +397,98 @@ Protected Attributes</h2></td></tr>
           <td></td>
         </tr>
       </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a4d4edf80918036ae380ef967f0a4090a"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">u64 pu::ui::Application::GetButtonsDown </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a5b73c965d8feba01be3c39f217318953"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">u64 pu::ui::Application::GetButtonsHeld </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a5a6d5b7eb26c33af458ca8b8b09677eb"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">u64 pu::ui::Application::GetButtonsUp </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a225ff9d81b7b01cda0686ff3fa5d05e1"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">HidTouchScreenState pu::ui::Application::GetTouchState </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 </div>
@@ -638,6 +742,29 @@ template&lt;typename Ovl &gt; </div>
 
 </div>
 </div>
+<a class="anchor" id="a3f56b32f87b644dd8dc2f731d41a890c"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void pu::ui::Application::UpdateButtons </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <h2 class="groupheader">Member Data Documentation</h2>
 <a class="anchor" id="afc5195faa35db0e1bce36a88fabd2049"></a>
 <div class="memitem">
@@ -748,6 +875,26 @@ template&lt;typename Ovl &gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">bool pu::ui::Application::fovl</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a7e6fadf805816037a2694f2cdee75734"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">PadState pu::ui::Application::input_pad</td>
         </tr>
       </table>
   </td>

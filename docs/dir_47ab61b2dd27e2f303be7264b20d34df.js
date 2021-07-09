@@ -20,7 +20,5 @@ var dir_47ab61b2dd27e2f303be7264b20d34df =
     [ "elm_TextBlock.hpp", "d7/d3f/elm___text_block_8hpp.html", [
       [ "TextBlock", "df/d21/classpu_1_1ui_1_1elm_1_1_text_block.html", "df/d21/classpu_1_1ui_1_1elm_1_1_text_block" ]
     ] ],
-    [ "elm_Toggle.hpp", "d0/db0/elm___toggle_8hpp.html", [
-      [ "Toggle", "d5/d51/classpu_1_1ui_1_1elm_1_1_toggle.html", "d5/d51/classpu_1_1ui_1_1elm_1_1_toggle" ]
-    ] ]
+    [ "elm_Toggle.hpp", "d0/db0/elm___toggle_8hpp.html", "d0/db0/elm___toggle_8hpp" ]
 ];

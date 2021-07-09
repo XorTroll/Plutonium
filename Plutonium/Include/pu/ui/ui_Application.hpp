@@ -78,6 +78,29 @@ namespace pu::ui
             void OnRender();
             void Close();
             void CloseWithFadeOut();
+
+            inline void UpdateButtons() {
+                padUpdate(&this->input_pad);
+            }
+
+            inline u64 GetButtonsDown() {
+                return padGetButtonsDown(&this->input_pad);
+            }
+
+            inline u64 GetButtonsUp() {
+                return padGetButtonsUp(&this->input_pad);
+            }
+
+            inline u64 GetButtonsHeld() {
+                return padGetButtons(&this->input_pad);
+            }
+
+            inline HidTouchScreenState GetTouchState() {
+                HidTouchScreenState state = {};
+                hidGetTouchScreenStates(&state, 1);
+                return state;
+            }
+
         protected:
             bool loaded;
             bool rover;
@@ -95,5 +118,6 @@ namespace pu::ui
             std::vector<std::function<void()>> thds;
             std::function<void(u64, u64, u64, Touch)> cbipt;
             render::Renderer::Ref rend;
+            PadState input_pad;
     };
 }

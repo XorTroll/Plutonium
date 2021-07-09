@@ -135,6 +135,6 @@ namespace pu::ui::elm
 
     void Toggle::OnInput(u64 Down, u64 Up, u64 Held, Touch Pos)
     {
-        if((Down & this->key) || ((this->key == KEY_TOUCH) && !Pos.IsEmpty())) this->checked = !this->checked;
+        if((Down & this->key) || ((this->key == TouchPseudoKey) && !Pos.IsEmpty())) this->checked = !this->checked;
     }
 }
