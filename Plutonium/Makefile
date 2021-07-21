@@ -98,7 +98,7 @@ $(BUILD):
 	@[ -d $@ ] || mkdir -p $@
 	@[ -d $(OUT)/lib ] || mkdir -p $(OUT)/lib
 	@$(MAKE) --no-print-directory -C $(BUILD) -f $(CURDIR)/Makefile
-	@rm -rf $(OUT)/include
+	@rm -rf $(OUT)/Include
 	@cp -r Include $(OUT)/Include
 
 #---------------------------------------------------------------------------------
