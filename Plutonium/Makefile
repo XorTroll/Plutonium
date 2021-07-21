@@ -18,7 +18,7 @@ include $(DEVKITPRO)/libnx/switch_rules
 BUILD		:=	build
 TARGET		:=  pu
 SOURCES		:=	Source Source/pu Source/pu/audio Source/pu/ui Source/pu/ttf Source/pu/sdl2 Source/pu/ui/elm Source/pu/ui/extras Source/pu/ui/render Source/pu/web
-INCLUDES	:=	Include
+INCLUDES	:=	include
 OUT			:=	out
 
 #---------------------------------------------------------------------------------
@@ -98,8 +98,8 @@ $(BUILD):
 	@[ -d $@ ] || mkdir -p $@
 	@[ -d $(OUT)/lib ] || mkdir -p $(OUT)/lib
 	@$(MAKE) --no-print-directory -C $(BUILD) -f $(CURDIR)/Makefile
-	@rm -rf $(OUT)/Include
-	@cp -r Include $(OUT)/Include
+	@rm -rf $(OUT)/include
+	@cp -r include $(OUT)/include
 
 #---------------------------------------------------------------------------------
 clean:
