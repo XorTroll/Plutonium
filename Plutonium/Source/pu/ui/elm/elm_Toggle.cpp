@@ -1,7 +1,10 @@
 #include <pu/ui/elm/elm_Toggle.hpp>
+#include <pu/ui/ui_Application.hpp>
 
 namespace pu::ui::elm
 {
+    static s32 prev_touchcount = 0;
+
     Toggle::Toggle(i32 X, i32 Y, String Content, u64 Key, Color Color) : Element::Element()
     {
         this->x = X;
@@ -135,6 +138,11 @@ namespace pu::ui::elm
 
     void Toggle::OnInput(u64 Down, u64 Up, u64 Held, Touch Pos)
     {
-        if((Down & this->key) || ((this->key == TouchPseudoKey) && !Pos.IsEmpty())) this->checked = !this->checked;
+        if ((Down & this->key) || (Application::GetTouchState().count == 0 && prev_touchcount == 1)) {
+            prev_touchcount = 0;
+            this->checked = !this->checked;
+        }
+        if (Application::GetTouchState().count == 1)
+            prev_touchcount = 1;
     }
 }
