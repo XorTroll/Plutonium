@@ -17,8 +17,6 @@
 
 namespace pu::ui::elm
 {
-    constexpr u64 TouchPseudoKey = HidNpadButton_29;
-
     class Toggle : public Element
     {
         public:
