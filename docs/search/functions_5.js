@@ -8,5 +8,7 @@ var searchData=
   ['find',['find',['../d2/de5/classpu_1_1_string.html#a0f1a663f9fbb3476a379cc3fe7a6a4ae',1,'pu::String']]],
   ['find_5ffirst_5fof',['find_first_of',['../d2/de5/classpu_1_1_string.html#a8590bcc98495c8d8f9d0a9345b9e6763',1,'pu::String']]],
   ['find_5flast_5fof',['find_last_of',['../d2/de5/classpu_1_1_string.html#a941ef00e525043948385a90a70d6d558',1,'pu::String']]],
+  ['findvalidfontfor',['FindValidFontFor',['../dd/d76/classpu_1_1ttf_1_1_font.html#af0e20bfebfaf5bd6450eb1441331636e',1,'pu::ttf::Font']]],
+  ['font',['Font',['../dd/d76/classpu_1_1ttf_1_1_font.html#a63675bb8b909a87e66062ea30c4f4800',1,'pu::ttf::Font']]],
   ['fromhex',['FromHex',['../d7/d0c/structpu_1_1ui_1_1_color.html#aa7eae46122422c6fa3cffec4cdea15b2',1,'pu::ui::Color']]]
 ];

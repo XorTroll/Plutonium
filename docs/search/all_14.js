@@ -1,7 +1,11 @@
 var searchData=
 [
-  ['valign',['valign',['../d9/d0e/classpu_1_1ui_1_1elm_1_1_element.html#a9d42548072b5ee72d6d0d27b965fb8b1',1,'pu::ui::elm::Element']]],
-  ['verticalalign',['VerticalAlign',['../d2/d5e/namespacepu_1_1ui_1_1elm.html#ac33e06ac84db60b2dd5b56b4a1276e92',1,'pu::ui::elm']]],
-  ['video',['Video',['../d8/d05/namespacepu_1_1web.html#a915a525f0544adb754530aa17ca18a17a34e2d1989a1dbf75cd631596133ee5ee',1,'pu::web']]],
-  ['visible',['visible',['../d9/d0e/classpu_1_1ui_1_1elm_1_1_element.html#ad46fad870d47414f843f2f35d099f1da',1,'pu::ui::elm::Element']]]
+  ['w',['w',['../dc/dcd/classpu_1_1ui_1_1_container.html#a1cfc135e2bb905b57a4be3b9294e812f',1,'pu::ui::Container']]],
+  ['width',['Width',['../df/d6f/structpu_1_1ui_1_1render_1_1_renderer_init_options.html#a3db7422b6b7156174ab9a2beb51b6fad',1,'pu::ui::render::RendererInitOptions::Width()'],['../dc/d32/structpu_1_1ui_1_1render_1_1_texture_render_options.html#a2a2039789561674845896cfb9ad2b634',1,'pu::ui::render::TextureRenderOptions::Width()']]],
+  ['window',['Window',['../d1/d78/namespacepu_1_1sdl2.html#a4dc2c75c183ac8dd775de27b4e26b932',1,'pu::sdl2']]],
+  ['withdefaultfontsize',['WithDefaultFontSize',['../df/d6f/structpu_1_1ui_1_1render_1_1_renderer_init_options.html#a0ee9d9d8df8bb9e3eaeab40d5560c7a4',1,'pu::ui::render::RendererInitOptions']]],
+  ['withimg',['WithIMG',['../df/d6f/structpu_1_1ui_1_1render_1_1_renderer_init_options.html#af350b605403ce65fc71ed60fecc56290',1,'pu::ui::render::RendererInitOptions']]],
+  ['withmixer',['WithMixer',['../df/d6f/structpu_1_1ui_1_1render_1_1_renderer_init_options.html#adff13ecdcc7cb3d3223802a5950cc988',1,'pu::ui::render::RendererInitOptions']]],
+  ['withromfs',['WithRomfs',['../df/d6f/structpu_1_1ui_1_1render_1_1_renderer_init_options.html#a468b864a81c1a19793916034a5f6e1f8',1,'pu::ui::render::RendererInitOptions']]],
+  ['withttf',['WithTTF',['../df/d6f/structpu_1_1ui_1_1render_1_1_renderer_init_options.html#a16f387c614eab664a5ad01787b716b50',1,'pu::ui::render::RendererInitOptions']]]
 ];

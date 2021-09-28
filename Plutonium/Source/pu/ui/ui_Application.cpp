@@ -18,6 +18,8 @@ namespace pu::ui
         this->rof = [](render::Renderer::Ref&) -> bool { return true; };
         this->fadea = 255;
         this->aapf = 35;
+        padConfigureInput(1, HidNpadStyleSet_NpadStandard);
+        padInitializeDefault(&this->input_pad);
     }
 
     void Application::Prepare()
@@ -39,7 +41,7 @@ namespace pu::ui
         this->cbipt = Callback;
     }
 
-    s32 Application::ShowDialog(Dialog::Ref &ToShow)
+    i32 Application::ShowDialog(Dialog::Ref &ToShow)
     {
         return ToShow->Show(this->rend, this);
     }
@@ -47,7 +49,7 @@ namespace pu::ui
     int Application::CreateShowDialog(String Title, String Content, std::vector<String> Options, bool UseLastOptionAsCancel, std::string Icon)
     {
         Dialog dlg(Title, Content);
-        for(s32 i = 0; i < Options.size(); i++)
+        for(i32 i = 0; i < Options.size(); i++)
         {
             if(UseLastOptionAsCancel && (i == Options.size() - 1)) dlg.SetCancelOption(Options[i]);
             else dlg.AddOption(Options[i]);
@@ -158,29 +160,32 @@ namespace pu::ui
 
     void Application::OnRender()
     {
-        hidScanInput();
-        u64 d = hidKeysDown(CONTROLLER_P1_AUTO);
-        u64 u = hidKeysUp(CONTROLLER_P1_AUTO);
-        u64 h = hidKeysHeld(CONTROLLER_P1_AUTO);
-        u64 th = hidKeysDown(CONTROLLER_HANDHELD);
-        Touch tch = Touch::Empty;
-        if(th & KEY_TOUCH)
-        {
-            touchPosition nxtch;
-            hidTouchRead(&nxtch, 0);
-            tch.X = nxtch.px;
-            tch.Y = nxtch.py;
+        this->UpdateButtons();
+        const auto d = this->GetButtonsDown();
+        const auto u = this->GetButtonsUp();
+        const auto h = this->GetButtonsHeld();
+
+        const auto tch_state = this->GetTouchState();
+        auto tch = Touch::Empty;
+        if(tch_state.count > 0) {
+            tch = {
+                .X = static_cast<i32>(tch_state.touches[0].x),
+                .Y = static_cast<i32>(tch_state.touches[0].y)
+            };
         }
         auto simtch = this->lyt->GetSimulatedTouch();
-        if(!simtch.IsEmpty()) tch = simtch;
-        if(!this->thds.empty()) for(s32 i = 0; i < this->thds.size(); i++) (this->thds[i])();
+        if(!simtch.IsEmpty()) {
+            tch = simtch;
+        }
+        
+        if(!this->thds.empty()) for(i32 i = 0; i < this->thds.size(); i++) (this->thds[i])();
         this->lyt->PreRender();
         auto lyth = this->lyt->GetAllThreads();
-        if(!lyth.empty()) for(s32 i = 0; i < lyth.size(); i++) (lyth[i])();
+        if(!lyth.empty()) for(i32 i = 0; i < lyth.size(); i++) (lyth[i])();
         if(!this->rover) (this->cbipt)(d, u, h, tch);
         if(this->lyt->HasBackgroundImage()) this->rend->RenderTexture(this->lyt->GetBackgroundImageTexture(), 0, 0);
         if(!this->rover) (this->lyt->GetOnInput())(d, u, h, tch);
-        if(this->lyt->HasChilds()) for(s32 i = 0; i < this->lyt->GetCount(); i++)
+        if(this->lyt->HasChilds()) for(i32 i = 0; i < this->lyt->GetCount(); i++)
         {
             auto elm = this->lyt->At(i);
             if(elm->IsVisible())
@@ -189,7 +194,7 @@ namespace pu::ui
                 if(!this->rover) elm->OnInput(d, u, h, tch);
             }
         }
-        if(this->ovl != NULL)
+        if(this->ovl != nullptr)
         {
             bool rok = this->ovl->Render(this->rend);
             if(this->tmillis > 0)

@@ -11,7 +11,6 @@ var dir_47ab61b2dd27e2f303be7264b20d34df =
       [ "MenuItem", "de/dbb/classpu_1_1ui_1_1elm_1_1_menu_item.html", "de/dbb/classpu_1_1ui_1_1elm_1_1_menu_item" ],
       [ "Menu", "dc/d6c/classpu_1_1ui_1_1elm_1_1_menu.html", "dc/d6c/classpu_1_1ui_1_1elm_1_1_menu" ]
     ] ],
-    [ "elm_MotionCursor.hpp", "d8/de8/elm___motion_cursor_8hpp.html", "d8/de8/elm___motion_cursor_8hpp" ],
     [ "elm_ProgressBar.hpp", "d3/dd7/elm___progress_bar_8hpp.html", [
       [ "ProgressBar", "d2/dcc/classpu_1_1ui_1_1elm_1_1_progress_bar.html", "d2/dcc/classpu_1_1ui_1_1elm_1_1_progress_bar" ]
     ] ],
@@ -21,7 +20,5 @@ var dir_47ab61b2dd27e2f303be7264b20d34df =
     [ "elm_TextBlock.hpp", "d7/d3f/elm___text_block_8hpp.html", [
       [ "TextBlock", "df/d21/classpu_1_1ui_1_1elm_1_1_text_block.html", "df/d21/classpu_1_1ui_1_1elm_1_1_text_block" ]
     ] ],
-    [ "elm_Toggle.hpp", "d0/db0/elm___toggle_8hpp.html", [
-      [ "Toggle", "d5/d51/classpu_1_1ui_1_1elm_1_1_toggle.html", "d5/d51/classpu_1_1ui_1_1elm_1_1_toggle" ]
-    ] ]
+    [ "elm_Toggle.hpp", "d0/db0/elm___toggle_8hpp.html", "d0/db0/elm___toggle_8hpp" ]
 ];

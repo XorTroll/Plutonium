@@ -16,19 +16,9 @@
 #include <switch.h>
 #include <pu/pu_String.hpp>
 #include <pu/ui/ui_Types.hpp>
-#include <SDL2/SDL.h>
-#include <SDL2/SDL_image.h>
-#include <SDL2/SDL_ttf.h>
-#include <SDL2/SDL2_gfxPrimitives.h>
-#include <SDL2/SDL_mixer.h>
+#include <pu/sdl2/sdl2_Types.hpp>
 
-namespace pu::ui::render
-{
-    typedef SDL_Window *NativeWindow;
-    typedef SDL_Renderer *NativeRenderer;
-    typedef SDL_Surface *NativeSurface;
-    typedef SDL_Texture *NativeTexture;
-    typedef TTF_Font *NativeFont;
+namespace pu::ui::render {
 
     enum class SharedFont
     {
@@ -40,19 +30,10 @@ namespace pu::ui::render
         NintendoExtended,
     };
 
-    NativeTexture ConvertToTexture(NativeSurface Surface);
-    NativeTexture RenderText(NativeFont Font, String Text, Color Color);
-    NativeTexture LoadImage(std::string Path);
-    NativeFont LoadSharedFont(SharedFont Type, s32 Size);
-    NativeFont LoadFont(std::string Path, s32 Size);
-    void SetDefaultFont(std::string Path);
-    void SetDefaultFontFromShared(SharedFont Type);
-    NativeFont LoadDefaultFont(s32 Size);
-    s32 GetTextureWidth(NativeTexture Texture);
-    s32 GetTextureHeight(NativeTexture Texture);
-    s32 GetTextWidth(NativeFont Font, String Text);
-    s32 GetTextHeight(NativeFont Font, String Text);
-    void SetAlphaValue(NativeTexture Texture, u8 Alpha);
-    void DeleteFont(NativeFont Font);
-    void DeleteTexture(NativeTexture Texture);
+    sdl2::Texture ConvertToTexture(sdl2::Surface Surface);
+    sdl2::Texture LoadImage(std::string Path);
+    i32 GetTextureWidth(sdl2::Texture Texture);
+    i32 GetTextureHeight(sdl2::Texture Texture);
+    void SetAlphaValue(sdl2::Texture Texture, u8 Alpha);
+    void DeleteTexture(sdl2::Texture Texture);
 }

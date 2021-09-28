@@ -21,37 +21,37 @@ namespace pu::ui::elm
     class Button : public Element
     {
         public:
-            Button(s32 X, s32 Y, s32 Width, s32 Height, String Content, Color TextColor, Color Color);
+            Button(i32 X, i32 Y, i32 Width, i32 Height, String Content, Color TextColor, Color Color);
             PU_SMART_CTOR(Button)
             ~Button();
 
-            s32 GetX();
-            void SetX(s32 X);
-            s32 GetY();
-            void SetY(s32 Y);
-            s32 GetWidth();
-            void SetWidth(s32 Width);
-            s32 GetHeight();
-            void SetHeight(s32 Height);
+            i32 GetX();
+            void SetX(i32 X);
+            i32 GetY();
+            void SetY(i32 Y);
+            i32 GetWidth();
+            void SetWidth(i32 Width);
+            i32 GetHeight();
+            void SetHeight(i32 Height);
             String GetContent();
             void SetContent(String Content);
             Color GetColor();
             void SetColor(Color Color);
-            void SetContentFont(render::NativeFont Font);
+            void SetContentFont(String font_name);
             void SetOnClick(std::function<void()> ClickCallback);
-            void OnRender(render::Renderer::Ref &Drawer, s32 X, s32 Y);
+            void OnRender(render::Renderer::Ref &Drawer, i32 X, i32 Y);
             void OnInput(u64 Down, u64 Up, u64 Held, Touch Pos);
         private:
-            s32 x;
-            s32 y;
-            s32 w;
-            s32 h;
-            render::NativeFont fnt;
+            i32 x;
+            i32 y;
+            i32 w;
+            i32 h;
+            String fnt_name;
             Color clr;
             String cnt;
             std::function<void()> clickcb;
             bool hover;
-            s32 hoverfact;
-            render::NativeTexture ntex;
+            i32 hoverfact;
+            sdl2::Texture ntex;
     };
 }

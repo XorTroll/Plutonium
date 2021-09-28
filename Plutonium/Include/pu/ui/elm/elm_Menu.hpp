@@ -30,10 +30,10 @@ namespace pu::ui::elm
             void SetName(String Name);
             Color GetColor();
             void SetColor(Color Color);
-            void AddOnClick(std::function<void()> Callback, u64 Key = KEY_A);
-            s32 GetCallbackCount();
-            std::function<void()> GetCallback(s32 Index);
-            u64 GetCallbackKey(s32 Index);
+            void AddOnClick(std::function<void()> Callback, u64 Key = HidNpadButton_A);
+            i32 GetCallbackCount();
+            std::function<void()> GetCallback(i32 Index);
+            u64 GetCallbackKey(i32 Index);
             std::string GetIcon();
             void SetIcon(std::string Icon);
             bool HasIcon();
@@ -49,20 +49,20 @@ namespace pu::ui::elm
     class Menu : public Element
     {
         public:
-            Menu(s32 X, s32 Y, s32 Width, Color OptionColor, s32 ItemSize, s32 ItemsToShow);
+            Menu(i32 X, i32 Y, i32 Width, Color OptionColor, i32 ItemSize, i32 ItemsToShow);
             PU_SMART_CTOR(Menu)
 
-            s32 GetX();
-            void SetX(s32 X);
-            s32 GetY();
-            void SetY(s32 Y);
-            s32 GetWidth();
-            void SetWidth(s32 Width);
-            s32 GetHeight();
-            s32 GetItemSize();
-            void SetItemSize(s32 ItemSize);
-            s32 GetNumberOfItemsToShow();
-            void SetNumberOfItemsToShow(s32 ItemsToShow);
+            i32 GetX();
+            void SetX(i32 X);
+            i32 GetY();
+            void SetY(i32 Y);
+            i32 GetWidth();
+            void SetWidth(i32 Width);
+            i32 GetHeight();
+            i32 GetItemSize();
+            void SetItemSize(i32 ItemSize);
+            i32 GetNumberOfItemsToShow();
+            void SetNumberOfItemsToShow(i32 ItemsToShow);
             Color GetColor();
             void SetColor(Color Color);
             Color GetOnFocusColor();
@@ -75,23 +75,23 @@ namespace pu::ui::elm
             void SetCooldownEnabled(bool Cooldown);
             MenuItem::Ref &GetSelectedItem();
             std::vector<MenuItem::Ref> &GetItems();
-            s32 GetSelectedIndex();
-            void SetSelectedIndex(s32 Index);
-            void OnRender(render::Renderer::Ref &Drawer, s32 X, s32 Y);
+            i32 GetSelectedIndex();
+            void SetSelectedIndex(i32 Index);
+            void OnRender(render::Renderer::Ref &Drawer, i32 X, i32 Y);
             void OnInput(u64 Down, u64 Up, u64 Held, Touch Pos);
         private:
             void ReloadItemRenders();
             bool dtouch;
-            s32 x;
-            s32 y;
-            s32 w;
-            s32 isize;
-            s32 ishow;
-            s32 previsel;
-            s32 fisel;
-            s32 isel;
-            s32 pselfact;
-            s32 selfact;
+            i32 x;
+            i32 y;
+            i32 w;
+            i32 isize;
+            i32 ishow;
+            i32 previsel;
+            i32 fisel;
+            i32 isel;
+            i32 pselfact;
+            i32 selfact;
             Color scb;
             Color clr;
             Color fcs;
@@ -100,8 +100,8 @@ namespace pu::ui::elm
             std::chrono::time_point<std::chrono::steady_clock> basetime;
             std::function<void()> onselch;
             std::vector<MenuItem::Ref> itms;
-            render::NativeFont font;
-            std::vector<render::NativeTexture> loadednames;
-            std::vector<render::NativeTexture> loadedicons;
+            String font_name;
+            std::vector<sdl2::Texture> loadednames;
+            std::vector<sdl2::Texture> loadedicons;
     };
 }

@@ -2,16 +2,17 @@
 
 namespace pu::ui::extras
 {
-    Toast::Toast(String Text, s32 FontSize, Color TextColor, Color BaseColor) : Overlay(0, 550, 0, 0, BaseColor)
+    Toast::Toast(String Text, String font_name, Color TextColor, Color BaseColor) : Overlay(0, 550, 0, 0, BaseColor)
     {
-        this->text = elm::TextBlock::New(0, 0, Text, FontSize);
+        this->text = elm::TextBlock::New(0, 0, Text);
+        this->text->SetFont(font_name);
         this->text->SetColor(TextColor);
         this->text->SetHorizontalAlign(pu::ui::elm::HorizontalAlign::Center);
         this->text->SetVerticalAlign(pu::ui::elm::VerticalAlign::Center);
-        s32 textw = this->text->GetTextWidth();
-        s32 texth = this->text->GetTextHeight();
-        s32 toastw = textw + (texth * 4);
-        s32 toasth = texth * 3;
+        i32 textw = this->text->GetTextWidth();
+        i32 texth = this->text->GetTextHeight();
+        i32 toastw = textw + (texth * 4);
+        i32 toasth = texth * 3;
         this->SetX((1280 - toastw) / 2);
         this->SetWidth(toastw);
         this->SetHeight(toasth);
@@ -21,10 +22,10 @@ namespace pu::ui::extras
     void Toast::SetText(String Text)
     {
         this->text->SetText(Text);
-        s32 textw = this->text->GetTextWidth();
-        s32 texth = this->text->GetTextHeight();
-        s32 toastw = textw + (texth * 4);
-        s32 toasth = texth * 3;
+        i32 textw = this->text->GetTextWidth();
+        i32 texth = this->text->GetTextHeight();
+        i32 toastw = textw + (texth * 4);
+        i32 toasth = texth * 3;
         this->SetX((1280 - toastw) / 2);
         this->SetWidth(toastw);
         this->SetHeight(toasth);

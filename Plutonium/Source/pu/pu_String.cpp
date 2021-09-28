@@ -240,23 +240,88 @@ namespace pu
         return String(L.base + R.base);
     }
 
+    String operator+(const String &L, u8 U)
+    {
+        return String(L.base + MakeFromUTF8(std::to_string((u32)U)));
+    }
+
+    String operator+(const String &L, u16 U)
+    {
+        return String(L.base + MakeFromUTF8(std::to_string(U)));
+    }
+
+    String operator+(const String &L, u32 U)
+    {
+        return String(L.base + MakeFromUTF8(std::to_string(U)));
+    }
+
+    String operator+(const String &L, u64 U)
+    {
+        return String(L.base + MakeFromUTF8(std::to_string(U)));
+    }
+
+    String operator+(const String &L, s8 I)
+    {
+        return String(L.base + MakeFromUTF8(std::to_string((i32)I)));
+    }
+
+    String operator+(const String &L, s16 I)
+    {
+        return String(L.base + MakeFromUTF8(std::to_string(I)));
+    }
+
+    String operator+(const String &L, i32 I)
+    {
+        return String(L.base + MakeFromUTF8(std::to_string(I)));
+    }
+
+    String operator+(const String &L, s64 I)
+    {
+        return String(L.base + MakeFromUTF8(std::to_string(I)));
+    }
+
+    String operator+(const String &L, float D)
+    {
+        return String(L.base + MakeFromUTF8(std::to_string(D)));
+    }
+
+    String operator+(const String &L, double D)
+    {
+        return String(L.base + MakeFromUTF8(std::to_string(D)));
+    }
+
     String String::operator+=(char C)
     BASE_RETURN_THIS_PLUS(C)
 
-    String String::operator+=(u8 N)
-    BASE_RETURN_THIS_PLUS(N)
+    String String::operator+=(u8 U)
+    BASE_RETURN_THIS_PLUS(U)
 
-    String String::operator+=(u16 N)
-    BASE_RETURN_THIS_PLUS(N)
+    String String::operator+=(u16 U)
+    BASE_RETURN_THIS_PLUS(U)
     
-    String String::operator+=(u32 N)
-    BASE_RETURN_THIS_PLUS(N)
+    String String::operator+=(u32 U)
+    BASE_RETURN_THIS_PLUS(U)
     
-    String String::operator+=(u64 N)
-    BASE_RETURN_THIS_PLUS(N)
+    String String::operator+=(u64 U)
+    BASE_RETURN_THIS_PLUS(U)
+
+    String String::operator+=(s8 I)
+    BASE_RETURN_THIS_PLUS(I)
+
+    String String::operator+=(s16 I)
+    BASE_RETURN_THIS_PLUS(I)
     
-    String String::operator+=(double Dec)
-    BASE_RETURN_THIS_PLUS(Dec)
+    String String::operator+=(i32 I)
+    BASE_RETURN_THIS_PLUS(I)
+    
+    String String::operator+=(s64 I)
+    BASE_RETURN_THIS_PLUS(I)
+    
+    String String::operator+=(float D)
+    BASE_RETURN_THIS_PLUS(D)
+
+    String String::operator+=(double D)
+    BASE_RETURN_THIS_PLUS(D)
 }
 
 namespace std

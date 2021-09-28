@@ -32,9 +32,9 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Plutonium framework API
-   &#160;<span id="projectnumber">0.1</span>
+   &#160;<span id="projectnumber">0.3.0</span>
    </div>
-   <div id="projectbrief">Simple UI framework for libnx and SDL2</div>
+   <div id="projectbrief">UI framework libraries for libnx</div>
   </td>
  </tr>
  </tbody>
@@ -118,6 +118,7 @@ $(document).ready(function(){initNavTree('d4/dbe/render___renderer_8hpp.html','.
 <code>#include &lt;<a class="el" href="../../db/db1/render___s_d_l2_8hpp_source.html">pu/ui/render/render_SDL2.hpp</a>&gt;</code><br />
 <code>#include &lt;string&gt;</code><br />
 <code>#include &lt;fstream&gt;</code><br />
+<code>#include &lt;vector&gt;</code><br />
 </div>
 <p><a href="../../d4/dbe/render___renderer_8hpp_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
@@ -125,7 +126,7 @@ $(document).ready(function(){initNavTree('d4/dbe/render___renderer_8hpp.html','.
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../df/d6f/structpu_1_1ui_1_1render_1_1_renderer_init_options.html">pu::ui::render::RendererInitOptions</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/d24/structpu_1_1ui_1_1render_1_1_native_texture_render_options.html">pu::ui::render::NativeTextureRenderOptions</a></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dc/d32/structpu_1_1ui_1_1render_1_1_texture_render_options.html">pu::ui::render::TextureRenderOptions</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/d27/classpu_1_1ui_1_1render_1_1_renderer.html">pu::ui::render::Renderer</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -137,8 +138,30 @@ Namespaces</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:aa19dde3f778fd2d4b31d9007dd5fb796"><td class="memItemLeft" align="right" valign="top">NativeRenderer&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../da/d54/namespacepu_1_1ui_1_1render.html#aa19dde3f778fd2d4b31d9007dd5fb796">pu::ui::render::GetMainRenderer</a> ()</td></tr>
-<tr class="separator:aa19dde3f778fd2d4b31d9007dd5fb796"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac3ef345ab94510dd75774086f3737224"><td class="memItemLeft" align="right" valign="top">sdl2::Renderer&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../da/d54/namespacepu_1_1ui_1_1render.html#ac3ef345ab94510dd75774086f3737224">pu::ui::render::GetMainRenderer</a> ()</td></tr>
+<tr class="separator:ac3ef345ab94510dd75774086f3737224"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a49da42826685906d7bf6662b9be169e1"><td class="memItemLeft" align="right" valign="top">sdl2::Window&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../da/d54/namespacepu_1_1ui_1_1render.html#a49da42826685906d7bf6662b9be169e1">pu::ui::render::GetMainWindow</a> ()</td></tr>
+<tr class="separator:a49da42826685906d7bf6662b9be169e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7d87075716f44ab90d397ade7da4cb70"><td class="memItemLeft" align="right" valign="top">sdl2::Surface&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../da/d54/namespacepu_1_1ui_1_1render.html#a7d87075716f44ab90d397ade7da4cb70">pu::ui::render::GetMainSurface</a> ()</td></tr>
+<tr class="separator:a7d87075716f44ab90d397ade7da4cb70"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ace15ebc233806168ace00e31c57c812c"><td class="memItemLeft" align="right" valign="top">std::pair&lt; u32, u32 &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../da/d54/namespacepu_1_1ui_1_1render.html#ace15ebc233806168ace00e31c57c812c">pu::ui::render::GetDimensions</a> ()</td></tr>
+<tr class="separator:ace15ebc233806168ace00e31c57c812c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a82021c62d7718c57b97beefe2c336cf7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../da/d54/namespacepu_1_1ui_1_1render.html#a82021c62d7718c57b97beefe2c336cf7">pu::ui::render::AddSharedFont</a> (String font_name, u32 font_size, PlSharedFontType type)</td></tr>
+<tr class="separator:a82021c62d7718c57b97beefe2c336cf7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3cca1cdad58c22a08da08e0ee8d76606"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../da/d54/namespacepu_1_1ui_1_1render.html#a3cca1cdad58c22a08da08e0ee8d76606">pu::ui::render::AddAllSharedFonts</a> (String font_name, u32 font_size)</td></tr>
+<tr class="separator:a3cca1cdad58c22a08da08e0ee8d76606"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad8f807238ef7b3c9fdf66bb6f5d68904"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../da/d54/namespacepu_1_1ui_1_1render.html#ad8f807238ef7b3c9fdf66bb6f5d68904">pu::ui::render::AddFontFile</a> (String font_name, u32 font_size, String path)</td></tr>
+<tr class="separator:ad8f807238ef7b3c9fdf66bb6f5d68904"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af1963eebf38d28e87a3a67425410c62b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../da/d54/namespacepu_1_1ui_1_1render.html#af1963eebf38d28e87a3a67425410c62b">pu::ui::render::AddDefaultFontFromShared</a> (u32 font_size)</td></tr>
+<tr class="separator:af1963eebf38d28e87a3a67425410c62b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a88a32a1956fd9eb01c22eb45f38a4c6a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../da/d54/namespacepu_1_1ui_1_1render.html#a88a32a1956fd9eb01c22eb45f38a4c6a">pu::ui::render::AddDefaultFontFromFile</a> (u32 font_size, String path)</td></tr>
+<tr class="separator:a88a32a1956fd9eb01c22eb45f38a4c6a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a22491336f0694f0bf7fb0edee14ad2e1"><td class="memItemLeft" align="right" valign="top">sdl2::Texture&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../da/d54/namespacepu_1_1ui_1_1render.html#a22491336f0694f0bf7fb0edee14ad2e1">pu::ui::render::RenderText</a> (String font_name, String Text, Color Color)</td></tr>
+<tr class="separator:a22491336f0694f0bf7fb0edee14ad2e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab218aa29cec245694d6e62d0a19982e1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../d6/da5/pu___macros_8hpp.html#ad21bc53f066ebb7defe268f31ec5cb40">i32</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../da/d54/namespacepu_1_1ui_1_1render.html#ab218aa29cec245694d6e62d0a19982e1">pu::ui::render::GetTextWidth</a> (String font_name, String Text)</td></tr>
+<tr class="separator:ab218aa29cec245694d6e62d0a19982e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa67d942a85182f2d8752771a809fc99b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../d6/da5/pu___macros_8hpp.html#ad21bc53f066ebb7defe268f31ec5cb40">i32</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../da/d54/namespacepu_1_1ui_1_1render.html#aa67d942a85182f2d8752771a809fc99b">pu::ui::render::GetTextHeight</a> (String font_name, String Text)</td></tr>
+<tr class="separator:aa67d942a85182f2d8752771a809fc99b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>

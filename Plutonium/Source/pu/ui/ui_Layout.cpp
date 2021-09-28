@@ -6,13 +6,13 @@ namespace pu::ui
     {
         this->onipt = [&](u64,u64,u64,Touch){};
         this->hasimage = false;
-        this->overbgtex = NULL;
+        this->overbgtex = nullptr;
         this->overbgcolor = Color(225, 225, 225, 255);
     }
 
     Layout::~Layout()
     {
-        if(this->overbgtex != NULL) render::DeleteTexture(this->overbgtex);
+        if(this->overbgtex != nullptr) render::DeleteTexture(this->overbgtex);
     }
 
     bool Layout::HasChilds()
@@ -42,14 +42,14 @@ namespace pu::ui
 
     void Layout::SetBackgroundImage(std::string Path)
     {
-        if(this->overbgtex != NULL) render::DeleteTexture(this->overbgtex);
+        if(this->overbgtex != nullptr) render::DeleteTexture(this->overbgtex);
         this->hasimage = true;
         this->overbgtex = render::LoadImage(Path);
     }
 
     void Layout::SetBackgroundColor(Color Color)
     {
-        if(this->overbgtex != NULL) render::DeleteTexture(this->overbgtex);
+        if(this->overbgtex != nullptr) render::DeleteTexture(this->overbgtex);
         this->hasimage = false;
         this->overbgcolor = Color;
     }
@@ -66,7 +66,7 @@ namespace pu::ui
         return simcpy; // Getting simulated touch resets it
     }
 
-    render::NativeTexture Layout::GetBackgroundImageTexture()
+    sdl2::Texture Layout::GetBackgroundImageTexture()
     {
         return this->overbgtex;
     }

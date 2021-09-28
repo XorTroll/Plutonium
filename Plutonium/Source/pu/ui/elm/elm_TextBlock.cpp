@@ -2,64 +2,62 @@
 
 namespace pu::ui::elm
 {
-    TextBlock::TextBlock(s32 X, s32 Y, String Text, s32 FontSize) : Element::Element()
+    TextBlock::TextBlock(i32 X, i32 Y, String Text) : Element::Element()
     {
         this->x = X;
         this->y = Y;
         this->text = Text;
-        this->clr = { 0, 0, 0, 255 };
-        this->fnt = render::LoadDefaultFont(FontSize);
-        this->fsize = FontSize;
-        this->ntex = render::RenderText(this->fnt, Text, this->clr);
+        this->fnt_name = "DefaultFont@25";
+        this->ntex = render::RenderText(this->fnt_name, Text, this->clr);
     }
 
     TextBlock::~TextBlock()
     {
-        if(this->ntex != NULL)
+        if(this->ntex != nullptr)
         {
             render::DeleteTexture(this->ntex);
-            this->ntex = NULL;
+            this->ntex = nullptr;
         }
     }
 
-    s32 TextBlock::GetX()
+    i32 TextBlock::GetX()
     {
         return this->x;
     }
 
-    void TextBlock::SetX(s32 X)
+    void TextBlock::SetX(i32 X)
     {
         this->x = X;
     }
 
-    s32 TextBlock::GetY()
+    i32 TextBlock::GetY()
     {
         return this->y;
     }
 
-    void TextBlock::SetY(s32 Y)
+    void TextBlock::SetY(i32 Y)
     {
         this->y = Y;
     }
 
-    s32 TextBlock::GetWidth()
+    i32 TextBlock::GetWidth()
     {
         return this->GetTextWidth();
     }
 
-    s32 TextBlock::GetHeight()
+    i32 TextBlock::GetHeight()
     {
         return this->GetTextHeight();
     }
 
-    s32 TextBlock::GetTextWidth()
+    i32 TextBlock::GetTextWidth()
     {
-        return render::GetTextWidth(this->fnt, this->text);
+        return render::GetTextWidth(this->fnt_name, this->text);
     }
 
-    s32 TextBlock::GetTextHeight()
+    i32 TextBlock::GetTextHeight()
     {
-        return render::GetTextHeight(this->fnt, this->text);
+        return render::GetTextHeight(this->fnt_name, this->text);
     }
 
     String TextBlock::GetText()
@@ -71,14 +69,14 @@ namespace pu::ui::elm
     {
         this->text = Text;
         render::DeleteTexture(this->ntex);
-        this->ntex = render::RenderText(this->fnt, Text, this->clr);
+        this->ntex = render::RenderText(this->fnt_name, Text, this->clr);
     }
 
-    void TextBlock::SetFont(render::NativeFont Font)
+    void TextBlock::SetFont(String font_name)
     {
-        this->fnt = Font;
+        this->fnt_name = font_name;
         render::DeleteTexture(this->ntex);
-        this->ntex = render::RenderText(Font, this->text, this->clr);
+        this->ntex = render::RenderText(this->fnt_name, this->text, this->clr);
     }
 
     Color TextBlock::GetColor()
@@ -90,13 +88,13 @@ namespace pu::ui::elm
     {
         this->clr = Color;
         render::DeleteTexture(this->ntex);
-        this->ntex = render::RenderText(this->fnt, this->text, Color);
+        this->ntex = render::RenderText(this->fnt_name, this->text, Color);
     }
 
-    void TextBlock::OnRender(render::Renderer::Ref &Drawer, s32 X, s32 Y)
+    void TextBlock::OnRender(render::Renderer::Ref &Drawer, i32 X, i32 Y)
     {
-        s32 rdx = X;
-        s32 rdy = Y;
+        i32 rdx = X;
+        i32 rdy = Y;
         Drawer->RenderTexture(this->ntex, rdx, rdy);
     }
 

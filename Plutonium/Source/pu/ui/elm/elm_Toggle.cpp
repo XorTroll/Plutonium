@@ -2,55 +2,55 @@
 
 namespace pu::ui::elm
 {
-    Toggle::Toggle(s32 X, s32 Y, String Content, u64 Key, Color Color) : Element::Element()
+    Toggle::Toggle(i32 X, i32 Y, String Content, u64 Key, Color Color) : Element::Element()
     {
         this->x = X;
         this->y = Y;
         this->key = Key;
         this->cnt = Content;
         this->clr = Color;
-        this->fnt = render::LoadDefaultFont(25);
+        this->fnt_name = "DefaultFont@25";
         this->fsize = 25;
         this->togfact = 255;
         this->checked = false;
-        this->ntex = render::RenderText(this->fnt, Content, Color);
+        this->ntex = render::RenderText(this->fnt_name, Content, Color);
     }
 
     Toggle::~Toggle()
     {
-        if(this->ntex != NULL)
+        if(this->ntex != nullptr)
         {
             render::DeleteTexture(this->ntex);
-            this->ntex = NULL;
+            this->ntex = nullptr;
         }
     }
 
-    s32 Toggle::GetX()
+    i32 Toggle::GetX()
     {
         return this->x;
     }
 
-    void Toggle::SetX(s32 X)
+    void Toggle::SetX(i32 X)
     {
         this->x = X;
     }
 
-    s32 Toggle::GetY()
+    i32 Toggle::GetY()
     {
         return this->y;
     }
 
-    void Toggle::SetY(s32 Y)
+    void Toggle::SetY(i32 Y)
     {
         this->y = Y;
     }
 
-    s32 Toggle::GetWidth()
+    i32 Toggle::GetWidth()
     {
         return 0;
     }
 
-    s32 Toggle::GetHeight()
+    i32 Toggle::GetHeight()
     {
         return 0;
     }
@@ -64,13 +64,13 @@ namespace pu::ui::elm
     {
         this->cnt = Content;
         render::DeleteTexture(this->ntex);
-        this->ntex = render::RenderText(this->fnt, Content, this->clr);
+        this->ntex = render::RenderText(this->fnt_name, Content, this->clr);
     }
 
-    void Toggle::SetFont(render::NativeFont Font)
+    void Toggle::SetFont(String font_name)
     {
-        this->fnt = Font;
-        this->ntex = render::RenderText(Font, this->cnt, this->clr);
+        this->fnt_name = font_name;
+        this->ntex = render::RenderText(this->fnt_name, this->cnt, this->clr);
     }
 
     Color Toggle::GetColor()
@@ -82,7 +82,7 @@ namespace pu::ui::elm
     {
         this->clr = Color;
         render::DeleteTexture(this->ntex);
-        this->ntex = render::RenderText(this->fnt, this->cnt, Color);
+        this->ntex = render::RenderText(this->fnt_name, this->cnt, Color);
     }
 
     u64 Toggle::GetKey()
@@ -100,16 +100,16 @@ namespace pu::ui::elm
         return this->checked;
     }
 
-    void Toggle::OnRender(render::Renderer::Ref &Drawer, s32 X, s32 Y)
+    void Toggle::OnRender(render::Renderer::Ref &Drawer, i32 X, i32 Y)
     {
-        s32 tw = render::GetTextWidth(this->fnt, this->cnt);
-        s32 th = render::GetTextHeight(this->fnt, this->cnt);
-        s32 rw = th;
-        s32 rh = (2 * th);
-        s32 rx = X;
-        s32 ry = Y;
-        s32 tx = rx + rw + (th / 2);
-        s32 ty = ry + (th / 2);
+        i32 tw = render::GetTextWidth(this->fnt_name, this->cnt);
+        i32 th = render::GetTextHeight(this->fnt_name, this->cnt);
+        i32 rw = th;
+        i32 rh = (2 * th);
+        i32 rx = X;
+        i32 ry = Y;
+        i32 tx = rx + rw + (th / 2);
+        i32 ty = ry + (th / 2);
         if(this->checked)
         {
             Drawer->RenderRectangleFill({ 130, 130, 130, 255 }, rx, ry, rw, rh);
@@ -135,6 +135,6 @@ namespace pu::ui::elm
 
     void Toggle::OnInput(u64 Down, u64 Up, u64 Held, Touch Pos)
     {
-        if((Down & this->key) || ((this->key == KEY_TOUCH) && !Pos.IsEmpty())) this->checked = !this->checked;
+        if((Down & this->key) || ((this->key == TouchPseudoKey) && !Pos.IsEmpty())) this->checked = !this->checked;
     }
 }

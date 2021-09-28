@@ -19,19 +19,19 @@ namespace pu::ui
     class Overlay : public Container
     {
         public:
-            Overlay(s32 X, s32 Y, s32 Width, s32 Height, Color Background, bool Rounded = true);
+            Overlay(i32 X, i32 Y, i32 Width, i32 Height, Color Background, bool Rounded = true);
             PU_SMART_CTOR(Overlay)
 
-            void SetRadius(s32 Radius);
-            s32 GetRadius();
+            void SetRadius(i32 Radius);
+            i32 GetRadius();
             virtual void OnPreRender(render::Renderer::Ref &Drawer);
             virtual void OnPostRender(render::Renderer::Ref &Drawer);
             bool Render(render::Renderer::Ref &Drawer);
             void NotifyEnding(bool End);
         private:
-            s32 fadea;
+            i32 fadea;
             Color bg;
-            s32 rad;
+            i32 rad;
             bool end;
             bool round;
     };
