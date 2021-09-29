@@ -104,7 +104,7 @@ namespace pu::ui
                 return padGetButtons(&this->input_pad);
             }
 
-            inline HidTouchScreenState GetTouchState() {
+            inline static HidTouchScreenState GetTouchState() {
                 HidTouchScreenState state = {};
                 hidGetTouchScreenStates(&state, 1);
                 return state;
