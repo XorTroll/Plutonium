@@ -1,19 +1,15 @@
 #include <MainApplication.hpp>
 
 /*
-
 // If you would like to initialize and finalize stuff before or after Plutonium, you can use libnx's userAppInit/userAppExit
 
-extern "C" void userAppInit()
-{
+extern "C" void userAppInit() {
     // Initialize stuff
 }
 
-extern "C" void userAppExit()
-{
+extern "C" void userAppExit() {
     // Cleanup/finalize stuff
 }
-
 */
 
 // Main entrypoint

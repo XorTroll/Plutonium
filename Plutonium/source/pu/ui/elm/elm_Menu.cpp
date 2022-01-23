@@ -251,13 +251,6 @@ namespace pu::ui::elm {
                             this->selected_item_idx++;
                             this->HandleOnSelectionChanged();
 
-                            /*
-                            for(i32 i = 0; i < this->items.size(); i++)
-                            {
-                                if(i == this->selected_item_idx) this->selected_item_alpha = 0;
-                                else if(i == this->prev_selected_item_idx) this->prev_selected_item_alpha = 255;
-                            }
-                            */
                             this->selected_item_alpha = 0;
                             this->prev_selected_item_alpha = 0xFF;
                         }
@@ -299,13 +292,6 @@ namespace pu::ui::elm {
                             this->selected_item_idx--;
                             this->HandleOnSelectionChanged();
 
-                            /*
-                            if(!this->items.empty()) for(i32 i = 0; i < this->items.size(); i++)
-                            {
-                                if(i == this->selected_item_idx) this->selected_item_alpha = 0;
-                                else if(i == this->prev_selected_item_idx) this->prev_selected_item_alpha = 255;
-                            }
-                            */
                             this->selected_item_alpha = 0;
                             this->prev_selected_item_alpha = 0xFF;
                         }

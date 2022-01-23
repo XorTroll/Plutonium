@@ -47,17 +47,12 @@ namespace pu::ui {
             return 0;
         }
 
-        auto dialog_width = (SpaceBetweenOptions * (this->opt_texs.size() - 1)) + 2 * OptionsBaseHorizontalMargin;
+        auto opts_width = (SpaceBetweenOptions * (this->opt_texs.size() - 1)) + 2 * OptionsBaseHorizontalMargin;
         for(const auto &opt_tex : this->opt_texs) {
             const auto opt_width = render::GetTextureWidth(opt_tex) + 2 * OptionHorizontalMargin;
-            dialog_width += opt_width;
+            opts_width += opt_width;
         }
-        
-        /*
-        if(dialog_width > render::ScreenWidth) {
-            dialog_width = render::ScreenWidth;
-        }
-        */
+        auto dialog_width = opts_width;
 
         const auto cnt_width = render::GetTextureWidth(this->cnt_tex) + ContentExtraWidth;
         if(cnt_width > dialog_width) {
@@ -77,12 +72,22 @@ namespace pu::ui {
                 opt_base_y = icon_height;
             }
 
-            /*
-            tdw = render::GetTextWidth(this->cnt_font_name, this->cnt) + 90 + render::GetTextureWidth(this->icon_tex) + 20;
-            if(tdw > dialog_width) dialog_width = tdw;
-            tdw = render::GetTextWidth(this->title_font_name, this->title) + 90 + render::GetTextureWidth(this->icon_tex) + 20;
-            if(tdw > dialog_width) dialog_width = tdw;
-            */
+            const auto icon_width = render::GetTextureWidth(this->icon_tex) + 2 * IconMargin;
+
+            const auto icon_title_width = title_width + icon_width;
+            if(icon_title_width > dialog_width) {
+                dialog_width = icon_title_width;
+            }
+
+            const auto icon_cnt_width = cnt_width + icon_width;
+            if(icon_cnt_width > dialog_width) {
+                dialog_width = icon_cnt_width;
+            }
+
+            const auto icon_opts_width = opts_width + icon_width;
+            if(icon_opts_width > dialog_width) {
+                dialog_width = icon_opts_width;
+            }
         }
         
         if(dialog_width > render::ScreenWidth) {
