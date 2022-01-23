@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['elms',['elms',['../dc/dcd/classpu_1_1ui_1_1_container.html#a6a469e5c273f71eb5f983080c5c12297',1,'pu::ui::Container']]],
-  ['empty',['Empty',['../df/d81/structpu_1_1ui_1_1_touch.html#ac1b988c4ac2ae9393a02bd54fb74b32d',1,'pu::ui::Touch']]]
+  ['elems_0',['elems',['../dc/dcd/classpu_1_1ui_1_1_container.html#a0e8fcdecac68cddf4c9baa90599569c6',1,'pu::ui::Container']]],
+  ['extra_5fdefault_5ffont_5fsizes_1',['extra_default_font_sizes',['../df/d6f/structpu_1_1ui_1_1render_1_1_renderer_init_options.html#a18a9ec1702ef30964391be62f777a1ad',1,'pu::ui::render::RendererInitOptions']]]
 ];

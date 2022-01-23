@@ -1,7 +1,6 @@
 var searchData=
 [
-  ['b',['B',['../d7/d0c/structpu_1_1ui_1_1_color.html#aa95a2e22c724c45cda32bfd4b7bedd63',1,'pu::ui::Color']]],
-  ['begin',['begin',['../d2/de5/classpu_1_1_string.html#a63b94842226d52a602ec4d5b700d24ea',1,'pu::String']]],
-  ['button',['Button',['../d4/de7/classpu_1_1ui_1_1elm_1_1_button.html#a1ce149aac65cf1a065fe0e4dd872814a',1,'pu::ui::elm::Button']]],
-  ['button',['Button',['../d4/de7/classpu_1_1ui_1_1elm_1_1_button.html',1,'pu::ui::elm']]]
+  ['b_0',['b',['../d7/d0c/structpu_1_1ui_1_1_color.html#ae55e2a30e1796df374dd677d31d83342',1,'pu::ui::Color']]],
+  ['basealpha_1',['BaseAlpha',['../dc/d49/classpu_1_1ui_1_1extras_1_1_toast.html#aeaad0b5a3c8e580ff6a3f02e9df86797',1,'pu::ui::extras::Toast']]],
+  ['button_2',['Button',['../d4/de7/classpu_1_1ui_1_1elm_1_1_button.html#a5f0c0c8ebb428045c252982e41b272d3',1,'pu::ui::elm::Button::Button()'],['../d4/de7/classpu_1_1ui_1_1elm_1_1_button.html',1,'pu::ui::elm::Button']]]
 ];

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['i32',['i32',['../d6/da5/pu___macros_8hpp.html#ad21bc53f066ebb7defe268f31ec5cb40',1,'pu_Macros.hpp']]]
+  ['i32_0',['i32',['../da/df2/namespacepu.html#ad6f40fe34a42045f7df3275f60b00e99',1,'pu']]]
 ];

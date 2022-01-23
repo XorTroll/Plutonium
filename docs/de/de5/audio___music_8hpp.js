@@ -1,17 +1,17 @@
 var audio___music_8hpp =
 [
-    [ "Music", "de/de5/audio___music_8hpp.html#a906d9108700d72278291d79c10fc99e0", null ],
-    [ "Delete", "de/de5/audio___music_8hpp.html#a5331a6cce3f5179627d2f9c32b309807", null ],
-    [ "FadeOut", "de/de5/audio___music_8hpp.html#aa0cb8040d0c59e2ce98e51622d2a26ed", null ],
-    [ "GetVolume", "de/de5/audio___music_8hpp.html#a70f614a6c05aa10039873713451a2046", null ],
-    [ "IsPlaying", "de/de5/audio___music_8hpp.html#a4c9bf2db759c2e1067f674736a3c24de", null ],
-    [ "Open", "de/de5/audio___music_8hpp.html#a215e5db7e618ded9938b98337eaefe38", null ],
-    [ "Pause", "de/de5/audio___music_8hpp.html#ad1c34b632e2225b90a8020756ba5ed67", null ],
-    [ "Play", "de/de5/audio___music_8hpp.html#a42d856cdf5e99462335a62097823771d", null ],
-    [ "PlayWithFadeIn", "de/de5/audio___music_8hpp.html#a187e0332053ab03800ca238fe281604e", null ],
-    [ "Resume", "de/de5/audio___music_8hpp.html#a985b002067d57f00d6228b15eb17c060", null ],
-    [ "Rewind", "de/de5/audio___music_8hpp.html#ac6000d5f48fcf60acccacff1044d0e28", null ],
-    [ "SetPosition", "de/de5/audio___music_8hpp.html#a04714ba749bfc72df1ae72ec3e229e42", null ],
-    [ "SetVolume", "de/de5/audio___music_8hpp.html#ab1e9f5d82a750544cf34e0a6c99d8560", null ],
-    [ "Stop", "de/de5/audio___music_8hpp.html#abfeb75790aa1646d075c1ce31006d2ff", null ]
+    [ "Music", "de/de5/audio___music_8hpp.html#adc990fea10ff67b623e34b67ffa29413", null ],
+    [ "DestroyMusic", "de/de5/audio___music_8hpp.html#a1f7671249f422dca75905b3becfe0a24", null ],
+    [ "FadeOutMusic", "de/de5/audio___music_8hpp.html#a0514eeae754124a9bdec08e79823f08a", null ],
+    [ "GetMusicVolume", "de/de5/audio___music_8hpp.html#a00fd980306751af01d7946a7d6da2044", null ],
+    [ "IsPlayingMusic", "de/de5/audio___music_8hpp.html#a07bae3d9442a509f1729c72ba4b4c92c", null ],
+    [ "OpenMusic", "de/de5/audio___music_8hpp.html#a66c81b8c5c29b92ac8a0786bc803ca23", null ],
+    [ "PauseMusic", "de/de5/audio___music_8hpp.html#a1a16cf110068c643338a686d06fc0311", null ],
+    [ "PlayMusic", "de/de5/audio___music_8hpp.html#ae6860df6873c68be641096106f2f10e1", null ],
+    [ "PlayMusicWithFadeIn", "de/de5/audio___music_8hpp.html#a6732fa4e7407c46285dda78126c4ae55", null ],
+    [ "ResumeMusic", "de/de5/audio___music_8hpp.html#a293674d2948d7a79e2cde7796c661848", null ],
+    [ "RewindMusic", "de/de5/audio___music_8hpp.html#a2f34c8478347186d0209fef078d41582", null ],
+    [ "SetMusicPosition", "de/de5/audio___music_8hpp.html#a101f963439aaf0a9a5229de9a9545ab1", null ],
+    [ "SetMusicVolume", "de/de5/audio___music_8hpp.html#ad8c9e4959cf7ad40f9493659130f2878", null ],
+    [ "StopMusic", "de/de5/audio___music_8hpp.html#adefbe54b078d8a9f1db1d50e9dfcaa7c", null ]
 ];

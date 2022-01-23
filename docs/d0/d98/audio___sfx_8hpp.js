@@ -1,7 +1,7 @@
 var audio___sfx_8hpp =
 [
-    [ "Sfx", "d0/d98/audio___sfx_8hpp.html#a8c7c61eb27f10a7ab3ae5abe610887a6", null ],
-    [ "DeleteSfx", "d0/d98/audio___sfx_8hpp.html#a5b22d95674df1aea26de78714ff482f3", null ],
-    [ "Load", "d0/d98/audio___sfx_8hpp.html#af7edd2660a20e032006e1a1aa70bf46e", null ],
-    [ "Play", "d0/d98/audio___sfx_8hpp.html#a3102df9f4d8134e17bbe9eb204f50672", null ]
+    [ "Sfx", "d0/d98/audio___sfx_8hpp.html#a21bc80b31e5b3e065615f5f24880e747", null ],
+    [ "DestroySfx", "d0/d98/audio___sfx_8hpp.html#ac3d79067485a253473beeae7691fea65", null ],
+    [ "LoadSfx", "d0/d98/audio___sfx_8hpp.html#a9d37a88a7efef6bac8947b853965234b", null ],
+    [ "PlaySfx", "d0/d98/audio___sfx_8hpp.html#a38344de3e19215b9d8125e6971c7f6cd", null ]
 ];

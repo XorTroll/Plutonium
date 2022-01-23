@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['texture',['Texture',['../d1/d78/namespacepu_1_1sdl2.html#a65fedc3a65aa972d8e05f05545a65fc3',1,'pu::sdl2']]],
-  ['ttf_5ffont',['TTF_Font',['../d6/d5a/ttf___s_d_l__ttf_8h.html#ac3b14e1c2946c0cf19776fe568d9abcf',1,'ttf_SDL_ttf.h']]]
+  ['sfx_0',['Sfx',['../d8/d8f/namespacepu_1_1audio.html#a21bc80b31e5b3e065615f5f24880e747',1,'pu::audio']]],
+  ['surface_1',['Surface',['../d1/d78/namespacepu_1_1sdl2.html#a00c40ae94ad2fc0b78571071c62faa19',1,'pu::sdl2']]]
 ];

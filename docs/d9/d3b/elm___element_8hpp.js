@@ -1,6 +1,6 @@
 var elm___element_8hpp =
 [
-    [ "Element", "d9/d0e/classpu_1_1ui_1_1elm_1_1_element.html", "d9/d0e/classpu_1_1ui_1_1elm_1_1_element" ],
+    [ "pu::ui::elm::Element", "d9/d0e/classpu_1_1ui_1_1elm_1_1_element.html", "d9/d0e/classpu_1_1ui_1_1elm_1_1_element" ],
     [ "HorizontalAlign", "d9/d3b/elm___element_8hpp.html#ac2066021dbc53818c251c446b6d7f864", [
       [ "Left", "d9/d3b/elm___element_8hpp.html#ac2066021dbc53818c251c446b6d7f864a945d5e233cf7d6240f6b783b36a374ff", null ],
       [ "Center", "d9/d3b/elm___element_8hpp.html#ac2066021dbc53818c251c446b6d7f864a4f1f6016fc9f3f2353c0cc7c67b292bd", null ],

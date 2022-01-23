@@ -1,10 +1,8 @@
 var searchData=
 [
-  ['menu',['Menu',['../dc/d6c/classpu_1_1ui_1_1elm_1_1_menu.html',1,'pu::ui::elm']]],
-  ['menu',['Menu',['../dc/d6c/classpu_1_1ui_1_1elm_1_1_menu.html#a0d4c8a5ce0fd12ef7fbd67fa8c8a647b',1,'pu::ui::elm::Menu']]],
-  ['menuitem',['MenuItem',['../de/dbb/classpu_1_1ui_1_1elm_1_1_menu_item.html',1,'pu::ui::elm']]],
-  ['menuitem',['MenuItem',['../de/dbb/classpu_1_1ui_1_1elm_1_1_menu_item.html#a35f33a57c480d3dc4af1873ead604f1e',1,'pu::ui::elm::MenuItem']]],
-  ['mixerallflags',['MixerAllFlags',['../da/d54/namespacepu_1_1ui_1_1render.html#a0955ba96cbd635c6bc387fcb51088555',1,'pu::ui::render']]],
-  ['mixerflags',['MixerFlags',['../df/d6f/structpu_1_1ui_1_1render_1_1_renderer_init_options.html#ad17069cb76d367ba3958988e7e50fcc6',1,'pu::ui::render::RendererInitOptions']]],
-  ['music',['Music',['../d8/d8f/namespacepu_1_1audio.html#a906d9108700d72278291d79c10fc99e0',1,'pu::audio']]]
+  ['noalpha_0',['NoAlpha',['../dc/d32/structpu_1_1ui_1_1render_1_1_texture_render_options.html#a66db5065001cf2ba752c7bb18c17300b',1,'pu::ui::render::TextureRenderOptions']]],
+  ['noheight_1',['NoHeight',['../dc/d32/structpu_1_1ui_1_1render_1_1_texture_render_options.html#aefa877cc8f0002335d30eb93d1faa4e3',1,'pu::ui::render::TextureRenderOptions']]],
+  ['norotation_2',['NoRotation',['../dc/d32/structpu_1_1ui_1_1render_1_1_texture_render_options.html#ac4399ad9cab23155bd9d5b6e9c30b015',1,'pu::ui::render::TextureRenderOptions']]],
+  ['notifyending_3',['NotifyEnding',['../d6/d8f/classpu_1_1ui_1_1_overlay.html#a099a0e84e2e7173429ab9c93c9962be2',1,'pu::ui::Overlay']]],
+  ['nowidth_4',['NoWidth',['../dc/d32/structpu_1_1ui_1_1render_1_1_texture_render_options.html#a308031ec24474b88bd71242522c42a5b',1,'pu::ui::render::TextureRenderOptions']]]
 ];

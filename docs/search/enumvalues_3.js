@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['korean',['Korean',['../da/d54/namespacepu_1_1ui_1_1render.html#a3c7c58449d392444ecb914962de801c7ad0bdb3cde477d82e766da05ebda50ccb',1,'pu::ui::render']]]
+  ['medium_0',['Medium',['../d9/d7f/namespacepu_1_1ui.html#ad3aa8662a33d0c410412b1cd1d2984f0a87f8a6ab85c9ced3702b4ea641ad4bb5',1,'pu::ui']]],
+  ['mediumlarge_1',['MediumLarge',['../d9/d7f/namespacepu_1_1ui.html#ad3aa8662a33d0c410412b1cd1d2984f0a5c44044dc65cd33c6cbd48595f688ef9',1,'pu::ui']]]
 ];
