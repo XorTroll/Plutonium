@@ -1,140 +1,82 @@
 #include <pu/ui/elm/elm_Toggle.hpp>
 
-namespace pu::ui::elm
-{
-    Toggle::Toggle(i32 X, i32 Y, String Content, u64 Key, Color Color) : Element::Element()
-    {
-        this->x = X;
-        this->y = Y;
-        this->key = Key;
-        this->cnt = Content;
-        this->clr = Color;
-        this->fnt_name = "DefaultFont@25";
-        this->fsize = 25;
-        this->togfact = 255;
+namespace pu::ui::elm {
+
+    Toggle::Toggle(const i32 x, const i32 y, const std::string &content, const u64 toggle_key, const Color clr) : Element::Element() {
+        this->x = x;
+        this->y = y;
+        this->key = toggle_key;
+        this->clr = clr;
+        this->cnt_tex = nullptr;
+        this->fnt_name = GetDefaultFont(DefaultFontSize::MediumLarge);
+        this->toggle_alpha = 0xFF;
         this->checked = false;
-        this->ntex = render::RenderText(this->fnt_name, Content, Color);
+        this->SetContent(content);
     }
 
-    Toggle::~Toggle()
-    {
-        if(this->ntex != nullptr)
-        {
-            render::DeleteTexture(this->ntex);
-            this->ntex = nullptr;
-        }
+    Toggle::~Toggle() {
+        render::DeleteTexture(this->cnt_tex);
     }
 
-    i32 Toggle::GetX()
-    {
-        return this->x;
+    i32 Toggle::GetWidth() {
+        return render::GetTextureWidth(this->cnt_tex) + 2 * ContentHorizontalMargin;
     }
 
-    void Toggle::SetX(i32 X)
-    {
-        this->x = X;
+    i32 Toggle::GetHeight() {
+        return render::GetTextureHeight(this->cnt_tex) + 2 * ContentVerticalMargin;
     }
 
-    i32 Toggle::GetY()
-    {
-        return this->y;
+    void Toggle::SetContent(const std::string &content) {
+        this->cnt = content;
+        render::DeleteTexture(this->cnt_tex);
+        this->cnt_tex = render::RenderText(this->fnt_name, content, this->clr);
     }
 
-    void Toggle::SetY(i32 Y)
-    {
-        this->y = Y;
-    }
-
-    i32 Toggle::GetWidth()
-    {
-        return 0;
-    }
-
-    i32 Toggle::GetHeight()
-    {
-        return 0;
-    }
-
-    String Toggle::GetContent()
-    {
-        return this->cnt;
-    }
-
-    void Toggle::SetContent(String Content)
-    {
-        this->cnt = Content;
-        render::DeleteTexture(this->ntex);
-        this->ntex = render::RenderText(this->fnt_name, Content, this->clr);
-    }
-
-    void Toggle::SetFont(String font_name)
-    {
+    void Toggle::SetFont(const std::string &font_name) {
         this->fnt_name = font_name;
-        this->ntex = render::RenderText(this->fnt_name, this->cnt, this->clr);
+        this->SetContent(this->cnt);
     }
 
-    Color Toggle::GetColor()
-    {
-        return this->clr;
+    void Toggle::SetColor(const Color clr) {
+        this->clr = clr;
+        this->SetContent(this->cnt);
     }
 
-    void Toggle::SetColor(Color Color)
-    {
-        this->clr = Color;
-        render::DeleteTexture(this->ntex);
-        this->ntex = render::RenderText(this->fnt_name, this->cnt, Color);
-    }
-
-    u64 Toggle::GetKey()
-    {
-        return this->key;
-    }
-
-    void Toggle::SetKey(u64 Key)
-    {
-        this->key = Key;
-    }
-
-    bool Toggle::IsChecked()
-    {
-        return this->checked;
-    }
-
-    void Toggle::OnRender(render::Renderer::Ref &Drawer, i32 X, i32 Y)
-    {
-        i32 tw = render::GetTextWidth(this->fnt_name, this->cnt);
-        i32 th = render::GetTextHeight(this->fnt_name, this->cnt);
-        i32 rw = th;
-        i32 rh = (2 * th);
-        i32 rx = X;
-        i32 ry = Y;
-        i32 tx = rx + rw + (th / 2);
-        i32 ty = ry + (th / 2);
-        if(this->checked)
-        {
-            Drawer->RenderRectangleFill({ 130, 130, 130, 255 }, rx, ry, rw, rh);
-            if(this->togfact < 255)
-            {
-                Drawer->RenderRectangleFill({ this->clr.R, this->clr.G, this->clr.B, (255 - this->togfact) }, rx, ry, rw, rh);
-                this->togfact += 48;
+    void Toggle::OnRender(render::Renderer::Ref &drawer, const i32 x, const i32 y) {
+        const auto cnt_width = render::GetTextureWidth(this->cnt_tex);
+        const auto cnt_height = render::GetTextureHeight(this->cnt_tex);
+        const auto bg_width = this->GetWidth();
+        const auto bg_height = this->GetHeight();
+        const auto cnt_x = x + ContentHorizontalMargin;
+        const auto cnt_y = y + ContentVerticalMargin;
+        if(this->checked) {
+            drawer->RenderRectangleFill(MakeBackgroundColor(0xFF), x, y, bg_width, bg_height);
+            if(this->toggle_alpha < 0xFF) {
+                drawer->RenderRectangleFill(MakeBackgroundColor(0xFF - this->toggle_alpha), x, y, bg_width, bg_height);
+                this->toggle_alpha += ToggleAlphaIncrement;
             }
-            else Drawer->RenderRectangleFill({ 130, 130, 130, 255 }, rx, ry, rw, rh);
-        }
-        else
-        {
-            Drawer->RenderRectangleFill(this->clr, rx, ry, rw, rh);
-            if(this->togfact > 0)
-            {
-                Drawer->RenderRectangleFill({ 130, 130, 130, this->togfact }, rx, ry, rw, rh);
-                this->togfact -= 48;
+            else {
+                drawer->RenderRectangleFill(MakeBackgroundColor(0xFF), x, y, bg_width, bg_height);
             }
-            else Drawer->RenderRectangleFill(this->clr, rx, ry, rw, rh);
         }
-        Drawer->RenderTexture(this->ntex, tx, ty);
+        else {
+            drawer->RenderRectangleFill(this->clr, x, y, bg_width, bg_height);
+            if(this->toggle_alpha > 0)
+            {
+                drawer->RenderRectangleFill(MakeBackgroundColor(this->toggle_alpha), x, y, bg_width, bg_height);
+                this->toggle_alpha -= ToggleAlphaIncrement;
+            }
+            else {
+                drawer->RenderRectangleFill(this->clr, x, y, bg_width, bg_height);
+            }
+        }
+        drawer->RenderTexture(this->cnt_tex, cnt_x, cnt_y);
     }
 
-    void Toggle::OnInput(u64 Down, u64 Up, u64 Held, Touch Pos)
-    {
-        if((Down & this->key) || ((this->key == TouchPseudoKey) && !Pos.IsEmpty())) this->checked = !this->checked;
+    void Toggle::OnInput(const u64 keys_down, const u64 keys_up, const u64 keys_held, const TouchPoint touch_pos) {
+        if((keys_down & this->key) || ((this->key == TouchPseudoKey) && touch_pos.HitsRegion(this->x, this->y, this->GetWidth(), this->GetHeight()))) {
+            this->checked = !this->checked;
+        }
     }
+
 }

@@ -31,7 +31,7 @@
 #include FT_GLYPH_H
 #include FT_TRUETYPE_IDS_H
 
-#include <pu/sdl2/ttf_SDL_ttf.h>
+#include <pu/sdl2/sdl2_CustomTtf.h>
 
 /* FIXME: Right now we assume the gray-scale renderer Freetype is using
    supports 256 shades of gray, but we should instead key off of num_grays

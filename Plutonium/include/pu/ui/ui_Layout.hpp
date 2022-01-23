@@ -15,33 +15,68 @@
 #include <pu/ui/ui_Container.hpp>
 #include <functional>
 
-namespace pu::ui
-{
-    class Layout : public Container
-    {
+namespace pu::ui {
+
+    class Layout : public Container {
         public:
-            Layout();
+            using OnInputCallback = std::function<void(const u64, const u64, const u64, const TouchPoint)>;
+            using RenderCallback = std::function<void()>;
+
+            static constexpr Color DefaultBackgroundColor = { 0xE1, 0xE1, 0xE1, 0xFF };
+
+        private:
+            bool has_image;
+            Color over_bg_color;
+            TouchPoint sim_touch_pos;
+            sdl2::Texture over_bg_tex;
+            OnInputCallback on_ipt;
+            std::vector<RenderCallback> render_cbs;
+
+        public:
+            Layout() : Container(0, 0, render::ScreenWidth, render::ScreenHeight), has_image(false), over_bg_color(DefaultBackgroundColor), sim_touch_pos(), over_bg_tex(), on_ipt(), render_cbs() {}
             PU_SMART_CTOR(Layout)
             ~Layout();
 
-            bool HasChilds();
-            void SetOnInput(std::function<void(u64 Down, u64 Up, u64 Held, Touch Pos)> Callback);
-            std::function<void(u64 Down, u64 Up, u64 Held, Touch Pos)> GetOnInput();
-            void AddThread(std::function<void()> Callback);
-            std::vector<std::function<void()>> GetAllThreads();
-            void SetBackgroundImage(std::string Path);
-            void SetBackgroundColor(Color Color);
-            void SimulateTouch(Touch Custom);
-            Touch GetSimulatedTouch();
-            sdl2::Texture GetBackgroundImageTexture();
-            Color GetBackgroundColor();
-            bool HasBackgroundImage();
-        private:
-            bool hasimage;
-            Color overbgcolor;
-            Touch simtouch;
-            sdl2::Texture overbgtex;
-            std::function<void(u64, u64, u64, Touch)> onipt;
-            std::vector<std::function<void()>> thds;
+            inline bool HasChildren() {
+                return !this->elems.empty();
+            }
+
+            inline void SetOnInput(OnInputCallback on_ipt_cb) {
+                this->on_ipt = on_ipt_cb;
+            }
+
+            inline OnInputCallback GetOnInput() {
+                return this->on_ipt;
+            }
+
+            inline void AddRenderCallback(RenderCallback render_cb) {
+                this->render_cbs.push_back(render_cb);
+            }
+
+            inline std::vector<RenderCallback> &GetRenderCallbacks() {
+                return this->render_cbs;
+            }
+
+            inline bool HasBackgroundImage() {
+                return this->has_image;
+            }
+            
+            inline sdl2::Texture GetBackgroundImageTexture() {
+                return this->over_bg_tex;
+            }
+
+            inline Color GetBackgroundColor() {
+                return this->over_bg_color;
+            }
+
+            void SetBackgroundImage(const std::string &path);
+            void SetBackgroundColor(const Color clr);
+            
+            inline void SimulateTouchPosition(const TouchPoint sim_touch_pos) {
+                this->sim_touch_pos = sim_touch_pos;
+            }
+            
+            TouchPoint ConsumeSimulatedTouchPosition();
     };
+
 }

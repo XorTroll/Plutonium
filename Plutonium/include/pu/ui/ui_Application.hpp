@@ -12,34 +12,48 @@
 */
 
 #pragma once
-#include <vector>
-#include <functional>
-#include <chrono>
 #include <pu/ui/ui_Dialog.hpp>
 #include <pu/ui/ui_Layout.hpp>
 #include <pu/ui/ui_Overlay.hpp>
+#include <chrono>
 
-namespace pu::ui
-{
-    class Application
-    {
+namespace pu::ui {
+
+    class Application {
         public:
-            Application(render::Renderer::Ref Renderer);
+            using OnInputCallback = std::function<void(const u64, const u64, const u64, const TouchPoint)>;
+            using RenderCallback = std::function<void()>;
+            using RenderOverFunction = std::function<bool(render::Renderer::Ref&)>;
+
+            static constexpr u8 DefaultFadeAlphaIncrement = 35;
+
+        protected:
+            bool loaded;
+            bool in_render_over;
+            RenderOverFunction render_over_fn;
+            bool is_shown;
+            u8 fade_alpha_increment;
+            i32 fade_alpha;
+            Layout::Ref lyt;
+            Overlay::Ref ovl;
+            u64 ovl_timeout_ms;
+            std::chrono::steady_clock::time_point ovl_start_time;
+            std::vector<RenderCallback> render_cbs;
+            OnInputCallback on_ipt_cb;
+            render::Renderer::Ref renderer;
+            PadState input_pad;
+        
+        public:
+            Application(render::Renderer::Ref renderer);
             PU_SMART_CTOR(Application)
 
-            template<typename L>
-            inline void LoadLayout(std::shared_ptr<L> Layout)
-            {
-                static_assert(std::is_base_of_v<ui::Layout, L>);
-
-                this->lyt = std::static_pointer_cast<ui::Layout>(Layout);
+            inline void LoadLayout(Layout::Ref lyt) {
+                this->lyt = lyt;
             }
 
             template<typename L>
-            inline std::shared_ptr<L> GetLayout()
-            {
+            inline std::shared_ptr<L> GetLayout() {
                 static_assert(std::is_base_of_v<ui::Layout, L>);
-
                 return std::static_pointer_cast<L>(this->lyt);
             }
 
@@ -48,48 +62,62 @@ namespace pu::ui
             // Force create a derived Application class which initializes everything here
             virtual void OnLoad() = 0;
 
-            void AddThread(std::function<void()> Callback);
-            void SetOnInput(std::function<void(u64 Down, u64 Up, u64 Held, Touch Pos)> Callback);
-            i32 ShowDialog(Dialog::Ref &ToShow);
-            int CreateShowDialog(String Title, String Content, std::vector<String> Options, bool UseLastOptionAsCancel, std::string Icon = "");
-            
-            template<typename O>
-            inline void StartOverlay(std::shared_ptr<O> Overlay)
-            {
-                static_assert(std::is_base_of_v<ui::Overlay, O>);
-
-                if(this->ovl == nullptr) this->ovl = std::dynamic_pointer_cast<ui::Overlay>(Overlay);
+            inline void AddRenderCallback(RenderCallback render_cb) {
+                this->render_cbs.push_back(render_cb);
             }
 
-            template<typename O>
-            inline void StartOverlayWithTimeout(std::shared_ptr<O> Overlay, u64 Milli)
-            {
-                static_assert(std::is_base_of_v<ui::Overlay, O>);
+            inline void SetOnInput(OnInputCallback on_ipt_cb) {
+                this->on_ipt_cb = on_ipt_cb;
+            }
 
-                if(this->ovl == nullptr)
-                {
-                    this->ovl = std::dynamic_pointer_cast<ui::Overlay>(Overlay);
-                    this->tmillis = Milli;
-                    this->tclock = std::chrono::steady_clock::now();
+            inline i32 ShowDialog(Dialog::Ref &dialog) {
+                return dialog->Show(this);
+            }
+
+            i32 CreateShowDialog(const std::string &title, const std::string &content, const std::vector<std::string> &opts, const bool use_last_opt_as_cancel, const std::string &icon_path = "");
+            
+            inline void StartOverlay(Overlay::Ref ovl) {
+                if(this->ovl == nullptr) {
+                    this->ovl = ovl;
                 }
             }
 
+            void StartOverlayWithTimeout(Overlay::Ref ovl, const u64 ms);
             void EndOverlay();
             void Show();
-            void ShowWithFadeIn();
-            bool IsShown();
+            
+            inline void ShowWithFadeIn() {
+                this->FadeIn();
+                this->Show();
+            }
+            
+            inline bool IsShown() {
+                return this->is_shown;
+            }
+
+            inline bool CanBeShown() {
+                return this->loaded && (this->lyt != nullptr);
+            }
+            
             bool CallForRender();
-            bool CallForRenderWithRenderOver(std::function<bool(render::Renderer::Ref&)> RenderFunc);
+            bool CallForRenderWithRenderOver(RenderOverFunction render_over_fn);
             void FadeIn();
             void FadeOut();
-            bool IsFadedIn();
-            void SetFadeAlphaAmountPerFrame(u8 Alpha);
+            
+            inline bool IsFadedIn() {
+                return this->fade_alpha > 0;
+            }
+            
+            inline void SetFadeAlphaIncrement(const u8 fade_alpha_increment) {
+                this->fade_alpha_increment = fade_alpha_increment;
+            }
+            
             void OnRender();
             void Close();
-            void CloseWithFadeOut();
-
-            inline void UpdateButtons() {
-                padUpdate(&this->input_pad);
+            
+            inline void CloseWithFadeOut() {
+                this->FadeOut();
+                this->Close();
             }
 
             inline u64 GetButtonsDown() {
@@ -109,24 +137,6 @@ namespace pu::ui
                 hidGetTouchScreenStates(&state, 1);
                 return state;
             }
-
-        protected:
-            bool loaded;
-            bool rover;
-            std::function<bool(render::Renderer::Ref&)> rof;
-            bool show;
-            u8 aapf;
-            i32 fadea;
-            bool closefact;
-            Layout::Ref lyt;
-            u64 tmillis;
-            std::chrono::steady_clock::time_point tclock;
-            bool fovl;
-            bool ffovl;
-            Overlay::Ref ovl;
-            std::vector<std::function<void()>> thds;
-            std::function<void(u64, u64, u64, Touch)> cbipt;
-            render::Renderer::Ref rend;
-            PadState input_pad;
     };
+
 }

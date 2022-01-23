@@ -1,70 +1,58 @@
 #include <pu/audio/audio_Music.hpp>
 
-namespace pu::audio
-{
-    Music Open(std::string Path)
-    {
-        return Mix_LoadMUS(Path.c_str());
+namespace pu::audio {
+
+    Music OpenMusic(const std::string &path) {
+        return Mix_LoadMUS(path.c_str());
     }
 
-    void Play(Music Mus, int Loops)
-    {
-        Mix_PlayMusic(Mus, Loops);
+    void PlayMusic(Music mus, const i32 loops) {
+        Mix_PlayMusic(mus, loops);
     }
 
-    void PlayWithFadeIn(Music Mus, int Loops, int Milli)
-    {
-        Mix_FadeInMusic(Mus, Loops, Milli);
+    void PlayMusicWithFadeIn(Music mus, const i32 loops, const i32 ms) {
+        Mix_FadeInMusic(mus, loops, ms);
     }
 
-    bool IsPlaying()
-    {
+    bool IsPlayingMusic() {
         return Mix_PlayingMusic();
     }
 
-    void Pause()
-    {
+    void PauseMusic() {
         Mix_PauseMusic();
     }
 
-    void Resume()
-    {
+    void ResumeMusic() {
         Mix_ResumeMusic();   
     }
 
-    void SetVolume(int Volume)
-    {
-        Mix_VolumeMusic(Volume);
+    void SetMusicVolume(const i32 vol) {
+        Mix_VolumeMusic(vol);
     }
 
-    int GetVolume()
-    {
+    i32 GetMusicVolume() {
         return Mix_VolumeMusic(-1);
     }
 
-    void FadeOut(int Milli)
-    {
-        Mix_FadeOutMusic(Milli);
+    void FadeOutMusic(const i32 ms) {
+        Mix_FadeOutMusic(ms);
     }
 
-    void Rewind()
-    {
+    void RewindMusic() {
         Mix_RewindMusic();
     }
 
-    void Stop()
-    {
+    void StopMusic() {
         Mix_HaltMusic();
     }
 
-    void SetPosition(double Sec)
-    {
-        Mix_SetMusicPosition(Sec);
+    void SetMusicPosition(const double sec) {
+        Mix_SetMusicPosition(sec);
     }
 
-    void Delete(Music Mus)
-    {
-        Mix_FreeMusic(Mus);
-        Mus = nullptr;
+    void DestroyMusic(Music &mus) {
+        Mix_FreeMusic(mus);
+        mus = nullptr;
     }
+
 }

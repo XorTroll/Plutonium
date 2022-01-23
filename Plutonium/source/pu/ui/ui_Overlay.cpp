@@ -1,69 +1,46 @@
 #include <pu/ui/ui_Overlay.hpp>
-#include <pu/ui/ui_Application.hpp>
-#include <cmath>
 
-namespace pu::ui
-{
-    Overlay::Overlay(i32 X, i32 Y, i32 Width, i32 Height, Color Background, bool Rounded) : Container(X, Y, Width, Height)
-    {
-        this->bg = Background;
-        this->round = Rounded;
-        this->rad = 25;
-        this->fadea = 0;
-        this->end = false;
-    }
+namespace pu::ui {
 
-    void Overlay::SetRadius(i32 Radius)
-    {
-        this->rad = Radius;
-    }
+    bool Overlay::Render(render::Renderer::Ref &drawer) {
+        this->OnPreRender(drawer);
+        drawer->SetBaseRenderAlpha(static_cast<u8>(this->fade_a));
+        if(this->round) {
+            drawer->RenderRoundedRectangleFill(this->bg_clr, this->x, this->y, this->w, this->h, this->rad);
+        }
+        else {
+            drawer->RenderRectangleFill(this->bg_clr, this->x, this->y, this->w, this->h);
+        }
 
-    i32 Overlay::GetRadius()
-    {
-        return this->rad;
-    }
-
-    void Overlay::OnPreRender(render::Renderer::Ref &Drawer)
-    {
-    }
-
-    void Overlay::OnPostRender(render::Renderer::Ref &Drawer)
-    {
-    }
-
-    bool Overlay::Render(render::Renderer::Ref &Drawer)
-    {
-        this->OnPreRender(Drawer);
-        Drawer->SetBaseRenderAlpha(this->fadea);
-        if(this->round) Drawer->RenderRoundedRectangleFill(this->bg, this->x, this->y, this->w, this->h, this->rad);
-        else Drawer->RenderRectangleFill(this->bg, this->x, this->y, this->w, this->h);
         this->PreRender();
-        for(auto &elm: this->elms)
-        {
-            if(elm->IsVisible()) elm->OnRender(Drawer, elm->GetProcessedX(), elm->GetProcessedY());
+        for(auto &elem: this->elems) {
+            if(elem->IsVisible()) {
+                elem->OnRender(drawer, elem->GetProcessedX(), elem->GetProcessedY());
+            }
         }
-        Drawer->UnsetBaseRenderAlpha();
-        if(this->end)
-        {
-            if(this->fadea > 0) this->fadea -= 25;
-            else this->fadea = 0;
+        drawer->ResetBaseRenderAlpha();
+        if(this->is_ending) {
+            if(this->fade_a > 0) {
+                this->fade_a -= FadeAlphaVariation;
+            }
+            else {
+                this->fade_a = 0;
+            }
         }
-        else
-        {
-            if(this->fadea < 200) this->fadea += 25;
-            if(this->fadea > 200) this->fadea = 200;
+        else {
+            if(this->fade_a < MaxFadeAlpha) {
+                this->fade_a += FadeAlphaVariation;
+            }
+            else {
+                this->fade_a = MaxFadeAlpha;
+            }
         }
-        this->OnPostRender(Drawer);
-        bool fin = (this->end && (this->fadea == 0));
-        if(fin)
-        {
-            this->end = false;
+        this->OnPostRender(drawer);
+        const auto is_finished = this->is_ending && (this->fade_a == 0);
+        if(is_finished) {
+            this->is_ending = false;
         }
-        return !fin;
+        return !is_finished;
     }
 
-    void Overlay::NotifyEnding(bool End)
-    {
-        this->end = End;
-    }
 }

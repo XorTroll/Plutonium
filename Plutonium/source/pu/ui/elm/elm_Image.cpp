@@ -1,107 +1,34 @@
 #include <pu/ui/elm/elm_Image.hpp>
+#include <sys/stat.h>
 
-namespace pu::ui::elm
-{
-    Image::Image(i32 X, i32 Y, String Image) : Element::Element()
-    {
-        this->x = X;
-        this->y = Y;
-        this->ntex = nullptr;
-        this->rendopts = render::TextureRenderOptions::Default;
-        this->SetImage(Image);
+namespace pu::ui::elm {
+
+    Image::Image(const i32 x, const i32 y, const std::string &image_path) : Element::Element() {
+        this->x = x;
+        this->y = y;
+        this->img_tex = nullptr;
+        this->rend_opts = render::TextureRenderOptions::Default;
+        this->SetImage(image_path);
     }
 
-    Image::~Image()
-    {
-        if(this->ntex != nullptr)
-        {
-            render::DeleteTexture(this->ntex);
-            this->ntex = nullptr;
+    Image::~Image() {
+        render::DeleteTexture(this->img_tex);
+    }
+
+    void Image::SetImage(const std::string &image_path) {
+        render::DeleteTexture(this->img_tex);
+
+        struct stat st;
+        if(stat(image_path.c_str(), &st) == 0) {
+            this->img_path = image_path;
+            this->img_tex = render::LoadImage(image_path);
+            this->rend_opts.width = render::GetTextureWidth(this->img_tex);
+            this->rend_opts.height = render::GetTextureHeight(this->img_tex);
         }
     }
 
-    i32 Image::GetX()
-    {
-        return this->x;
+    void Image::OnRender(render::Renderer::Ref &drawer, const i32 x, const i32 y) {
+        drawer->RenderTexture(this->img_tex, x, y, this->rend_opts);
     }
 
-    void Image::SetX(i32 X)
-    {
-        this->x = X;
-    }
-
-    i32 Image::GetY()
-    {
-        return this->y;
-    }
-
-    void Image::SetY(i32 Y)
-    {
-        this->y = Y;
-    }
-
-    i32 Image::GetWidth()
-    {
-        return this->rendopts.Width;
-    }
-
-    void Image::SetWidth(i32 Width)
-    {
-        this->rendopts.Width = Width;
-    }
-
-    i32 Image::GetHeight()
-    {
-        return this->rendopts.Height;
-    }
-
-    void Image::SetHeight(i32 Height)
-    {
-        this->rendopts.Height = Height;
-    }
-
-    float Image::GetRotation()
-    {
-        return this->rendopts.Angle;
-    }
-
-    void Image::SetRotation(float Angle)
-    {
-        this->rendopts.Angle = Angle;
-    }
-
-    String Image::GetImage()
-    {
-        return this->img;
-    }
-
-    void Image::SetImage(String Image)
-    {
-        if(this->ntex != nullptr) render::DeleteTexture(this->ntex);
-        this->ntex = nullptr;
-        std::ifstream ifs(Image.AsUTF8());
-        bool ok = ifs.good();
-        ifs.close();
-        if(ok)    
-        {
-            this->img = Image;
-            this->ntex = render::LoadImage(Image.AsUTF8());
-            this->rendopts.Width = render::GetTextureWidth(this->ntex);
-            this->rendopts.Height = render::GetTextureHeight(this->ntex);
-        }
-    }
-
-    bool Image::IsImageValid()
-    {
-        return ((ntex != nullptr) && this->img.HasAny());
-    }
-
-    void Image::OnRender(render::Renderer::Ref &Drawer, i32 X, i32 Y)
-    {
-        Drawer->RenderTexture(this->ntex, X, Y, this->rendopts);
-    }
-
-    void Image::OnInput(u64 Down, u64 Up, u64 Held, Touch Pos)
-    {
-    }
 }

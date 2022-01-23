@@ -12,55 +12,77 @@
 */
 
 #pragma once
-#include <pu/pu_Macros.hpp>
 #include <pu/ui/render/render_Renderer.hpp>
 
-namespace pu::ui::elm
-{
-    enum class HorizontalAlign
-    {
+namespace pu::ui {
+
+    class Container;
+
+}
+
+namespace pu::ui::elm {
+
+    enum class HorizontalAlign {
         Left,
         Center,
-        Right,
+        Right
     };
 
-    enum class VerticalAlign
-    {
+    enum class VerticalAlign {
         Up,
         Center,
-        Down,
+        Down
     };
 
-    class Element
-    {
-        public:
-            Element();
-            PU_SMART_CTOR(Element)
-            virtual ~Element();
+    class Element {
+        protected:
+            bool visible;
+            HorizontalAlign h_align;
+            VerticalAlign v_align;
+            Container *parent_container;
 
-            // In order to make custom UI Elements, need to implement this functions
+        public:
+            Element() : visible(true), h_align(HorizontalAlign::Left), v_align(VerticalAlign::Up), parent_container(nullptr) {}
+            PU_SMART_CTOR(Element)
+            virtual ~Element() {}
+
             virtual i32 GetX() = 0;
             virtual i32 GetY() = 0;
             virtual i32 GetWidth() = 0;
             virtual i32 GetHeight() = 0;
-            virtual void OnRender(render::Renderer::Ref &Drawer, i32 X, i32 Y) = 0;
-            virtual void OnInput(u64 Down, u64 Up, u64 Held, Touch Pos) = 0;
+            virtual void OnRender(render::Renderer::Ref &drawer, const i32 x, const i32 y) = 0;
+            virtual void OnInput(const u64 keys_down, const u64 keys_up, const u64 keys_held, const TouchPoint touch_pos) = 0;
 
-            bool IsVisible();
-            void SetVisible(bool Visible);
-            void SetParent(void *Base);
-            void *GetParent();
-            void SetHorizontalAlign(HorizontalAlign Align);
-            HorizontalAlign GetHorizontalAlign();
-            void SetVerticalAlign(VerticalAlign Align);
-            VerticalAlign GetVerticalAlign();
-            bool HasParent();
+            inline bool IsVisible() {
+                return this->visible;
+            }
+
+            inline void SetVisible(const bool visible) {
+                this->visible = visible;
+            }
+
+            inline void SetHorizontalAlign(const HorizontalAlign align) {
+                this->h_align = align;
+            }
+
+            inline HorizontalAlign GetHorizontalAlign() {
+                return this->h_align;
+            }
+
+            inline void SetVerticalAlign(const VerticalAlign align) {
+                this->v_align = align;
+            }
+
+            inline VerticalAlign GetVerticalAlign() {
+                return this->v_align;
+            }
+
+            inline void SetParentContainer(Container *parent_container) {
+                this->parent_container = parent_container;
+            }
+            
             i32 GetProcessedX();
             i32 GetProcessedY();
-        protected:
-            bool visible;
-            HorizontalAlign halign;
-            VerticalAlign valign;
-            void *parent;
     };
+
 }

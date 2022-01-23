@@ -1,20 +1,18 @@
 #include <pu/audio/audio_Sfx.hpp>
 
-namespace pu::audio
-{
-    Sfx Load(std::string Path)
-    {
-        return Mix_LoadWAV(Path.c_str());
+namespace pu::audio {
+
+    Sfx LoadSfx(const std::string &path) {
+        return Mix_LoadWAV(path.c_str());
     }
 
-    void Play(Sfx Sfx)
-    {
-        Mix_PlayChannel(-1, Sfx, 0);
+    void PlaySfx(Sfx sfx) {
+        Mix_PlayChannel(-1, sfx, 0);
     }
 
-    void DeleteSfx(Sfx Sfx)
-    {
-        Mix_FreeChunk(Sfx);
-        Sfx = nullptr;
+    void DestroySfx(Sfx &sfx) {
+        Mix_FreeChunk(sfx);
+        sfx = nullptr;
     }
+
 }

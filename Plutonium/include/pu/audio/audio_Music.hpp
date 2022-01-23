@@ -13,23 +13,24 @@
 
 #pragma once
 #include <SDL2/SDL_mixer.h>
-#include <string>
+#include <pu/pu_Include.hpp>
 
-namespace pu::audio
-{
-    typedef Mix_Music *Music;
+namespace pu::audio {
 
-    Music Open(std::string Path);
-    void Play(Music Mus, int Loops);
-    void PlayWithFadeIn(Music Mus, int Loops, int Milli);
-    bool IsPlaying();
-    void Pause();
-    void Resume();
-    void SetVolume(int Volume);
-    int GetVolume();
-    void FadeOut(int Milli);
-    void Rewind();
-    void Stop();
-    void SetPosition(double Sec);
-    void Delete(Music Mus);
+    using Music = Mix_Music*;
+
+    Music OpenMusic(const std::string &path);
+    void PlayMusic(Music mus, const int loops);
+    void PlayMusicWithFadeIn(Music mus, const i32 llops, const i32 ms);
+    bool IsPlayingMusic();
+    void PauseMusic();
+    void ResumeMusic();
+    void SetMusicVolume(const i32 vol);
+    i32 GetMusicVolume();
+    void FadeOutMusic(const i32 ms);
+    void RewindMusic();
+    void StopMusic();
+    void SetMusicPosition(const double sec);
+    void DestroyMusic(Music &mus);
+
 }

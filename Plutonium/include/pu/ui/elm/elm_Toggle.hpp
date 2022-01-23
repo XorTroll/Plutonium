@@ -12,46 +12,83 @@
 */
 
 #pragma once
-#include <pu/pu_String.hpp>
 #include <pu/ui/elm/elm_Element.hpp>
 
-namespace pu::ui::elm
-{
-    constexpr u64 TouchPseudoKey = HidNpadButton_29;
+namespace pu::ui::elm {
 
-    class Toggle : public Element
-    {
+    class Toggle : public Element {
         public:
-            Toggle(i32 X, i32 Y, String Content, u64 Key, Color Color);
-            PU_SMART_CTOR(Toggle)
-            ~Toggle();
+            static constexpr u32 ContentHorizontalMargin = 30;
+            static constexpr u32 ContentVerticalMargin = 20;
 
-            i32 GetX();
-            void SetX(i32 X);
-            i32 GetY();
-            void SetY(i32 Y);
-            i32 GetWidth();
-            i32 GetHeight();
-            String GetContent();
-            void SetContent(String Content);
-            void SetFont(String font_name);
-            Color GetColor();
-            void SetColor(Color General);
-            u64 GetKey();
-            void SetKey(u64 Key);
-            bool IsChecked();
-            void OnRender(render::Renderer::Ref &Drawer, i32 X, i32 Y);
-            void OnInput(u64 Down, u64 Up, u64 Held, Touch Pos);
+            static constexpr u8 ToggleAlphaIncrement = 48;
+
+            static constexpr Color MakeBackgroundColor(const u8 alpha) {
+                return { 130, 130, 130, alpha };
+            }
+
         private:
-            String cnt;
             i32 x;
             i32 y;
             u64 key;
             bool checked;
             Color clr;
-            String fnt_name;
-            i32 fsize;
-            i32 togfact;
-            sdl2::Texture ntex;
+            std::string fnt_name;
+            i32 toggle_alpha;
+            std::string cnt;
+            sdl2::Texture cnt_tex;
+
+        public:
+            Toggle(const i32 x, const i32 y, const std::string &content, const u64 toggle_key, const Color clr);
+            PU_SMART_CTOR(Toggle)
+            ~Toggle();
+
+            inline i32 GetX() override {
+                return this->x;
+            }
+
+            inline void SetX(const i32 x) {
+                this->x = x;
+            }
+
+            inline i32 GetY() override {
+                return this->y;
+            }
+
+            inline void SetY(const i32 y) {
+                this->y = y;
+            }
+            
+            i32 GetWidth() override;
+            i32 GetHeight() override;
+
+            inline std::string GetContent() {
+                return this->cnt;
+            }
+            
+            void SetContent(const std::string &content);
+            void SetFont(const std::string &font_name);
+            
+            inline Color GetColor() {
+                return this->clr;
+            }
+            
+            void SetColor(const Color clr);
+            
+            inline u64 GetKey() {
+                return this->key;
+            }
+
+            inline void SetKey(const u64 toggle_key) {
+                this->key = toggle_key;
+            }
+            
+            inline bool IsChecked() {
+                return this->checked;
+            }
+
+            void OnRender(render::Renderer::Ref &drawer, const i32 x, const i32 y) override;
+            void OnInput(const u64 keys_down, const u64 keys_up, const u64 keys_held, const TouchPoint touch_pos) override;
     };
+
 }

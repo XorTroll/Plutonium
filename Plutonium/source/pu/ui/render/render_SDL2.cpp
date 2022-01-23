@@ -1,45 +1,56 @@
 #include <pu/ui/render/render_SDL2.hpp>
 #include <pu/ui/render/render_Renderer.hpp>
-#include <utility>
-#include <unordered_map>
 
-namespace pu::ui::render
-{
-    sdl2::Texture ConvertToTexture(sdl2::Surface Surface)
-    {
-        sdl2::Texture tex = SDL_CreateTextureFromSurface(GetMainRenderer(), Surface);
-        SDL_FreeSurface(Surface);
+namespace pu::ui::render {
+
+    sdl2::Texture ConvertToTexture(sdl2::Surface surface) {
+        if(surface == nullptr) {
+            return nullptr;
+        }
+
+        auto tex = SDL_CreateTextureFromSurface(GetMainRenderer(), surface);
+        SDL_FreeSurface(surface);
         return tex;
     }
 
-    sdl2::Texture LoadImage(std::string Path)
-    {
-        return ConvertToTexture(IMG_Load(Path.c_str()));
+    sdl2::Texture LoadImage(const std::string &path) {
+        return ConvertToTexture(IMG_Load(path.c_str()));
     }
 
-    i32 GetTextureWidth(sdl2::Texture Texture)
-    {
-        int w = 0;
-        SDL_QueryTexture(Texture, nullptr, nullptr, &w, nullptr);
-        return (i32)w;
+    i32 GetTextureWidth(sdl2::Texture texture) {
+        if(texture == nullptr) {
+            return 0;
+        }
+
+        i32 w = 0;
+        SDL_QueryTexture(texture, nullptr, nullptr, &w, nullptr);
+        return w;
     }
 
-    i32 GetTextureHeight(sdl2::Texture Texture)
-    {
-        int h = 0;
-        SDL_QueryTexture(Texture, nullptr, nullptr, nullptr, &h);
-        return (i32)h;
+    i32 GetTextureHeight(sdl2::Texture texture) {
+        if(texture == nullptr) {
+            return 0;
+        }
+
+        i32 h = 0;
+        SDL_QueryTexture(texture, nullptr, nullptr, nullptr, &h);
+        return h;
     }
 
-    void SetAlphaValue(sdl2::Texture Texture, u8 Alpha)
-    {
-        SDL_SetTextureBlendMode(Texture, SDL_BLENDMODE_BLEND);
-        SDL_SetTextureAlphaMod(Texture, Alpha);
+    void SetAlphaValue(sdl2::Texture texture, const u8 alpha) {
+        if(texture == nullptr) {
+            return;
+        }
+
+        SDL_SetTextureBlendMode(texture, SDL_BLENDMODE_BLEND);
+        SDL_SetTextureAlphaMod(texture, alpha);
     }
 
-    void DeleteTexture(sdl2::Texture Texture)
-    {
-        SDL_DestroyTexture(Texture);
-        Texture = nullptr;
+    void DeleteTexture(sdl2::Texture &texture) {
+        if(texture != nullptr) {
+            SDL_DestroyTexture(texture);
+            texture = nullptr;
+        }
     }
+
 }

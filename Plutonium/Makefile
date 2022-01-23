@@ -26,10 +26,7 @@ OUT			:=	out
 #---------------------------------------------------------------------------------
 ARCH	:=	-march=armv8-a -mtune=cortex-a57 -mtp=soft -fPIC -ftls-model=local-exec
 
-CFLAGS	:=	-g -w -D__SWITCH__ \
-			-ffunction-sections \
-			-fdata-sections \
-			$(ARCH) \
+CFLAGS	:=	-g -Wall -D__SWITCH__ -ffunction-sections -fdata-sections $(ARCH)
 
 CFLAGS	+=	$(INCLUDE) -I$(PORTLIBS)/include/freetype2 -DPU_MAJOR=$(PU_MAJOR) -DPU_MINOR=$(PU_MINOR) -DPU_MICRO=$(PU_MICRO) -DPU_VERSION=\"$(PU_MAJOR).$(PU_MINOR).$(PU_MICRO)\"
 

@@ -1,104 +1,46 @@
 #include <pu/ui/elm/elm_TextBlock.hpp>
 
-namespace pu::ui::elm
-{
-    TextBlock::TextBlock(i32 X, i32 Y, String Text) : Element::Element()
-    {
-        this->x = X;
-        this->y = Y;
-        this->text = Text;
-        this->fnt_name = "DefaultFont@25";
-        this->ntex = render::RenderText(this->fnt_name, Text, this->clr);
+namespace pu::ui::elm {
+
+    TextBlock::TextBlock(const i32 x, const i32 y, const std::string &text) : Element::Element() {
+        this->x = x;
+        this->y = y;
+        this->clr = DefaultColor;
+        this->text_tex = nullptr;
+        this->fnt_name = GetDefaultFont(DefaultFontSize::MediumLarge);
+        this->SetText(text);
     }
 
-    TextBlock::~TextBlock()
-    {
-        if(this->ntex != nullptr)
-        {
-            render::DeleteTexture(this->ntex);
-            this->ntex = nullptr;
-        }
+    TextBlock::~TextBlock() {
+        render::DeleteTexture(this->text_tex);
     }
 
-    i32 TextBlock::GetX()
-    {
-        return this->x;
+    i32 TextBlock::GetWidth() {
+        return render::GetTextureWidth(this->text_tex);
     }
 
-    void TextBlock::SetX(i32 X)
-    {
-        this->x = X;
+    i32 TextBlock::GetHeight() {
+        return render::GetTextureHeight(this->text_tex);
     }
 
-    i32 TextBlock::GetY()
-    {
-        return this->y;
+    void TextBlock::SetText(const std::string &text) {
+        this->text = text;
+        render::DeleteTexture(this->text_tex);
+        this->text_tex = render::RenderText(this->fnt_name, text, this->clr);
     }
 
-    void TextBlock::SetY(i32 Y)
-    {
-        this->y = Y;
-    }
-
-    i32 TextBlock::GetWidth()
-    {
-        return this->GetTextWidth();
-    }
-
-    i32 TextBlock::GetHeight()
-    {
-        return this->GetTextHeight();
-    }
-
-    i32 TextBlock::GetTextWidth()
-    {
-        return render::GetTextWidth(this->fnt_name, this->text);
-    }
-
-    i32 TextBlock::GetTextHeight()
-    {
-        return render::GetTextHeight(this->fnt_name, this->text);
-    }
-
-    String TextBlock::GetText()
-    {
-        return this->text;
-    }
-
-    void TextBlock::SetText(String Text)
-    {
-        this->text = Text;
-        render::DeleteTexture(this->ntex);
-        this->ntex = render::RenderText(this->fnt_name, Text, this->clr);
-    }
-
-    void TextBlock::SetFont(String font_name)
-    {
+    void TextBlock::SetFont(const std::string &font_name) {
         this->fnt_name = font_name;
-        render::DeleteTexture(this->ntex);
-        this->ntex = render::RenderText(this->fnt_name, this->text, this->clr);
+        this->SetText(this->text);
     }
 
-    Color TextBlock::GetColor()
-    {
-        return this->clr;
+    void TextBlock::SetColor(const Color clr) {
+        this->clr = clr;
+        this->SetText(this->text);
     }
 
-    void TextBlock::SetColor(Color Color)
-    {
-        this->clr = Color;
-        render::DeleteTexture(this->ntex);
-        this->ntex = render::RenderText(this->fnt_name, this->text, Color);
+    void TextBlock::OnRender(render::Renderer::Ref &drawer, const i32 x, const i32 y) {
+        drawer->RenderTexture(this->text_tex, x, y);
     }
 
-    void TextBlock::OnRender(render::Renderer::Ref &Drawer, i32 X, i32 Y)
-    {
-        i32 rdx = X;
-        i32 rdy = Y;
-        Drawer->RenderTexture(this->ntex, rdx, rdy);
-    }
-
-    void TextBlock::OnInput(u64 Down, u64 Up, u64 Held, Touch Pos)
-    {
-    }
 }

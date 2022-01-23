@@ -1,222 +1,212 @@
 #include <pu/ui/ui_Application.hpp>
 
-namespace pu::ui
-{
-    Application::Application(render::Renderer::Ref Renderer)
-    {
-        this->rend = Renderer;
-        this->rend->Initialize();
-        this->show = false;
-        this->cbipt = [&](u64,u64,u64,Touch){};
-        this->rover = false;
+namespace pu::ui {
+
+    Application::Application(render::Renderer::Ref renderer) {
+        this->renderer = renderer;
+        // TODO: do it outside ctor, get result...?
+        this->renderer->Initialize();
+        this->is_shown = false;
+        this->on_ipt_cb = {};
+        this->in_render_over = false;
         this->ovl = nullptr;
-        this->closefact = false;
-        this->fovl = false;
-        this->ffovl = false;
         this->lyt = nullptr;
         this->loaded = false;
-        this->rof = [](render::Renderer::Ref&) -> bool { return true; };
-        this->fadea = 255;
-        this->aapf = 35;
+        this->render_over_fn = {};
+        this->fade_alpha = 0xFF;
+        this->fade_alpha_increment = DefaultFadeAlphaIncrement;
         padConfigureInput(1, HidNpadStyleSet_NpadStandard);
         padInitializeDefault(&this->input_pad);
     }
 
-    void Application::Prepare()
-    {
-        if(!this->loaded)
-        {
+    void Application::Prepare() {
+        if(!this->loaded) {
             this->OnLoad();
             this->loaded = true;
         }
     }
 
-    void Application::AddThread(std::function<void()> Callback)
-    {
-        this->thds.push_back(Callback);
-    }
-
-    void Application::SetOnInput(std::function<void(u64 Down, u64 Up, u64 Held, Touch Pos)> Callback)
-    {
-        this->cbipt = Callback;
-    }
-
-    i32 Application::ShowDialog(Dialog::Ref &ToShow)
-    {
-        return ToShow->Show(this->rend, this);
-    }
-
-    int Application::CreateShowDialog(String Title, String Content, std::vector<String> Options, bool UseLastOptionAsCancel, std::string Icon)
-    {
-        Dialog dlg(Title, Content);
-        for(i32 i = 0; i < Options.size(); i++)
-        {
-            if(UseLastOptionAsCancel && (i == Options.size() - 1)) dlg.SetCancelOption(Options[i]);
-            else dlg.AddOption(Options[i]);
+    i32 Application::CreateShowDialog(const std::string &title, const std::string &content, const std::vector<std::string> &opts, const bool use_last_opt_as_cancel, const std::string &icon_path) {
+        auto dialog = Dialog::New(title, content);
+        for(i32 i = 0; i < opts.size(); i++) {
+            const auto &opt = opts.at(i);
+            if(use_last_opt_as_cancel && (i == (opts.size() - 1))) {
+                dialog->SetCancelOption(opt);
+            }
+            else {
+                dialog->AddOption(opt);
+            }
         }
-        if(!Icon.empty()) dlg.SetIcon(Icon);
-        int opt = dlg.Show(this->rend, this);
-        if(dlg.UserCancelled()) opt = -1;
-        else if(!dlg.IsOk()) opt = -2;
-        return opt;
+
+        if(!icon_path.empty()) {
+            dialog->SetIcon(icon_path);
+        }
+
+        const auto opt = this->ShowDialog(dialog);
+        if(dialog->UserCancelled()) {
+            return -1;
+        }
+        else if(!dialog->IsOk()) {
+            return -2;
+        }
+        else {
+            return opt;
+        }
     }
 
-    void Application::EndOverlay()
-    {
-        if(this->ovl != nullptr)
-        {
+    void Application::StartOverlayWithTimeout(Overlay::Ref ovl, const u64 ms) {
+        if(this->ovl == nullptr) {
+            this->ovl = ovl;
+            this->ovl_timeout_ms = ms;
+            this->ovl_start_time = std::chrono::steady_clock::now();
+        }
+    }
+
+    void Application::EndOverlay() {
+        if(this->ovl != nullptr) {
             this->ovl->NotifyEnding(false);
-            this->tmillis = 0;
+            this->ovl_timeout_ms = 0;
             this->ovl = nullptr;
-            this->fovl = false;
-            this->ffovl = false;
         }
     }
 
-    void Application::Show()
-    {
-        if(!this->loaded) return;
-        if(this->lyt == nullptr) return;
-        this->show = true;
-        while(this->show) this->CallForRender();
+    void Application::Show() {
+        if(!this->CanBeShown()) {
+            return;
+        }
+
+        this->is_shown = true;
+        while(this->is_shown) {
+            this->CallForRender();
+        }
     }
 
-    void Application::ShowWithFadeIn()
-    {
-        this->FadeIn();
-        this->Show();
-    }
+    bool Application::CallForRender() {
+        if(!this->CanBeShown()) {
+            return false;
+        }
 
-    bool Application::IsShown()
-    {
-        return this->show;
-    }
-
-    bool Application::CallForRender()
-    {
-        if(!this->loaded) return false;
-        if(this->lyt == nullptr) return false;
-        bool c = true;
-        this->rend->InitializeRender(this->lyt->GetBackgroundColor());
+        auto continue_render = true;
+        this->renderer->InitializeRender(this->lyt->GetBackgroundColor());
         this->OnRender();
-        if(this->rover)
-        {
-            c = (this->rof)(this->rend);
-            this->rover = false;
-            this->rof = [](render::Renderer::Ref &Drawer) -> bool { return true; };
+        if(this->in_render_over) {
+            continue_render = (this->render_over_fn)(this->renderer);
+            this->in_render_over = false;
+            this->render_over_fn = {};
         }
-        this->rend->FinalizeRender();
-        return c;
+        this->renderer->FinalizeRender();
+        return continue_render;
     }
 
-    bool Application::CallForRenderWithRenderOver(std::function<bool(render::Renderer::Ref &Drawer)> RenderFunc)
-    {
-        this->rover = true;
-        this->rof = RenderFunc;
+    bool Application::CallForRenderWithRenderOver(RenderOverFunction render_over_fn) {
+        this->in_render_over = true;
+        this->render_over_fn = render_over_fn;
         return this->CallForRender();
     }
 
-    void Application::FadeIn()
-    {
-        fadea = 0;
-        while(true)
-        {
-            CallForRender();
-            fadea += aapf;
-            if(fadea > 255)
-            {
-                fadea = 255;
-                CallForRender();
+    void Application::FadeIn() {
+        this->fade_alpha = 0;
+        while(true) {
+            this->CallForRender();
+            this->fade_alpha += this->fade_alpha_increment;
+            if(this->fade_alpha > 0xFF) {
+                this->fade_alpha = 0xFF;
+                this->CallForRender();
                 break;
             }
         }
     }
 
-    void Application::FadeOut()
-    {
-        fadea = 255;
-        while(true)
-        {
-            CallForRender();
-            fadea -= aapf;
-            if(fadea < 0)
-            {
-                fadea = 0;
-                CallForRender();
+    void Application::FadeOut() {
+        this->fade_alpha = 0xFF;
+        while(true) {
+            this->CallForRender();
+            this->fade_alpha -= this->fade_alpha_increment;
+            if(this->fade_alpha < 0) {
+                this->fade_alpha = 0;
+                this->CallForRender();
                 break;
             }
         }
     }
 
-    bool Application::IsFadedIn()
-    {
-        return (fadea > 0);
-    }
-
-    void Application::SetFadeAlphaAmountPerFrame(u8 Alpha)
-    {
-        aapf = Alpha;
-    }
-
-    void Application::OnRender()
-    {
-        this->UpdateButtons();
-        const auto d = this->GetButtonsDown();
-        const auto u = this->GetButtonsUp();
-        const auto h = this->GetButtonsHeld();
+    void Application::OnRender() {
+        padUpdate(&this->input_pad);
+        const auto keys_down = this->GetButtonsDown();
+        const auto keys_up = this->GetButtonsUp();
+        const auto keys_held = this->GetButtonsHeld();
 
         const auto tch_state = this->GetTouchState();
-        auto tch = Touch::Empty;
+        TouchPoint tch_pos = {};
         if(tch_state.count > 0) {
-            tch = {
-                .X = static_cast<i32>(tch_state.touches[0].x),
-                .Y = static_cast<i32>(tch_state.touches[0].y)
-            };
+            tch_pos = { tch_state.touches[0].x, tch_state.touches[0].y };
         }
-        auto simtch = this->lyt->GetSimulatedTouch();
-        if(!simtch.IsEmpty()) {
-            tch = simtch;
+        const auto sim_tch_pos = this->lyt->ConsumeSimulatedTouchPosition();
+        if(!sim_tch_pos.IsEmpty()) {
+            tch_pos = sim_tch_pos;
+        }
+
+        for(auto &render_cb: this->render_cbs) {
+            if(render_cb) {
+                render_cb();
+            }
         }
         
-        if(!this->thds.empty()) for(i32 i = 0; i < this->thds.size(); i++) (this->thds[i])();
         this->lyt->PreRender();
-        auto lyth = this->lyt->GetAllThreads();
-        if(!lyth.empty()) for(i32 i = 0; i < lyth.size(); i++) (lyth[i])();
-        if(!this->rover) (this->cbipt)(d, u, h, tch);
-        if(this->lyt->HasBackgroundImage()) this->rend->RenderTexture(this->lyt->GetBackgroundImageTexture(), 0, 0);
-        if(!this->rover) (this->lyt->GetOnInput())(d, u, h, tch);
-        if(this->lyt->HasChilds()) for(i32 i = 0; i < this->lyt->GetCount(); i++)
-        {
+
+        for(auto &lyt_render_cb: this->lyt->GetRenderCallbacks()) {
+            if(lyt_render_cb) {
+                lyt_render_cb();
+            }
+        }
+
+        if(!this->in_render_over) {
+            if(this->on_ipt_cb) {
+                (this->on_ipt_cb)(keys_down, keys_up, keys_held, tch_pos);
+            }
+        }
+
+        if(this->lyt->HasBackgroundImage()) {
+            this->renderer->RenderTexture(this->lyt->GetBackgroundImageTexture(), 0, 0);
+        }
+
+        if(!this->in_render_over) {
+            auto lyt_on_ipt_cb = this->lyt->GetOnInput();
+            if(lyt_on_ipt_cb) {
+                lyt_on_ipt_cb(keys_down, keys_up, keys_held, tch_pos);
+            }
+        }
+
+        for(i32 i = 0; i < this->lyt->GetCount(); i++) {
             auto elm = this->lyt->At(i);
-            if(elm->IsVisible())
-            {
-                elm->OnRender(this->rend, elm->GetProcessedX(), elm->GetProcessedY());
-                if(!this->rover) elm->OnInput(d, u, h, tch);
+            if(elm->IsVisible()) {
+                elm->OnRender(this->renderer, elm->GetProcessedX(), elm->GetProcessedY());
+                if(!this->in_render_over) {
+                    elm->OnInput(keys_down, keys_up, keys_held, tch_pos);
+                }
             }
         }
-        if(this->ovl != nullptr)
-        {
-            bool rok = this->ovl->Render(this->rend);
-            if(this->tmillis > 0)
-            {
-                auto nclk = std::chrono::steady_clock::now();
-                u64 cctime = std::chrono::duration_cast<std::chrono::milliseconds>(nclk - this->tclock).count();
-                if(cctime >= this->tmillis) this->ovl->NotifyEnding(true);
+
+        if(this->ovl != nullptr) {
+            const auto ovl_continue_render = this->ovl->Render(this->renderer);
+            if(this->ovl_timeout_ms > 0) {
+                const auto time_now = std::chrono::steady_clock::now();
+                const auto elapsed_time_ms = std::chrono::duration_cast<std::chrono::milliseconds>(time_now - this->ovl_start_time).count();
+                if(elapsed_time_ms >= this->ovl_timeout_ms) {
+                    this->ovl->NotifyEnding(true);
+                }
             }
-            if(!rok) this->EndOverlay();
+            if(!ovl_continue_render) {
+                this->EndOverlay();
+            }
         }
-        this->rend->RenderRectangleFill({ 0, 0, 0, 255 - (u8)fadea }, 0, 0, 1280, 720);
+
+        this->renderer->RenderRectangleFill({ 0, 0, 0, 0xFF - static_cast<u8>(this->fade_alpha) }, 0, 0, render::ScreenWidth, render::ScreenHeight);
     }
 
-    void Application::Close()
-    {
-        this->show = false;
-        this->rend->Finalize();
+    void Application::Close() {
+        this->is_shown = false;
+        this->renderer->Finalize();
     }
 
-    void Application::CloseWithFadeOut()
-    {
-        this->FadeOut();
-        this->Close();
-    }
 }

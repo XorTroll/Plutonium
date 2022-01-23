@@ -14,41 +14,75 @@
 #pragma once
 #include <pu/ui/elm/elm_Element.hpp>
 #include <vector>
+#include <bits/stdc++.h>
 
-namespace pu::ui
-{
-    class Container
-    {
-        public:
-            Container(i32 X, i32 Y, i32 Width, i32 Height);
-            PU_SMART_CTOR(Container)
+namespace pu::ui {
 
-            template<typename Elem>
-            void Add(std::shared_ptr<Elem> Elm)
-            {
-                static_assert(std::is_base_of<elm::Element, Elem>::value, "Elements must inherit from pu::ui::elm::Element!");
-
-                elms.push_back(std::dynamic_pointer_cast<elm::Element>(Elm));
-            }
-
-            elm::Element::Ref &At(i32 Index);
-            bool Has(elm::Element::Ref &Elm);
-            void Clear();
-            i32 GetCount();
-            void SetX(i32 X);
-            i32 GetX();
-            void SetY(i32 Y);
-            i32 GetY();
-            void SetWidth(i32 Width);
-            i32 GetWidth();
-            void SetHeight(i32 Height);
-            i32 GetHeight();
-            void PreRender();
+    class Container {
         protected:
             i32 x;
             i32 y;
             i32 w;
             i32 h;
-            std::vector<elm::Element::Ref> elms;
+            std::vector<elm::Element::Ref> elems;
+
+        public:
+            Container(const i32 x, const i32 y, const i32 width, const i32 height) : x(x), y(y), w(width), h(height), elems() {}
+            PU_SMART_CTOR(Container)
+
+            inline void Add(elm::Element::Ref elem) {
+                this->elems.push_back(elem);
+            }
+
+            inline elm::Element::Ref &At(const i32 idx) {
+                return this->elems.at(idx);
+            }
+
+            inline bool Has(elm::Element::Ref &elem) {
+                return std::find(this->elems.begin(), this->elems.end(), elem) != this->elems.end();
+            }
+
+            inline void Clear() {
+                this->elems.clear();
+            }
+
+            inline size_t GetCount() {
+                return this->elems.size();
+            }
+
+            inline void SetX(const i32 x) {
+                this->x = x;
+            }
+
+            inline i32 GetX() {
+                return this->x;
+            }
+
+            inline void SetY(const i32 y) {
+                this->y = y;
+            }
+
+            inline i32 GetY() {
+                return this->y;
+            }
+
+            inline void SetWidth(const i32 width) {
+                this->w = width;
+            }
+
+            inline i32 GetWidth() {
+                return this->w;
+            }
+
+            inline void SetHeight(const i32 height) {
+                this->h = height;
+            }
+            
+            inline i32 GetHeight() {
+                return this->h;
+            }
+
+            void PreRender();
     };
+
 }

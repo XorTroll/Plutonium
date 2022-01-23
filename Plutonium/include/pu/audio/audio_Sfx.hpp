@@ -13,13 +13,14 @@
 
 #pragma once
 #include <SDL2/SDL_mixer.h>
-#include <string> 
+#include <pu/pu_Include.hpp> 
 
-namespace pu::audio
-{
-    typedef Mix_Chunk *Sfx;
+namespace pu::audio {
 
-    Sfx Load(std::string Path);
-    void Play(Sfx Sfx);
-    void DeleteSfx(Sfx Sfx);
+    using Sfx = Mix_Chunk*;
+
+    Sfx LoadSfx(const std::string &path);
+    void PlaySfx(Sfx sfx);
+    void DestroySfx(Sfx &sfx);
+
 }

@@ -14,117 +14,157 @@
 #pragma once
 #include <pu/ui/ui_Types.hpp>
 #include <pu/ui/render/render_SDL2.hpp>
-#include <string>
-#include <fstream>
 #include <vector>
 
-namespace pu::ui::render
-{
-    struct RendererInitOptions
-    {
-        u32 SDLFlags;
-        u32 RenderFlags;
-        u32 Width;
-        u32 Height;
-        bool InitTTF;
-        std::vector<u32> DefaultFontExtraSizes;
-        String DefaultFontPath;
-        bool InitMixer;
-        u32 MixerFlags;
-        bool InitIMG;
-        u32 IMGFlags;
-        bool InitPL;
-        bool InitRomFs;
+namespace pu::ui::render {
 
-        RendererInitOptions(u32 sdl_flags, u32 render_flags, u32 w = 1280, u32 h = 720) : SDLFlags(sdl_flags), RenderFlags(render_flags), Width(w), Height(h) {}
+    constexpr u32 ScreenWidth = 1280;
+    constexpr u32 ScreenHeight = 720;
 
-        // Empty font path = using shared font
-        inline RendererInitOptions WithTTF(String default_font_path = "")
-        {
-            this->InitTTF = true;
-            if(default_font_path.HasAny()) this->DefaultFontPath = default_font_path;
-            else this->InitPL = true;
-            return *this;
+    struct RendererInitOptions {
+        u32 sdl_flags;
+        u32 sdl_render_flags;
+        u32 width;
+        u32 height;
+        bool init_ttf;
+        std::vector<u32> extra_default_font_sizes;
+        std::string default_font_path;
+        bool init_mixer;
+        u32 audio_mixer_flags;
+        bool init_img;
+        u32 sdl_img_flags;
+        bool init_pl;
+        bool init_romfs;
+
+        RendererInitOptions(const u32 sdl_flags, const u32 sdl_render_flags, const u32 w = ScreenWidth, const u32 h = ScreenHeight) : sdl_flags(sdl_flags), sdl_render_flags(sdl_render_flags), width(w), height(h), init_ttf(false), extra_default_font_sizes(), default_font_path(), init_mixer(false), audio_mixer_flags(0), init_img(false), sdl_img_flags(0), init_pl(false), init_romfs(false) {}
+
+        inline void UseTTF(const std::string &default_font_path = "") {
+            this->init_ttf = true;
+
+            // Empty font path = using shared font
+            if(!default_font_path.empty()) {
+                this->default_font_path = default_font_path;
+            }
+            else {
+                this->init_pl = true;
+            }
         }
 
-        inline RendererInitOptions WithDefaultFontSize(u32 font_size)
-        {
-            this->DefaultFontExtraSizes.push_back(font_size);
-            return *this;
+        inline void SetExtraDefaultFontSize(const u32 font_size) {
+            this->extra_default_font_sizes.push_back(font_size);
         }
 
-        inline RendererInitOptions WithMixer(u32 flags)
-        {
-            this->InitMixer = true;
-            this->MixerFlags = flags;
-            return *this;
+        inline void UseAudio(const u32 audio_mixer_flags) {
+            this->init_mixer = true;
+            this->audio_mixer_flags = audio_mixer_flags;
         }
 
-        inline RendererInitOptions WithIMG(u32 flags)
-        {
-            this->InitIMG = true;
-            this->IMGFlags = flags;
-            return *this;
+        inline void UseImage(const u32 sdl_img_flags) {
+            this->init_img = true;
+            this->sdl_img_flags = sdl_img_flags;
         }
 
-        inline RendererInitOptions WithRomfs()
-        {
-            this->InitRomFs = true;
-            return *this;
+        inline void UseRomfs() {
+            this->init_romfs = true;
         }
     };
 
-    static constexpr u32 MixerAllFlags = (MIX_INIT_FLAC | MIX_INIT_MOD | MIX_INIT_MP3 | MIX_INIT_OGG);
-    static constexpr u32 IMGAllFlags = (IMG_INIT_PNG | IMG_INIT_JPG | IMG_INIT_TIF | IMG_INIT_WEBP);
-    static constexpr u32 RendererSoftwareFlags = SDL_RENDERER_SOFTWARE;
-    static constexpr u32 RendererHardwareFlags = (SDL_RENDERER_PRESENTVSYNC | SDL_RENDERER_ACCELERATED);
+    constexpr u32 MixerAllFlags = MIX_INIT_FLAC | MIX_INIT_MOD | MIX_INIT_MP3 | MIX_INIT_OGG;
+    constexpr u32 IMGAllFlags = IMG_INIT_PNG | IMG_INIT_JPG | IMG_INIT_TIF | IMG_INIT_WEBP;
+    constexpr u32 RendererSoftwareFlags = SDL_RENDERER_SOFTWARE;
+    constexpr u32 RendererHardwareFlags = SDL_RENDERER_PRESENTVSYNC | SDL_RENDERER_ACCELERATED;
 
-    struct TextureRenderOptions
-    {
-        i32 AlphaMod;
-        i32 Width;
-        i32 Height;
-        float Angle;
+    struct TextureRenderOptions {
+        i32 alpha_mod;
+        i32 width;
+        i32 height;
+        float rot_angle;
 
-        // No extra alpha, no custom size, no rotation
+        static constexpr i32 NoAlpha = -1;
+        static constexpr i32 NoWidth = -1;
+        static constexpr i32 NoHeight = -1;
+        static constexpr float NoRotation = -1.0f;
+
+        static constexpr TextureRenderOptions WithCustomAlpha(const u8 alpha) {
+            return { alpha, NoWidth, NoHeight, NoRotation };
+        }
+
+        static constexpr TextureRenderOptions WithCustomDimensions(const i32 width, const i32 height) {
+            return { NoAlpha, width, height, NoRotation };
+        }
+
+        // No special options
         static const TextureRenderOptions Default;
     };
 
-    inline constexpr const TextureRenderOptions TextureRenderOptions::Default = { .AlphaMod = -1, .Width = -1, .Height = -1, .Angle = -1.0f };
+    inline constexpr const TextureRenderOptions TextureRenderOptions::Default = { TextureRenderOptions::NoAlpha, TextureRenderOptions::NoWidth, TextureRenderOptions::NoHeight, TextureRenderOptions::NoRotation };
 
-    class Renderer
-    {
+    class Renderer {
+        private:
+            RendererInitOptions init_opts;
+            bool ok_romfs;
+            bool ok_pl;
+            bool initialized;
+            i32 base_x;
+            i32 base_y;
+            i32 base_a;
+
+            inline u8 GetActualAlpha(const u8 input_a) {
+                if(this->base_a >= 0) {
+                    return static_cast<u8>(this->base_a);
+                }
+                else {
+                    return input_a;
+                }
+            }
+
         public:
-            Renderer(RendererInitOptions Options);
+            Renderer(const RendererInitOptions init_opts) : init_opts(init_opts), ok_romfs(false), ok_pl(false), initialized(false), base_x(0), base_y(0), base_a(0) {}
             PU_SMART_CTOR(Renderer)
 
             void Initialize();
             void Finalize();
-            bool HasInitialized();
-            bool HasRomFs();
-            void InitializeRender(Color Color);
+            
+            inline bool HasInitialized() {
+                return this->initialized;
+            }
+
+            inline bool HasRomFs() {
+                return this->ok_romfs;
+            }
+            
+            void InitializeRender(const Color clr);
             void FinalizeRender();
-            void RenderTexture(sdl2::Texture Texture, i32 X, i32 Y, TextureRenderOptions Options = TextureRenderOptions::Default);
-            void RenderRectangle(Color Color, i32 X, i32 Y, i32 Width, i32 Height);
-            void RenderRectangleFill(Color Color, i32 X, i32 Y, i32 Width, i32 Height);
-            void RenderRectangleOutline(Color Color, u32 X, u32 Y, u32 Width, u32 Height, u32 BorderWidth);
-            void RenderRoundedRectangle(Color Color, i32 X, i32 Y, i32 Width, i32 Height, i32 Radius);
-            void RenderRoundedRectangleFill(Color Color, i32 X, i32 Y, i32 Width, i32 Height, i32 Radius);
-            void RenderCircle(Color Color, i32 X, i32 Y, i32 Radius);
-            void RenderCircleFill(Color Color, i32 X, i32 Y, i32 Radius);
-            void RenderShadowSimple(i32 X, i32 Y, i32 Width, i32 Height, i32 BaseAlpha, u8 MainAlpha = 255);
-            void SetBaseRenderPosition(i32 X, i32 Y);
-            void UnsetBaseRenderPosition();
-            void SetBaseRenderAlpha(u8 Alpha);
-            void UnsetBaseRenderAlpha();
-        private:
-            RendererInitOptions initopts;
-            bool okromfs;
-            bool okpl;
-            bool initialized;
-            i32 basex;
-            i32 basey;
-            int basea;
+            void RenderTexture(sdl2::Texture texture, const i32 x, const i32 y, const TextureRenderOptions opts = TextureRenderOptions::Default);
+            void RenderRectangle(const Color clr, const i32 x, const i32 y, const i32 width, const i32 height);
+            void RenderRectangleFill(const Color clr, const i32 x, const i32 y, const i32 width, const i32 height);
+            
+            inline void RenderRectangleOutline(const Color clr, const i32 x, const i32 y, const i32 width, const i32 height, const i32 border_width) {
+                this->RenderRectangleFill(clr, x - border_width, y - border_width, width + (border_width * 2), height + (border_width * 2));
+            }
+            
+            void RenderRoundedRectangle(const Color clr, const i32 x, const i32 y, const i32 width, const i32 height, const i32 radius);
+            void RenderRoundedRectangleFill(const Color clr, const i32 x, const i32 y, const i32 width, const i32 height, const i32 radius);
+            void RenderCircle(const Color clr, const i32 x, const i32 y, const i32 radius);
+            void RenderCircleFill(const Color clr, const i32 x, const i32 y, const i32 radius);
+            void RenderShadowSimple(const i32 x, const i32 y, const i32 width, const i32 height, const i32 base_alpha, const u8 main_alpha = 0xFF);
+            
+            inline void SetBaseRenderPosition(const i32 x, const i32 y) {
+                this->base_x = x;
+                this->base_y = y;
+            }
+            
+            inline void ResetBaseRenderPosition() {
+                this->SetBaseRenderPosition(0, 0);
+            }
+
+            inline void SetBaseRenderAlpha(const u8 alpha) {
+                this->base_a = alpha;
+            }
+
+            inline void ResetBaseRenderAlpha() {
+                this->base_a = -1;
+            }
     };
 
     // Global rendering
@@ -137,24 +177,20 @@ namespace pu::ui::render
 
     // Text rendering
 
-    void AddSharedFont(String font_name, u32 font_size, PlSharedFontType type);
-    void AddAllSharedFonts(String font_name, u32 font_size);
-    void AddFontFile(String font_name, u32 font_size, String path);
+    bool AddSharedFont(const std::string &font_name, const u32 font_size, const PlSharedFontType type);
+    bool AddAllSharedFonts(const std::string &font_name, const u32 font_size);
+    bool AddFontFile(const std::string &font_name, const u32 font_size, const std::string &path);
 
-    inline void AddDefaultFontFromShared(u32 font_size)
-    {
-        std::string font_name = "DefaultFont@" + std::to_string(font_size);
-        AddAllSharedFonts(font_name, font_size);
+    inline void AddDefaultFontFromShared(const u32 font_size) {
+        AddAllSharedFonts(MakeDefaultFontName(font_size), font_size);
     }
 
-    inline void AddDefaultFontFromFile(u32 font_size, String path)
-    {
-        std::string font_name = "DefaultFont@" + std::to_string(font_size);
-        AddFontFile(font_name, font_size, path);
+    inline void AddDefaultFontFromFile(const u32 font_size, const std::string &path) {
+        AddFontFile(MakeDefaultFontName(font_size), font_size, path);
     }
 
-    sdl2::Texture RenderText(String font_name, String Text, Color Color);
-    i32 GetTextWidth(String font_name, String Text);
-    i32 GetTextHeight(String font_name, String Text);
+    sdl2::Texture RenderText(const std::string &font_name, const std::string &text, const Color clr);
+    i32 GetTextWidth(const std::string &font_name, const std::string &text);
+    i32 GetTextHeight(const std::string &font_name, const std::string &text);
 
 }

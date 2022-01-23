@@ -1,43 +1,38 @@
 #include <pu/ui/extras/extras_Toast.hpp>
 
-namespace pu::ui::extras
-{
-    Toast::Toast(String Text, String font_name, Color TextColor, Color BaseColor) : Overlay(0, 550, 0, 0, BaseColor)
-    {
-        this->text = elm::TextBlock::New(0, 0, Text);
+namespace pu::ui::extras {
+
+    Toast::Toast(const std::string &text, const std::string &font_name, const Color text_clr, const Color bg_clr) : Overlay(0, DefaultY, 0, 0, bg_clr) {
+        this->text = elm::TextBlock::New(0, 0, text);
         this->text->SetFont(font_name);
-        this->text->SetColor(TextColor);
-        this->text->SetHorizontalAlign(pu::ui::elm::HorizontalAlign::Center);
-        this->text->SetVerticalAlign(pu::ui::elm::VerticalAlign::Center);
-        i32 textw = this->text->GetTextWidth();
-        i32 texth = this->text->GetTextHeight();
-        i32 toastw = textw + (texth * 4);
-        i32 toasth = texth * 3;
-        this->SetX((1280 - toastw) / 2);
-        this->SetWidth(toastw);
-        this->SetHeight(toasth);
+        this->text->SetColor(text_clr);
+        this->text->SetHorizontalAlign(elm::HorizontalAlign::Center);
+        this->text->SetVerticalAlign(elm::VerticalAlign::Center);
+        this->AdjustDimensions();
         this->Add(this->text);
     }
 
-    void Toast::SetText(String Text)
-    {
-        this->text->SetText(Text);
-        i32 textw = this->text->GetTextWidth();
-        i32 texth = this->text->GetTextHeight();
-        i32 toastw = textw + (texth * 4);
-        i32 toasth = texth * 3;
-        this->SetX((1280 - toastw) / 2);
-        this->SetWidth(toastw);
-        this->SetHeight(toasth);
+    void Toast::AdjustDimensions() {
+        const auto text_width = this->text->GetWidth();
+        const auto text_height = this->text->GetHeight();
+        const auto toast_width = text_width + 2 * HorizontalMargin;
+        const auto toast_height = text_height * HeightAndTextHeightFactor;
+        this->SetX((render::ScreenWidth - toast_width) / 2);
+        this->SetWidth(toast_width);
+        this->SetHeight(toast_height);
     }
 
-    void Toast::OnPreRender(render::Renderer::Ref &Drawer)
-    {
-        Drawer->SetBaseRenderAlpha(200);
+    void Toast::SetText(const std::string &text) {
+        this->text->SetText(text);
+        this->AdjustDimensions();
     }
 
-    void Toast::OnPostRender(render::Renderer::Ref &Drawer)
-    {
-        Drawer->UnsetBaseRenderAlpha();
+    void Toast::OnPreRender(render::Renderer::Ref &drawer) {
+        drawer->SetBaseRenderAlpha(BaseAlpha);
     }
+
+    void Toast::OnPostRender(render::Renderer::Ref &drawer) {
+        drawer->ResetBaseRenderAlpha();
+    }
+
 }
