@@ -188,12 +188,28 @@ namespace pu::ui::render {
     }
 	
     void Renderer::RenderRoundedRectangle(const Color clr, const i32 x, const i32 y, const i32 width, const i32 height, const i32 radius) {
-        roundedRectangleRGBA(g_Renderer, x + this->base_x, y + this->base_y, x + this->base_x + width, y + this->base_y + height, radius, clr.r, clr.g, clr.b, this->GetActualAlpha(clr.a));
+        auto proper_radius = radius;
+        if((2 * proper_radius) > width) {
+            proper_radius = width / 2;
+        }
+        if((2 * proper_radius) > height) {
+            proper_radius = height / 2;
+        }
+        
+        roundedRectangleRGBA(g_Renderer, x + this->base_x, y + this->base_y, x + this->base_x + width, y + this->base_y + height, proper_radius, clr.r, clr.g, clr.b, this->GetActualAlpha(clr.a));
         SDL_SetRenderDrawBlendMode(g_Renderer, SDL_BLENDMODE_BLEND);
     }
 
     void Renderer::RenderRoundedRectangleFill(const Color clr, const i32 x, const i32 y, const i32 width, const i32 height, const i32 radius) {
-        roundedBoxRGBA(g_Renderer, x + this->base_x, y + this->base_y, x + this->base_x + width, y + this->base_y + height, radius, clr.r, clr.g, clr.b, this->GetActualAlpha(clr.a));
+        auto proper_radius = radius;
+        if((2 * proper_radius) > width) {
+            proper_radius = width / 2;
+        }
+        if((2 * proper_radius) > height) {
+            proper_radius = height / 2;
+        }
+        
+        roundedBoxRGBA(g_Renderer, x + this->base_x, y + this->base_y, x + this->base_x + width, y + this->base_y + height, proper_radius, clr.r, clr.g, clr.b, this->GetActualAlpha(clr.a));
         SDL_SetRenderDrawBlendMode(g_Renderer, SDL_BLENDMODE_BLEND);
     }
 
