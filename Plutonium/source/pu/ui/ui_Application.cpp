@@ -28,7 +28,7 @@ namespace pu::ui {
 
     i32 Application::CreateShowDialog(const std::string &title, const std::string &content, const std::vector<std::string> &opts, const bool use_last_opt_as_cancel, const std::string &icon_path) {
         auto dialog = Dialog::New(title, content);
-        for(i32 i = 0; i < opts.size(); i++) {
+        for(u32 i = 0; i < opts.size(); i++) {
             const auto &opt = opts.at(i);
             if(use_last_opt_as_cancel && (i == (opts.size() - 1))) {
                 dialog->SetCancelOption(opt);
@@ -177,7 +177,7 @@ namespace pu::ui {
             }
         }
 
-        for(i32 i = 0; i < this->lyt->GetCount(); i++) {
+        for(u32 i = 0; i < this->lyt->GetCount(); i++) {
             auto elm = this->lyt->At(i);
             if(elm->IsVisible()) {
                 elm->OnRender(this->renderer, elm->GetProcessedX(), elm->GetProcessedY());
@@ -191,7 +191,7 @@ namespace pu::ui {
             const auto ovl_continue_render = this->ovl->Render(this->renderer);
             if(this->ovl_timeout_ms > 0) {
                 const auto time_now = std::chrono::steady_clock::now();
-                const auto elapsed_time_ms = std::chrono::duration_cast<std::chrono::milliseconds>(time_now - this->ovl_start_time).count();
+                const u64 elapsed_time_ms = std::chrono::duration_cast<std::chrono::milliseconds>(time_now - this->ovl_start_time).count();
                 if(elapsed_time_ms >= this->ovl_timeout_ms) {
                     this->ovl->NotifyEnding(true);
                 }
@@ -201,7 +201,7 @@ namespace pu::ui {
             }
         }
 
-        this->renderer->RenderRectangleFill({ 0, 0, 0, 0xFF - static_cast<u8>(this->fade_alpha) }, 0, 0, render::ScreenWidth, render::ScreenHeight);
+        this->renderer->RenderRectangleFill({ 0, 0, 0, static_cast<u8>(0xFF - this->fade_alpha) }, 0, 0, render::ScreenWidth, render::ScreenHeight);
     }
 
     void Application::Close() {

@@ -56,7 +56,7 @@ namespace pu::ui::elm {
                 return this->on_key_cbs.size();
             }
 
-            inline OnKeyCallback GetOnKeyCallback(const i32 idx) {
+            inline OnKeyCallback GetOnKeyCallback(const u32 idx) {
                 if(idx < this->on_key_cbs.size()) {
                     return this->on_key_cbs.at(idx);
                 }
@@ -65,7 +65,7 @@ namespace pu::ui::elm {
                 }
             }
 
-            inline u64 GetOnKeyCallbackKey(const i32 idx) {
+            inline u64 GetOnKeyCallbackKey(const u32 idx) {
                 if(idx < this->on_key_cb_keys.size()) {
                     return this->on_key_cb_keys.at(idx);
                 }

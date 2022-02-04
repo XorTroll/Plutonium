@@ -93,6 +93,11 @@ namespace pu::ui::render {
             return { NoAlpha, width, height, NoRotation };
         }
 
+        static constexpr TextureRenderOptions WithAlphaAndCustomDimensions(const u8 alpha, const i32 width, const i32 height) {
+            return { alpha, width, height, NoRotation };
+        }
+
+
         // No special options
         static const TextureRenderOptions Default;
     };

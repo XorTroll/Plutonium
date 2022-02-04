@@ -74,7 +74,7 @@ namespace pu::ui {
             std::vector<std::string> opts;
             std::vector<sdl2::Texture> opt_texs;
             std::string cancel_opt;
-            i32 selected_opt_idx;
+            u32 selected_opt_idx;
             i32 selected_opt_over_alpha;
             i32 prev_selected_opt_idx;
             i32 prev_selected_opt_over_alpha;

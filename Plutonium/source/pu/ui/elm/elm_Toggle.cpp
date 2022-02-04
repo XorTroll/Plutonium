@@ -43,8 +43,6 @@ namespace pu::ui::elm {
     }
 
     void Toggle::OnRender(render::Renderer::Ref &drawer, const i32 x, const i32 y) {
-        const auto cnt_width = render::GetTextureWidth(this->cnt_tex);
-        const auto cnt_height = render::GetTextureHeight(this->cnt_tex);
         const auto bg_width = this->GetWidth();
         const auto bg_height = this->GetHeight();
         const auto cnt_x = x + ContentHorizontalMargin;

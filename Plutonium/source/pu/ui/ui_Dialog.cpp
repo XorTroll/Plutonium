@@ -138,8 +138,7 @@ namespace pu::ui {
                 }
                 if(tch_state.count > 0) {
                     auto cur_opt_x = dialog_x + OptionsBaseHorizontalMargin;
-                    for(i32 i = 0; i < this->opts.size(); i++) {
-                        const auto &opt = this->opts.at(i);
+                    for(u32 i = 0; i < this->opts.size(); i++) {
                         auto &opt_tex = this->opt_texs.at(i);
                         const auto opt_name_width = render::GetTextureWidth(opt_tex);
                         const auto opt_width = opt_name_width + 2 * OptionHorizontalMargin;
@@ -181,7 +180,7 @@ namespace pu::ui {
                 }
 
                 auto cur_opt_x = dialog_x + OptionsBaseHorizontalMargin;
-                for(i32 i = 0; i < this->opt_texs.size(); i++) {
+                for(u32 i = 0; i < this->opt_texs.size(); i++) {
                     auto &opt_tex = this->opt_texs.at(i);
                     const auto opt_name_width = render::GetTextureWidth(opt_tex);
                     const auto opt_name_height = render::GetTextureHeight(opt_tex);
@@ -200,7 +199,7 @@ namespace pu::ui {
                             drawer->RenderRoundedRectangleFill(over_clr, cur_opt_x, opt_base_y, opt_width, OptionHeight, OptionBorderRadius);
                         }
                     }
-                    else if(this->prev_selected_opt_idx == i) {
+                    else if(this->prev_selected_opt_idx == static_cast<i32>(i)) {
                         if(this->prev_selected_opt_over_alpha > 0) {
                             const auto over_clr = MakeOverColor(static_cast<u8>(this->prev_selected_opt_over_alpha));
                             drawer->RenderRoundedRectangleFill(over_clr, cur_opt_x, opt_base_y, opt_width, OptionHeight, OptionBorderRadius);

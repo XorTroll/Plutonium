@@ -1000,7 +1000,7 @@ static Uint32 UTF8_getch(const char **src, size_t *srclen)
 {
     const Uint8 *p = *(const Uint8**)src;
     size_t left = 0;
-    SDL_bool overlong = SDL_FALSE;
+    // SDL_bool overlong = SDL_FALSE;
     SDL_bool underflow = SDL_FALSE;
     Uint32 ch = UNKNOWN_UNICODE;
 
@@ -1010,7 +1010,7 @@ static Uint32 UTF8_getch(const char **src, size_t *srclen)
     if (p[0] >= 0xFC) {
         if ((p[0] & 0xFE) == 0xFC) {
             if (p[0] == 0xFC && (p[1] & 0xFC) == 0x80) {
-                overlong = SDL_TRUE;
+                // overlong = SDL_TRUE;
             }
             ch = (Uint32) (p[0] & 0x01);
             left = 5;
@@ -1018,7 +1018,7 @@ static Uint32 UTF8_getch(const char **src, size_t *srclen)
     } else if (p[0] >= 0xF8) {
         if ((p[0] & 0xFC) == 0xF8) {
             if (p[0] == 0xF8 && (p[1] & 0xF8) == 0x80) {
-                overlong = SDL_TRUE;
+                // overlong = SDL_TRUE;
             }
             ch = (Uint32) (p[0] & 0x03);
             left = 4;
@@ -1026,7 +1026,7 @@ static Uint32 UTF8_getch(const char **src, size_t *srclen)
     } else if (p[0] >= 0xF0) {
         if ((p[0] & 0xF8) == 0xF0) {
             if (p[0] == 0xF0 && (p[1] & 0xF0) == 0x80) {
-                overlong = SDL_TRUE;
+                // overlong = SDL_TRUE;
             }
             ch = (Uint32) (p[0] & 0x07);
             left = 3;
@@ -1034,7 +1034,7 @@ static Uint32 UTF8_getch(const char **src, size_t *srclen)
     } else if (p[0] >= 0xE0) {
         if ((p[0] & 0xF0) == 0xE0) {
             if (p[0] == 0xE0 && (p[1] & 0xE0) == 0x80) {
-                overlong = SDL_TRUE;
+                // overlong = SDL_TRUE;
             }
             ch = (Uint32) (p[0] & 0x0F);
             left = 2;
@@ -1042,7 +1042,7 @@ static Uint32 UTF8_getch(const char **src, size_t *srclen)
     } else if (p[0] >= 0xC0) {
         if ((p[0] & 0xE0) == 0xC0) {
             if ((p[0] & 0xDE) == 0xC0) {
-                overlong = SDL_TRUE;
+                // overlong = SDL_TRUE;
             }
             ch = (Uint32) (p[0] & 0x1F);
             left = 1;
@@ -1943,7 +1943,6 @@ SDL_Surface *TTF_RenderUTF8_Blended_Wrapped(TTF_Font *ttf_font,
     if ( wrapLength > 0 && *text ) {
         const char *wrapDelims = " \t\r\n";
         int w, h;
-        int line = 0;
         char *spot, *tok, *next_tok, *end;
         char delim;
         size_t str_len = SDL_strlen(text);
