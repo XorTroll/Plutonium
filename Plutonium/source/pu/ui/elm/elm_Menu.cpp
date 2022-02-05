@@ -28,14 +28,8 @@ namespace pu::ui::elm {
         }
         this->loaded_icon_texs.clear();
     
-        auto item_count = this->items_to_show;
-        if(item_count > this->items.size()) {
-            item_count = this->items.size();
-        }
-        if((item_count + this->advanced_item_count) > this->items.size()) {
-            item_count = this->items.size() - this->advanced_item_count;
-        }
-        for(i32 i = this->advanced_item_count; i < (this->advanced_item_count + static_cast<i32>(item_count)); i++) {
+        const auto item_count = this->GetItemCount();
+        for(u32 i = this->advanced_item_count; i < (this->advanced_item_count + item_count); i++) {
             auto &item = this->items.at(i);
             auto name_tex = render::RenderText(this->font_name, item->GetName(), item->GetColor());
             this->loaded_name_texs.push_back(name_tex);
@@ -75,10 +69,10 @@ namespace pu::ui::elm {
         if(idx < this->items.size()) {
             this->selected_item_idx = idx;
             this->advanced_item_count = 0;
-            if(this->selected_item_idx >= static_cast<i32>(this->items.size() - this->items_to_show)) {
+            if(this->selected_item_idx >= this->items.size() - this->items_to_show) {
                 this->advanced_item_count = this->items.size() - this->items_to_show;
             }
-            else if(this->selected_item_idx < static_cast<i32>(this->items_to_show)) {
+            else if(this->selected_item_idx < this->items_to_show) {
                 this->advanced_item_count = 0;
             }
             else {
@@ -93,20 +87,14 @@ namespace pu::ui::elm {
 
     void Menu::OnRender(render::Renderer::Ref &drawer, const i32 x, const i32 y) {
         if(!this->items.empty()) {
-            auto item_count = this->items_to_show;
-            if(item_count > this->items.size()) {
-                item_count = this->items.size();
-            }
-            if((item_count + this->advanced_item_count) > this->items.size()) {
-                item_count = this->items.size() - this->advanced_item_count;
-            }
+            const auto item_count = this->GetItemCount();
 
             if(this->loaded_name_texs.empty()) {
-                ReloadItemRenders();
+                this->ReloadItemRenders();
             }
 
             auto cur_item_y = y;
-            for(i32 i = this->advanced_item_count; i < (this->advanced_item_count + static_cast<i32>(item_count)); i++) {
+            for(u32 i = this->advanced_item_count; i < (this->advanced_item_count + item_count); i++) {
                 const auto loaded_tex_idx = i - this->advanced_item_count;
                 auto name_tex = this->loaded_name_texs.at(loaded_tex_idx);
                 auto icon_tex = this->loaded_icon_texs.at(loaded_tex_idx);
@@ -121,7 +109,7 @@ namespace pu::ui::elm {
                         drawer->RenderRectangleFill(this->items_focus_clr, x, cur_item_y, this->w, this->items_h);
                     }
                 }
-                else if(this->prev_selected_item_idx == i) {
+                else if(this->prev_selected_item_idx == static_cast<i32>(i)) {
                     drawer->RenderRectangleFill(this->items_clr, x, cur_item_y, this->w, this->items_h);
                     if(this->prev_selected_item_alpha > 0) {
                         const auto focus_clr = this->MakeItemsFocusColor(this->prev_selected_item_alpha);
@@ -189,14 +177,8 @@ namespace pu::ui::elm {
         if(!touch_pos.IsEmpty()) {
             const auto x = this->GetProcessedX();
             auto cur_item_y = this->GetProcessedY();
-            auto item_count = this->items_to_show;
-            if(item_count > this->items.size()) {
-                item_count = this->items.size();
-            }
-            if((item_count + this->advanced_item_count) > this->items.size()) {
-                item_count = this->items.size() - this->advanced_item_count;
-            }
-            for(i32 i = this->advanced_item_count; i < (this->advanced_item_count + static_cast<i32>(item_count)); i++) {
+            const auto item_count = this->GetItemCount();
+            for(u32 i = this->advanced_item_count; i < (this->advanced_item_count + item_count); i++) {
                 if(touch_pos.HitsRegion(x, cur_item_y, this->w, this->items_h)) {
                     this->item_touched = true;
                     this->prev_selected_item_idx = this->selected_item_idx;
@@ -205,7 +187,7 @@ namespace pu::ui::elm {
                     if(i == this->selected_item_idx) {
                         this->selected_item_alpha = 0xFF;
                     }
-                    else if(i == this->prev_selected_item_idx) {
+                    else if(static_cast<i32>(i) == this->prev_selected_item_idx) {
                         this->prev_selected_item_alpha = 0;
                     }
                     break;
@@ -239,8 +221,8 @@ namespace pu::ui::elm {
                     }
                 }
                 if(move) {
-                    if(this->selected_item_idx < static_cast<i32>(this->items.size() - 1)) {
-                        if((this->selected_item_idx - this->advanced_item_count) == static_cast<i32>(this->items_to_show - 1)) {
+                    if(!this->items.empty() && this->selected_item_idx < (this->items.size() - 1)) {
+                        if((this->selected_item_idx - this->advanced_item_count) == (this->items_to_show - 1)) {
                             this->advanced_item_count++;
                             this->selected_item_idx++;
                             this->HandleOnSelectionChanged();
@@ -255,13 +237,11 @@ namespace pu::ui::elm {
                             this->prev_selected_item_alpha = 0xFF;
                         }
                     }
-                    else
-                    {
+                    else {
                         this->selected_item_idx = 0;
                         this->advanced_item_count = 0;
-                        if(this->items.size() >= this->items_to_show)
-                        {
-                            ReloadItemRenders();
+                        if(this->items.size() >= this->items_to_show) {
+                            this->ReloadItemRenders();
                         }
                     }
                 }

@@ -52,7 +52,7 @@ namespace pu::ui::elm {
 
             void AddOnKey(OnKeyCallback on_key_cb, const u64 key = HidNpadButton_A);
             
-            inline i32 GetOnKeyCallbackCount() {
+            inline u32 GetOnKeyCallbackCount() {
                 return this->on_key_cbs.size();
             }
 
@@ -111,11 +111,11 @@ namespace pu::ui::elm {
             i32 w;
             i32 items_h;
             u32 items_to_show;
-            i32 selected_item_idx;
+            u32 selected_item_idx;
             i32 selected_item_alpha;
             i32 prev_selected_item_idx;
             i32 prev_selected_item_alpha;
-            i32 advanced_item_count;
+            u32 advanced_item_count;
             Color scrollbar_clr;
             Color items_clr;
             Color items_focus_clr;
@@ -161,7 +161,7 @@ namespace pu::ui::elm {
             inline void RunSelectedItemCallback(const u64 keys) {
                 auto item = this->items.at(this->selected_item_idx);
                 const auto cb_count = item->GetOnKeyCallbackCount();
-                for(i32 i = 0; i < cb_count; i++) {
+                for(u32 i = 0; i < cb_count; i++) {
                     if(keys & item->GetOnKeyCallbackKey(i)) {
                         if(!this->cooldown_enabled) {
                             auto cb = item->GetOnKeyCallback(i);
@@ -172,6 +172,17 @@ namespace pu::ui::elm {
                     }
                 }
                 this->cooldown_enabled = false;
+            }
+
+            inline u32 GetItemCount() {
+                auto item_count = this->items_to_show;
+                if(item_count > this->items.size()) {
+                    item_count = this->items.size();
+                }
+                if((item_count + this->advanced_item_count) > this->items.size()) {
+                    item_count = this->items.size() - this->advanced_item_count;
+                }
+                return item_count;
             }
 
         public:
@@ -256,6 +267,17 @@ namespace pu::ui::elm {
 
             inline void ClearItems() {
                 this->items.clear();
+                for(auto &name_tex : this->loaded_name_texs) {
+                    render::DeleteTexture(name_tex);
+                }
+                this->loaded_name_texs.clear();
+                for(auto &icon_tex : this->loaded_icon_texs) {
+                    render::DeleteTexture(icon_tex);
+                }
+                this->loaded_icon_texs.clear();
+                this->selected_item_idx = 0;
+                this->prev_selected_item_idx = 0;
+                this->advanced_item_count = 0;
             }
 
             inline void SetCooldownEnabled(const bool enabled) {
