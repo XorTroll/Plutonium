@@ -65,6 +65,21 @@ namespace pu::ui::elm {
         this->font_name = GetDefaultFont(DefaultFontSize::MediumLarge);
     }
 
+    void Menu::ClearItems() {
+        this->items.clear();
+        for(auto &name_tex : this->loaded_name_texs) {
+            render::DeleteTexture(name_tex);
+        }
+        this->loaded_name_texs.clear();
+        for(auto &icon_tex : this->loaded_icon_texs) {
+            render::DeleteTexture(icon_tex);
+        }
+        this->loaded_icon_texs.clear();
+        this->selected_item_idx = 0;
+        this->prev_selected_item_idx = 0;
+        this->advanced_item_count = 0;
+    }
+
     void Menu::SetSelectedIndex(const u32 idx) {
         if(idx < this->items.size()) {
             this->selected_item_idx = idx;
