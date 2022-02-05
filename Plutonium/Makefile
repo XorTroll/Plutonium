@@ -17,9 +17,9 @@ include $(DEVKITPRO)/libnx/switch_rules
 #---------------------------------------------------------------------------------
 BUILD		:=	build
 TARGET		:=  pu
-SOURCES		:=	source source/pu source/pu/audio source/pu/ui source/pu/ttf source/pu/sdl2 source/pu/ui/elm source/pu/ui/extras source/pu/ui/render source/pu/web
+SOURCES		:=	source source/pu source/pu/audio source/pu/ttf source/pu/sdl2 source/pu/ui source/pu/ui/elm source/pu/ui/extras source/pu/ui/render
 INCLUDES	:=	include
-OUT			:=	out
+OUT_LIB		:=	lib
 
 #---------------------------------------------------------------------------------
 # options for code generation
@@ -75,7 +75,7 @@ else
 #---------------------------------------------------------------------------------
 endif
 #---------------------------------------------------------------------------------
-export OUTPUT       := $(CURDIR)/$(OUT)/lib/lib$(TARGET).a
+export OUTPUT       := $(CURDIR)/$(OUT_LIB)/lib$(TARGET).a
 export DEPSDIR      := $(CURDIR)/$(BUILD)
 export OFILES_BIN	:=	$(addsuffix .o,$(BINFILES))
 export OFILES_SRC	:=	$(CPPFILES:.cpp=.o) $(CFILES:.c=.o) $(SFILES:.s=.o)
@@ -93,16 +93,14 @@ all: $(BUILD)
 
 $(BUILD):
 	@[ -d $@ ] || mkdir -p $@
-	@[ -d $(OUT)/lib ] || mkdir -p $(OUT)/lib
+	@[ -d $(OUT_LIB) ] || mkdir -p $(OUT_LIB)
 	@$(MAKE) --no-print-directory -C $(BUILD) -f $(CURDIR)/Makefile
-	@rm -rf $(OUT)/include
-	@cp -r include $(OUT)/include
 
 #---------------------------------------------------------------------------------
 clean:
 	@echo clean ...
-	@rm -fr $(CURDIR)/$(OUT)
-	@rm -fr $(BUILD) $(OUTPUT).a
+	@rm -fr $(CURDIR)/$(BUILD)
+	@rm -fr $(CURDIR)/$(OUT_LIB)
 
 #---------------------------------------------------------------------------------
 else

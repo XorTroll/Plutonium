@@ -66,8 +66,8 @@ LIBS	:= -lpu -lfreetype -lSDL2_mixer -lopusfile -lopus -lmodplug -lmpg123 -lvorb
 # include and lib
 #---------------------------------------------------------------------------------
 
-# IMPORTANT! Change "$(CURDIR)/../Plutonium/out" to the path in which you have Plutonium libs.
-LIBDIRS	:= $(PORTLIBS) $(LIBNX) $(CURDIR)/../Plutonium/out
+# IMPORTANT! Change "$(CURDIR)/../Plutonium" to the path in which you have Plutonium
+LIBDIRS	:= $(PORTLIBS) $(LIBNX) $(CURDIR)/../Plutonium
 
 
 #---------------------------------------------------------------------------------

@@ -35,7 +35,7 @@ namespace pu::ui::elm {
         if((item_count + this->advanced_item_count) > this->items.size()) {
             item_count = this->items.size() - this->advanced_item_count;
         }
-        for(i32 i = this->advanced_item_count; i < (item_count + this->advanced_item_count); i++) {
+        for(i32 i = this->advanced_item_count; i < (this->advanced_item_count + static_cast<i32>(item_count)); i++) {
             auto &item = this->items.at(i);
             auto name_tex = render::RenderText(this->font_name, item->GetName(), item->GetColor());
             this->loaded_name_texs.push_back(name_tex);
@@ -50,7 +50,7 @@ namespace pu::ui::elm {
         }
     }
 
-    Menu::Menu(const i32 x, const i32 y, const i32 width, const Color items_clr, const Color items_focus_clr, const i32 items_height, const i32 items_to_show) : Element::Element() {
+    Menu::Menu(const i32 x, const i32 y, const i32 width, const Color items_clr, const Color items_focus_clr, const i32 items_height, const u32 items_to_show) : Element::Element() {
         this->x = x;
         this->y = y;
         this->w = width;
@@ -71,14 +71,14 @@ namespace pu::ui::elm {
         this->font_name = GetDefaultFont(DefaultFontSize::MediumLarge);
     }
 
-    void Menu::SetSelectedIndex(const i32 idx) {
+    void Menu::SetSelectedIndex(const u32 idx) {
         if(idx < this->items.size()) {
             this->selected_item_idx = idx;
             this->advanced_item_count = 0;
-            if(this->selected_item_idx >= (this->items.size() - this->items_to_show)) {
+            if(this->selected_item_idx >= static_cast<i32>(this->items.size() - this->items_to_show)) {
                 this->advanced_item_count = this->items.size() - this->items_to_show;
             }
-            else if(this->selected_item_idx < this->items_to_show) {
+            else if(this->selected_item_idx < static_cast<i32>(this->items_to_show)) {
                 this->advanced_item_count = 0;
             }
             else {
@@ -106,7 +106,7 @@ namespace pu::ui::elm {
             }
 
             auto cur_item_y = y;
-            for(i32 i = this->advanced_item_count; i < (item_count + this->advanced_item_count); i++) {
+            for(i32 i = this->advanced_item_count; i < (this->advanced_item_count + static_cast<i32>(item_count)); i++) {
                 const auto loaded_tex_idx = i - this->advanced_item_count;
                 auto name_tex = this->loaded_name_texs.at(loaded_tex_idx);
                 auto icon_tex = this->loaded_icon_texs.at(loaded_tex_idx);
@@ -196,7 +196,7 @@ namespace pu::ui::elm {
             if((item_count + this->advanced_item_count) > this->items.size()) {
                 item_count = this->items.size() - this->advanced_item_count;
             }
-            for(i32 i = this->advanced_item_count; i < (this->advanced_item_count + item_count); i++) {
+            for(i32 i = this->advanced_item_count; i < (this->advanced_item_count + static_cast<i32>(item_count)); i++) {
                 if(touch_pos.HitsRegion(x, cur_item_y, this->w, this->items_h)) {
                     this->item_touched = true;
                     this->prev_selected_item_idx = this->selected_item_idx;
@@ -239,8 +239,8 @@ namespace pu::ui::elm {
                     }
                 }
                 if(move) {
-                    if(this->selected_item_idx < (this->items.size() - 1)) {
-                        if((this->selected_item_idx - this->advanced_item_count) == (this->items_to_show - 1)) {
+                    if(this->selected_item_idx < static_cast<i32>(this->items.size() - 1)) {
+                        if((this->selected_item_idx - this->advanced_item_count) == static_cast<i32>(this->items_to_show - 1)) {
                             this->advanced_item_count++;
                             this->selected_item_idx++;
                             this->HandleOnSelectionChanged();

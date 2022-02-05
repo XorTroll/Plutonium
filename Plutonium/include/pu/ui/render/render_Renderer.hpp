@@ -85,6 +85,10 @@ namespace pu::ui::render {
         static constexpr i32 NoHeight = -1;
         static constexpr float NoRotation = -1.0f;
 
+        static constexpr TextureRenderOptions Default() {
+            return { NoAlpha, NoWidth, NoHeight, NoRotation };
+        }
+        
         static constexpr TextureRenderOptions WithCustomAlpha(const u8 alpha) {
             return { alpha, NoWidth, NoHeight, NoRotation };
         }
@@ -93,16 +97,10 @@ namespace pu::ui::render {
             return { NoAlpha, width, height, NoRotation };
         }
 
-        static constexpr TextureRenderOptions WithAlphaAndCustomDimensions(const u8 alpha, const i32 width, const i32 height) {
+        static constexpr TextureRenderOptions WithCustomAlphaAndDimensions(const u8 alpha, const i32 width, const i32 height) {
             return { alpha, width, height, NoRotation };
         }
-
-
-        // No special options
-        static const TextureRenderOptions Default;
     };
-
-    inline constexpr const TextureRenderOptions TextureRenderOptions::Default = { TextureRenderOptions::NoAlpha, TextureRenderOptions::NoWidth, TextureRenderOptions::NoHeight, TextureRenderOptions::NoRotation };
 
     class Renderer {
         private:
@@ -140,7 +138,7 @@ namespace pu::ui::render {
             
             void InitializeRender(const Color clr);
             void FinalizeRender();
-            void RenderTexture(sdl2::Texture texture, const i32 x, const i32 y, const TextureRenderOptions opts = TextureRenderOptions::Default);
+            void RenderTexture(sdl2::Texture texture, const i32 x, const i32 y, const TextureRenderOptions opts = TextureRenderOptions::Default());
             void RenderRectangle(const Color clr, const i32 x, const i32 y, const i32 width, const i32 height);
             void RenderRectangleFill(const Color clr, const i32 x, const i32 y, const i32 width, const i32 height);
             

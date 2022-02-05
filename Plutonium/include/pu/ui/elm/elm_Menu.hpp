@@ -110,7 +110,7 @@ namespace pu::ui::elm {
             i32 y;
             i32 w;
             i32 items_h;
-            i32 items_to_show;
+            u32 items_to_show;
             i32 selected_item_idx;
             i32 selected_item_alpha;
             i32 prev_selected_item_idx;
@@ -175,7 +175,7 @@ namespace pu::ui::elm {
             }
 
         public:
-            Menu(const i32 x, const i32 y, const i32 width, const Color items_clr, const Color items_focus_clr, const i32 items_height, const i32 items_to_show);
+            Menu(const i32 x, const i32 y, const i32 width, const Color items_clr, const Color items_focus_clr, const i32 items_height, const u32 items_to_show);
             PU_SMART_CTOR(Menu)
 
             inline i32 GetX() override {
@@ -274,7 +274,7 @@ namespace pu::ui::elm {
                 return this->selected_item_idx;
             }
 
-            void SetSelectedIndex(const i32 idx);
+            void SetSelectedIndex(const u32 idx);
 
             void OnRender(render::Renderer::Ref &drawer, const i32 x, const i32 y) override;
             void OnInput(const u64 keys_down, const u64 keys_up, const u64 keys_held, const TouchPoint touch_pos) override;
