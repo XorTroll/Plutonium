@@ -84,7 +84,7 @@ namespace pu::ui::elm {
         if(idx < this->items.size()) {
             this->selected_item_idx = idx;
             this->advanced_item_count = 0;
-            if(this->selected_item_idx >= this->items.size() - this->items_to_show) {
+            if(this->selected_item_idx >= (this->items.size() - this->items_to_show)) {
                 this->advanced_item_count = this->items.size() - this->items_to_show;
             }
             else if(this->selected_item_idx < this->items_to_show) {
@@ -236,7 +236,7 @@ namespace pu::ui::elm {
                     }
                 }
                 if(move) {
-                    if(!this->items.empty() && this->selected_item_idx < (this->items.size() - 1)) {
+                    if(!this->items.empty() && (this->selected_item_idx < (this->items.size() - 1))) {
                         if((this->selected_item_idx - this->advanced_item_count) == (this->items_to_show - 1)) {
                             this->advanced_item_count++;
                             this->selected_item_idx++;
