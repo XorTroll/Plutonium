@@ -79,7 +79,7 @@ namespace pu::ttf {
                 return this->font_size;
             }
 
-            sdl2::Font FindValidFontFor(const char ch);
+            sdl2::Font FindValidFontFor(const Uint16 ch);
             std::pair<u32, u32> GetTextDimensions(const std::string &str);
             sdl2::Texture RenderText(const std::string &str, const ui::Color clr);
     };

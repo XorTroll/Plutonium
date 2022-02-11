@@ -57,8 +57,8 @@ namespace pu::ttf {
         }
     }
 
-    sdl2::Font Font::FindValidFontFor(const char ch) {
-        for(auto &[idx, font] : this->font_faces) {
+    sdl2::Font Font::FindValidFontFor(const Uint16 ch) {
+        for(const auto &[idx, font] : this->font_faces) {
             if(TTF_GlyphIsProvided(font->font, ch)) {
                 return font->font;
             }
