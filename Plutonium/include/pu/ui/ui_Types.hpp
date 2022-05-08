@@ -57,7 +57,7 @@ namespace pu::ui {
         return (touch_x >= region_x) && (touch_x < (region_x + region_w)) && (touch_y >= region_y) && (touch_y < (region_y + region_h));
     }
 
-    constexpr u64 TouchPseudoKey = HidNpadButton_29;
+    constexpr u64 TouchPseudoKey = 1 << 29;
 
     struct TouchPoint {
         i32 x;
