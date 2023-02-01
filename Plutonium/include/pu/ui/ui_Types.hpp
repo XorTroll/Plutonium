@@ -12,6 +12,7 @@
 */
 
 #pragma once
+#include <array>
 #include <pu/pu_Include.hpp>
 
 namespace pu::ui {
