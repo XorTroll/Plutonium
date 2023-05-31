@@ -20,7 +20,7 @@
 using Ref = std::shared_ptr<type>; \
 template<typename ...Args> \
 inline static Ref New(Args &&...ctor_args) { \
-    return std::move(std::make_shared<type>(std::forward<Args>(ctor_args)...)); \
+    return std::make_shared<type>(std::forward<Args>(ctor_args)...); \
 }
 
 namespace pu {
