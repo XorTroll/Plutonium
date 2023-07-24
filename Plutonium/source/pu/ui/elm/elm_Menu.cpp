@@ -169,8 +169,9 @@ namespace pu::ui::elm {
                 drawer->RenderRectangleFill(this->scrollbar_clr, scrollbar_x, y, ScrollbarWidth, scrollbar_height);
 
                 const auto light_scrollbar_clr = this->MakeLighterScrollbarColor();
-                const auto scrollbar_front_height = (this->items_to_show * scrollbar_height) / this->items.size();
-                const auto scrollbar_front_y = y + (this->advanced_item_count * (scrollbar_height / this->items.size()));
+                const auto scrollbar_factor = (double)this->items_to_show / (double)this->items.size();
+                const auto scrollbar_front_height = (u32)(scrollbar_height * scrollbar_factor);
+                const auto scrollbar_front_y = y + (u32)(this->advanced_item_count * ((double)scrollbar_height / (double)this->items.size()));
                 drawer->RenderRectangleFill(light_scrollbar_clr, scrollbar_x, scrollbar_front_y, ScrollbarWidth, scrollbar_front_height);
             }
             drawer->RenderShadowSimple(x, cur_item_y, this->w, ShadowHeight, ShadowBaseAlpha);

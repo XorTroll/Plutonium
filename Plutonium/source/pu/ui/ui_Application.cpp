@@ -90,7 +90,7 @@ namespace pu::ui {
         this->renderer->InitializeRender(this->lyt->GetBackgroundColor());
         this->OnRender();
         if(this->in_render_over) {
-            continue_render = (this->render_over_fn)(this->renderer);
+            continue_render = this->render_over_fn(this->renderer);
             this->in_render_over = false;
             this->render_over_fn = {};
         }
