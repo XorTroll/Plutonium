@@ -52,6 +52,7 @@ namespace pu::ui {
             const auto opt_width = render::GetTextureWidth(opt_tex) + 2 * OptionHorizontalMargin;
             opts_width += opt_width;
         }
+        const auto opt_row_count = opts_width / pu::ui::render::ScreenWidth + 1;
         auto dialog_width = opts_width;
 
         const auto cnt_width = render::GetTextureWidth(this->cnt_tex) + ContentExtraWidth;
@@ -94,7 +95,7 @@ namespace pu::ui {
             dialog_width = render::ScreenWidth;
         }
 
-        auto dialog_height = opt_base_y + OptionHeight + OptionBottomMargin;
+        auto dialog_height = opt_base_y + opt_row_count * OptionHeight + (opt_row_count - 1) * SpaceBetweenOptionRows + OptionBottomMargin;
         if(dialog_height > render::ScreenHeight) {
             dialog_height = render::ScreenHeight;
         }
@@ -105,7 +106,9 @@ namespace pu::ui {
 
         auto is_finishing = false;
         i32 initial_fade_alpha = 0;
+        const auto base_opt_base_y = opt_base_y;
         while(true) {
+            opt_base_y = base_opt_base_y;
             const auto ok = app_ref->CallForRenderWithRenderOver([&](render::Renderer::Ref &drawer) -> bool {
                 const auto keys_down = app_ref->GetButtonsDown();
                 const auto tch_state = app_ref->GetTouchState();
@@ -140,6 +143,7 @@ namespace pu::ui {
                     auto cur_opt_x = dialog_x + OptionsBaseHorizontalMargin;
                     for(u32 i = 0; i < this->opts.size(); i++) {
                         auto &opt_tex = this->opt_texs.at(i);
+                        const auto opt_name_x = cur_opt_x + OptionHorizontalMargin;
                         const auto opt_name_width = render::GetTextureWidth(opt_tex);
                         const auto opt_width = opt_name_width + 2 * OptionHorizontalMargin;
 
@@ -151,8 +155,15 @@ namespace pu::ui {
                         }
 
                         cur_opt_x += opt_width + SpaceBetweenOptions;
+
+                        if((opt_name_x + opt_width) > pu::ui::render::ScreenWidth) {
+                            cur_opt_x = dialog_x + OptionsBaseHorizontalMargin;
+                            opt_base_y += OptionHeight + SpaceBetweenOptionRows;
+                        }
                     }
                 }
+
+                opt_base_y = base_opt_base_y;
                 
                 const auto dialog_clr = MakeDialogColor(static_cast<u8>(initial_fade_alpha));
                 auto screen_fade_alpha = initial_fade_alpha;
@@ -213,6 +224,11 @@ namespace pu::ui {
                     render::SetAlphaValue(opt_tex, static_cast<u8>(initial_fade_alpha));
                     drawer->RenderTexture(opt_tex, opt_name_x, opt_name_y);
                     cur_opt_x += opt_width + SpaceBetweenOptions;
+
+                    if((cur_opt_x + opt_width) > pu::ui::render::ScreenWidth) {
+                        cur_opt_x = dialog_x + OptionsBaseHorizontalMargin;
+                        opt_base_y += OptionHeight + SpaceBetweenOptionRows;
+                    }
                 }
 
                 if(is_finishing) {

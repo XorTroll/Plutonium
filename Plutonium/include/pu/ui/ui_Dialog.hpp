@@ -29,6 +29,7 @@ namespace pu::ui {
             static constexpr u32 DialogBorderRadius = 35;
 
             static constexpr u32 SpaceBetweenOptions = 20;
+            static constexpr u32 SpaceBetweenOptionRows = 10;
 
             static constexpr u32 TitleExtraWidth = 90;
             static constexpr u32 ContentExtraWidth = 90;
