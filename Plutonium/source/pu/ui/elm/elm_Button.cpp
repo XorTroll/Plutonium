@@ -12,6 +12,7 @@ namespace pu::ui::elm {
         this->bg_clr = bg_clr;
         this->hover = false;
         this->hover_alpha = 0xFF;
+        this->hover_alpha_incr = {};
         this->fnt_name = GetDefaultFont(DefaultFontSize::MediumLarge);
         this->cnt_tex = nullptr;
         this->SetContent(content);
@@ -44,10 +45,9 @@ namespace pu::ui::elm {
             if(this->hover_alpha < 0xFF) {
                 const auto hover_bg_clr = this->MakeHoverBackgroundColor(this->hover_alpha);
                 drawer->RenderRectangleFill(hover_bg_clr, x, y, this->w, this->h);
-                this->hover_alpha += HoverAlphaIncrement;
+                this->hover_alpha_incr.Increment(this->hover_alpha);
             }
             else {
-                this->hover_alpha = 0xFF;
                 const auto darker_bg_clr = this->MakeHoverBackgroundColor(-1);
                 drawer->RenderRectangleFill(darker_bg_clr, x, y, this->w, this->h);
             }
@@ -56,10 +56,9 @@ namespace pu::ui::elm {
             if(this->hover_alpha > 0) {
                 const auto hover_bg_clr = this->MakeHoverBackgroundColor(this->hover_alpha);
                 drawer->RenderRectangleFill(hover_bg_clr, x, y, this->w, this->h);
-                this->hover_alpha -= HoverAlphaIncrement;
+                this->hover_alpha_incr.Increment(this->hover_alpha);
             }
             else {
-                this->hover_alpha = 0;
                 drawer->RenderRectangleFill(this->bg_clr, x, y, this->w, this->h);
             }
         }
@@ -74,15 +73,20 @@ namespace pu::ui::elm {
     void Button::OnInput(const u64 keys_down, const u64 keys_up, const u64 keys_held, const TouchPoint touch_pos) {
         if(this->hover) {
             if(touch_pos.IsEmpty()) {
-                (this->on_click_cb)();
+                if(this->on_click_cb) {
+                    this->on_click_cb();
+                }
+
                 this->hover = false;
                 this->hover_alpha = 0xFF;
+                this->hover_alpha_incr.StartToZero(HoverAlphaIncrementSteps, 0xFF);
             }
         }
         else {
             if(touch_pos.HitsRegion(this->x, this->y, this->w, this->h)) {
                 this->hover = true;
                 this->hover_alpha = 0;
+                this->hover_alpha_incr.StartFromZero(HoverAlphaIncrementSteps, 0xFF);
             }
         }
     }

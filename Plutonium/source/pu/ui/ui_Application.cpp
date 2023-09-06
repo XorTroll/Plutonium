@@ -14,7 +14,8 @@ namespace pu::ui {
         this->loaded = false;
         this->render_over_fn = {};
         this->fade_alpha = 0xFF;
-        this->fade_alpha_increment = DefaultFadeAlphaIncrement;
+        this->fade_alpha_increment_steps = DefaultFadeAlphaIncrementSteps;
+        this->fade_alpha_incr = {};
         padConfigureInput(1, HidNpadStyleSet_NpadStandard);
         padInitializeDefault(&this->input_pad);
     }
@@ -106,28 +107,26 @@ namespace pu::ui {
 
     void Application::FadeIn() {
         this->fade_alpha = 0;
+        this->fade_alpha_incr.StartFromZero(this->fade_alpha_increment_steps, 0xFF);
         while(true) {
             this->CallForRender();
-            this->fade_alpha += this->fade_alpha_increment;
-            if(this->fade_alpha > 0xFF) {
-                this->fade_alpha = 0xFF;
-                this->CallForRender();
+            if(this->fade_alpha_incr.Increment(this->fade_alpha)) {
                 break;
             }
         }
+        this->CallForRender();
     }
 
     void Application::FadeOut() {
         this->fade_alpha = 0xFF;
+        this->fade_alpha_incr.StartToZero(this->fade_alpha_increment_steps, this->fade_alpha);
         while(true) {
             this->CallForRender();
-            this->fade_alpha -= this->fade_alpha_increment;
-            if(this->fade_alpha < 0) {
-                this->fade_alpha = 0;
-                this->CallForRender();
+            if(this->fade_alpha_incr.Increment(this->fade_alpha)) {
                 break;
             }
         }
+        this->CallForRender();
     }
 
     void Application::OnRender() {

@@ -22,5 +22,5 @@ var classpu_1_1ui_1_1elm_1_1_button =
     [ "SetX", "d4/de7/classpu_1_1ui_1_1elm_1_1_button.html#a769db72c019d7cb99f9fcc1b9868fcdd", null ],
     [ "SetY", "d4/de7/classpu_1_1ui_1_1elm_1_1_button.html#a45a817b45a09bb02e8f77058ad3b81fe", null ],
     [ "DarkerColorFactor", "d4/de7/classpu_1_1ui_1_1elm_1_1_button.html#afa07ff33700aa99860cdb0af03c70d2b", null ],
-    [ "HoverAlphaIncrement", "d4/de7/classpu_1_1ui_1_1elm_1_1_button.html#aedae485321432d002e9a3fb6ed4c4637", null ]
+    [ "HoverAlphaIncrementSteps", "d4/de7/classpu_1_1ui_1_1elm_1_1_button.html#aa46ddde12cb4b27f58f172e70d938678", null ]
 ];

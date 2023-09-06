@@ -89,7 +89,7 @@ namespace pu::ui::elm {
         public:
             static constexpr Color DefaultScrollbarColor = { 110, 110, 110, 0xFF };
 
-            static constexpr u8 ItemAlphaIncrement = 48;
+            static constexpr u8 ItemAlphaIncrementSteps = 15;
 
             static constexpr float IconItemSizesFactor = 0.8f;
 
@@ -113,8 +113,10 @@ namespace pu::ui::elm {
             u32 items_to_show;
             u32 selected_item_idx;
             i32 selected_item_alpha;
+            SigmoidIncrementer<i32> selected_item_alpha_incr;
             i32 prev_selected_item_idx;
             i32 prev_selected_item_alpha;
+            SigmoidIncrementer<i32> prev_selected_item_alpha_incr;
             u32 advanced_item_count;
             Color scrollbar_clr;
             Color items_clr;

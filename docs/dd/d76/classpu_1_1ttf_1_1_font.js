@@ -3,7 +3,7 @@ var classpu_1_1ttf_1_1_font =
     [ "Font", "dd/d76/classpu_1_1ttf_1_1_font.html#ab8d94d1d98e3d64184413d01992808e8", null ],
     [ "~Font", "dd/d76/classpu_1_1ttf_1_1_font.html#a5013c818d4c511e5a90e261e9c5e3323", null ],
     [ "EmptyFontFaceDisposingFunction", "dd/d76/classpu_1_1ttf_1_1_font.html#a11cb4d9c0e5a4a89327a2c08d211c27b", null ],
-    [ "FindValidFontFor", "dd/d76/classpu_1_1ttf_1_1_font.html#a9a58d1b9ed579353b70fff68e5fd096d", null ],
+    [ "FindValidFontFor", "dd/d76/classpu_1_1ttf_1_1_font.html#ade2451c88b207f375bbd26071051fd3f", null ],
     [ "GetFontSize", "dd/d76/classpu_1_1ttf_1_1_font.html#a75155cdaaa058dc76401839b6643ebfb", null ],
     [ "GetTextDimensions", "dd/d76/classpu_1_1ttf_1_1_font.html#adf857402bea5c385c17189953ec24b22", null ],
     [ "IsValidFontFaceIndex", "dd/d76/classpu_1_1ttf_1_1_font.html#a9bf8adcefc6de5b8ce195556184c9794", null ],

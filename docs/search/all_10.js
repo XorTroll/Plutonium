@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['textblock_0',['TextBlock',['../df/d21/classpu_1_1ui_1_1elm_1_1_text_block.html',1,'pu::ui::elm::TextBlock'],['../df/d21/classpu_1_1ui_1_1elm_1_1_text_block.html#a53765fda58529ef8f6c0012729a98f66',1,'pu::ui::elm::TextBlock::TextBlock()']]],
+  ['textblock_0',['textblock',['../df/d21/classpu_1_1ui_1_1elm_1_1_text_block.html',1,'pu::ui::elm::TextBlock'],['../df/d21/classpu_1_1ui_1_1elm_1_1_text_block.html#a53765fda58529ef8f6c0012729a98f66',1,'pu::ui::elm::TextBlock::TextBlock()']]],
   ['textmargin_1',['TextMargin',['../dc/d6c/classpu_1_1ui_1_1elm_1_1_menu.html#a28f36a9751b1e84e17f4984d32f7a8b5',1,'pu::ui::elm::Menu']]],
   ['texture_2',['Texture',['../d1/d78/namespacepu_1_1sdl2.html#a65fedc3a65aa972d8e05f05545a65fc3',1,'pu::sdl2']]],
   ['texturerenderoptions_3',['TextureRenderOptions',['../dc/d32/structpu_1_1ui_1_1render_1_1_texture_render_options.html',1,'pu::ui::render']]],
@@ -9,11 +9,11 @@ var searchData=
   ['titlex_6',['TitleX',['../d6/de9/classpu_1_1ui_1_1_dialog.html#ac88985313d52c067ba9c0790740e76eb',1,'pu::ui::Dialog']]],
   ['titley_7',['TitleY',['../d6/de9/classpu_1_1ui_1_1_dialog.html#a9b71e4ba6d98dd724ead594e76876dc9',1,'pu::ui::Dialog']]],
   ['tmp_5flog_8',['TMP_LOG',['../de/dfe/sdl2___custom_ttf_8h.html#ab2c3d9ef4492e1a489a12e22440a58d4',1,'sdl2_CustomTtf.h']]],
-  ['toast_9',['Toast',['../dc/d49/classpu_1_1ui_1_1extras_1_1_toast.html',1,'pu::ui::extras::Toast'],['../dc/d49/classpu_1_1ui_1_1extras_1_1_toast.html#a44c63bca452b4696c9561e24ecef5b0e',1,'pu::ui::extras::Toast::Toast()']]],
-  ['toggle_10',['Toggle',['../d5/d51/classpu_1_1ui_1_1elm_1_1_toggle.html',1,'pu::ui::elm::Toggle'],['../d5/d51/classpu_1_1ui_1_1elm_1_1_toggle.html#a0186168d3a517849bbeaaa8fbb540430',1,'pu::ui::elm::Toggle::Toggle(const i32 x, const i32 y, const std::string &amp;content, const u64 toggle_key, const Color clr)']]],
+  ['toast_9',['toast',['../dc/d49/classpu_1_1ui_1_1extras_1_1_toast.html#a44c63bca452b4696c9561e24ecef5b0e',1,'pu::ui::extras::Toast::Toast()'],['../dc/d49/classpu_1_1ui_1_1extras_1_1_toast.html',1,'pu::ui::extras::Toast']]],
+  ['toggle_10',['toggle',['../d5/d51/classpu_1_1ui_1_1elm_1_1_toggle.html',1,'pu::ui::elm::Toggle'],['../d5/d51/classpu_1_1ui_1_1elm_1_1_toggle.html#a0186168d3a517849bbeaaa8fbb540430',1,'pu::ui::elm::Toggle::Toggle(const i32 x, const i32 y, const std::string &amp;content, const u64 toggle_key, const Color clr)']]],
   ['togglealphaincrement_11',['ToggleAlphaIncrement',['../d5/d51/classpu_1_1ui_1_1elm_1_1_toggle.html#a4fb466d4378838309f7ad8d5f4c3e942',1,'pu::ui::elm::Toggle']]],
   ['touchhitsregion_12',['TouchHitsRegion',['../d9/d7f/namespacepu_1_1ui.html#a24a793f56cfb1058002a3a5d805d454f',1,'pu::ui']]],
-  ['touchpoint_13',['TouchPoint',['../d7/d55/structpu_1_1ui_1_1_touch_point.html',1,'pu::ui::TouchPoint'],['../d7/d55/structpu_1_1ui_1_1_touch_point.html#a463faa05a99d011664b24321d91afd94',1,'pu::ui::TouchPoint::TouchPoint()'],['../d7/d55/structpu_1_1ui_1_1_touch_point.html#a3101acfec15553d4e497641acf07f1b2',1,'pu::ui::TouchPoint::TouchPoint(const u32 x, const u32 y)']]],
+  ['touchpoint_13',['touchpoint',['../d7/d55/structpu_1_1ui_1_1_touch_point.html',1,'pu::ui::TouchPoint'],['../d7/d55/structpu_1_1ui_1_1_touch_point.html#a3101acfec15553d4e497641acf07f1b2',1,'pu::ui::TouchPoint::TouchPoint(const u32 x, const u32 y)'],['../d7/d55/structpu_1_1ui_1_1_touch_point.html#a463faa05a99d011664b24321d91afd94',1,'pu::ui::TouchPoint::TouchPoint()']]],
   ['touchpseudokey_14',['TouchPseudoKey',['../d9/d7f/namespacepu_1_1ui.html#a66f25a7f79116138f33ff92bfe628c0a',1,'pu::ui']]],
   ['ttf_5fbyteswappedunicode_15',['TTF_ByteSwappedUNICODE',['../de/dfe/sdl2___custom_ttf_8h.html#ac5c76b0b95a972409c3a75bfda4049c1',1,'sdl2_CustomTtf.h']]],
   ['ttf_5fclosefont_16',['TTF_CloseFont',['../de/dfe/sdl2___custom_ttf_8h.html#a006b7c83a8ff15bb9f9d453d48ba3e51',1,'sdl2_CustomTtf.h']]],

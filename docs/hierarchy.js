@@ -22,6 +22,8 @@ var hierarchy =
     [ "pu::ui::elm::MenuItem", "de/dbb/classpu_1_1ui_1_1elm_1_1_menu_item.html", null ],
     [ "pu::ui::render::Renderer", "d0/d27/classpu_1_1ui_1_1render_1_1_renderer.html", null ],
     [ "pu::ui::render::RendererInitOptions", "df/d6f/structpu_1_1ui_1_1render_1_1_renderer_init_options.html", null ],
+    [ "pu::ui::SigmoidIncrementer< T >", "d2/d96/classpu_1_1ui_1_1_sigmoid_incrementer.html", null ],
+    [ "pu::ui::SigmoidIncrementer< i32 >", "d2/d96/classpu_1_1ui_1_1_sigmoid_incrementer.html", null ],
     [ "pu::ui::render::TextureRenderOptions", "dc/d32/structpu_1_1ui_1_1render_1_1_texture_render_options.html", null ],
     [ "pu::ui::TouchPoint", "d7/d55/structpu_1_1ui_1_1_touch_point.html", null ]
 ];

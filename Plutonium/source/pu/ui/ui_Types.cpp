@@ -3,8 +3,6 @@
 namespace pu::ui {
 
     Color Color::FromHex(const std::string &str_clr) {
-        // Format: '#rrggbbaa'
-
         std::string r = "00";
         std::string g = "00";
         std::string b = "00";

@@ -23,7 +23,7 @@ namespace pu::ui::elm {
 
             static constexpr u8 DarkerColorFactor = 70;
 
-            static constexpr u8 HoverAlphaIncrement = 48;
+            static constexpr u8 HoverAlphaIncrementSteps = 48;
 
         private:
             i32 x;
@@ -38,6 +38,7 @@ namespace pu::ui::elm {
             OnClickCallback on_click_cb;
             bool hover;
             i32 hover_alpha;
+            SigmoidIncrementer<i32> hover_alpha_incr;
 
             inline Color MakeHoverBackgroundColor(const i32 alpha) {
                 i32 base_r = this->bg_clr.r - DarkerColorFactor;

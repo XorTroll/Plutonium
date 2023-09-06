@@ -30,6 +30,7 @@ var annotated_dup =
         [ "Dialog", "d6/de9/classpu_1_1ui_1_1_dialog.html", "d6/de9/classpu_1_1ui_1_1_dialog" ],
         [ "Layout", "d6/d11/classpu_1_1ui_1_1_layout.html", "d6/d11/classpu_1_1ui_1_1_layout" ],
         [ "Overlay", "d6/d8f/classpu_1_1ui_1_1_overlay.html", "d6/d8f/classpu_1_1ui_1_1_overlay" ],
+        [ "SigmoidIncrementer", "d2/d96/classpu_1_1ui_1_1_sigmoid_incrementer.html", "d2/d96/classpu_1_1ui_1_1_sigmoid_incrementer" ],
         [ "TouchPoint", "d7/d55/structpu_1_1ui_1_1_touch_point.html", "d7/d55/structpu_1_1ui_1_1_touch_point" ]
       ] ]
     ] ]

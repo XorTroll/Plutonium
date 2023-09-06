@@ -104,8 +104,11 @@ namespace pu::ui {
         const auto dialog_y = (render::ScreenHeight - dialog_height) / 2;
         opt_base_y += dialog_y;
 
+        auto finish = false;
         auto is_finishing = false;
         i32 initial_fade_alpha = 0;
+        SigmoidIncrementer<i32> initial_fade_alpha_incr;
+        initial_fade_alpha_incr.StartFromZero(FadeAlphaIncrementSteps, 0xFF);
         const auto base_opt_base_y = opt_base_y;
         while(true) {
             opt_base_y = base_opt_base_y;
@@ -119,7 +122,9 @@ namespace pu::ui {
                         this->selected_opt_idx--;
 
                         this->selected_opt_over_alpha = 0;
+                        this->selected_opt_over_alpha_incr.StartFromZero(OverAlphaIncrementSteps, 0xFF);
                         this->prev_selected_opt_over_alpha = 0xFF;
+                        this->prev_selected_opt_over_alpha_incr.StartToZero(OverAlphaIncrementSteps, 0xFF);
                     }
                 }
                 else if(keys_down & HidNpadButton_AnyRight) {
@@ -128,16 +133,18 @@ namespace pu::ui {
                         this->selected_opt_idx++;
 
                         this->selected_opt_over_alpha = 0;
+                        this->selected_opt_over_alpha_incr.StartFromZero(OverAlphaIncrementSteps, 0xFF);
                         this->prev_selected_opt_over_alpha = 0xFF;
+                        this->prev_selected_opt_over_alpha_incr.StartToZero(OverAlphaIncrementSteps, 0xFF);
                     }
                 }
                 else if(keys_down & HidNpadButton_A) {
                     this->user_cancelled = false;
-                    is_finishing = true;
+                    finish = true;
                 }
                 else if(keys_down & HidNpadButton_B) {
                     this->user_cancelled = true;
-                    is_finishing = true;
+                    finish = true;
                 }
                 if(tch_state.count > 0) {
                     auto cur_opt_x = dialog_x + OptionsBaseHorizontalMargin;
@@ -150,7 +157,7 @@ namespace pu::ui {
                         if(tch_pos.HitsRegion(cur_opt_x, opt_base_y, opt_width, OptionHeight)) {
                             this->selected_opt_idx = i;
                             this->user_cancelled = false;
-                            is_finishing = true;
+                            finish = true;
                             break;
                         }
 
@@ -199,25 +206,20 @@ namespace pu::ui {
                     const auto opt_name_x = cur_opt_x + OptionHorizontalMargin;
                     const auto opt_name_y = opt_base_y + ((OptionHeight - opt_name_height) / 2);
                     if(this->selected_opt_idx == i) {
+                        this->selected_opt_over_alpha_incr.Increment(this->selected_opt_over_alpha);
+
+                        auto over_clr = MakeOverColor(static_cast<u8>(initial_fade_alpha));
                         if(this->selected_opt_over_alpha < 0xFF) {
-                            const auto over_clr = MakeOverColor(static_cast<u8>(this->selected_opt_over_alpha));
-                            drawer->RenderRoundedRectangleFill(over_clr, cur_opt_x, opt_base_y, opt_width, OptionHeight, OptionBorderRadius);
-                            this->selected_opt_over_alpha += OverAlphaIncrement;
+                            over_clr = MakeOverColor(static_cast<u8>(this->selected_opt_over_alpha));
                         }
-                        else {
-                            this->selected_opt_over_alpha = 0xFF;
-                            const auto over_clr = MakeOverColor(static_cast<u8>(initial_fade_alpha));
-                            drawer->RenderRoundedRectangleFill(over_clr, cur_opt_x, opt_base_y, opt_width, OptionHeight, OptionBorderRadius);
-                        }
+                        drawer->RenderRoundedRectangleFill(over_clr, cur_opt_x, opt_base_y, opt_width, OptionHeight, OptionBorderRadius);
                     }
                     else if(this->prev_selected_opt_idx == static_cast<i32>(i)) {
+                        this->prev_selected_opt_over_alpha_incr.Increment(this->prev_selected_opt_over_alpha);
+
                         if(this->prev_selected_opt_over_alpha > 0) {
                             const auto over_clr = MakeOverColor(static_cast<u8>(this->prev_selected_opt_over_alpha));
                             drawer->RenderRoundedRectangleFill(over_clr, cur_opt_x, opt_base_y, opt_width, OptionHeight, OptionBorderRadius);
-                            this->prev_selected_opt_over_alpha -= OverAlphaIncrement;
-                        }
-                        else {
-                            this->prev_selected_opt_over_alpha = 0;
                         }
                     }
 
@@ -231,31 +233,28 @@ namespace pu::ui {
                     }
                 }
 
+                if(finish && !is_finishing) {
+                    finish = false;
+
+                    is_finishing = true;
+                    initial_fade_alpha_incr.StartToZero(FadeAlphaIncrementSteps, 0xFF);
+                }
+
                 if(is_finishing) {
-                    if(initial_fade_alpha == 0) {
+                    if(initial_fade_alpha_incr.Increment(initial_fade_alpha)) {
                         return false;
-                    }
-                    
-                    if(initial_fade_alpha > 0) {
-                        initial_fade_alpha -= FadeAlphaIncrement;
-                    }
-                    if(initial_fade_alpha < 0) {
-                        initial_fade_alpha = 0;
                     }
                 }
                 else {
-                    if(initial_fade_alpha < 0xFF) {
-                        initial_fade_alpha += FadeAlphaIncrement;
-                    }
-                    if(initial_fade_alpha > 0xFF) {
-                        initial_fade_alpha = 0xFF;
-                    }
+                    initial_fade_alpha_incr.Increment(initial_fade_alpha);
                 }
                 return true;
             });
 
             if(!ok) {
-                app_ref->CallForRenderWithRenderOver([](render::Renderer::Ref&) -> bool { return false; });
+                app_ref->CallForRenderWithRenderOver([](render::Renderer::Ref&) -> bool {
+                    return false;
+                });
                 break;
             }
         }

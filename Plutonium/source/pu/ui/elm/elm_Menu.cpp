@@ -56,7 +56,9 @@ namespace pu::ui::elm {
         this->selected_item_idx = 0;
         this->advanced_item_count = 0;
         this->selected_item_alpha = 0xFF;
+        this->selected_item_alpha_incr = {};
         this->prev_selected_item_alpha = 0;
+        this->prev_selected_item_alpha_incr = {};
         this->on_selection_changed_cb = {};
         this->cooldown_enabled = false;
         this->item_touched = false;
@@ -118,7 +120,7 @@ namespace pu::ui::elm {
                     if(this->selected_item_alpha < 0xFF) {
                         const auto focus_clr = this->MakeItemsFocusColor(this->selected_item_alpha);
                         drawer->RenderRectangleFill(focus_clr, x, cur_item_y, this->w, this->items_h);
-                        this->selected_item_alpha += ItemAlphaIncrement;
+                        this->selected_item_alpha_incr.Increment(this->selected_item_alpha);
                     }
                     else {
                         drawer->RenderRectangleFill(this->items_focus_clr, x, cur_item_y, this->w, this->items_h);
@@ -129,7 +131,7 @@ namespace pu::ui::elm {
                     if(this->prev_selected_item_alpha > 0) {
                         const auto focus_clr = this->MakeItemsFocusColor(this->prev_selected_item_alpha);
                         drawer->RenderRectangleFill(focus_clr, x, cur_item_y, this->w, this->items_h);
-                        this->prev_selected_item_alpha -= ItemAlphaIncrement;
+                        this->prev_selected_item_alpha_incr.Increment(this->prev_selected_item_alpha);
                     }
                     else {
                         drawer->RenderRectangleFill(this->items_clr, x, cur_item_y, this->w, this->items_h);
@@ -202,9 +204,11 @@ namespace pu::ui::elm {
                     this->HandleOnSelectionChanged();
                     if(i == this->selected_item_idx) {
                         this->selected_item_alpha = 0xFF;
+                        this->selected_item_alpha_incr.StartToZero(ItemAlphaIncrementSteps, 0xFF);
                     }
                     else if(static_cast<i32>(i) == this->prev_selected_item_idx) {
                         this->prev_selected_item_alpha = 0;
+                        this->prev_selected_item_alpha_incr.StartFromZero(ItemAlphaIncrementSteps, 0xFF);
                     }
                     break;
                 }
@@ -250,7 +254,9 @@ namespace pu::ui::elm {
                             this->HandleOnSelectionChanged();
 
                             this->selected_item_alpha = 0;
+                            this->selected_item_alpha_incr.StartFromZero(ItemAlphaIncrementSteps, 0xFF);
                             this->prev_selected_item_alpha = 0xFF;
+                            this->prev_selected_item_alpha_incr.StartToZero(ItemAlphaIncrementSteps, 0xFF);
                         }
                     }
                     else {
@@ -289,7 +295,9 @@ namespace pu::ui::elm {
                             this->HandleOnSelectionChanged();
 
                             this->selected_item_alpha = 0;
+                            this->selected_item_alpha_incr.StartFromZero(ItemAlphaIncrementSteps, 0xFF);
                             this->prev_selected_item_alpha = 0xFF;
+                            this->prev_selected_item_alpha_incr.StartToZero(ItemAlphaIncrementSteps, 0xFF);
                         }
                     }
                     else {

@@ -9,5 +9,6 @@ var searchData=
   ['shadowbasealpha_6',['ShadowBaseAlpha',['../dc/d6c/classpu_1_1ui_1_1elm_1_1_menu.html#a96db8cad313dedb360e4b54fea41aa6e',1,'pu::ui::elm::Menu']]],
   ['shadowheight_7',['ShadowHeight',['../dc/d6c/classpu_1_1ui_1_1elm_1_1_menu.html#ab1d3d1185ddae9d7add1237a75623f1e',1,'pu::ui::elm::Menu']]],
   ['spacebetweencontentandoptions_8',['SpaceBetweenContentAndOptions',['../d6/de9/classpu_1_1ui_1_1_dialog.html#a83362018361b92e5bd8934e62ac08849',1,'pu::ui::Dialog']]],
-  ['spacebetweenoptions_9',['SpaceBetweenOptions',['../d6/de9/classpu_1_1ui_1_1_dialog.html#ab31d5ebf1ebd0ceaacbb2591c66a91fd',1,'pu::ui::Dialog']]]
+  ['spacebetweenoptionrows_9',['SpaceBetweenOptionRows',['../d6/de9/classpu_1_1ui_1_1_dialog.html#a9c530c7ad00ab28c627b8ecb1df10381',1,'pu::ui::Dialog']]],
+  ['spacebetweenoptions_10',['SpaceBetweenOptions',['../d6/de9/classpu_1_1ui_1_1_dialog.html#ab31d5ebf1ebd0ceaacbb2591c66a91fd',1,'pu::ui::Dialog']]]
 ];

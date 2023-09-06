@@ -25,14 +25,15 @@ namespace pu::ui {
             using RenderCallback = std::function<void()>;
             using RenderOverFunction = std::function<bool(render::Renderer::Ref&)>;
 
-            static constexpr u8 DefaultFadeAlphaIncrement = 35;
+            static constexpr u8 DefaultFadeAlphaIncrementSteps = 20;
 
         protected:
             bool loaded;
             bool in_render_over;
             RenderOverFunction render_over_fn;
             bool is_shown;
-            u8 fade_alpha_increment;
+            u8 fade_alpha_increment_steps;
+            SigmoidIncrementer<i32> fade_alpha_incr;
             i32 fade_alpha;
             Layout::Ref lyt;
             Overlay::Ref ovl;
@@ -108,8 +109,8 @@ namespace pu::ui {
                 return this->fade_alpha > 0;
             }
             
-            inline void SetFadeAlphaIncrement(const u8 fade_alpha_increment) {
-                this->fade_alpha_increment = fade_alpha_increment;
+            inline void SetFadeAlphaIncrementStepCount(const u8 fade_alpha_increment_steps) {
+                this->fade_alpha_increment_steps = fade_alpha_increment_steps;
             }
             
             void OnRender();

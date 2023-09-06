@@ -1,9 +1,10 @@
 var structpu_1_1ui_1_1render_1_1_texture_render_options =
 [
+    [ "Default", "dc/d32/structpu_1_1ui_1_1render_1_1_texture_render_options.html#a444be4065f67535c7f74d6aa656ecf06", null ],
     [ "WithCustomAlpha", "dc/d32/structpu_1_1ui_1_1render_1_1_texture_render_options.html#aa4e31026155552f90a79d79ebb0b8960", null ],
+    [ "WithCustomAlphaAndDimensions", "dc/d32/structpu_1_1ui_1_1render_1_1_texture_render_options.html#afde5b55a16b80ad2f32af61a6db2de09", null ],
     [ "WithCustomDimensions", "dc/d32/structpu_1_1ui_1_1render_1_1_texture_render_options.html#a930d13b2448e2deb76b7d1acdfb16c38", null ],
     [ "alpha_mod", "dc/d32/structpu_1_1ui_1_1render_1_1_texture_render_options.html#a4b579ab4b2bb90df8ad49d633a03e22a", null ],
-    [ "Default", "dc/d32/structpu_1_1ui_1_1render_1_1_texture_render_options.html#a94c26c6ecd1916c945150a136f315050", null ],
     [ "height", "dc/d32/structpu_1_1ui_1_1render_1_1_texture_render_options.html#aaf5207a4ee7b5198863579ac8da5ba66", null ],
     [ "NoAlpha", "dc/d32/structpu_1_1ui_1_1render_1_1_texture_render_options.html#a66db5065001cf2ba752c7bb18c17300b", null ],
     [ "NoHeight", "dc/d32/structpu_1_1ui_1_1render_1_1_texture_render_options.html#aefa877cc8f0002335d30eb93d1faa4e3", null ],

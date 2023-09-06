@@ -14,6 +14,7 @@
 #include <switch.h>
 #include <string>
 #include <memory>
+#include <cmath>
 
 // Defines a static function (::New(...)) as a constructor for smart ptrs, also defines a custom type (::Ref) to simplify it
 #define PU_SMART_CTOR(type) \

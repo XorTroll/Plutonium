@@ -61,8 +61,8 @@ namespace pu::ui {
                 return { 0xB4, 0xB4, 0xC8, alpha };
             }
 
-            static constexpr u8 OverAlphaIncrement = 48;
-            static constexpr u8 FadeAlphaIncrement = 25;
+            static constexpr u8 OverAlphaIncrementSteps = 12;
+            static constexpr u8 FadeAlphaIncrementSteps = 18;
 
         private:
             std::string title_font_name;
@@ -77,8 +77,10 @@ namespace pu::ui {
             std::string cancel_opt;
             u32 selected_opt_idx;
             i32 selected_opt_over_alpha;
+            SigmoidIncrementer<i32> selected_opt_over_alpha_incr;
             i32 prev_selected_opt_idx;
             i32 prev_selected_opt_over_alpha;
+            SigmoidIncrementer<i32> prev_selected_opt_over_alpha_incr;
             bool user_cancelled;
             sdl2::Texture icon_tex;
 
