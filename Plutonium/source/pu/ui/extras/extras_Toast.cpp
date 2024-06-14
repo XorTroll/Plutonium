@@ -8,8 +8,9 @@ namespace pu::ui::extras {
         this->base_alpha = DefaulBaseAlpha;
         text_block->SetHorizontalAlign(elm::HorizontalAlign::Center);
         text_block->SetVerticalAlign(elm::VerticalAlign::Center);
+        this->text = text_block;
         this->AdjustDimensions();
-        this->Add(text_block);
+        this->Add(this->text);
     }
 
     void Toast::AdjustDimensions() {
