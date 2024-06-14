@@ -2,7 +2,6 @@ var classpu_1_1ui_1_1elm_1_1_text_block =
 [
     [ "TextBlock", "df/d21/classpu_1_1ui_1_1elm_1_1_text_block.html#a53765fda58529ef8f6c0012729a98f66", null ],
     [ "~TextBlock", "df/d21/classpu_1_1ui_1_1elm_1_1_text_block.html#a50a27767538bd5f5d11dfe8917df2462", null ],
-    [ "GetColor", "df/d21/classpu_1_1ui_1_1elm_1_1_text_block.html#a4df9ca024179ff31534463f57750c4c7", null ],
     [ "GetHeight", "df/d21/classpu_1_1ui_1_1elm_1_1_text_block.html#a70d4c6bb076406752fe4ac82dcf8de3f", null ],
     [ "GetText", "df/d21/classpu_1_1ui_1_1elm_1_1_text_block.html#a611edbe4430f49292f55c83c409bf52a", null ],
     [ "GetWidth", "df/d21/classpu_1_1ui_1_1elm_1_1_text_block.html#aaf3acb29e652f73e96d2bbc39bb56b02", null ],

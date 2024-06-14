@@ -56,8 +56,8 @@ namespace pu::ui {
             static constexpr u8 DefaultOverAlphaIncrementSteps = 12;
             static constexpr u8 DefaultFadeAlphaIncrementSteps = 18;
 
-            static constexpr Color DefaultDialogColor = { 225, 225, 225, 255 };
-            static constexpr Color DefaultOverColor = { 180, 180, 180, 255 };
+            static constexpr Color DefaultDialogColor = { 0xE1, 0xE1, 0xE1, 0xFF };
+            static constexpr Color DefaultOverColor = { 0xB4, 0xB4, 0xC8, 0xFF };
 
         private:
             std::string title_font_name;

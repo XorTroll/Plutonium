@@ -1,19 +1,5 @@
 var searchData=
 [
-  ['darkercolorfactor_0',['DarkerColorFactor',['../d4/de7/classpu_1_1ui_1_1elm_1_1_button.html#afa07ff33700aa99860cdb0af03c70d2b',1,'pu::ui::elm::Button']]],
-  ['default_5ffont_5fpath_1',['default_font_path',['../df/d6f/structpu_1_1ui_1_1render_1_1_renderer_init_options.html#aa064b0fd59c49602b364117809a4800e',1,'pu::ui::render::RendererInitOptions']]],
-  ['defaultbackgroundcolor_2',['defaultbackgroundcolor',['../d2/dcc/classpu_1_1ui_1_1elm_1_1_progress_bar.html#ad4d519a38187fd69ae4c04c62266de15',1,'pu::ui::elm::ProgressBar::DefaultBackgroundColor'],['../d6/d11/classpu_1_1ui_1_1_layout.html#ac27edb42fdd26503e9a4acf2173554af',1,'pu::ui::Layout::DefaultBackgroundColor']]],
-  ['defaultcolor_3',['defaultcolor',['../de/dbb/classpu_1_1ui_1_1elm_1_1_menu_item.html#a62b160e43a24fa6466a0f3081a2d12b1',1,'pu::ui::elm::MenuItem::DefaultColor'],['../df/d21/classpu_1_1ui_1_1elm_1_1_text_block.html#a22026d87a80576dd41eb1074097cb0f1',1,'pu::ui::elm::TextBlock::DefaultColor']]],
-  ['defaultcontentcolor_4',['DefaultContentColor',['../d6/de9/classpu_1_1ui_1_1_dialog.html#a243819febdc26a20ec183c385f522237',1,'pu::ui::Dialog']]],
-  ['defaultfadealphaincrementsteps_5',['DefaultFadeAlphaIncrementSteps',['../da/dc0/classpu_1_1ui_1_1_application.html#a3a1052b148785fbc80df9ec0e2207b94',1,'pu::ui::Application']]],
-  ['defaultfontsize_6',['DefaultFontSize',['../dd/d76/classpu_1_1ttf_1_1_font.html#abb4ac46c73eaefd27282a6b3460d2a28',1,'pu::ttf::Font']]],
-  ['defaultfontsizes_7',['DefaultFontSizes',['../d9/d7f/namespacepu_1_1ui.html#a129f8b5dc52755208a66894a05b718cb',1,'pu::ui']]],
-  ['defaultoptioncolor_8',['DefaultOptionColor',['../d6/de9/classpu_1_1ui_1_1_dialog.html#aea9d6835c8698f7cf16f33c83ad332e9',1,'pu::ui::Dialog']]],
-  ['defaultprogresscolor_9',['DefaultProgressColor',['../d2/dcc/classpu_1_1ui_1_1elm_1_1_progress_bar.html#ab50f8aea0b37568355c4683830e1467b',1,'pu::ui::elm::ProgressBar']]],
-  ['defaultradius_10',['DefaultRadius',['../d6/d8f/classpu_1_1ui_1_1_overlay.html#a556ea751947340b653b9eba75d17df33',1,'pu::ui::Overlay']]],
-  ['defaultscrollbarcolor_11',['DefaultScrollbarColor',['../dc/d6c/classpu_1_1ui_1_1elm_1_1_menu.html#a51883af6fcc217c66c9b414b025ca29f',1,'pu::ui::elm::Menu']]],
-  ['defaulttitlecolor_12',['DefaultTitleColor',['../d6/de9/classpu_1_1ui_1_1_dialog.html#a04c1f79f4619fd6d62ba050ce1bdd9a3',1,'pu::ui::Dialog']]],
-  ['defaulty_13',['DefaultY',['../dc/d49/classpu_1_1ui_1_1extras_1_1_toast.html#a23747403d5048ab9d1eb985f45942ee2',1,'pu::ui::extras::Toast']]],
-  ['dialogborderradius_14',['DialogBorderRadius',['../d6/de9/classpu_1_1ui_1_1_dialog.html#ad36b9adb17f68581dce346eba58e5ade',1,'pu::ui::Dialog']]],
-  ['dialogextrabasewidth_15',['DialogExtraBaseWidth',['../d6/de9/classpu_1_1ui_1_1_dialog.html#a613a931c7b5f212666dcde18c796165f',1,'pu::ui::Dialog']]]
+  ['elems_0',['elems',['../dc/dcd/classpu_1_1ui_1_1_container.html#a0e8fcdecac68cddf4c9baa90599569c6',1,'pu::ui::Container']]],
+  ['extra_5fdefault_5ffont_5fsizes_1',['extra_default_font_sizes',['../df/d6f/structpu_1_1ui_1_1render_1_1_renderer_init_options.html#a18a9ec1702ef30964391be62f777a1ad',1,'pu::ui::render::RendererInitOptions']]]
 ];

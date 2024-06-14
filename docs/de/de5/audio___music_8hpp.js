@@ -1,6 +1,6 @@
 var audio___music_8hpp =
 [
-    [ "Music", "de/de5/audio___music_8hpp.html#adc990fea10ff67b623e34b67ffa29413", null ],
+    [ "Music", "de/de5/audio___music_8hpp.html#ad2bc0719898a3c96c00d86780f9d8c11", null ],
     [ "DestroyMusic", "de/de5/audio___music_8hpp.html#a1f7671249f422dca75905b3becfe0a24", null ],
     [ "FadeOutMusic", "de/de5/audio___music_8hpp.html#a0514eeae754124a9bdec08e79823f08a", null ],
     [ "GetMusicVolume", "de/de5/audio___music_8hpp.html#a00fd980306751af01d7946a7d6da2044", null ],

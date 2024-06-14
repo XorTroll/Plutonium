@@ -1,5 +1,6 @@
 var classpu_1_1ui_1_1_application =
 [
+    [ "DialogPrepareCallback", "da/dc0/classpu_1_1ui_1_1_application.html#ab5ffc6305fac5a8da0d44e2d312b1855", null ],
     [ "OnInputCallback", "da/dc0/classpu_1_1ui_1_1_application.html#afa87e0a47c4ad3505f9bacf00e61dbb0", null ],
     [ "RenderCallback", "da/dc0/classpu_1_1ui_1_1_application.html#a875fd12dc58069ead6176a47c553ce05", null ],
     [ "RenderOverFunction", "da/dc0/classpu_1_1ui_1_1_application.html#a374a778ba740283e918269bda6cf33ee", null ],
@@ -10,7 +11,7 @@ var classpu_1_1ui_1_1_application =
     [ "CanBeShown", "da/dc0/classpu_1_1ui_1_1_application.html#a5b80802e3217a2eaef820c95bc3a9a6e", null ],
     [ "Close", "da/dc0/classpu_1_1ui_1_1_application.html#a9a4772b2d9c594eb0fffb264c21c8720", null ],
     [ "CloseWithFadeOut", "da/dc0/classpu_1_1ui_1_1_application.html#a4d70ac6b82dbe63b108b708a5ce64dab", null ],
-    [ "CreateShowDialog", "da/dc0/classpu_1_1ui_1_1_application.html#a85d3df4a6757a55e83ef93dae98542f0", null ],
+    [ "CreateShowDialog", "da/dc0/classpu_1_1ui_1_1_application.html#aea136818b7715fb573acece35659bd1e", null ],
     [ "EndOverlay", "da/dc0/classpu_1_1ui_1_1_application.html#a88a356add56c9d77f2b257ffb1b04c74", null ],
     [ "FadeIn", "da/dc0/classpu_1_1ui_1_1_application.html#a5e4ce9356c5a450b89dfe13ef222c7e1", null ],
     [ "FadeOut", "da/dc0/classpu_1_1ui_1_1_application.html#a5c81b0f1930c4f66288c4c1587e48ef9", null ],

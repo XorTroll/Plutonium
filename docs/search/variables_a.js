@@ -1,6 +1,7 @@
 var searchData=
 [
-  ['maxfadealpha_0',['MaxFadeAlpha',['../d6/d8f/classpu_1_1ui_1_1_overlay.html#a8b935b2d5134a9b818a2abc8f8ca166f',1,'pu::ui::Overlay']]],
-  ['maxscreenfadealpha_1',['MaxScreenFadeAlpha',['../d6/de9/classpu_1_1ui_1_1_dialog.html#a04a7b26c55c1e812ee770a61f1ec7c22',1,'pu::ui::Dialog']]],
-  ['mixerallflags_2',['MixerAllFlags',['../da/d54/namespacepu_1_1ui_1_1render.html#a0955ba96cbd635c6bc387fcb51088555',1,'pu::ui::render']]]
+  ['noalpha_0',['NoAlpha',['../dc/d32/structpu_1_1ui_1_1render_1_1_texture_render_options.html#a66db5065001cf2ba752c7bb18c17300b',1,'pu::ui::render::TextureRenderOptions']]],
+  ['noheight_1',['NoHeight',['../dc/d32/structpu_1_1ui_1_1render_1_1_texture_render_options.html#aefa877cc8f0002335d30eb93d1faa4e3',1,'pu::ui::render::TextureRenderOptions']]],
+  ['norotation_2',['NoRotation',['../dc/d32/structpu_1_1ui_1_1render_1_1_texture_render_options.html#ac4399ad9cab23155bd9d5b6e9c30b015',1,'pu::ui::render::TextureRenderOptions']]],
+  ['nowidth_3',['NoWidth',['../dc/d32/structpu_1_1ui_1_1render_1_1_texture_render_options.html#a308031ec24474b88bd71242522c42a5b',1,'pu::ui::render::TextureRenderOptions']]]
 ];

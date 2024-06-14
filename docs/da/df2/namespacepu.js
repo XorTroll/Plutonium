@@ -1,8 +1,8 @@
 var namespacepu =
 [
     [ "audio", "d8/d8f/namespacepu_1_1audio.html", [
-      [ "Music", "d8/d8f/namespacepu_1_1audio.html#adc990fea10ff67b623e34b67ffa29413", null ],
-      [ "Sfx", "d8/d8f/namespacepu_1_1audio.html#a21bc80b31e5b3e065615f5f24880e747", null ],
+      [ "Music", "d8/d8f/namespacepu_1_1audio.html#ad2bc0719898a3c96c00d86780f9d8c11", null ],
+      [ "Sfx", "d8/d8f/namespacepu_1_1audio.html#a88fc28259e6dad775921efd1d384966c", null ],
       [ "DestroyMusic", "d8/d8f/namespacepu_1_1audio.html#a1f7671249f422dca75905b3becfe0a24", null ],
       [ "DestroySfx", "d8/d8f/namespacepu_1_1audio.html#ac3d79067485a253473beeae7691fea65", null ],
       [ "FadeOutMusic", "d8/d8f/namespacepu_1_1audio.html#a0514eeae754124a9bdec08e79823f08a", null ],
@@ -21,13 +21,13 @@ var namespacepu =
       [ "StopMusic", "d8/d8f/namespacepu_1_1audio.html#adefbe54b078d8a9f1db1d50e9dfcaa7c", null ]
     ] ],
     [ "sdl2", "d1/d78/namespacepu_1_1sdl2.html", [
-      [ "Font", "d1/d78/namespacepu_1_1sdl2.html#a6cc3040689b5eaa481307108ed33d996", null ],
-      [ "Renderer", "d1/d78/namespacepu_1_1sdl2.html#a4872247f27ba13a3f3db43c110da39c0", null ],
-      [ "Surface", "d1/d78/namespacepu_1_1sdl2.html#a00c40ae94ad2fc0b78571071c62faa19", null ],
-      [ "Texture", "d1/d78/namespacepu_1_1sdl2.html#a65fedc3a65aa972d8e05f05545a65fc3", null ],
-      [ "Window", "d1/d78/namespacepu_1_1sdl2.html#a4dc2c75c183ac8dd775de27b4e26b932", null ]
+      [ "Font", "d1/d78/namespacepu_1_1sdl2.html#a047543c75bc366131d8e3a89126ef08f", null ],
+      [ "Renderer", "d1/d78/namespacepu_1_1sdl2.html#aa0c4e634637db654441e537fabc75125", null ],
+      [ "Surface", "d1/d78/namespacepu_1_1sdl2.html#a7b87c4dd0744d10e5bb57d274c10f7ac", null ],
+      [ "Texture", "d1/d78/namespacepu_1_1sdl2.html#a880d1002237395b299353a9d6c501d4e", null ],
+      [ "Window", "d1/d78/namespacepu_1_1sdl2.html#af25620a2e82c56dc48a4abc6e5f0b31f", null ]
     ] ],
     [ "ttf", "d5/d72/namespacepu_1_1ttf.html", "d5/d72/namespacepu_1_1ttf" ],
     [ "ui", "d9/d7f/namespacepu_1_1ui.html", "d9/d7f/namespacepu_1_1ui" ],
-    [ "i32", "da/df2/namespacepu.html#ad6f40fe34a42045f7df3275f60b00e99", null ]
+    [ "i32", "da/df2/namespacepu.html#abd11f97b8b05a9c48f1aebeb941a9aca", null ]
 ];

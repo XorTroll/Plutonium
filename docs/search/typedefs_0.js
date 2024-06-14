@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['font_0',['Font',['../d1/d78/namespacepu_1_1sdl2.html#a6cc3040689b5eaa481307108ed33d996',1,'pu::sdl2']]]
+  ['dialogpreparecallback_0',['DialogPrepareCallback',['../da/dc0/classpu_1_1ui_1_1_application.html#ab5ffc6305fac5a8da0d44e2d312b1855',1,'pu::ui::Application']]]
 ];
