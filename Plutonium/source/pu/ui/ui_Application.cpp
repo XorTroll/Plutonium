@@ -27,7 +27,7 @@ namespace pu::ui {
         }
     }
 
-    i32 Application::CreateShowDialog(const std::string &title, const std::string &content, const std::vector<std::string> &opts, const bool use_last_opt_as_cancel, const std::string &icon_path) {
+    i32 Application::CreateShowDialog(const std::string &title, const std::string &content, const std::vector<std::string> &opts, const bool use_last_opt_as_cancel, const std::string &icon_path, DialogPrepareCallback prepare_cb) {
         auto dialog = Dialog::New(title, content);
         for(u32 i = 0; i < opts.size(); i++) {
             const auto &opt = opts.at(i);
@@ -41,6 +41,10 @@ namespace pu::ui {
 
         if(!icon_path.empty()) {
             dialog->SetIcon(icon_path);
+        }
+
+        if(prepare_cb != nullptr) {
+            prepare_cb(dialog);
         }
 
         const auto opt = this->ShowDialog(dialog);

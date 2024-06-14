@@ -2,21 +2,21 @@
 
 namespace pu::ui::extras {
 
-    Toast::Toast(const std::string &text, const std::string &font_name, const Color text_clr, const Color bg_clr) : Overlay(0, DefaultY, 0, 0, bg_clr) {
-        this->text = elm::TextBlock::New(0, 0, text);
-        this->text->SetFont(font_name);
-        this->text->SetColor(text_clr);
-        this->text->SetHorizontalAlign(elm::HorizontalAlign::Center);
-        this->text->SetVerticalAlign(elm::VerticalAlign::Center);
+    Toast::Toast(elm::TextBlock::Ref &text_block, const Color bg_clr) : Overlay(0, DefaultY, 0, 0, bg_clr) {
+        this->height_and_text_height_factor = DefaulHeightAndTextHeightFactor;
+        this->h_margin = DefaulHorizontalMargin;
+        this->base_alpha = DefaulBaseAlpha;
+        text_block->SetHorizontalAlign(elm::HorizontalAlign::Center);
+        text_block->SetVerticalAlign(elm::VerticalAlign::Center);
         this->AdjustDimensions();
-        this->Add(this->text);
+        this->Add(text_block);
     }
 
     void Toast::AdjustDimensions() {
         const auto text_width = this->text->GetWidth();
         const auto text_height = this->text->GetHeight();
-        const auto toast_width = text_width + 2 * HorizontalMargin;
-        const auto toast_height = text_height * HeightAndTextHeightFactor;
+        const auto toast_width = text_width + 2 * this->h_margin;
+        const auto toast_height = text_height * this->height_and_text_height_factor;
         this->SetX((render::ScreenWidth - toast_width) / 2);
         this->SetWidth(toast_width);
         this->SetHeight(toast_height);
@@ -28,7 +28,7 @@ namespace pu::ui::extras {
     }
 
     void Toast::OnPreRender(render::Renderer::Ref &drawer) {
-        drawer->SetBaseRenderAlpha(BaseAlpha);
+        drawer->SetBaseRenderAlpha(this->base_alpha);
     }
 
     void Toast::OnPostRender(render::Renderer::Ref &drawer) {

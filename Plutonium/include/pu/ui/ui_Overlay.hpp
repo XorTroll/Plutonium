@@ -19,27 +19,30 @@ namespace pu::ui {
     class Overlay : public Container {
         public:
             static constexpr i32 DefaultRadius = 25;
-            static constexpr i32 MaxFadeAlpha = 200;
-            static constexpr i32 FadeAlphaVariation = 25;
+            static constexpr u8 DefaultMaxFadeAlpha = 200;
+            static constexpr u8 DefaultFadeAlphaVariation = 25;
 
         private:
             i32 fade_a;
             Color bg_clr;
             i32 rad;
             bool is_ending;
-            bool round;
+            u8 max_fade_alpha;
+            u8 fade_alpha_variation;
 
         public:
-            Overlay(const i32 x, const i32 y, const i32 width, const i32 height, const Color bg_clr, const bool round = true, const i32 radius = DefaultRadius) : Container(x, y, width, height), fade_a(0), bg_clr(bg_clr), rad(radius), is_ending(false), round(round) {}
+            Overlay(const i32 x, const i32 y, const i32 width, const i32 height, const Color bg_clr) : Container(x, y, width, height), fade_a(0), bg_clr(bg_clr), rad(DefaultRadius), is_ending(false), max_fade_alpha(DefaultMaxFadeAlpha), fade_alpha_variation(DefaultFadeAlphaVariation) {}
             PU_SMART_CTOR(Overlay)
 
-            inline void SetRadius(const i32 radius) {
-                this->rad = radius;
+            PU_CLASS_POD_GETSET(Radius, rad, i32)
+
+            inline bool HasRadius() {
+                return this->rad > 0;
             }
 
-            inline i32 GetRadius() {
-                return this->rad;
-            }
+            PU_CLASS_POD_GETSET(BackgroundColor, bg_clr, Color)
+            PU_CLASS_POD_GETSET(MaxFadeAlpha, max_fade_alpha, u8)
+            PU_CLASS_POD_GETSET(FadeAlphaVariation, fade_alpha_variation, u8)
 
             virtual void OnPreRender(render::Renderer::Ref &drawer) {}
             virtual void OnPostRender(render::Renderer::Ref &drawer) {}

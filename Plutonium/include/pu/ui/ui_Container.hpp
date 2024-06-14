@@ -50,37 +50,10 @@ namespace pu::ui {
                 return this->elems.size();
             }
 
-            inline void SetX(const i32 x) {
-                this->x = x;
-            }
-
-            inline i32 GetX() {
-                return this->x;
-            }
-
-            inline void SetY(const i32 y) {
-                this->y = y;
-            }
-
-            inline i32 GetY() {
-                return this->y;
-            }
-
-            inline void SetWidth(const i32 width) {
-                this->w = width;
-            }
-
-            inline i32 GetWidth() {
-                return this->w;
-            }
-
-            inline void SetHeight(const i32 height) {
-                this->h = height;
-            }
-            
-            inline i32 GetHeight() {
-                return this->h;
-            }
+            PU_CLASS_POD_GETSET(X, x, i32)
+            PU_CLASS_POD_GETSET(Y, y, i32)
+            PU_CLASS_POD_GETSET(Width, w, i32)
+            PU_CLASS_POD_GETSET(Height, h, i32)
 
             void PreRender();
     };

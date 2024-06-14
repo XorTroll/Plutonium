@@ -44,6 +44,63 @@ namespace pu::ui::elm {
         }
     }
 
+    void Menu::MoveUp() {
+        if(this->selected_item_idx > 0) {
+            if(this->selected_item_idx == this->advanced_item_count) {
+                this->advanced_item_count--;
+                this->selected_item_idx--;
+                this->HandleOnSelectionChanged();
+                this->ReloadItemRenders();
+            }
+            else {
+                this->prev_selected_item_idx = this->selected_item_idx;
+                this->selected_item_idx--;
+                this->HandleOnSelectionChanged();
+
+                this->selected_item_alpha = 0;
+                this->selected_item_alpha_incr.StartFromZero(this->item_alpha_incr_steps, 0xFF);
+                this->prev_selected_item_alpha = 0xFF;
+                this->prev_selected_item_alpha_incr.StartToZero(this->item_alpha_incr_steps, 0xFF);
+            }
+        }
+        else {
+            this->selected_item_idx = this->items.size() - 1;
+            this->advanced_item_count = 0;
+            if(this->items.size() >= this->items_to_show) {
+                this->advanced_item_count = this->items.size() - this->items_to_show;
+                this->ReloadItemRenders();
+            }
+        }
+    }
+
+    void Menu::MoveDown() {
+        if(!this->items.empty() && (this->selected_item_idx < (this->items.size() - 1))) {
+            if((this->selected_item_idx - this->advanced_item_count) == (this->items_to_show - 1)) {
+                this->advanced_item_count++;
+                this->selected_item_idx++;
+                this->HandleOnSelectionChanged();
+                this->ReloadItemRenders();
+            }
+            else {
+                this->prev_selected_item_idx = this->selected_item_idx;
+                this->selected_item_idx++;
+                this->HandleOnSelectionChanged();
+
+                this->selected_item_alpha = 0;
+                this->selected_item_alpha_incr.StartFromZero(this->item_alpha_incr_steps, 0xFF);
+                this->prev_selected_item_alpha = 0xFF;
+                this->prev_selected_item_alpha_incr.StartToZero(this->item_alpha_incr_steps, 0xFF);
+            }
+        }
+        else {
+            this->selected_item_idx = 0;
+            this->advanced_item_count = 0;
+            if(this->items.size() >= this->items_to_show) {
+                this->ReloadItemRenders();
+            }
+        }
+    }
+
     Menu::Menu(const i32 x, const i32 y, const i32 width, const Color items_clr, const Color items_focus_clr, const i32 items_height, const u32 items_to_show) : Element::Element() {
         this->x = x;
         this->y = y;
@@ -63,8 +120,17 @@ namespace pu::ui::elm {
         this->cooldown_enabled = false;
         this->item_touched = false;
         this->items_focus_clr = items_focus_clr;
-        this->move_mode = 0;
+        this->move_status = MoveStatus::None;
         this->font_name = GetDefaultFont(DefaultFontSize::MediumLarge);
+        this->item_alpha_incr_steps = DefaultItemAlphaIncrementSteps;
+        this->icon_item_sizes_factor = DefaultIconItemSizesFactor;
+        this->icon_margin = DefaultIconMargin;
+        this->text_margin = DefaultTextMargin;
+        this->light_scrollbar_color_factor = DefaultLightScrollbarColorFactor;
+        this->scrollbar_width = DefaultScrollbarWidth;
+        this->shadow_height = DefaultShadowHeight;
+        this->shadow_base_alpha = DefaultShadowBaseAlpha;
+        this->move_wait_time_ms = DefaultMoveWaitTimeMs;
     }
 
     void Menu::ClearItems() {
@@ -143,11 +209,11 @@ namespace pu::ui::elm {
 
                 auto &item = this->items.at(i);
                 const auto name_height = render::GetTextureHeight(name_tex);
-                auto name_x = x + TextMargin;
+                auto name_x = x + this->text_margin;
                 const auto name_y = cur_item_y + ((this->items_h - name_height) / 2);
                 if(item->HasIcon()) {
                     const auto factor = (float)render::GetTextureHeight(icon_tex) / (float)render::GetTextureWidth(icon_tex);
-                    auto icon_width = (i32)(this->items_h * IconItemSizesFactor);
+                    auto icon_width = (i32)(this->items_h * this->icon_item_sizes_factor);
                     auto icon_height = icon_width;
                     if(factor < 1) {
                         icon_height = (i32)(icon_width * factor);
@@ -156,9 +222,9 @@ namespace pu::ui::elm {
                         icon_width = (i32)(icon_height * factor);
                     }
 
-                    const auto icon_x = x + IconMargin;
+                    const auto icon_x = x + this->icon_margin;
                     const auto icon_y = cur_item_y + (this->items_h - icon_height) / 2;
-                    name_x = icon_x + icon_width + TextMargin;
+                    name_x = icon_x + icon_width + this->text_margin;
                     drawer->RenderTexture(icon_tex, icon_x, icon_y, render::TextureRenderOptions::WithCustomDimensions(icon_width, icon_height));
                 }
                 drawer->RenderTexture(name_tex, name_x, name_y);
@@ -166,17 +232,17 @@ namespace pu::ui::elm {
             }
 
             if(this->items_to_show < this->items.size()) {
-                const auto scrollbar_x = x + (this->w - ScrollbarWidth);
+                const auto scrollbar_x = x + (this->w - this->scrollbar_width);
                 const auto scrollbar_height = this->GetHeight();
-                drawer->RenderRectangleFill(this->scrollbar_clr, scrollbar_x, y, ScrollbarWidth, scrollbar_height);
+                drawer->RenderRectangleFill(this->scrollbar_clr, scrollbar_x, y, this->scrollbar_width, scrollbar_height);
 
                 const auto light_scrollbar_clr = this->MakeLighterScrollbarColor();
                 const auto scrollbar_factor = (double)this->items_to_show / (double)this->items.size();
                 const auto scrollbar_front_height = (u32)(scrollbar_height * scrollbar_factor);
                 const auto scrollbar_front_y = y + (u32)(this->advanced_item_count * ((double)scrollbar_height / (double)this->items.size()));
-                drawer->RenderRectangleFill(light_scrollbar_clr, scrollbar_x, scrollbar_front_y, ScrollbarWidth, scrollbar_front_height);
+                drawer->RenderRectangleFill(light_scrollbar_clr, scrollbar_x, scrollbar_front_y, this->scrollbar_width, scrollbar_front_height);
             }
-            drawer->RenderShadowSimple(x, cur_item_y, this->w, ShadowHeight, ShadowBaseAlpha);
+            drawer->RenderShadowSimple(x, cur_item_y, this->w, this->shadow_height, this->shadow_base_alpha);
         }
     }
 
@@ -185,11 +251,17 @@ namespace pu::ui::elm {
             return;
         }
 
-        if(this->move_mode == 1) {
+        if((this->move_status == MoveStatus::WaitingUp) || (this->move_status == MoveStatus::WaitingDown)) {
             const auto cur_time = std::chrono::steady_clock::now();
             const auto time_diff_ms = std::chrono::duration_cast<std::chrono::milliseconds>(cur_time - this->move_start_time).count();
-            if(time_diff_ms >= 150) {
-                this->move_mode = 2;
+            if(time_diff_ms >= this->move_wait_time_ms) {
+                if(this->move_status == MoveStatus::WaitingUp) {
+                    this->MoveUp();
+                }
+                else {
+                    this->MoveDown();
+                }
+                this->move_status = MoveStatus::None;
             }
         }
         if(!touch_pos.IsEmpty()) {
@@ -204,11 +276,11 @@ namespace pu::ui::elm {
                     this->HandleOnSelectionChanged();
                     if(i == this->selected_item_idx) {
                         this->selected_item_alpha = 0xFF;
-                        this->selected_item_alpha_incr.StartToZero(ItemAlphaIncrementSteps, 0xFF);
+                        this->selected_item_alpha_incr.StartToZero(this->item_alpha_incr_steps, 0xFF);
                     }
                     else if(static_cast<i32>(i) == this->prev_selected_item_idx) {
                         this->prev_selected_item_alpha = 0;
-                        this->prev_selected_item_alpha_incr.StartFromZero(ItemAlphaIncrementSteps, 0xFF);
+                        this->prev_selected_item_alpha_incr.StartFromZero(this->item_alpha_incr_steps, 0xFF);
                     }
                     break;
                 }
@@ -227,87 +299,22 @@ namespace pu::ui::elm {
             }
         }
         else {
-            if(keys_down & HidNpadButton_AnyDown) {
-                auto move = true;
-                if(keys_held & HidNpadButton_StickRDown) {
-                    move = false;
-                    if(this->move_mode == 0) {
-                        this->move_start_time = std::chrono::steady_clock::now();
-                        this->move_mode = 1;
-                    }
-                    else if(move_mode == 2) {
-                        this->move_mode = 0;
-                        move = true;
-                    }
-                }
-                if(move) {
-                    if(!this->items.empty() && (this->selected_item_idx < (this->items.size() - 1))) {
-                        if((this->selected_item_idx - this->advanced_item_count) == (this->items_to_show - 1)) {
-                            this->advanced_item_count++;
-                            this->selected_item_idx++;
-                            this->HandleOnSelectionChanged();
-                            this->ReloadItemRenders();
-                        }
-                        else {
-                            this->prev_selected_item_idx = this->selected_item_idx;
-                            this->selected_item_idx++;
-                            this->HandleOnSelectionChanged();
-
-                            this->selected_item_alpha = 0;
-                            this->selected_item_alpha_incr.StartFromZero(ItemAlphaIncrementSteps, 0xFF);
-                            this->prev_selected_item_alpha = 0xFF;
-                            this->prev_selected_item_alpha_incr.StartToZero(ItemAlphaIncrementSteps, 0xFF);
-                        }
-                    }
-                    else {
-                        this->selected_item_idx = 0;
-                        this->advanced_item_count = 0;
-                        if(this->items.size() >= this->items_to_show) {
-                            this->ReloadItemRenders();
-                        }
-                    }
+            if(keys_down & HidNpadButton_Down) {
+                this->MoveDown();
+            }
+            else if((keys_held & HidNpadButton_StickLDown) || (keys_held & HidNpadButton_StickRDown)) {
+                if(this->move_status == MoveStatus::None) {
+                    this->move_start_time = std::chrono::steady_clock::now();
+                    this->move_status = MoveStatus::WaitingDown;
                 }
             }
-            else if(keys_down & HidNpadButton_AnyUp) {
-                auto move = true;
-                if(keys_held & HidNpadButton_StickRUp) {
-                    move = false;
-                    if(this->move_mode == 0) {
-                        this->move_start_time = std::chrono::steady_clock::now();
-                        this->move_mode = 1;
-                    }
-                    else if(this->move_mode == 2) {
-                        this->move_mode = 0;
-                        move = true;
-                    }
-                }
-                if(move) {
-                    if(this->selected_item_idx > 0) {
-                        if(this->selected_item_idx == this->advanced_item_count) {
-                            this->advanced_item_count--;
-                            this->selected_item_idx--;
-                            this->HandleOnSelectionChanged();
-                            this->ReloadItemRenders();
-                        }
-                        else {
-                            this->prev_selected_item_idx = this->selected_item_idx;
-                            this->selected_item_idx--;
-                            this->HandleOnSelectionChanged();
-
-                            this->selected_item_alpha = 0;
-                            this->selected_item_alpha_incr.StartFromZero(ItemAlphaIncrementSteps, 0xFF);
-                            this->prev_selected_item_alpha = 0xFF;
-                            this->prev_selected_item_alpha_incr.StartToZero(ItemAlphaIncrementSteps, 0xFF);
-                        }
-                    }
-                    else {
-                        this->selected_item_idx = this->items.size() - 1;
-                        this->advanced_item_count = 0;
-                        if(this->items.size() >= this->items_to_show) {
-                            this->advanced_item_count = this->items.size() - this->items_to_show;
-                            this->ReloadItemRenders();
-                        }
-                    }
+            else if(keys_down & HidNpadButton_Up) {
+                this->MoveUp();
+            }
+            else if((keys_held & HidNpadButton_StickLUp) || (keys_held & HidNpadButton_StickRUp)) {
+                if(this->move_status == MoveStatus::None) {
+                    this->move_start_time = std::chrono::steady_clock::now();
+                    this->move_status = MoveStatus::WaitingUp;
                 }
             }
             else {

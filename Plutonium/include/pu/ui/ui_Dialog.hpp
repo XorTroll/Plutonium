@@ -25,44 +25,39 @@ namespace pu::ui {
             static constexpr Color DefaultContentColor = { 0x14, 0x14, 0x14, 0xFF };
             static constexpr Color DefaultOptionColor = { 0xA, 0xA, 0xA, 0xFF };
 
-            static constexpr u32 DialogExtraBaseWidth = 250;
-            static constexpr u32 DialogBorderRadius = 35;
+            static constexpr u32 DefaultDialogExtraBaseWidth = 250;
+            static constexpr u32 DefaultDialogBorderRadius = 35;
 
-            static constexpr u32 SpaceBetweenOptions = 20;
-            static constexpr u32 SpaceBetweenOptionRows = 10;
+            static constexpr u32 DefaultSpaceBetweenOptions = 20;
+            static constexpr u32 DefaultSpaceBetweenOptionRows = 10;
 
-            static constexpr u32 TitleExtraWidth = 90;
-            static constexpr u32 ContentExtraWidth = 90;
-            static constexpr u32 SpaceBetweenContentAndOptions = 140;
-            static constexpr u32 TitleTopMargin = 20; 
+            static constexpr u32 DefaultTitleExtraWidth = 90;
+            static constexpr u32 DefaultContentExtraWidth = 90;
+            static constexpr u32 DefaultSpaceBetweenContentAndOptions = 140;
+            static constexpr u32 DefaultTitleTopMargin = 20; 
 
-            static constexpr u32 TitleX = 45;
-            static constexpr u32 TitleY = 55;
-            static constexpr u32 ContentX = 45;
-            static constexpr u32 ContentY = 140;
+            static constexpr u32 DefaultTitleX = 45;
+            static constexpr u32 DefaultTitleY = 55;
+            static constexpr u32 DefaultContentX = 45;
+            static constexpr u32 DefaultContentY = 140;
 
-            static constexpr u32 IconExtraHeight = 25;
+            static constexpr u32 DefaultIconExtraHeight = 25;
 
-            static constexpr u32 OptionsBaseHorizontalMargin = 45;
-            static constexpr u32 OptionHeight = 60;
-            static constexpr u32 OptionHorizontalMargin = 30;
-            static constexpr u32 OptionBorderRadius = OptionHeight / 3;
-            static constexpr u32 OptionBottomMargin = 25;
+            static constexpr u32 DefaultOptionsBaseHorizontalMargin = 45;
+            static constexpr u32 DefaultOptionHeight = 60;
+            static constexpr u32 DefaultOptionHorizontalMargin = 30;
+            static constexpr u32 DefaultOptionBorderRadius = DefaultOptionHeight / 3;
+            static constexpr u32 DefaultOptionBottomMargin = 25;
             
-            static constexpr u8 MaxScreenFadeAlpha = 125;
+            static constexpr u8 DefaultMaxScreenFadeAlpha = 125;
 
-            static constexpr u32 IconMargin = 30;
+            static constexpr u32 DefaultIconMargin = 30;
 
-            static inline constexpr Color MakeDialogColor(const u8 alpha) {
-                return { 0xE1, 0xE1, 0xE1, alpha };
-            }
-            
-            static inline constexpr Color MakeOverColor(const u8 alpha) {
-                return { 0xB4, 0xB4, 0xC8, alpha };
-            }
+            static constexpr u8 DefaultOverAlphaIncrementSteps = 12;
+            static constexpr u8 DefaultFadeAlphaIncrementSteps = 18;
 
-            static constexpr u8 OverAlphaIncrementSteps = 12;
-            static constexpr u8 FadeAlphaIncrementSteps = 18;
+            static constexpr Color DefaultDialogColor = { 225, 225, 225, 255 };
+            static constexpr Color DefaultOverColor = { 180, 180, 180, 255 };
 
         private:
             std::string title_font_name;
@@ -83,6 +78,44 @@ namespace pu::ui {
             SigmoidIncrementer<i32> prev_selected_opt_over_alpha_incr;
             bool user_cancelled;
             sdl2::Texture icon_tex;
+            Color title_clr;
+            Color cnt_clr;
+            Color opt_clr;
+            u32 dialog_extra_base_width;
+            u32 dialog_border_radius;
+            u32 space_between_options;
+            u32 space_between_option_rows;
+            u32 title_extra_width;
+            u32 cnt_extra_width;
+            u32 space_between_cnt_and_options;
+            u32 title_top_margin;
+            u32 title_x;
+            u32 title_y;
+            u32 cnt_x;
+            u32 cnt_y;
+            u32 icon_extra_height;
+            u32 opts_base_h_margin;
+            u32 opt_height;
+            u32 opt_h_margin;
+            u32 opt_border_radius;
+            u32 opt_bottom_margin;
+            u8 max_screen_fade_alpha;
+            u32 icon_margin;
+            Color dialog_clr;
+            Color over_clr;
+            u8 over_alpha_incr_steps;
+            u8 fade_alpha_incr_steps;
+
+            inline Color MakeDialogColor(const u8 alpha) {
+                return this->dialog_clr.WithAlpha(alpha);
+            }
+            
+            inline Color MakeOverColor(const u8 alpha) {
+                return this->over_clr.WithAlpha(alpha);
+            }
+
+            void LoadTitle();
+            void LoadContent();
 
         public:
             Dialog(const std::string &title, const std::string &content);
@@ -102,6 +135,45 @@ namespace pu::ui {
             inline bool HasCancelOption() {
                 return !this->cancel_opt.empty();
             }
+
+            PU_CLASS_POD_GET(TitleColor, title_clr, Color)
+
+            void SetTitleColor(const Color clr);
+
+            void SetTitle(const std::string &new_title);
+
+            PU_CLASS_POD_GET(ContentColor, cnt_clr, Color)
+
+            void SetContentColor(const Color clr);
+
+            void SetContent(const std::string &new_content);
+
+            PU_CLASS_POD_GETSET(OptionColor, opt_clr, Color)
+
+            PU_CLASS_POD_GETSET(DialogExtraBaseWidth, dialog_extra_base_width, u32)
+            PU_CLASS_POD_GETSET(DialogBorderRadius, dialog_border_radius, u32)
+            PU_CLASS_POD_GETSET(SpaceBetweenOptions, space_between_options, u32)
+            PU_CLASS_POD_GETSET(SpaceBetweenOptionRows, space_between_option_rows, u32)
+            PU_CLASS_POD_GETSET(TitleExtraWidth, title_extra_width, u32)
+            PU_CLASS_POD_GETSET(ContentExtraWidth, cnt_extra_width, u32)
+            PU_CLASS_POD_GETSET(SpaceBetweenContentAndOptions, space_between_cnt_and_options, u32)
+            PU_CLASS_POD_GETSET(TitleTopMargin, title_top_margin, u32)
+            PU_CLASS_POD_GETSET(TitleX, title_x, u32)
+            PU_CLASS_POD_GETSET(TitleY, title_y, u32)
+            PU_CLASS_POD_GETSET(ContentX, cnt_x, u32)
+            PU_CLASS_POD_GETSET(ContentY, cnt_y, u32)
+            PU_CLASS_POD_GETSET(IconExtraHeight, icon_extra_height, u32)
+            PU_CLASS_POD_GETSET(OptionsBaseHorizontalMargin, opts_base_h_margin, u32)
+            PU_CLASS_POD_GETSET(OptionHeight, opt_height, u32)
+            PU_CLASS_POD_GETSET(OptionHorizontalMargin, opt_h_margin, u32)
+            PU_CLASS_POD_GETSET(OptionBorderRadius, opt_border_radius, u32)
+            PU_CLASS_POD_GETSET(OptionBottomMargin, opt_bottom_margin, u32)
+            PU_CLASS_POD_GETSET(MaxScreenFadeAlpha, max_screen_fade_alpha, u8)
+            PU_CLASS_POD_GETSET(IconMargin, icon_margin, u32)
+            PU_CLASS_POD_GETSET(DialogColor, dialog_clr, Color)
+            PU_CLASS_POD_GETSET(OverColor, over_clr, Color)
+            PU_CLASS_POD_GETSET(OverAlphaIncrementSteps, over_alpha_incr_steps, u8)
+            PU_CLASS_POD_GETSET(FadeAlphaIncrementSteps, fade_alpha_incr_steps, u8)
 
             void SetIcon(const std::string &icon_path);
             

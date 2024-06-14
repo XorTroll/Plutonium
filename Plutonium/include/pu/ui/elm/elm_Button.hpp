@@ -21,9 +21,11 @@ namespace pu::ui::elm {
         public:
             using OnClickCallback = std::function<void()>;
 
-            static constexpr u8 DarkerColorFactor = 70;
+            static constexpr u8 DefaultDarkerColorFactor = 70;
 
-            static constexpr u8 HoverAlphaIncrementSteps = 48;
+            static constexpr u8 DefaultHoverAlphaIncrementSteps = 48;
+
+            static constexpr DefaultFontSize DefaultContentFontSize = DefaultFontSize::MediumLarge;
 
         private:
             i32 x;
@@ -39,17 +41,19 @@ namespace pu::ui::elm {
             bool hover;
             i32 hover_alpha;
             SigmoidIncrementer<i32> hover_alpha_incr;
+            u8 darker_color_factor;
+            u8 hover_alpha_incr_steps;
 
             inline Color MakeHoverBackgroundColor(const i32 alpha) {
-                i32 base_r = this->bg_clr.r - DarkerColorFactor;
+                i32 base_r = this->bg_clr.r - this->darker_color_factor;
                 if(base_r < 0) {
                     base_r = 0;
                 }
-                i32 base_g = this->bg_clr.g - DarkerColorFactor;
+                i32 base_g = this->bg_clr.g - this->darker_color_factor;
                 if(base_g < 0) {
                     base_g = 0;
                 }
-                i32 base_b = this->bg_clr.b - DarkerColorFactor;
+                i32 base_b = this->bg_clr.b - this->darker_color_factor;
                 if(base_b < 0) {
                     base_b = 0;
                 }
@@ -104,20 +108,12 @@ namespace pu::ui::elm {
             }
 
             void SetContent(const std::string &content);
-            
-            inline Color GetContentColor() {
-                return this->cnt_clr;
-            }
+
+            PU_CLASS_POD_GET(ContentColor, cnt_clr, Color)
 
             void SetContentColor(const Color content_clr);
 
-            inline Color GetBackgroundColor() {
-                return this->bg_clr;
-            }
-
-            inline void SetBackgroundColor(const Color bg_clr) {
-                this->bg_clr = bg_clr;
-            }
+            PU_CLASS_POD_GETSET(BackgroundColor, bg_clr, Color)
 
             void SetContentFont(const std::string &font_name);
             

@@ -58,10 +58,8 @@ namespace pu::ui::elm {
 
             void SetText(const std::string &text);
             void SetFont(const std::string &font_name);
-            
-            inline Color GetColor() {
-                return this->clr;
-            }
+
+            PU_CLASS_POD_GET(Color, clr, Color)
             
             void SetColor(const Color clr);
             void OnRender(render::Renderer::Ref &drawer, const i32 x, const i32 y) override;

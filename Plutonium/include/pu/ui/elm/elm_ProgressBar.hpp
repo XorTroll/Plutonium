@@ -21,6 +21,8 @@ namespace pu::ui::elm {
             static constexpr Color DefaultProgressColor = { 139, 195, 74, 255 };
             static constexpr Color DefaultBackgroundColor = { 140, 140, 140, 255 };
 
+            static constexpr double DefaultHeightRadiusFactor = 0.333;
+
         private:
             i32 x;
             i32 y;
@@ -28,11 +30,12 @@ namespace pu::ui::elm {
             i32 h;
             double val;
             double max_val;
+            u32 radius;
             Color progress_clr;
             Color bg_clr;
 
         public:
-            ProgressBar(const i32 x, const i32 y, const i32 width, const i32 height, const double max_val) : Element(), x(x), y(y), w(width), h(height), val(0), max_val(max_val), progress_clr(DefaultProgressColor), bg_clr(DefaultBackgroundColor) {}
+            ProgressBar(const i32 x, const i32 y, const i32 width, const i32 height, const double max_val);
             PU_SMART_CTOR(ProgressBar)
 
             inline i32 GetX() override {
@@ -67,25 +70,11 @@ namespace pu::ui::elm {
                 this->h = height;
             }
 
-            inline Color GetProgressColor() {
-                return this->progress_clr;
-            }
+            PU_CLASS_POD_GETSET(Radius, radius, u32)
+            PU_CLASS_POD_GETSET(ProgressColor, progress_clr, Color)
+            PU_CLASS_POD_GETSET(BackgroundColor, bg_clr, Color)
 
-            inline void SetProgressColor(const Color progress_clr) {
-                this->progress_clr = progress_clr;
-            }
-
-            inline Color GetBackgroundColor() {
-                return this->bg_clr;
-            }
-
-            inline void SetBackgroundColor(const Color bg_clr) {
-                this->bg_clr = bg_clr;
-            }
-
-            inline double GetProgress() {
-                return this->val;
-            }
+            PU_CLASS_POD_GET(Progress, val, double)
 
             void SetProgress(const double progress);
             
@@ -97,13 +86,7 @@ namespace pu::ui::elm {
                 this->SetProgress(this->val - extra_progress);
             }
 
-            inline void SetMaxProgress(const double max_progress) {
-                this->max_val = max_progress;
-            }
-
-            inline double GetMaxProgress() {
-                return this->max_val;
-            }
+            PU_CLASS_POD_GETSET(MaxProgress, max_val, double)
 
             inline void FillProgress() {
                 this->SetProgress(this->max_val);

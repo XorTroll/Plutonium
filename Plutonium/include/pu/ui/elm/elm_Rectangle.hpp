@@ -16,8 +16,7 @@
 
 namespace pu::ui::elm {
 
-    class Rectangle : public Element
-    {
+    class Rectangle : public Element {
         private:
             i32 x;
             i32 y;
@@ -61,23 +60,9 @@ namespace pu::ui::elm {
             inline void SetHeight(const i32 height) {
                 this->h = height;
             }
-            
-            inline i32 GetBorderRadius() {
-                return this->border_radius;
-            }
 
-            inline void SetBorderRadius(const i32 border_radius) {
-                this->border_radius = border_radius;
-            }
-
-            
-            inline Color GetColor() {
-                return this->clr;
-            }
-
-            inline void SetColor(const Color clr) {
-                this->clr = clr;
-            }
+            PU_CLASS_POD_GETSET(BorderRadius, border_radius, i32)
+            PU_CLASS_POD_GETSET(Color, clr, Color)
             
             void OnRender(render::Renderer::Ref &drawer, const i32 x, const i32 y) override;
             void OnInput(const u64 keys_down, const u64 keys_up, const u64 keys_held, const TouchPoint touch_pos) override {}

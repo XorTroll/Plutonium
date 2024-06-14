@@ -5,7 +5,7 @@ namespace pu::ui {
     bool Overlay::Render(render::Renderer::Ref &drawer) {
         this->OnPreRender(drawer);
         drawer->SetBaseRenderAlpha(static_cast<u8>(this->fade_a));
-        if(this->round) {
+        if(this->rad > 0) {
             drawer->RenderRoundedRectangleFill(this->bg_clr, this->x, this->y, this->w, this->h, this->rad);
         }
         else {
@@ -21,18 +21,18 @@ namespace pu::ui {
         drawer->ResetBaseRenderAlpha();
         if(this->is_ending) {
             if(this->fade_a > 0) {
-                this->fade_a -= FadeAlphaVariation;
+                this->fade_a -= this->fade_alpha_variation;
             }
             else {
                 this->fade_a = 0;
             }
         }
         else {
-            if(this->fade_a < MaxFadeAlpha) {
-                this->fade_a += FadeAlphaVariation;
+            if(this->fade_a < this->max_fade_alpha) {
+                this->fade_a += this->fade_alpha_variation;
             }
             else {
-                this->fade_a = MaxFadeAlpha;
+                this->fade_a = this->max_fade_alpha;
             }
         }
         this->OnPostRender(drawer);

@@ -52,6 +52,10 @@ namespace pu::ui {
 
         // Expected format: '#rrggbbaa'
         static Color FromHex(const std::string &str_clr);
+
+        inline Color WithAlpha(const u8 a) {
+            return { this->r, this->g, this->b, a };
+        }
     };
 
     static inline constexpr bool TouchHitsRegion(const i32 touch_x, const i32 touch_y, const i32 region_x, const i32 region_y, const i32 region_w, const i32 region_h) {

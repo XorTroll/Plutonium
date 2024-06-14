@@ -21,6 +21,7 @@ namespace pu::ui {
 
     class Application {
         public:
+            using DialogPrepareCallback = std::function<void(Dialog::Ref&)>;
             using OnInputCallback = std::function<void(const u64, const u64, const u64, const TouchPoint)>;
             using RenderCallback = std::function<void()>;
             using RenderOverFunction = std::function<bool(render::Renderer::Ref&)>;
@@ -75,7 +76,7 @@ namespace pu::ui {
                 return dialog->Show(this);
             }
 
-            i32 CreateShowDialog(const std::string &title, const std::string &content, const std::vector<std::string> &opts, const bool use_last_opt_as_cancel, const std::string &icon_path = "");
+            i32 CreateShowDialog(const std::string &title, const std::string &content, const std::vector<std::string> &opts, const bool use_last_opt_as_cancel, const std::string &icon_path = "", DialogPrepareCallback prepare_cb = nullptr);
             
             inline void StartOverlay(Overlay::Ref ovl) {
                 if(this->ovl == nullptr) {

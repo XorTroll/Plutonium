@@ -61,13 +61,7 @@ namespace pu::ui::elm {
                 this->rend_opts.height = height;
             }
 
-            inline float GetRotationAngle() {
-                return this->rend_opts.rot_angle;
-            }
-
-            inline void SetRotationAngle(const float angle) {
-                this->rend_opts.rot_angle = angle;
-            }
+            PU_CLASS_POD_GETSET(RotationAngle, rend_opts.rot_angle, float)
 
             inline std::string GetImagePath() {
                 return this->img_path;

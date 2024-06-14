@@ -8,10 +8,13 @@ namespace pu::ui::elm {
         this->key = toggle_key;
         this->clr = clr;
         this->cnt_tex = nullptr;
-        this->fnt_name = GetDefaultFont(DefaultFontSize::MediumLarge);
+        this->fnt_name = GetDefaultFont(DefaultContentFontSize);
         this->toggle_alpha = 0xFF;
         this->checked = false;
         this->SetContent(content);
+        this->cnt_h_margin = DefaultContentHorizontalMargin;
+        this->cnt_v_margin = DefaultContentVerticalMargin;
+        this->toggle_alpha_incr = DefaultToggleAlphaIncrement;
     }
 
     Toggle::~Toggle() {
@@ -19,11 +22,11 @@ namespace pu::ui::elm {
     }
 
     i32 Toggle::GetWidth() {
-        return render::GetTextureWidth(this->cnt_tex) + 2 * ContentHorizontalMargin;
+        return render::GetTextureWidth(this->cnt_tex) + 2 * this->cnt_h_margin;
     }
 
     i32 Toggle::GetHeight() {
-        return render::GetTextureHeight(this->cnt_tex) + 2 * ContentVerticalMargin;
+        return render::GetTextureHeight(this->cnt_tex) + 2 * this->cnt_v_margin;
     }
 
     void Toggle::SetContent(const std::string &content) {
@@ -45,13 +48,13 @@ namespace pu::ui::elm {
     void Toggle::OnRender(render::Renderer::Ref &drawer, const i32 x, const i32 y) {
         const auto bg_width = this->GetWidth();
         const auto bg_height = this->GetHeight();
-        const auto cnt_x = x + ContentHorizontalMargin;
-        const auto cnt_y = y + ContentVerticalMargin;
+        const auto cnt_x = x + this->cnt_h_margin;
+        const auto cnt_y = y + this->cnt_v_margin;
         if(this->checked) {
             drawer->RenderRectangleFill(MakeBackgroundColor(0xFF), x, y, bg_width, bg_height);
             if(this->toggle_alpha < 0xFF) {
                 drawer->RenderRectangleFill(MakeBackgroundColor(0xFF - this->toggle_alpha), x, y, bg_width, bg_height);
-                this->toggle_alpha += ToggleAlphaIncrement;
+                this->toggle_alpha += this->toggle_alpha_incr;
             }
             else {
                 drawer->RenderRectangleFill(MakeBackgroundColor(0xFF), x, y, bg_width, bg_height);
@@ -62,7 +65,7 @@ namespace pu::ui::elm {
             if(this->toggle_alpha > 0)
             {
                 drawer->RenderRectangleFill(MakeBackgroundColor(this->toggle_alpha), x, y, bg_width, bg_height);
-                this->toggle_alpha -= ToggleAlphaIncrement;
+                this->toggle_alpha -= this->toggle_alpha_incr;
             }
             else {
                 drawer->RenderRectangleFill(this->clr, x, y, bg_width, bg_height);

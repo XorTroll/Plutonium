@@ -89,19 +89,27 @@ namespace pu::ui::elm {
         public:
             static constexpr Color DefaultScrollbarColor = { 110, 110, 110, 0xFF };
 
-            static constexpr u8 ItemAlphaIncrementSteps = 15;
+            static constexpr u8 DefaultItemAlphaIncrementSteps = 15;
 
-            static constexpr float IconItemSizesFactor = 0.8f;
+            static constexpr float DefaultIconItemSizesFactor = 0.8f;
 
-            static constexpr u32 IconMargin = 25;
-            static constexpr u32 TextMargin = 25;
+            static constexpr u32 DefaultIconMargin = 25;
+            static constexpr u32 DefaultTextMargin = 25;
 
-            static constexpr u8 LightScrollbarColorFactor = 30;
+            static constexpr u8 DefaultLightScrollbarColorFactor = 30;
 
-            static constexpr u32 ScrollbarWidth = 20;
+            static constexpr u32 DefaultScrollbarWidth = 20;
 
-            static constexpr u32 ShadowHeight = 5;
-            static constexpr u8 ShadowBaseAlpha = 160;
+            static constexpr u32 DefaultShadowHeight = 5;
+            static constexpr u8 DefaultShadowBaseAlpha = 160;
+
+            static constexpr s64 DefaultMoveWaitTimeMs = 150;
+
+            enum class MoveStatus : u8 {
+                None = 0,
+                WaitingUp = 1,
+                WaitingDown = 2
+            };
 
             using OnSelectionChangedCallback = std::function<void()>;
 
@@ -123,30 +131,42 @@ namespace pu::ui::elm {
             Color items_focus_clr;
             bool cooldown_enabled;
             bool item_touched;
-            u8 move_mode;
+            MoveStatus move_status;
             std::chrono::time_point<std::chrono::steady_clock> move_start_time;
             OnSelectionChangedCallback on_selection_changed_cb;
             std::vector<MenuItem::Ref> items;
             std::string font_name;
             std::vector<sdl2::Texture> loaded_name_texs;
             std::vector<sdl2::Texture> loaded_icon_texs;
+            u8 item_alpha_incr_steps;
+            float icon_item_sizes_factor;
+            u32 icon_margin;
+            u32 text_margin;
+            u8 light_scrollbar_color_factor;
+            u32 scrollbar_width;
+            u32 shadow_height;
+            u8 shadow_base_alpha;
+            s64 move_wait_time_ms;
+
 
             void ReloadItemRenders();
+            void MoveUp();
+            void MoveDown();
 
             inline Color MakeItemsFocusColor(const u8 alpha) {
-                return { this->items_focus_clr.r, this->items_focus_clr.g, this->items_focus_clr.b, alpha };
+                return this->items_focus_clr.WithAlpha(alpha);
             }
 
             inline constexpr Color MakeLighterScrollbarColor() {
-                i32 base_r = this->scrollbar_clr.r - LightScrollbarColorFactor;
+                i32 base_r = this->scrollbar_clr.r - this->light_scrollbar_color_factor;
                 if(base_r < 0) {
                     base_r = 0;
                 }
-                i32 base_g = this->scrollbar_clr.g - LightScrollbarColorFactor;
+                i32 base_g = this->scrollbar_clr.g - this->light_scrollbar_color_factor;
                 if(base_g < 0) {
                     base_g = 0;
                 }
-                i32 base_b = this->scrollbar_clr.b - LightScrollbarColorFactor;
+                i32 base_b = this->scrollbar_clr.b - this->light_scrollbar_color_factor;
                 if(base_b < 0) {
                     base_b = 0;
                 }
@@ -219,45 +239,20 @@ namespace pu::ui::elm {
                 return this->items_h * this->items_to_show;
             }
 
-            inline i32 GetItemsHeight() {
-                return this->items_h;
-            }
-
-            inline void SetItemsHeight(const i32 items_height) {
-                this->items_h = items_height;
-            }
-
-            inline i32 GetNumberOfItemsToShow() {
-                return this->items_to_show;
-            }
-
-            inline void SetNumberOfItemsToShow(const i32 items_to_show) {
-                this->items_to_show = items_to_show;
-            }
-
-            inline Color GetItemsColor() {
-                return this->items_clr;
-            }
-
-            inline void SetItemsColor(const Color items_clr) {
-                this->items_clr = items_clr;
-            }
-
-            inline Color GetItemsFocusColor() {
-                return this->items_focus_clr;
-            }
-
-            inline void SetItemsFocusColor(const Color items_focus_clr) {
-                this->items_focus_clr = items_focus_clr;
-            }
-
-            inline Color GetScrollbarColor() {
-                return this->scrollbar_clr;
-            }
-
-            inline void SetScrollbarColor(const Color scrollbar_clr) {
-                this->scrollbar_clr = scrollbar_clr;
-            }
+            PU_CLASS_POD_GETSET(ItemsHeight, items_h, i32)
+            PU_CLASS_POD_GETSET(NumberOfItemsToShow, items_to_show, i32)
+            PU_CLASS_POD_GETSET(ItemsFocusColor, items_focus_clr, Color)
+            PU_CLASS_POD_GETSET(ItemsColor, items_clr, Color)
+            PU_CLASS_POD_GETSET(ScrollbarColor, scrollbar_clr, Color)
+            PU_CLASS_POD_GETSET(ItemAlphaIncrementSteps, item_alpha_incr_steps, u8)
+            PU_CLASS_POD_GETSET(IconItemSizesFactor, icon_item_sizes_factor, float)
+            PU_CLASS_POD_GETSET(IconMargin, icon_margin, u32)
+            PU_CLASS_POD_GETSET(TextMargin, text_margin, u32)
+            PU_CLASS_POD_GETSET(LightScrollbarColorFactor, light_scrollbar_color_factor, u8)
+            PU_CLASS_POD_GETSET(ScrollbarWidth, scrollbar_width, u32)
+            PU_CLASS_POD_GETSET(ShadowHeight, shadow_height, u32)
+            PU_CLASS_POD_GETSET(ShadowBaseAlpha, shadow_base_alpha, u8)
+            PU_CLASS_POD_GETSET(MoveWaitTimeMs, move_wait_time_ms, s64)
 
             inline void SetOnSelectionChanged(OnSelectionChangedCallback on_selection_changed_cb) {
                 this->on_selection_changed_cb = on_selection_changed_cb;
@@ -269,9 +264,7 @@ namespace pu::ui::elm {
 
             void ClearItems();
 
-            inline void SetCooldownEnabled(const bool enabled) {
-                this->cooldown_enabled = enabled;
-            }
+            PU_CLASS_POD_SET(CooldownEnabled, cooldown_enabled, bool)
 
             inline MenuItem::Ref &GetSelectedItem() {
                 return this->items.at(this->selected_item_idx);
@@ -281,9 +274,7 @@ namespace pu::ui::elm {
                 return this->items;
             }
 
-            inline i32 GetSelectedIndex() {
-                return this->selected_item_idx;
-            }
+            PU_CLASS_POD_GET(SelectedIndex, selected_item_idx, i32)
 
             void SetSelectedIndex(const u32 idx);
 

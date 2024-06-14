@@ -13,10 +13,12 @@ namespace pu::ui::elm {
         this->hover = false;
         this->hover_alpha = 0xFF;
         this->hover_alpha_incr = {};
-        this->fnt_name = GetDefaultFont(DefaultFontSize::MediumLarge);
+        this->fnt_name = GetDefaultFont(DefaultContentFontSize);
         this->cnt_tex = nullptr;
         this->SetContent(content);
         this->on_click_cb = {};
+        this->darker_color_factor = DefaultDarkerColorFactor;
+        this->hover_alpha_incr_steps = DefaultHoverAlphaIncrementSteps;
     }
 
     Button::~Button() {
@@ -79,14 +81,14 @@ namespace pu::ui::elm {
 
                 this->hover = false;
                 this->hover_alpha = 0xFF;
-                this->hover_alpha_incr.StartToZero(HoverAlphaIncrementSteps, 0xFF);
+                this->hover_alpha_incr.StartToZero(this->hover_alpha_incr_steps, 0xFF);
             }
         }
         else {
             if(touch_pos.HitsRegion(this->x, this->y, this->w, this->h)) {
                 this->hover = true;
                 this->hover_alpha = 0;
-                this->hover_alpha_incr.StartFromZero(HoverAlphaIncrementSteps, 0xFF);
+                this->hover_alpha_incr.StartFromZero(this->hover_alpha_incr_steps, 0xFF);
             }
         }
     }
