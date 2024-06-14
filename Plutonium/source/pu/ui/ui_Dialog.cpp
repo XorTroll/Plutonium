@@ -19,6 +19,8 @@ namespace pu::ui {
         this->opt_font_name = GetDefaultFont(DefaultFontSize::Small);
         this->title = title;
         this->cnt = content;
+        this->title_tex = nullptr;
+        this->cnt_tex = nullptr;
         this->icon_tex = nullptr;
         this->selected_opt_idx = 0;
         this->prev_selected_opt_idx = 0;
@@ -69,7 +71,7 @@ namespace pu::ui {
 
     void Dialog::AddOption(const std::string &opt_name)  {
         this->opts.push_back(opt_name);
-        this->opt_texs.push_back(render::RenderText(this->opt_font_name, opt_name, DefaultOptionColor));
+        this->opt_texs.push_back(render::RenderText(this->opt_font_name, opt_name, this->opt_clr));
     }
 
     void Dialog::SetTitleColor(const Color clr) {
