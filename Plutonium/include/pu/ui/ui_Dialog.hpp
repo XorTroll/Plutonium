@@ -68,7 +68,6 @@ namespace pu::ui {
             sdl2::Texture title_tex;
             sdl2::Texture cnt_tex;
             std::vector<std::string> opts;
-            std::vector<sdl2::Texture> opt_texs;
             std::string cancel_opt;
             u32 selected_opt_idx;
             i32 selected_opt_over_alpha;
@@ -192,7 +191,7 @@ namespace pu::ui {
                     return false;
                 }
 
-                if(this->HasCancelOption() && (this->selected_opt_idx == (this->opt_texs.size() - 1))) {
+                if(this->HasCancelOption() && (this->selected_opt_idx == (this->opts.size() - 1))) {
                     return false;
                 }
 

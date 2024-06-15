@@ -64,14 +64,10 @@ namespace pu::ui {
         render::DeleteTexture(this->title_tex);
         render::DeleteTexture(this->cnt_tex);
         render::DeleteTexture(this->icon_tex);
-        for(auto &opt_tex: this->opt_texs) {
-            render::DeleteTexture(opt_tex);
-        }
     }
 
     void Dialog::AddOption(const std::string &opt_name)  {
         this->opts.push_back(opt_name);
-        this->opt_texs.push_back(render::RenderText(this->opt_font_name, opt_name, this->opt_clr));
     }
 
     void Dialog::SetTitleColor(const Color clr) {
@@ -104,12 +100,17 @@ namespace pu::ui {
             this->AddOption(this->cancel_opt);
         }
 
-        if(this->opt_texs.empty()) {
+        std::vector<sdl2::Texture> opts_texs;
+        for(const auto &opt: this->opts) {
+            opts_texs.push_back(render::RenderText(this->opt_font_name, opt, this->opt_clr));
+        }
+
+        if(opts_texs.empty()) {
             return 0;
         }
 
-        auto opts_width = (this->space_between_options * (this->opt_texs.size() - 1)) + 2 * this->opts_base_h_margin;
-        for(const auto &opt_tex : this->opt_texs) {
+        auto opts_width = (this->space_between_options * (opts_texs.size() - 1)) + 2 * this->opts_base_h_margin;
+        for(const auto &opt_tex : opts_texs) {
             const auto opt_width = render::GetTextureWidth(opt_tex) + 2 * this->opt_h_margin;
             opts_width += opt_width;
         }
@@ -189,7 +190,7 @@ namespace pu::ui {
                     }
                 }
                 else if(keys_down & HidNpadButton_AnyRight) {
-                    if(this->selected_opt_idx < (this->opt_texs.size() - 1)) {
+                    if(this->selected_opt_idx < (opts_texs.size() - 1)) {
                         this->prev_selected_opt_idx = this->selected_opt_idx;
                         this->selected_opt_idx++;
 
@@ -210,7 +211,7 @@ namespace pu::ui {
                 if(tch_state.count > 0) {
                     auto cur_opt_x = dialog_x + this->opts_base_h_margin;
                     for(u32 i = 0; i < this->opts.size(); i++) {
-                        auto &opt_tex = this->opt_texs.at(i);
+                        auto &opt_tex = opts_texs.at(i);
                         const auto opt_name_x = cur_opt_x + this->opt_h_margin;
                         const auto opt_name_width = render::GetTextureWidth(opt_tex);
                         const auto opt_width = opt_name_width + 2 * this->opt_h_margin;
@@ -259,8 +260,8 @@ namespace pu::ui {
                 }
 
                 auto cur_opt_x = dialog_x + this->opts_base_h_margin;
-                for(u32 i = 0; i < this->opt_texs.size(); i++) {
-                    auto &opt_tex = this->opt_texs.at(i);
+                for(u32 i = 0; i < opts_texs.size(); i++) {
+                    auto &opt_tex = opts_texs.at(i);
                     const auto opt_name_width = render::GetTextureWidth(opt_tex);
                     const auto opt_name_height = render::GetTextureHeight(opt_tex);
                     const auto opt_width = opt_name_width + 2 * this->opt_h_margin;
@@ -318,6 +319,10 @@ namespace pu::ui {
                 });
                 break;
             }
+        }
+
+        for(auto &opt_tex: opts_texs) {
+            render::DeleteTexture(opt_tex);
         }
 
         return this->selected_opt_idx;
