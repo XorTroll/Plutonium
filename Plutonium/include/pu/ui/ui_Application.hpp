@@ -36,6 +36,8 @@ namespace pu::ui {
             u8 fade_alpha_increment_steps;
             SigmoidIncrementer<i32> fade_alpha_incr;
             i32 fade_alpha;
+            sdl2::Texture fade_bg_tex;
+            Color fade_bg_clr;
             Layout::Ref lyt;
             Overlay::Ref ovl;
             u64 ovl_timeout_ms;
@@ -48,6 +50,7 @@ namespace pu::ui {
         public:
             Application(render::Renderer::Ref renderer);
             PU_SMART_CTOR(Application)
+            ~Application();
 
             inline void LoadLayout(Layout::Ref lyt) {
                 this->lyt = lyt;
@@ -103,8 +106,12 @@ namespace pu::ui {
             
             bool CallForRender();
             bool CallForRenderWithRenderOver(RenderOverFunction render_over_fn);
+
             void FadeIn();
             void FadeOut();
+            void SetFadeBackgroundImage(const std::string &path);
+            void SetFadeBackgroundColor(const Color clr);
+            void ResetFadeBackgroundImage();
             
             inline bool IsFadedIn() {
                 return this->fade_alpha > 0;

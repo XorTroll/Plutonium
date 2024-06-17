@@ -12,6 +12,7 @@ var classpu_1_1ui_1_1_layout =
     [ "GetRenderCallbacks", "d6/d11/classpu_1_1ui_1_1_layout.html#a98ffb6a05d8923b24298dc65fd552187", null ],
     [ "HasBackgroundImage", "d6/d11/classpu_1_1ui_1_1_layout.html#a162283529f76efb15db628752da72876", null ],
     [ "HasChildren", "d6/d11/classpu_1_1ui_1_1_layout.html#a66240d9592d4264ea6a8472da6794ff5", null ],
+    [ "ResetBackgroundImage", "d6/d11/classpu_1_1ui_1_1_layout.html#a5feaf9aea18eab076c4fc810efb5b3fe", null ],
     [ "SetBackgroundColor", "d6/d11/classpu_1_1ui_1_1_layout.html#a6af2213635577dc827211b558d4d1b9d", null ],
     [ "SetBackgroundImage", "d6/d11/classpu_1_1ui_1_1_layout.html#af15d0dd42c8e32c3579cc8a8fd5e30b3", null ],
     [ "SetOnInput", "d6/d11/classpu_1_1ui_1_1_layout.html#a218c687961e2245e5de19727b8dc92bd", null ],

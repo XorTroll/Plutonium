@@ -16,8 +16,14 @@ namespace pu::ui {
         this->fade_alpha = 0xFF;
         this->fade_alpha_increment_steps = DefaultFadeAlphaIncrementSteps;
         this->fade_alpha_incr = {};
+        this->fade_bg_tex = nullptr;
+        this->fade_bg_clr = { 0, 0, 0, 0xFF };
         padConfigureInput(1, HidNpadStyleSet_NpadStandard);
         padInitializeDefault(&this->input_pad);
+    }
+
+    Application::~Application() {
+        this->ResetFadeBackgroundImage();
     }
 
     void Application::Prepare() {
@@ -133,6 +139,20 @@ namespace pu::ui {
         this->CallForRender();
     }
 
+    void Application::SetFadeBackgroundImage(const std::string &path) {
+        this->ResetFadeBackgroundImage();
+        this->fade_bg_tex = render::LoadImage(path);
+    }
+
+    void Application::SetFadeBackgroundColor(const Color clr) {
+        this->ResetFadeBackgroundImage();
+        this->fade_bg_clr = clr;
+    }
+
+    void Application::ResetFadeBackgroundImage() {
+        render::DeleteTexture(this->fade_bg_tex);
+    }
+
     void Application::OnRender() {
         padUpdate(&this->input_pad);
         const auto keys_down = this->GetButtonsDown();
@@ -204,7 +224,13 @@ namespace pu::ui {
             }
         }
 
-        this->renderer->RenderRectangleFill({ 0, 0, 0, static_cast<u8>(0xFF - this->fade_alpha) }, 0, 0, render::ScreenWidth, render::ScreenHeight);
+        const auto over_alpha = static_cast<u8>(0xFF - this->fade_alpha);
+        if(this->fade_bg_tex != nullptr) {
+            this->renderer->RenderTexture(this->fade_bg_tex, 0, 0, render::TextureRenderOptions::WithCustomAlpha(over_alpha));
+        }
+        else {
+            this->renderer->RenderRectangleFill(this->fade_bg_clr.WithAlpha(over_alpha), 0, 0, render::ScreenWidth, render::ScreenHeight);
+        }
     }
 
     void Application::Close() {

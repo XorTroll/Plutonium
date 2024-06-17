@@ -15,8 +15,10 @@ var searchData=
   ['rendershadowsimple_12',['RenderShadowSimple',['../d0/d27/classpu_1_1ui_1_1render_1_1_renderer.html#a41477557dcafdb135112dbaec7980e17',1,'pu::ui::render::Renderer']]],
   ['rendertext_13',['RenderText',['../dd/d76/classpu_1_1ttf_1_1_font.html#a63b8e719cf5a6badb9b381fc4437b316',1,'pu::ttf::Font::RenderText()'],['../da/d54/namespacepu_1_1ui_1_1render.html#a5d9f841115348f57afed74d536a6b291',1,'pu::ui::render::RenderText()']]],
   ['rendertexture_14',['RenderTexture',['../d0/d27/classpu_1_1ui_1_1render_1_1_renderer.html#ace361f412b2089bec3631e4e86874396',1,'pu::ui::render::Renderer']]],
-  ['resetbaserenderalpha_15',['ResetBaseRenderAlpha',['../d0/d27/classpu_1_1ui_1_1render_1_1_renderer.html#a0acd213f97329a9f584b6983cfe61910',1,'pu::ui::render::Renderer']]],
-  ['resetbaserenderposition_16',['ResetBaseRenderPosition',['../d0/d27/classpu_1_1ui_1_1render_1_1_renderer.html#ad1726412cb8b0f2658fa8ac980d40a5c',1,'pu::ui::render::Renderer']]],
-  ['resumemusic_17',['ResumeMusic',['../d8/d8f/namespacepu_1_1audio.html#a293674d2948d7a79e2cde7796c661848',1,'pu::audio']]],
-  ['rewindmusic_18',['RewindMusic',['../d8/d8f/namespacepu_1_1audio.html#a2f34c8478347186d0209fef078d41582',1,'pu::audio']]]
+  ['resetbackgroundimage_15',['ResetBackgroundImage',['../d6/d11/classpu_1_1ui_1_1_layout.html#a5feaf9aea18eab076c4fc810efb5b3fe',1,'pu::ui::Layout']]],
+  ['resetbaserenderalpha_16',['ResetBaseRenderAlpha',['../d0/d27/classpu_1_1ui_1_1render_1_1_renderer.html#a0acd213f97329a9f584b6983cfe61910',1,'pu::ui::render::Renderer']]],
+  ['resetbaserenderposition_17',['ResetBaseRenderPosition',['../d0/d27/classpu_1_1ui_1_1render_1_1_renderer.html#ad1726412cb8b0f2658fa8ac980d40a5c',1,'pu::ui::render::Renderer']]],
+  ['resetfadebackgroundimage_18',['ResetFadeBackgroundImage',['../da/dc0/classpu_1_1ui_1_1_application.html#a9364343b7ad9d724a50cd287a4f31145',1,'pu::ui::Application']]],
+  ['resumemusic_19',['ResumeMusic',['../d8/d8f/namespacepu_1_1audio.html#a293674d2948d7a79e2cde7796c661848',1,'pu::audio']]],
+  ['rewindmusic_20',['RewindMusic',['../d8/d8f/namespacepu_1_1audio.html#a2f34c8478347186d0209fef078d41582',1,'pu::audio']]]
 ];

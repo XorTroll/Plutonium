@@ -3,19 +3,21 @@
 namespace pu::ui {
 
     Layout::~Layout() {
-        render::DeleteTexture(this->over_bg_tex);
+        this->ResetBackgroundImage();
     }
 
     void Layout::SetBackgroundImage(const std::string &path) {
-        render::DeleteTexture(this->over_bg_tex);
-        this->has_image = true;
+        this->ResetBackgroundImage();
         this->over_bg_tex = render::LoadImage(path);
     }
 
     void Layout::SetBackgroundColor(const Color clr) {
-        render::DeleteTexture(this->over_bg_tex);
-        this->has_image = false;
+        this->ResetBackgroundImage();
         this->over_bg_color = clr;
+    }
+
+    void Layout::ResetBackgroundImage() {
+        render::DeleteTexture(this->over_bg_tex);
     }
 
     TouchPoint Layout::ConsumeSimulatedTouchPosition() {

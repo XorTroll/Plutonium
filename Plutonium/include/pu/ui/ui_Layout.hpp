@@ -33,7 +33,7 @@ namespace pu::ui {
             std::vector<RenderCallback> render_cbs;
 
         public:
-            Layout() : Container(0, 0, render::ScreenWidth, render::ScreenHeight), has_image(false), over_bg_color(DefaultBackgroundColor), sim_touch_pos(), over_bg_tex(), on_ipt(), render_cbs() {}
+            Layout() : Container(0, 0, render::ScreenWidth, render::ScreenHeight), has_image(false), over_bg_color(DefaultBackgroundColor), sim_touch_pos(), over_bg_tex(nullptr), on_ipt(), render_cbs() {}
             PU_SMART_CTOR(Layout)
             ~Layout();
 
@@ -58,7 +58,7 @@ namespace pu::ui {
             }
 
             inline bool HasBackgroundImage() {
-                return this->has_image;
+                return this->over_bg_tex != nullptr;
             }
             
             inline sdl2::Texture GetBackgroundImageTexture() {
@@ -70,6 +70,7 @@ namespace pu::ui {
             }
 
             void SetBackgroundImage(const std::string &path);
+            void ResetBackgroundImage();
             void SetBackgroundColor(const Color clr);
             
             inline void SimulateTouchPosition(const TouchPoint sim_touch_pos) {
