@@ -93,14 +93,14 @@ namespace pu::ui::elm {
 
             static constexpr float DefaultIconItemSizesFactor = 0.8f;
 
-            static constexpr u32 DefaultIconMargin = 25;
-            static constexpr u32 DefaultTextMargin = 25;
+            static constexpr u32 DefaultIconMargin = 37;
+            static constexpr u32 DefaultTextMargin = 37;
 
             static constexpr u8 DefaultLightScrollbarColorFactor = 30;
 
-            static constexpr u32 DefaultScrollbarWidth = 20;
+            static constexpr u32 DefaultScrollbarWidth = 30;
 
-            static constexpr u32 DefaultShadowHeight = 5;
+            static constexpr u32 DefaultShadowHeight = 7;
             static constexpr u8 DefaultShadowBaseAlpha = 160;
 
             static constexpr s64 DefaultMoveWaitTimeMs = 150;

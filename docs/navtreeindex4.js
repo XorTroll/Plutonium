@@ -1,5 +1,13 @@
 var NAVTREEINDEX4 =
 {
+"de/dfe/sdl2___custom_ttf_8h.html#aa68127157495ec3b63d62a8febbb22ea":[2,0,0,0,0,1,0,67],
+"de/dfe/sdl2___custom_ttf_8h.html#aa976ff0751d7df9259015ea30fa6f35c":[2,0,0,0,0,1,0,13],
+"de/dfe/sdl2___custom_ttf_8h.html#aab246fd7087f737dd55420960f30d5c8":[2,0,0,0,0,1,0,56],
+"de/dfe/sdl2___custom_ttf_8h.html#aae080416313819a910740cbeefe22df8":[2,0,0,0,0,1,0,51],
+"de/dfe/sdl2___custom_ttf_8h.html#aaf268cfbe04686badc430312de63caf3":[2,0,0,0,0,1,0,29],
+"de/dfe/sdl2___custom_ttf_8h.html#ab27048c94a69566e8eb7e70a281858ab":[2,0,0,0,0,1,0,21],
+"de/dfe/sdl2___custom_ttf_8h.html#ab2c3d9ef4492e1a489a12e22440a58d4":[2,0,0,0,0,1,0,4],
+"de/dfe/sdl2___custom_ttf_8h.html#aba8b8a98dd3909c5524907f5977ea2d2":[2,0,0,0,0,1,0,10],
 "de/dfe/sdl2___custom_ttf_8h.html#abc9c7c175a1d7d16a561ef2151b50cc4":[2,0,0,0,0,1,0,6],
 "de/dfe/sdl2___custom_ttf_8h.html#ac3b14e1c2946c0cf19776fe568d9abcf":[2,0,0,0,0,1,0,25],
 "de/dfe/sdl2___custom_ttf_8h.html#ac5c76b0b95a972409c3a75bfda4049c1":[2,0,0,0,0,1,0,26],

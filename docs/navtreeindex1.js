@@ -1,5 +1,8 @@
 var NAVTREEINDEX1 =
 {
+"d5/d51/classpu_1_1ui_1_1elm_1_1_toggle.html#a9d1beb36ba3a1714ec16ccefea0592d8":[0,0,0,3,0,8,16],
+"d5/d51/classpu_1_1ui_1_1elm_1_1_toggle.html#a9d1beb36ba3a1714ec16ccefea0592d8":[1,0,0,1,0,8,16],
+"d5/d51/classpu_1_1ui_1_1elm_1_1_toggle.html#ab192194d4ee8c692baba173ab8d3823e":[0,0,0,3,0,8,15],
 "d5/d51/classpu_1_1ui_1_1elm_1_1_toggle.html#ab192194d4ee8c692baba173ab8d3823e":[1,0,0,1,0,8,15],
 "d5/d51/classpu_1_1ui_1_1elm_1_1_toggle.html#af623ffcba145eb610e462697cba933b7":[0,0,0,3,0,8,13],
 "d5/d51/classpu_1_1ui_1_1elm_1_1_toggle.html#af623ffcba145eb610e462697cba933b7":[1,0,0,1,0,8,13],
@@ -246,8 +249,5 @@ var NAVTREEINDEX1 =
 "d7/d55/structpu_1_1ui_1_1_touch_point.html#ad1919bedf08cd88f0f0b5d085f435910":[0,0,0,3,10,3],
 "d7/d55/structpu_1_1ui_1_1_touch_point.html#ad1919bedf08cd88f0f0b5d085f435910":[1,0,0,1,10,3],
 "d8/d8f/namespacepu_1_1audio.html":[0,0,0,0],
-"d8/d8f/namespacepu_1_1audio.html#a00fd980306751af01d7946a7d6da2044":[0,0,0,0,5],
-"d8/d8f/namespacepu_1_1audio.html#a0514eeae754124a9bdec08e79823f08a":[0,0,0,0,4],
-"d8/d8f/namespacepu_1_1audio.html#a07bae3d9442a509f1729c72ba4b4c92c":[0,0,0,0,6],
-"d8/d8f/namespacepu_1_1audio.html#a101f963439aaf0a9a5229de9a9545ab1":[0,0,0,0,15]
+"d8/d8f/namespacepu_1_1audio.html#a00fd980306751af01d7946a7d6da2044":[0,0,0,0,5]
 };

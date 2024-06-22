@@ -177,7 +177,10 @@ namespace pu::ui {
             const auto ok = app_ref->CallForRenderWithRenderOver([&](render::Renderer::Ref &drawer) -> bool {
                 const auto keys_down = app_ref->GetButtonsDown();
                 const auto tch_state = app_ref->GetTouchState();
-                const TouchPoint tch_pos = { tch_state.touches[0].x, tch_state.touches[0].y };
+                const TouchPoint tch_pos = {
+                    (u32)((double)tch_state.touches[0].x * render::ScreenFactor),
+                    (u32)((double)tch_state.touches[0].y * render::ScreenFactor)
+                };
                 if(keys_down & HidNpadButton_AnyLeft) {
                     if(this->selected_opt_idx > 0) {
                         this->prev_selected_opt_idx = this->selected_opt_idx;

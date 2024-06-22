@@ -18,8 +18,13 @@
 
 namespace pu::ui::render {
 
-    constexpr u32 ScreenWidth = 1280;
-    constexpr u32 ScreenHeight = 720;
+    constexpr u32 BaseScreenWidth = 1280;
+    constexpr u32 BaseScreenHeight = 720;
+    
+    constexpr u32 ScreenWidth = 1920;
+    constexpr u32 ScreenHeight = 1080;
+
+    constexpr double ScreenFactor = (double)ScreenWidth / (double)BaseScreenWidth;
 
     struct RendererInitOptions {
         u32 sdl_flags;

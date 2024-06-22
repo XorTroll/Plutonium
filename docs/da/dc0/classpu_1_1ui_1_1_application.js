@@ -21,6 +21,7 @@ var classpu_1_1ui_1_1_application =
     [ "GetButtonsUp", "da/dc0/classpu_1_1ui_1_1_application.html#a5a6d5b7eb26c33af458ca8b8b09677eb", null ],
     [ "GetLayout", "da/dc0/classpu_1_1ui_1_1_application.html#aaf460c32bd5e2c4d211465f4a1195fd5", null ],
     [ "GetTouchState", "da/dc0/classpu_1_1ui_1_1_application.html#a225ff9d81b7b01cda0686ff3fa5d05e1", null ],
+    [ "HasFadeBackgroundImage", "da/dc0/classpu_1_1ui_1_1_application.html#a8dc4882d14f248d483312979c961a5c1", null ],
     [ "IsFadedIn", "da/dc0/classpu_1_1ui_1_1_application.html#abc4dca38f274ea1ed87702c40e875fd3", null ],
     [ "IsShown", "da/dc0/classpu_1_1ui_1_1_application.html#a04f910e1f6ac91784093220b38433a06", null ],
     [ "LoadLayout", "da/dc0/classpu_1_1ui_1_1_application.html#adfde79d1bcbd14fba0a33239855ca320", null ],

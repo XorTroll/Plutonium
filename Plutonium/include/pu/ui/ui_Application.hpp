@@ -109,9 +109,6 @@ namespace pu::ui {
 
             void FadeIn();
             void FadeOut();
-            void SetFadeBackgroundImage(const std::string &path);
-            void SetFadeBackgroundColor(const Color clr);
-            void ResetFadeBackgroundImage();
             
             inline bool IsFadedIn() {
                 return this->fade_alpha > 0;
@@ -120,6 +117,15 @@ namespace pu::ui {
             inline void SetFadeAlphaIncrementStepCount(const u8 fade_alpha_increment_steps) {
                 this->fade_alpha_increment_steps = fade_alpha_increment_steps;
             }
+
+            void SetFadeBackgroundImage(const std::string &path);
+            void ResetFadeBackgroundImage();
+
+            inline bool HasFadeBackgroundImage() {
+                return this->fade_bg_tex != nullptr;
+            }
+
+            void SetFadeBackgroundColor(const Color clr);
             
             void OnRender();
             void Close();

@@ -21,10 +21,13 @@ var namespacepu_1_1ui_1_1render =
     [ "LoadImage", "da/d54/namespacepu_1_1ui_1_1render.html#ac6a58de115048eb3260a085d5fcfc3f0", null ],
     [ "RenderText", "da/d54/namespacepu_1_1ui_1_1render.html#a5d9f841115348f57afed74d536a6b291", null ],
     [ "SetAlphaValue", "da/d54/namespacepu_1_1ui_1_1render.html#ab22ff2d91f71f95a4e889cc942d69b43", null ],
+    [ "BaseScreenHeight", "da/d54/namespacepu_1_1ui_1_1render.html#a946cfa807d6452bb288d6a619211d962", null ],
+    [ "BaseScreenWidth", "da/d54/namespacepu_1_1ui_1_1render.html#a7a90721ab0edd200b5587049de359727", null ],
     [ "IMGAllFlags", "da/d54/namespacepu_1_1ui_1_1render.html#aca8de816c249f71ecec38137222352f2", null ],
     [ "MixerAllFlags", "da/d54/namespacepu_1_1ui_1_1render.html#a0955ba96cbd635c6bc387fcb51088555", null ],
     [ "RendererHardwareFlags", "da/d54/namespacepu_1_1ui_1_1render.html#ae9f1375477d6776bad834896952ecaf2", null ],
     [ "RendererSoftwareFlags", "da/d54/namespacepu_1_1ui_1_1render.html#aaedd6a7faa3d79a5e6cf58120fe8626b", null ],
+    [ "ScreenFactor", "da/d54/namespacepu_1_1ui_1_1render.html#ae3cf1b4af112241c6f3de6a58659c23a", null ],
     [ "ScreenHeight", "da/d54/namespacepu_1_1ui_1_1render.html#af387b6301a55da00e921539845d9f357", null ],
     [ "ScreenWidth", "da/d54/namespacepu_1_1ui_1_1render.html#ae5920eeeae0aa4c3eac8073c2471ebb6", null ]
 ];

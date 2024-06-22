@@ -162,7 +162,11 @@ namespace pu::ui {
         const auto tch_state = this->GetTouchState();
         TouchPoint tch_pos = {};
         if(tch_state.count > 0) {
-            tch_pos = { tch_state.touches[0].x, tch_state.touches[0].y };
+            // Touch positions are based on a default 1280x720 size, need to scale them to our width/height
+            tch_pos = {
+                (u32)((double)tch_state.touches[0].x * render::ScreenFactor),
+                (u32)((double)tch_state.touches[0].y * render::ScreenFactor)
+            };
         }
         const auto sim_tch_pos = this->lyt->ConsumeSimulatedTouchPosition();
         if(!sim_tch_pos.IsEmpty()) {

@@ -27,7 +27,7 @@ namespace pu::ui {
         Count
     };
     
-    constexpr u32 DefaultFontSizes[static_cast<u32>(DefaultFontSize::Count)] = { 18, 20, 25, 30 };
+    constexpr u32 DefaultFontSizes[static_cast<u32>(DefaultFontSize::Count)] = { 27, 30, 37, 45 };
 
     inline std::string MakeDefaultFontName(const u32 font_size) {
         return "DefaultFont@" + std::to_string(font_size);

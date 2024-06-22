@@ -15,10 +15,13 @@ var render___renderer_8hpp =
     [ "GetTextHeight", "d4/dbe/render___renderer_8hpp.html#ace12eee5e824e7246730c4141cc73210", null ],
     [ "GetTextWidth", "d4/dbe/render___renderer_8hpp.html#abb9cc63606c0f861f03830cf1bb3cf88", null ],
     [ "RenderText", "d4/dbe/render___renderer_8hpp.html#a5d9f841115348f57afed74d536a6b291", null ],
+    [ "BaseScreenHeight", "d4/dbe/render___renderer_8hpp.html#a946cfa807d6452bb288d6a619211d962", null ],
+    [ "BaseScreenWidth", "d4/dbe/render___renderer_8hpp.html#a7a90721ab0edd200b5587049de359727", null ],
     [ "IMGAllFlags", "d4/dbe/render___renderer_8hpp.html#aca8de816c249f71ecec38137222352f2", null ],
     [ "MixerAllFlags", "d4/dbe/render___renderer_8hpp.html#a0955ba96cbd635c6bc387fcb51088555", null ],
     [ "RendererHardwareFlags", "d4/dbe/render___renderer_8hpp.html#ae9f1375477d6776bad834896952ecaf2", null ],
     [ "RendererSoftwareFlags", "d4/dbe/render___renderer_8hpp.html#aaedd6a7faa3d79a5e6cf58120fe8626b", null ],
+    [ "ScreenFactor", "d4/dbe/render___renderer_8hpp.html#ae3cf1b4af112241c6f3de6a58659c23a", null ],
     [ "ScreenHeight", "d4/dbe/render___renderer_8hpp.html#af387b6301a55da00e921539845d9f357", null ],
     [ "ScreenWidth", "d4/dbe/render___renderer_8hpp.html#ae5920eeeae0aa4c3eac8073c2471ebb6", null ]
 ];

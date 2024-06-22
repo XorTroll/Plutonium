@@ -18,7 +18,7 @@ namespace pu::ui {
 
     class Overlay : public Container {
         public:
-            static constexpr i32 DefaultRadius = 25;
+            static constexpr i32 DefaultRadius = 37;
             static constexpr u8 DefaultMaxFadeAlpha = 200;
             static constexpr u8 DefaultFadeAlphaVariation = 25;
 

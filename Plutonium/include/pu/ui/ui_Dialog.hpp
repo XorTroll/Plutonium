@@ -25,33 +25,33 @@ namespace pu::ui {
             static constexpr Color DefaultContentColor = { 0x14, 0x14, 0x14, 0xFF };
             static constexpr Color DefaultOptionColor = { 0xA, 0xA, 0xA, 0xFF };
 
-            static constexpr u32 DefaultDialogExtraBaseWidth = 250;
-            static constexpr u32 DefaultDialogBorderRadius = 35;
+            static constexpr u32 DefaultDialogExtraBaseWidth = 375;
+            static constexpr u32 DefaultDialogBorderRadius = 52;
 
-            static constexpr u32 DefaultSpaceBetweenOptions = 20;
-            static constexpr u32 DefaultSpaceBetweenOptionRows = 10;
+            static constexpr u32 DefaultSpaceBetweenOptions = 30;
+            static constexpr u32 DefaultSpaceBetweenOptionRows = 15;
 
-            static constexpr u32 DefaultTitleExtraWidth = 90;
-            static constexpr u32 DefaultContentExtraWidth = 90;
-            static constexpr u32 DefaultSpaceBetweenContentAndOptions = 140;
-            static constexpr u32 DefaultTitleTopMargin = 20; 
+            static constexpr u32 DefaultTitleExtraWidth = 135;
+            static constexpr u32 DefaultContentExtraWidth = 135;
+            static constexpr u32 DefaultSpaceBetweenContentAndOptions = 210;
+            static constexpr u32 DefaultTitleTopMargin = 30;
 
-            static constexpr u32 DefaultTitleX = 45;
-            static constexpr u32 DefaultTitleY = 55;
-            static constexpr u32 DefaultContentX = 45;
-            static constexpr u32 DefaultContentY = 140;
+            static constexpr u32 DefaultTitleX = 67;
+            static constexpr u32 DefaultTitleY = 82;
+            static constexpr u32 DefaultContentX = 67;
+            static constexpr u32 DefaultContentY = 210;
 
-            static constexpr u32 DefaultIconExtraHeight = 25;
+            static constexpr u32 DefaultIconExtraHeight = 37;
 
-            static constexpr u32 DefaultOptionsBaseHorizontalMargin = 45;
-            static constexpr u32 DefaultOptionHeight = 60;
-            static constexpr u32 DefaultOptionHorizontalMargin = 30;
+            static constexpr u32 DefaultOptionsBaseHorizontalMargin = 67;
+            static constexpr u32 DefaultOptionHeight = 90;
+            static constexpr u32 DefaultOptionHorizontalMargin = 45;
             static constexpr u32 DefaultOptionBorderRadius = DefaultOptionHeight / 3;
-            static constexpr u32 DefaultOptionBottomMargin = 25;
+            static constexpr u32 DefaultOptionBottomMargin = 37;
             
             static constexpr u8 DefaultMaxScreenFadeAlpha = 125;
 
-            static constexpr u32 DefaultIconMargin = 30;
+            static constexpr u32 DefaultIconMargin = 45;
 
             static constexpr u8 DefaultOverAlphaIncrementSteps = 12;
             static constexpr u8 DefaultFadeAlphaIncrementSteps = 18;

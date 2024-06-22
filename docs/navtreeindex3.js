@@ -1,5 +1,13 @@
 var NAVTREEINDEX3 =
 {
+"dc/d32/structpu_1_1ui_1_1render_1_1_texture_render_options.html#a4b579ab4b2bb90df8ad49d633a03e22a":[0,0,0,3,2,2,4],
+"dc/d32/structpu_1_1ui_1_1render_1_1_texture_render_options.html#a4b579ab4b2bb90df8ad49d633a03e22a":[1,0,0,1,2,2,4],
+"dc/d32/structpu_1_1ui_1_1render_1_1_texture_render_options.html#a66db5065001cf2ba752c7bb18c17300b":[0,0,0,3,2,2,6],
+"dc/d32/structpu_1_1ui_1_1render_1_1_texture_render_options.html#a66db5065001cf2ba752c7bb18c17300b":[1,0,0,1,2,2,6],
+"dc/d32/structpu_1_1ui_1_1render_1_1_texture_render_options.html#a8b2642bbebad684c07f9e692d053952b":[0,0,0,3,2,2,11],
+"dc/d32/structpu_1_1ui_1_1render_1_1_texture_render_options.html#a8b2642bbebad684c07f9e692d053952b":[1,0,0,1,2,2,11],
+"dc/d32/structpu_1_1ui_1_1render_1_1_texture_render_options.html#a930d13b2448e2deb76b7d1acdfb16c38":[0,0,0,3,2,2,3],
+"dc/d32/structpu_1_1ui_1_1render_1_1_texture_render_options.html#a930d13b2448e2deb76b7d1acdfb16c38":[1,0,0,1,2,2,3],
 "dc/d32/structpu_1_1ui_1_1render_1_1_texture_render_options.html#aa4e31026155552f90a79d79ebb0b8960":[0,0,0,3,2,2,1],
 "dc/d32/structpu_1_1ui_1_1render_1_1_texture_render_options.html#aa4e31026155552f90a79d79ebb0b8960":[1,0,0,1,2,2,1],
 "dc/d32/structpu_1_1ui_1_1render_1_1_texture_render_options.html#aaf5207a4ee7b5198863579ac8da5ba66":[0,0,0,3,2,2,5],
@@ -241,13 +249,5 @@ var NAVTREEINDEX3 =
 "de/dfe/sdl2___custom_ttf_8h.html#a985c8d64368bf74aeabbf92a281b487e":[2,0,0,0,0,1,0,54],
 "de/dfe/sdl2___custom_ttf_8h.html#a98e376b293c26e85ae636e518fb27822":[2,0,0,0,0,1,0,23],
 "de/dfe/sdl2___custom_ttf_8h.html#aa215d7d4fe202960904507a6ad4e6097":[2,0,0,0,0,1,0,52],
-"de/dfe/sdl2___custom_ttf_8h.html#aa503af9d6b9e24d596927bda18f127af":[2,0,0,0,0,1,0,71],
-"de/dfe/sdl2___custom_ttf_8h.html#aa68127157495ec3b63d62a8febbb22ea":[2,0,0,0,0,1,0,67],
-"de/dfe/sdl2___custom_ttf_8h.html#aa976ff0751d7df9259015ea30fa6f35c":[2,0,0,0,0,1,0,13],
-"de/dfe/sdl2___custom_ttf_8h.html#aab246fd7087f737dd55420960f30d5c8":[2,0,0,0,0,1,0,56],
-"de/dfe/sdl2___custom_ttf_8h.html#aae080416313819a910740cbeefe22df8":[2,0,0,0,0,1,0,51],
-"de/dfe/sdl2___custom_ttf_8h.html#aaf268cfbe04686badc430312de63caf3":[2,0,0,0,0,1,0,29],
-"de/dfe/sdl2___custom_ttf_8h.html#ab27048c94a69566e8eb7e70a281858ab":[2,0,0,0,0,1,0,21],
-"de/dfe/sdl2___custom_ttf_8h.html#ab2c3d9ef4492e1a489a12e22440a58d4":[2,0,0,0,0,1,0,4],
-"de/dfe/sdl2___custom_ttf_8h.html#aba8b8a98dd3909c5524907f5977ea2d2":[2,0,0,0,0,1,0,10]
+"de/dfe/sdl2___custom_ttf_8h.html#aa503af9d6b9e24d596927bda18f127af":[2,0,0,0,0,1,0,71]
 };
