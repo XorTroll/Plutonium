@@ -156,13 +156,21 @@ namespace pu::ui::render {
         if(opts.rot_angle != TextureRenderOptions::NoRotation) {
             angle = opts.rot_angle;
         }
-        if(opts.alpha_mod != TextureRenderOptions::NoAlpha) {
+
+        const auto has_alpha_mod = opts.alpha_mod != TextureRenderOptions::NoAlpha;
+        if(has_alpha_mod) {
             SetAlphaValue(texture, static_cast<u8>(opts.alpha_mod));
         }
         if(this->base_a >= 0) {
             SetAlphaValue(texture, static_cast<u8>(this->base_a));
         }
+
         SDL_RenderCopyEx(g_Renderer, texture, nullptr, &pos, angle, nullptr, SDL_FLIP_NONE);
+
+        if(has_alpha_mod || (this->base_a >= 0)) {
+            // Aka unset alpha value, needed if the same texture is rendered several times with different alphas
+            SetAlphaValue(texture, 0xFF);
+        }
     }
 
     void Renderer::RenderRectangle(const Color clr, const i32 x, const i32 y, const i32 width, const i32 height) {

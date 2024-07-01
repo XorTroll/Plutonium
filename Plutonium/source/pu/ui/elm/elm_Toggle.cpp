@@ -2,7 +2,7 @@
 
 namespace pu::ui::elm {
 
-    Toggle::Toggle(const i32 x, const i32 y, const std::string &content, const u64 toggle_key, const Color clr) : Element::Element() {
+    Toggle::Toggle(const i32 x, const i32 y, const std::string &content, const u64 toggle_key, const Color clr) : Element() {
         this->x = x;
         this->y = y;
         this->key = toggle_key;

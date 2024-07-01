@@ -2,7 +2,7 @@
 
 namespace pu::ui::elm {
 
-    TextBlock::TextBlock(const i32 x, const i32 y, const std::string &text) : Element::Element() {
+    TextBlock::TextBlock(const i32 x, const i32 y, const std::string &text) : Element() {
         this->x = x;
         this->y = y;
         this->clr = DefaultColor;

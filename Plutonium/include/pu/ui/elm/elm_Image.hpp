@@ -19,15 +19,14 @@ namespace pu::ui::elm {
     class Image : public Element {
         private:
             std::string img_path;
-            sdl2::Texture img_tex;
+            sdl2::TextureHandle::Ref img_tex;
             render::TextureRenderOptions rend_opts;
             i32 x;
             i32 y;
 
         public:
-            Image(const i32 x, const i32 y, const std::string &image_path);
+            Image(const i32 x, const i32 y, sdl2::TextureHandle::Ref image);
             PU_SMART_CTOR(Image)
-            ~Image();
 
             inline i32 GetX() override {
                 return this->x;
@@ -62,12 +61,8 @@ namespace pu::ui::elm {
             }
 
             PU_CLASS_POD_GETSET(RotationAngle, rend_opts.rot_angle, float)
-
-            inline std::string GetImagePath() {
-                return this->img_path;
-            }
             
-            void SetImage(const std::string &image_path);
+            void SetImage(sdl2::TextureHandle::Ref image);
             
             inline bool IsImageValid() {
                 return this->img_tex != nullptr;

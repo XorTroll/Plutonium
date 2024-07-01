@@ -6,9 +6,9 @@ namespace pu::ui {
         this->ResetBackgroundImage();
     }
 
-    void Layout::SetBackgroundImage(const std::string &path) {
+    void Layout::SetBackgroundImage(sdl2::TextureHandle::Ref bg_tex) {
         this->ResetBackgroundImage();
-        this->over_bg_tex = render::LoadImage(path);
+        this->over_bg_tex = bg_tex;
     }
 
     void Layout::SetBackgroundColor(const Color clr) {
@@ -17,7 +17,7 @@ namespace pu::ui {
     }
 
     void Layout::ResetBackgroundImage() {
-        render::DeleteTexture(this->over_bg_tex);
+        this->over_bg_tex = {};
     }
 
     TouchPoint Layout::ConsumeSimulatedTouchPosition() {

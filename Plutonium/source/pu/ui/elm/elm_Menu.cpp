@@ -8,14 +8,8 @@ namespace pu::ui::elm {
         this->on_key_cb_keys.push_back(key);
     }
 
-    void MenuItem::SetIcon(const std::string &icon_path) {
-        struct stat st;
-        if(stat(icon_path.c_str(), &st) == 0) {
-            this->icon_path = icon_path;
-        }
-        else {
-            this->icon_path = "";
-        }
+    void MenuItem::SetIcon(sdl2::TextureHandle::Ref icon) {
+        this->icon = icon;
     }
 
     void Menu::ReloadItemRenders() {
@@ -23,24 +17,12 @@ namespace pu::ui::elm {
             render::DeleteTexture(name_tex);
         }
         this->loaded_name_texs.clear();
-        for(auto &icon_tex : this->loaded_icon_texs) {
-            render::DeleteTexture(icon_tex);
-        }
-        this->loaded_icon_texs.clear();
     
         const auto item_count = this->GetItemCount();
         for(u32 i = this->advanced_item_count; i < (this->advanced_item_count + item_count); i++) {
             auto &item = this->items.at(i);
             auto name_tex = render::RenderText(this->font_name, item->GetName(), item->GetColor());
             this->loaded_name_texs.push_back(name_tex);
-
-            if(item->HasIcon()) {
-                auto icon_tex = render::LoadImage(item->GetIconPath());
-                this->loaded_icon_texs.push_back(icon_tex);
-            }
-            else {
-                this->loaded_icon_texs.push_back(nullptr);
-            }
         }
     }
 
@@ -101,7 +83,7 @@ namespace pu::ui::elm {
         }
     }
 
-    Menu::Menu(const i32 x, const i32 y, const i32 width, const Color items_clr, const Color items_focus_clr, const i32 items_height, const u32 items_to_show) : Element::Element() {
+    Menu::Menu(const i32 x, const i32 y, const i32 width, const Color items_clr, const Color items_focus_clr, const i32 items_height, const u32 items_to_show) : Element() {
         this->x = x;
         this->y = y;
         this->w = width;
@@ -135,14 +117,12 @@ namespace pu::ui::elm {
 
     void Menu::ClearItems() {
         this->items.clear();
+
         for(auto &name_tex : this->loaded_name_texs) {
             render::DeleteTexture(name_tex);
         }
         this->loaded_name_texs.clear();
-        for(auto &icon_tex : this->loaded_icon_texs) {
-            render::DeleteTexture(icon_tex);
-        }
-        this->loaded_icon_texs.clear();
+
         this->selected_item_idx = 0;
         this->prev_selected_item_idx = 0;
         this->advanced_item_count = 0;
@@ -180,7 +160,6 @@ namespace pu::ui::elm {
             for(u32 i = this->advanced_item_count; i < (this->advanced_item_count + item_count); i++) {
                 const auto loaded_tex_idx = i - this->advanced_item_count;
                 auto name_tex = this->loaded_name_texs.at(loaded_tex_idx);
-                auto icon_tex = this->loaded_icon_texs.at(loaded_tex_idx);
                 if(this->selected_item_idx == i) {
                     drawer->RenderRectangleFill(this->items_clr, x, cur_item_y, this->w, this->items_h);
                     if(this->selected_item_alpha < 0xFF) {
@@ -212,7 +191,8 @@ namespace pu::ui::elm {
                 auto name_x = x + this->text_margin;
                 const auto name_y = cur_item_y + ((this->items_h - name_height) / 2);
                 if(item->HasIcon()) {
-                    const auto factor = (float)render::GetTextureHeight(icon_tex) / (float)render::GetTextureWidth(icon_tex);
+                    auto icon_tex = this->items.at(i)->GetIconTexture();
+                    const auto factor = (float)render::GetTextureHeight(icon_tex->Get()) / (float)render::GetTextureWidth(icon_tex->Get());
                     auto icon_width = (i32)(this->items_h * this->icon_item_sizes_factor);
                     auto icon_height = icon_width;
                     if(factor < 1) {
@@ -225,7 +205,7 @@ namespace pu::ui::elm {
                     const auto icon_x = x + this->icon_margin;
                     const auto icon_y = cur_item_y + (this->items_h - icon_height) / 2;
                     name_x = icon_x + icon_width + this->text_margin;
-                    drawer->RenderTexture(icon_tex, icon_x, icon_y, render::TextureRenderOptions::WithCustomDimensions(icon_width, icon_height));
+                    drawer->RenderTexture(icon_tex->Get(), icon_x, icon_y, render::TextureRenderOptions::WithCustomDimensions(icon_width, icon_height));
                 }
                 drawer->RenderTexture(name_tex, name_x, name_y);
                 cur_item_y += this->items_h;

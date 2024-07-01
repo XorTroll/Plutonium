@@ -36,7 +36,7 @@ namespace pu::ui {
             u8 fade_alpha_increment_steps;
             SigmoidIncrementer<i32> fade_alpha_incr;
             i32 fade_alpha;
-            sdl2::Texture fade_bg_tex;
+            sdl2::TextureHandle::Ref fade_bg_tex;
             Color fade_bg_clr;
             Layout::Ref lyt;
             Overlay::Ref ovl;
@@ -50,7 +50,7 @@ namespace pu::ui {
         public:
             Application(render::Renderer::Ref renderer);
             PU_SMART_CTOR(Application)
-            ~Application();
+            virtual ~Application();
 
             inline void LoadLayout(Layout::Ref lyt) {
                 this->lyt = lyt;
@@ -79,7 +79,7 @@ namespace pu::ui {
                 return dialog->Show(this);
             }
 
-            i32 CreateShowDialog(const std::string &title, const std::string &content, const std::vector<std::string> &opts, const bool use_last_opt_as_cancel, const std::string &icon_path = "", DialogPrepareCallback prepare_cb = nullptr);
+            i32 CreateShowDialog(const std::string &title, const std::string &content, const std::vector<std::string> &opts, const bool use_last_opt_as_cancel, sdl2::TextureHandle::Ref icon = {}, DialogPrepareCallback prepare_cb = nullptr);
             
             inline void StartOverlay(Overlay::Ref ovl) {
                 if(this->ovl == nullptr) {
@@ -118,8 +118,12 @@ namespace pu::ui {
                 this->fade_alpha_increment_steps = fade_alpha_increment_steps;
             }
 
-            void SetFadeBackgroundImage(const std::string &path);
+            void SetFadeBackgroundImage(sdl2::TextureHandle::Ref bg_tex);
             void ResetFadeBackgroundImage();
+
+            inline sdl2::TextureHandle::Ref &GetFadeBackgroundImageTexture() {
+                return this->fade_bg_tex;
+            }
 
             inline bool HasFadeBackgroundImage() {
                 return this->fade_bg_tex != nullptr;

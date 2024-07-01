@@ -16,7 +16,7 @@ namespace pu::ui {
         this->fade_alpha = 0xFF;
         this->fade_alpha_increment_steps = DefaultFadeAlphaIncrementSteps;
         this->fade_alpha_incr = {};
-        this->fade_bg_tex = nullptr;
+        this->fade_bg_tex = {};
         this->fade_bg_clr = { 0, 0, 0, 0xFF };
         padConfigureInput(1, HidNpadStyleSet_NpadStandard);
         padInitializeDefault(&this->input_pad);
@@ -33,7 +33,7 @@ namespace pu::ui {
         }
     }
 
-    i32 Application::CreateShowDialog(const std::string &title, const std::string &content, const std::vector<std::string> &opts, const bool use_last_opt_as_cancel, const std::string &icon_path, DialogPrepareCallback prepare_cb) {
+    i32 Application::CreateShowDialog(const std::string &title, const std::string &content, const std::vector<std::string> &opts, const bool use_last_opt_as_cancel, sdl2::TextureHandle::Ref icon, DialogPrepareCallback prepare_cb) {
         auto dialog = Dialog::New(title, content);
         for(u32 i = 0; i < opts.size(); i++) {
             const auto &opt = opts.at(i);
@@ -45,8 +45,8 @@ namespace pu::ui {
             }
         }
 
-        if(!icon_path.empty()) {
-            dialog->SetIcon(icon_path);
+        if(icon != nullptr) {
+            dialog->SetIcon(icon);
         }
 
         if(prepare_cb != nullptr) {
@@ -139,9 +139,9 @@ namespace pu::ui {
         this->CallForRender();
     }
 
-    void Application::SetFadeBackgroundImage(const std::string &path) {
+    void Application::SetFadeBackgroundImage(sdl2::TextureHandle::Ref bg_tex) {
         this->ResetFadeBackgroundImage();
-        this->fade_bg_tex = render::LoadImage(path);
+        this->fade_bg_tex = bg_tex;
     }
 
     void Application::SetFadeBackgroundColor(const Color clr) {
@@ -150,7 +150,7 @@ namespace pu::ui {
     }
 
     void Application::ResetFadeBackgroundImage() {
-        render::DeleteTexture(this->fade_bg_tex);
+       this->fade_bg_tex = {};
     }
 
     void Application::OnRender() {
@@ -158,6 +158,15 @@ namespace pu::ui {
         const auto keys_down = this->GetButtonsDown();
         const auto keys_up = this->GetButtonsUp();
         const auto keys_held = this->GetButtonsHeld();
+        auto start_lyt = this->lyt;
+        auto lyt_changed = false;
+
+        #define _ONLY_DO_UNCHANGED(...) { \
+            if(!lyt_changed) { \
+                __VA_ARGS__ \
+                lyt_changed = this->lyt != start_lyt; \
+            } \
+        }
 
         const auto tch_state = this->GetTouchState();
         TouchPoint tch_pos = {};
@@ -175,43 +184,54 @@ namespace pu::ui {
 
         for(auto &render_cb: this->render_cbs) {
             if(render_cb) {
-                render_cb();
+                _ONLY_DO_UNCHANGED(
+                    render_cb();
+                );
             }
         }
-        
+
         this->lyt->PreRender();
 
         for(auto &lyt_render_cb: this->lyt->GetRenderCallbacks()) {
             if(lyt_render_cb) {
-                lyt_render_cb();
+                _ONLY_DO_UNCHANGED(
+                    lyt_render_cb();
+                );
             }
         }
 
         if(!this->in_render_over) {
             if(this->on_ipt_cb) {
-                (this->on_ipt_cb)(keys_down, keys_up, keys_held, tch_pos);
+                _ONLY_DO_UNCHANGED(
+                    (this->on_ipt_cb)(keys_down, keys_up, keys_held, tch_pos);
+                );
             }
         }
 
-        if(this->lyt->HasBackgroundImage()) {
-            this->renderer->RenderTexture(this->lyt->GetBackgroundImageTexture(), 0, 0);
+        auto lyt_bg_tex = this->lyt->GetBackgroundImageTexture();
+        if(lyt_bg_tex != nullptr) {
+            this->renderer->RenderTexture(lyt_bg_tex->Get(), 0, 0);
         }
 
         if(!this->in_render_over) {
             auto lyt_on_ipt_cb = this->lyt->GetOnInput();
             if(lyt_on_ipt_cb) {
-                lyt_on_ipt_cb(keys_down, keys_up, keys_held, tch_pos);
+                _ONLY_DO_UNCHANGED(
+                    lyt_on_ipt_cb(keys_down, keys_up, keys_held, tch_pos);
+                );
             }
         }
 
-        for(u32 i = 0; i < this->lyt->GetCount(); i++) {
-            auto elm = this->lyt->At(i);
-            if(elm->IsVisible()) {
-                elm->OnRender(this->renderer, elm->GetProcessedX(), elm->GetProcessedY());
-                if(!this->in_render_over) {
-                    elm->OnInput(keys_down, keys_up, keys_held, tch_pos);
+        auto lyt_elems = this->lyt->GetElements();
+        for(auto &elem: lyt_elems) {
+            _ONLY_DO_UNCHANGED(
+                if(elem->IsVisible()) {
+                    elem->OnRender(this->renderer, elem->GetProcessedX(), elem->GetProcessedY());
+                    if(!this->in_render_over) {
+                        elem->OnInput(keys_down, keys_up, keys_held, tch_pos);
+                    }
                 }
-            }
+            );
         }
 
         if(this->ovl != nullptr) {
@@ -229,11 +249,13 @@ namespace pu::ui {
         }
 
         const auto over_alpha = static_cast<u8>(0xFF - this->fade_alpha);
-        if(this->fade_bg_tex != nullptr) {
-            this->renderer->RenderTexture(this->fade_bg_tex, 0, 0, render::TextureRenderOptions::WithCustomAlpha(over_alpha));
-        }
-        else {
-            this->renderer->RenderRectangleFill(this->fade_bg_clr.WithAlpha(over_alpha), 0, 0, render::ScreenWidth, render::ScreenHeight);
+        if(over_alpha > 0) {
+            if(this->fade_bg_tex != nullptr) {
+                this->renderer->RenderTexture(this->fade_bg_tex->Get(), 0, 0, render::TextureRenderOptions::WithCustomAlpha(over_alpha));
+            }
+            else {
+                this->renderer->RenderRectangleFill(this->fade_bg_clr.WithAlpha(over_alpha), 0, 0, render::ScreenWidth, render::ScreenHeight);
+            }
         }
     }
 

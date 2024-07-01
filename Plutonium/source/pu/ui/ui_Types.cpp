@@ -11,8 +11,7 @@ namespace pu::ui {
         if(str_clr.length() >= 9) {
             a = str_clr.substr(7, 2);
         }
-        if(str_clr.length() >= 7)
-        {
+        if(str_clr.length() >= 7) {
             r = str_clr.substr(1, 2);
             g = str_clr.substr(3, 2);
             b = str_clr.substr(5, 2);

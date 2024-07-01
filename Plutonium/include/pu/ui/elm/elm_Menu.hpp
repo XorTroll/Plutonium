@@ -25,13 +25,13 @@ namespace pu::ui::elm {
 
         private:
             std::string name;
-            Color items_clr;
-            std::string icon_path;
+            Color clr;
+            sdl2::TextureHandle::Ref icon;
             std::vector<OnKeyCallback> on_key_cbs;
             std::vector<u64> on_key_cb_keys;
 
         public:
-            MenuItem(const std::string &name) : name(name), items_clr(DefaultColor) {}
+            MenuItem(const std::string &name) : name(name), clr(DefaultColor) {}
             PU_SMART_CTOR(MenuItem)
 
             inline std::string GetName() {
@@ -42,13 +42,7 @@ namespace pu::ui::elm {
                 this->name = name;
             }
 
-            inline Color GetColor() {
-                return this->items_clr;
-            }
-
-            inline void SetColor(const Color items_clr) {
-                this->items_clr = items_clr;
-            }
+            PU_CLASS_POD_GETSET(Color, clr, Color)
 
             void AddOnKey(OnKeyCallback on_key_cb, const u64 key = HidNpadButton_A);
             
@@ -74,14 +68,14 @@ namespace pu::ui::elm {
                 }
             }
 
-            inline std::string GetIconPath() {
-                return this->icon_path;
+            inline sdl2::TextureHandle::Ref GetIconTexture() {
+                return this->icon;
             }
 
-            void SetIcon(const std::string &icon_path);
+            void SetIcon(sdl2::TextureHandle::Ref icon);
 
             inline bool HasIcon() {
-                return !this->icon_path.empty();
+                return this->icon != nullptr;
             }
     };
 
@@ -137,7 +131,6 @@ namespace pu::ui::elm {
             std::vector<MenuItem::Ref> items;
             std::string font_name;
             std::vector<sdl2::Texture> loaded_name_texs;
-            std::vector<sdl2::Texture> loaded_icon_texs;
             u8 item_alpha_incr_steps;
             float icon_item_sizes_factor;
             u32 icon_margin;

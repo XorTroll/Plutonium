@@ -76,7 +76,7 @@ namespace pu::ui {
             i32 prev_selected_opt_over_alpha;
             SigmoidIncrementer<i32> prev_selected_opt_over_alpha_incr;
             bool user_cancelled;
-            sdl2::Texture icon_tex;
+            sdl2::TextureHandle::Ref icon_tex;
             Color title_clr;
             Color cnt_clr;
             Color opt_clr;
@@ -115,6 +115,7 @@ namespace pu::ui {
 
             void LoadTitle();
             void LoadContent();
+            void DisposeIcon();
 
         public:
             Dialog(const std::string &title, const std::string &content);
@@ -174,9 +175,9 @@ namespace pu::ui {
             PU_CLASS_POD_GETSET(OverAlphaIncrementSteps, over_alpha_incr_steps, u8)
             PU_CLASS_POD_GETSET(FadeAlphaIncrementSteps, fade_alpha_incr_steps, u8)
 
-            void SetIcon(const std::string &icon_path);
+            void SetIcon(sdl2::TextureHandle::Ref tex);
             
-            inline constexpr bool HasIcon() {
+            inline bool HasIcon() {
                 return this->icon_tex != nullptr;
             }
             

@@ -2,7 +2,7 @@
 
 namespace pu::ui::elm {
 
-    Button::Button(const i32 x, const i32 y, const i32 width, const i32 height, const std::string &content, const Color content_clr, const Color bg_clr) : Element::Element() {
+    Button::Button(const i32 x, const i32 y, const i32 width, const i32 height, const std::string &content, const Color content_clr, const Color bg_clr) : Element() {
         this->x = x;
         this->y = y;
         this->w = width;

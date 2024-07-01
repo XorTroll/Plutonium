@@ -34,8 +34,8 @@ namespace pu::ui {
                 this->elems.push_back(elem);
             }
 
-            inline elm::Element::Ref &At(const i32 idx) {
-                return this->elems.at(idx);
+            inline std::vector<elm::Element::Ref> &GetElements() {
+                return this->elems;
             }
 
             inline bool Has(elm::Element::Ref &elem) {
@@ -44,10 +44,6 @@ namespace pu::ui {
 
             inline void Clear() {
                 this->elems.clear();
-            }
-
-            inline size_t GetCount() {
-                return this->elems.size();
             }
 
             PU_CLASS_POD_GETSET(X, x, i32)

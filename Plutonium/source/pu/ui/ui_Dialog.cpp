@@ -13,6 +13,10 @@ namespace pu::ui {
         this->cnt_tex = render::RenderText(this->cnt_font_name, this->cnt, this->cnt_clr);
     }
 
+    void Dialog::DisposeIcon() {
+        this->icon_tex = {};
+    }
+
     Dialog::Dialog(const std::string &title, const std::string &content) {
         this->title_font_name = GetDefaultFont(DefaultFontSize::Large);
         this->cnt_font_name = GetDefaultFont(DefaultFontSize::Medium);
@@ -63,7 +67,7 @@ namespace pu::ui {
     Dialog::~Dialog() {
         render::DeleteTexture(this->title_tex);
         render::DeleteTexture(this->cnt_tex);
-        render::DeleteTexture(this->icon_tex);
+        this->DisposeIcon();
     }
 
     void Dialog::AddOption(const std::string &opt_name)  {
@@ -90,9 +94,9 @@ namespace pu::ui {
         this->LoadContent();
     }
 
-    void Dialog::SetIcon(const std::string &icon_path) {
-        render::DeleteTexture(this->icon_tex);
-        this->icon_tex = render::LoadImage(icon_path);
+    void Dialog::SetIcon(sdl2::TextureHandle::Ref tex) {
+        this->DisposeIcon();
+        this->icon_tex = tex;
     }
 
     i32 Dialog::Show(Application *app_ref) {
@@ -110,11 +114,20 @@ namespace pu::ui {
         }
 
         auto opts_width = (this->space_between_options * (opts_texs.size() - 1)) + 2 * this->opts_base_h_margin;
-        for(const auto &opt_tex : opts_texs) {
+        u32 row_opt_width = this->opts_base_h_margin;
+        u32 opt_row_count = 1;
+        for(const auto &opt_tex: opts_texs) {
             const auto opt_width = render::GetTextureWidth(opt_tex) + 2 * this->opt_h_margin;
             opts_width += opt_width;
+
+            row_opt_width += opt_width + this->space_between_options;
+            if((row_opt_width + this->opts_base_h_margin) >= render::ScreenWidth) {
+                opt_row_count++;
+                // Move this option to the next row
+                row_opt_width = this->opts_base_h_margin + opt_width + this->space_between_options;
+            }
         }
-        const auto opt_row_count = opts_width / pu::ui::render::ScreenWidth + 1;
+
         auto dialog_width = opts_width;
 
         const auto cnt_width = render::GetTextureWidth(this->cnt_tex) + this->cnt_extra_width;
@@ -130,12 +143,12 @@ namespace pu::ui {
         auto opt_base_y = title_cnt_height;
     
         if(this->HasIcon()) {
-            const auto icon_height = render::GetTextureHeight(this->icon_tex) + 2 * this->icon_margin;
+            const auto icon_height = render::GetTextureHeight(this->icon_tex->Get()) + 2 * this->icon_margin;
             if(icon_height > opt_base_y) {
                 opt_base_y = icon_height;
             }
 
-            const auto icon_width = render::GetTextureWidth(this->icon_tex) + 2 * this->icon_margin;
+            const auto icon_width = render::GetTextureWidth(this->icon_tex->Get()) + 2 * this->icon_margin;
 
             const auto icon_title_width = title_width + icon_width;
             if(icon_title_width > dialog_width) {
@@ -230,7 +243,7 @@ namespace pu::ui {
 
                         if((opt_name_x + opt_width) > pu::ui::render::ScreenWidth) {
                             cur_opt_x = dialog_x + this->opts_base_h_margin;
-                            opt_base_y += this->opt_height + this->space_between_options;
+                            opt_base_y += this->opt_height + this->space_between_option_rows;
                         }
                     }
                 }
@@ -256,10 +269,10 @@ namespace pu::ui {
                 drawer->RenderTexture(this->cnt_tex, dialog_x + this->cnt_x, dialog_y + this->cnt_y);
                 
                 if(this->HasIcon()) {
-                    const auto icon_width = render::GetTextureWidth(this->icon_tex);
+                    const auto icon_width = render::GetTextureWidth(this->icon_tex->Get());
                     const auto icon_x = dialog_x + (dialog_width - (icon_width + 2 * this->icon_margin));
                     const auto icon_y = dialog_y + this->icon_margin;
-                    drawer->RenderTexture(this->icon_tex, icon_x, icon_y, render::TextureRenderOptions::WithCustomAlpha(static_cast<u8>(initial_fade_alpha)));
+                    drawer->RenderTexture(this->icon_tex->Get(), icon_x, icon_y, render::TextureRenderOptions::WithCustomAlpha(static_cast<u8>(initial_fade_alpha)));
                 }
 
                 auto cur_opt_x = dialog_x + this->opts_base_h_margin;
@@ -268,8 +281,14 @@ namespace pu::ui {
                     const auto opt_name_width = render::GetTextureWidth(opt_tex);
                     const auto opt_name_height = render::GetTextureHeight(opt_tex);
                     const auto opt_width = opt_name_width + 2 * this->opt_h_margin;
+                    if((cur_opt_x + opt_width) >= pu::ui::render::ScreenWidth) {
+                        cur_opt_x = dialog_x + this->opts_base_h_margin;
+                        opt_base_y += this->opt_height + this->space_between_option_rows;
+                    }
+
                     const auto opt_name_x = cur_opt_x + this->opt_h_margin;
                     const auto opt_name_y = opt_base_y + ((this->opt_height - opt_name_height) / 2);
+
                     if(this->selected_opt_idx == i) {
                         this->selected_opt_over_alpha_incr.Increment(this->selected_opt_over_alpha);
 
@@ -290,12 +309,8 @@ namespace pu::ui {
 
                     render::SetAlphaValue(opt_tex, static_cast<u8>(initial_fade_alpha));
                     drawer->RenderTexture(opt_tex, opt_name_x, opt_name_y);
-                    cur_opt_x += opt_width + this->space_between_options;
 
-                    if((cur_opt_x + opt_width) > pu::ui::render::ScreenWidth) {
-                        cur_opt_x = dialog_x + this->opts_base_h_margin;
-                        opt_base_y += this->opt_height + this->space_between_options;
-                    }
+                    cur_opt_x += opt_width + this->space_between_options;
                 }
 
                 if(finish && !is_finishing) {
