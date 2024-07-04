@@ -14,6 +14,7 @@
 #pragma once
 #include <pu/ui/ui_Types.hpp>
 #include <pu/ui/render/render_SDL2.hpp>
+#include <pu/ttf/ttf_Font.hpp>
 #include <vector>
 
 namespace pu::ui::render {
@@ -31,31 +32,32 @@ namespace pu::ui::render {
         u32 sdl_render_flags;
         u32 width;
         u32 height;
-        bool init_ttf;
+        std::vector<PlSharedFontType> default_shared_fonts;
+        std::vector<std::string> default_font_paths;
         std::vector<u32> extra_default_font_sizes;
-        std::string default_font_path;
         bool init_mixer;
         u32 audio_mixer_flags;
         bool init_img;
         u32 sdl_img_flags;
-        bool init_pl;
         bool init_romfs;
 
-        RendererInitOptions(const u32 sdl_flags, const u32 sdl_render_flags, const u32 w = ScreenWidth, const u32 h = ScreenHeight) : sdl_flags(sdl_flags), sdl_render_flags(sdl_render_flags), width(w), height(h), init_ttf(false), extra_default_font_sizes(), default_font_path(), init_mixer(false), audio_mixer_flags(0), init_img(false), sdl_img_flags(0), init_pl(false), init_romfs(false) {}
+        RendererInitOptions(const u32 sdl_flags, const u32 sdl_render_flags, const u32 w = ScreenWidth, const u32 h = ScreenHeight) : sdl_flags(sdl_flags), sdl_render_flags(sdl_render_flags), width(w), height(h), default_shared_fonts(), default_font_paths(), extra_default_font_sizes(), init_mixer(false), audio_mixer_flags(0), init_img(false), sdl_img_flags(0), init_romfs(false) {}
 
-        inline void UseTTF(const std::string &default_font_path = "") {
-            this->init_ttf = true;
+        inline void AddDefaultSharedFont(const PlSharedFontType type) {
+            this->default_shared_fonts.push_back(type);
+        }
 
-            // Empty font path = using shared font
-            if(!default_font_path.empty()) {
-                this->default_font_path = default_font_path;
-            }
-            else {
-                this->init_pl = true;
+        inline void AddDefaultAllSharedFonts() {
+            for(u32 i = 0; i < PlSharedFontType_Total; i++) {
+                this->default_shared_fonts.push_back(static_cast<PlSharedFontType>(i));
             }
         }
 
-        inline void SetExtraDefaultFontSize(const u32 font_size) {
+        inline void AddDefaultFontPath(const std::string &font_path) {
+            this->default_font_paths.push_back(font_path);
+        }
+
+        inline void AddExtraDefaultFontSize(const u32 font_size) {
             this->extra_default_font_sizes.push_back(font_size);
         }
 
@@ -110,6 +112,7 @@ namespace pu::ui::render {
     class Renderer {
         private:
             RendererInitOptions init_opts;
+            bool ttf_init;
             bool ok_romfs;
             bool ok_pl;
             bool initialized;
@@ -183,19 +186,18 @@ namespace pu::ui::render {
 
     std::pair<u32, u32> GetDimensions();
 
+    // Font loading
+
+    bool AddFont(const std::string &font_name, std::shared_ptr<ttf::Font> &font);
+
+    bool LoadSingleSharedFontInFont(std::shared_ptr<ttf::Font> &font, const PlSharedFontType type);
+    bool LoadAllSharedFontsInFont(std::shared_ptr<ttf::Font> &font);
+
+    inline void AddDefaultFont(std::shared_ptr<ttf::Font> &font) {
+        AddFont(MakeDefaultFontName(font->GetFontSize()), font);
+    }
+
     // Text rendering
-
-    bool AddSharedFont(const std::string &font_name, const u32 font_size, const PlSharedFontType type);
-    bool AddAllSharedFonts(const std::string &font_name, const u32 font_size);
-    bool AddFontFile(const std::string &font_name, const u32 font_size, const std::string &path);
-
-    inline void AddDefaultFontFromShared(const u32 font_size) {
-        AddAllSharedFonts(MakeDefaultFontName(font_size), font_size);
-    }
-
-    inline void AddDefaultFontFromFile(const u32 font_size, const std::string &path) {
-        AddFontFile(MakeDefaultFontName(font_size), font_size, path);
-    }
 
     sdl2::Texture RenderText(const std::string &font_name, const std::string &text, const Color clr);
     i32 GetTextWidth(const std::string &font_name, const std::string &text);

@@ -18,7 +18,7 @@ int main() {
     auto renderer_opts = pu::ui::render::RendererInitOptions(SDL_INIT_EVERYTHING, pu::ui::render::RendererHardwareFlags);
     renderer_opts.UseImage(pu::ui::render::IMGAllFlags);
     renderer_opts.UseAudio(pu::ui::render::MixerAllFlags);
-    renderer_opts.UseTTF();
+    renderer_opts.AddDefaultAllSharedFonts();
     auto renderer = pu::ui::render::Renderer::New(renderer_opts);
 
     // Create our main application from the renderer

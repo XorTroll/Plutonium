@@ -1,5 +1,4 @@
 #include <pu/ui/render/render_Renderer.hpp>
-#include <pu/ttf/ttf_Font.hpp>
 
 namespace pu::ui::render {
 
@@ -12,18 +11,6 @@ namespace pu::ui::render {
 
         // Global font object
         std::vector<std::pair<std::string, std::shared_ptr<ttf::Font>>> g_FontTable;
-
-        inline bool DoAddSharedFont(std::shared_ptr<ttf::Font> &font, const PlSharedFontType type) {
-            // Let's assume pl services are initialized, and return if anything unexpected happens
-            PlFontData data = {};
-            if(R_FAILED(plGetSharedFontByType(&data, type))) {
-                return false;
-            }
-            if(!ttf::Font::IsValidFontFaceIndex(font->LoadFromMemory(data.address, data.size, ttf::Font::EmptyFontFaceDisposingFunction))) {
-                return false;
-            }
-            return true;
-        }
 
         inline bool ExistsFont(const std::string &font_name) {
             for(const auto &[name, font]: g_FontTable) {
@@ -39,11 +26,13 @@ namespace pu::ui::render {
 
     void Renderer::Initialize() {
         if(!this->initialized) {
+            this->ttf_init = false;
+
             if(this->init_opts.init_romfs) {
                 this->ok_romfs = R_SUCCEEDED(romfsInit());
             }
 
-            if(this->init_opts.init_pl) {
+            if(!this->init_opts.default_shared_fonts.empty()) {
                 // TODO: choose pl service type?
                 this->ok_pl = R_SUCCEEDED(plInitialize(PlServiceType_User));
             }
@@ -61,24 +50,25 @@ namespace pu::ui::render {
                 IMG_Init(this->init_opts.sdl_img_flags);
             }
 
-            if(this->init_opts.init_ttf) {
+            if(!this->init_opts.default_shared_fonts.empty() || !this->init_opts.default_font_paths.empty()) {
                 TTF_Init();
-                if(!this->init_opts.default_font_path.empty()) {
-                    for(const auto size: DefaultFontSizes) {
-                        AddDefaultFontFromFile(size, this->init_opts.default_font_path);
-                    }
-                    for(const auto size: this->init_opts.extra_default_font_sizes) {
-                        AddDefaultFontFromFile(size, this->init_opts.default_font_path);
-                    }
+                this->ttf_init = true;
+
+                #define _CREATE_DEFAULT_FONT_FOR_SIZES(sizes) { \
+                    for(const auto size: sizes) { \
+                        auto default_font = std::make_shared<ttf::Font>(size); \
+                        for(const auto &path: this->init_opts.default_font_paths) { \
+                            default_font->LoadFromFile(path); \
+                        } \
+                        for(const auto type: this->init_opts.default_shared_fonts) { \
+                            LoadSingleSharedFontInFont(default_font, type); \
+                        } \
+                        AddDefaultFont(default_font); \
+                    } \
                 }
-                else {
-                    for(const auto size: DefaultFontSizes) {
-                        AddDefaultFontFromShared(size);
-                    }
-                    for(const auto size: this->init_opts.extra_default_font_sizes) {
-                        AddDefaultFontFromShared(size);
-                    }
-                }
+
+                _CREATE_DEFAULT_FONT_FOR_SIZES(DefaultFontSizes);
+                _CREATE_DEFAULT_FONT_FOR_SIZES(this->init_opts.extra_default_font_sizes);
             }
 
             if(this->init_opts.init_mixer) {
@@ -98,7 +88,7 @@ namespace pu::ui::render {
             // Close all the fonts before closing TTF
             g_FontTable.clear();
 
-            if(this->init_opts.init_ttf) {
+            if(this->ttf_init) {
                 TTF_Quit();
             }
             if(this->init_opts.init_img) {
@@ -267,42 +257,8 @@ namespace pu::ui::render {
         return { static_cast<u32>(w), static_cast<u32>(h) };
     }
 
-    bool AddSharedFont(const std::string &font_name, const u32 font_size, const PlSharedFontType type) {
+    bool AddFont(const std::string &font_name, std::shared_ptr<ttf::Font> &font) {
         if(ExistsFont(font_name)) {
-            return false;
-        }
-        
-        auto font = std::make_shared<ttf::Font>(font_size);
-        if(!DoAddSharedFont(font, type)) {
-            return false;
-        }
-        
-        g_FontTable.push_back(std::make_pair(font_name, std::move(font)));
-        return true;
-    }
-
-    bool AddAllSharedFonts(const std::string &font_name, const u32 font_size) {
-        if(ExistsFont(font_name)) {
-            return false;
-        }
-        
-        auto font = std::make_shared<ttf::Font>(font_size);
-        if(!DoAddSharedFont(font, PlSharedFontType_Standard)) {
-            return false;
-        }
-        if(!DoAddSharedFont(font, PlSharedFontType_NintendoExt)) {
-            return false;
-        }
-        if(!DoAddSharedFont(font, PlSharedFontType_ChineseSimplified)) {
-            return false;
-        }
-        if(!DoAddSharedFont(font, PlSharedFontType_ExtChineseSimplified)) {
-            return false;
-        }
-        if(!DoAddSharedFont(font, PlSharedFontType_ChineseTraditional)) {
-            return false;
-        }
-        if(!DoAddSharedFont(font, PlSharedFontType_KO)) {
             return false;
         }
 
@@ -310,17 +266,25 @@ namespace pu::ui::render {
         return true;
     }
 
-    bool AddFontFile(const std::string &font_name, const u32 font_size, const std::string &path) {
-        if(ExistsFont(font_name)) {
+    bool LoadSingleSharedFontInFont(std::shared_ptr<ttf::Font> &font, const PlSharedFontType type) {
+        // Assume pl services are initialized, and return if anything unexpected happens
+        PlFontData data = {};
+        if(R_FAILED(plGetSharedFontByType(&data, type))) {
+            return false;
+        }
+        if(!ttf::Font::IsValidFontFaceIndex(font->LoadFromMemory(data.address, data.size, ttf::Font::EmptyFontFaceDisposingFunction))) {
             return false;
         }
 
-        auto font = std::make_shared<ttf::Font>(font_size);
-        if(!ttf::Font::IsValidFontFaceIndex(font->LoadFromFile(path))) {
-            return false;
+        return true;
+    }
+
+    bool LoadAllSharedFontsInFont(std::shared_ptr<ttf::Font> &font) {
+        for(u32 i = 0; i < PlSharedFontType_Total; i++) {
+            if(!LoadSingleSharedFontInFont(font, static_cast<PlSharedFontType>(i))) {
+                return false;
+            }
         }
-        
-        g_FontTable.push_back(std::make_pair(font_name, std::move(font)));
         return true;
     }
 
