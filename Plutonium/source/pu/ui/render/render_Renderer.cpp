@@ -37,6 +37,9 @@ namespace pu::ui::render {
                 this->ok_pl = R_SUCCEEDED(plInitialize(PlServiceType_User));
             }
 
+            padConfigureInput(this->init_opts.pad_player_count, this->init_opts.pad_style_tag);
+            padInitializeWithMask(&this->input_pad, this->init_opts.pad_id_mask);
+
             // TODO: check sdl return errcodes!
 
             SDL_Init(this->init_opts.sdl_flags);
@@ -288,34 +291,65 @@ namespace pu::ui::render {
         return true;
     }
 
-    sdl2::Texture RenderText(const std::string &font_name, const std::string &text, const Color clr) {
+    bool GetTextDimensions(const std::string &font_name, const std::string &text, i32 &out_width, i32 &out_height) {
         for(auto &[name, font]: g_FontTable) {
             if(name == font_name) {
-                return font->RenderText(text, clr);
+                const auto [w, h] = font->GetTextDimensions(text);
+                out_width = w;
+                out_height = h;
+                return true;
+            }
+        }
+        return false;
+    }
+
+    i32 GetTextWidth(const std::string &font_name, const std::string &text) {
+        i32 width = 0;
+        i32 dummy;
+        GetTextDimensions(font_name, text, width, dummy);
+        return width;
+    }
+
+    i32 GetTextHeight(const std::string &font_name, const std::string &text) {
+        i32 dummy;
+        i32 height = 0;
+        GetTextDimensions(font_name, text, dummy, height);
+        return height;
+    }
+
+    sdl2::Texture RenderText(const std::string &font_name, const std::string &text, const Color clr, const u32 max_width, const u32 max_height) {
+        for(auto &[name, font]: g_FontTable) {
+            if(name == font_name) {
+                auto text_tex = font->RenderText(text, clr);
+
+                if((max_width > 0) || (max_height > 0)) {
+                    auto cur_text = text;
+                    auto cur_width = GetTextureWidth(text_tex);
+                    auto cur_height = GetTextureHeight(text_tex);
+                    while(true) {
+                        if(cur_text.empty()) {
+                            break;
+                        }
+                        if((max_width > 0) && (cur_width <= (i32)max_width)) {
+                            break;
+                        }
+                        if((max_height > 0) && (cur_height <= (i32)max_height)) {
+                            break;
+                        }
+
+                        cur_text.pop_back();
+                        DeleteTexture(text_tex);
+                        text_tex = font->RenderText(cur_text + "...", clr);
+                        cur_width = GetTextureWidth(text_tex);
+                        cur_height = GetTextureHeight(text_tex);
+                    }
+                }
+
+                return text_tex;
             }
         }
 
         return nullptr;
-    }
-
-    i32 GetTextWidth(const std::string &font_name, const std::string &text) {
-        for(auto &[name, font]: g_FontTable) {
-            if(name == font_name) {
-                const auto [w, _] = font->GetTextDimensions(text);
-                return static_cast<i32>(w);
-            }
-        }
-        return 0;
-    }
-
-    i32 GetTextHeight(const std::string &font_name, const std::string &text) {
-        for(auto &[name, font]: g_FontTable) {
-            if(name == font_name) {
-                const auto [_, h] = font->GetTextDimensions(text);
-                return static_cast<i32>(h);
-            }
-        }
-        return 0;
     }
 
 }

@@ -16,7 +16,7 @@ namespace pu::ui::render {
     sdl2::Texture LoadImage(const std::string &path) {
         return ConvertToTexture(IMG_Load(path.c_str()));
     }
-
+    
     i32 GetTextureWidth(sdl2::Texture texture) {
         if(texture == nullptr) {
             return 0;

@@ -21,7 +21,7 @@ namespace pu::audio {
 
     Music OpenMusic(const std::string &path);
     void PlayMusic(Music mus, const int loops);
-    void PlayMusicWithFadeIn(Music mus, const i32 llops, const i32 ms);
+    void PlayMusicWithFadeIn(Music mus, const i32 loops, const i32 ms);
     bool IsPlayingMusic();
     void PauseMusic();
     void ResumeMusic();

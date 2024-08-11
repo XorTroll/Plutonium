@@ -18,8 +18,7 @@ namespace pu::ui {
         this->fade_alpha_incr = {};
         this->fade_bg_tex = {};
         this->fade_bg_clr = { 0, 0, 0, 0xFF };
-        padConfigureInput(1, HidNpadStyleSet_NpadStandard);
-        padInitializeDefault(&this->input_pad);
+        rmutexInit(&this->render_lock);
     }
 
     Application::~Application() {
@@ -154,7 +153,8 @@ namespace pu::ui {
     }
 
     void Application::OnRender() {
-        padUpdate(&this->input_pad);
+        this->LockRender();
+        this->renderer->UpdateInput();
         const auto keys_down = this->GetButtonsDown();
         const auto keys_up = this->GetButtonsUp();
         const auto keys_held = this->GetButtonsHeld();
@@ -257,11 +257,17 @@ namespace pu::ui {
                 this->renderer->RenderRectangleFill(this->fade_bg_clr.WithAlpha(over_alpha), 0, 0, render::ScreenWidth, render::ScreenHeight);
             }
         }
+
+        this->UnlockRender();
     }
 
-    void Application::Close() {
+    void Application::Close(const bool do_exit) {
         this->is_shown = false;
         this->renderer->Finalize();
+
+        if(do_exit) {
+            exit(0);
+        }
     }
 
 }

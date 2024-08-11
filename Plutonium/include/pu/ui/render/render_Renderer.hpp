@@ -40,8 +40,11 @@ namespace pu::ui::render {
         bool init_img;
         u32 sdl_img_flags;
         bool init_romfs;
+        u32 pad_player_count;
+        u64 pad_id_mask;
+        u32 pad_style_tag;
 
-        RendererInitOptions(const u32 sdl_flags, const u32 sdl_render_flags, const u32 w = ScreenWidth, const u32 h = ScreenHeight) : sdl_flags(sdl_flags), sdl_render_flags(sdl_render_flags), width(w), height(h), default_shared_fonts(), default_font_paths(), extra_default_font_sizes(), init_mixer(false), audio_mixer_flags(0), init_img(false), sdl_img_flags(0), init_romfs(false) {}
+        RendererInitOptions(const u32 sdl_flags, const u32 sdl_render_flags, const u32 w = ScreenWidth, const u32 h = ScreenHeight) : sdl_flags(sdl_flags), sdl_render_flags(sdl_render_flags), width(w), height(h), default_shared_fonts(), default_font_paths(), extra_default_font_sizes(), init_mixer(false), audio_mixer_flags(0), init_img(false), sdl_img_flags(0), init_romfs(false), pad_player_count(1), pad_id_mask(0), pad_style_tag(0) {}
 
         inline void AddDefaultSharedFont(const PlSharedFontType type) {
             this->default_shared_fonts.push_back(type);
@@ -73,6 +76,18 @@ namespace pu::ui::render {
 
         inline void UseRomfs() {
             this->init_romfs = true;
+        }
+
+        inline void SetInputPlayerCount(const u32 count) {
+            this->pad_player_count = count;
+        }
+
+        inline void AddInputNpadIdType(const u64 type) {
+            this->pad_id_mask |= BITL(type);
+        }
+
+        inline void AddInputNpadStyleTag(const u32 tag) {
+            this->pad_style_tag |= tag;
         }
     };
 
@@ -119,6 +134,7 @@ namespace pu::ui::render {
             i32 base_x;
             i32 base_y;
             i32 base_a;
+            PadState input_pad;
 
             inline u8 GetActualAlpha(const u8 input_a) {
                 if(this->base_a >= 0) {
@@ -130,7 +146,7 @@ namespace pu::ui::render {
             }
 
         public:
-            Renderer(const RendererInitOptions init_opts) : init_opts(init_opts), ok_romfs(false), ok_pl(false), initialized(false), base_x(0), base_y(0), base_a(0) {}
+            Renderer(const RendererInitOptions init_opts) : init_opts(init_opts), ok_romfs(false), ok_pl(false), initialized(false), base_x(0), base_y(0), base_a(0), input_pad() {}
             PU_SMART_CTOR(Renderer)
 
             void Initialize();
@@ -176,6 +192,22 @@ namespace pu::ui::render {
             inline void ResetBaseRenderAlpha() {
                 this->base_a = -1;
             }
+
+            inline void UpdateInput() {
+                padUpdate(&this->input_pad);
+            }
+
+            inline u64 GetButtonsDown() {
+                return padGetButtonsDown(&this->input_pad);
+            }
+
+            inline u64 GetButtonsUp() {
+                return padGetButtonsUp(&this->input_pad);
+            }
+
+            inline u64 GetButtonsHeld() {
+                return padGetButtons(&this->input_pad);
+            }
     };
 
     // Global rendering
@@ -199,8 +231,9 @@ namespace pu::ui::render {
 
     // Text rendering
 
-    sdl2::Texture RenderText(const std::string &font_name, const std::string &text, const Color clr);
+    bool GetTextDimensions(const std::string &font_name, const std::string &text, i32 &out_width, i32 &out_height);
     i32 GetTextWidth(const std::string &font_name, const std::string &text);
     i32 GetTextHeight(const std::string &font_name, const std::string &text);
+    sdl2::Texture RenderText(const std::string &font_name, const std::string &text, const Color clr, const u32 max_width = 0, const u32 max_height = 0);
 
 }

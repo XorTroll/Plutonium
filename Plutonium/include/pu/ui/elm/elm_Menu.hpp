@@ -141,7 +141,6 @@ namespace pu::ui::elm {
             u8 shadow_base_alpha;
             s64 move_wait_time_ms;
 
-
             void ReloadItemRenders();
             void MoveUp();
             void MoveDown();
@@ -256,6 +255,10 @@ namespace pu::ui::elm {
             }
 
             void ClearItems();
+
+            inline void ForceReloadItems() {
+                this->ReloadItemRenders();
+            }
 
             PU_CLASS_POD_SET(CooldownEnabled, cooldown_enabled, bool)
 

@@ -45,7 +45,7 @@ namespace pu::ui {
             std::vector<RenderCallback> render_cbs;
             OnInputCallback on_ipt_cb;
             render::Renderer::Ref renderer;
-            PadState input_pad;
+            RMutex render_lock;
         
         public:
             Application(render::Renderer::Ref renderer);
@@ -107,6 +107,14 @@ namespace pu::ui {
             bool CallForRender();
             bool CallForRenderWithRenderOver(RenderOverFunction render_over_fn);
 
+            inline void LockRender() {
+                rmutexLock(&this->render_lock);
+            }
+
+            inline void UnlockRender() {
+                rmutexUnlock(&this->render_lock);
+            }
+
             void FadeIn();
             void FadeOut();
             
@@ -132,23 +140,23 @@ namespace pu::ui {
             void SetFadeBackgroundColor(const Color clr);
             
             void OnRender();
-            void Close();
+            void Close(const bool do_exit = false);
             
-            inline void CloseWithFadeOut() {
+            inline void CloseWithFadeOut(const bool do_exit = false) {
                 this->FadeOut();
-                this->Close();
+                this->Close(do_exit);
             }
 
             inline u64 GetButtonsDown() {
-                return padGetButtonsDown(&this->input_pad);
+                return this->renderer->GetButtonsDown();
             }
 
             inline u64 GetButtonsUp() {
-                return padGetButtonsUp(&this->input_pad);
+                return this->renderer->GetButtonsUp();
             }
 
             inline u64 GetButtonsHeld() {
-                return padGetButtons(&this->input_pad);
+                return this->renderer->GetButtonsHeld();
             }
 
             inline HidTouchScreenState GetTouchState() {
