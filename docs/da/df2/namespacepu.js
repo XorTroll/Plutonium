@@ -12,7 +12,7 @@ var namespacepu =
       [ "OpenMusic", "d8/d8f/namespacepu_1_1audio.html#a66c81b8c5c29b92ac8a0786bc803ca23", null ],
       [ "PauseMusic", "d8/d8f/namespacepu_1_1audio.html#a1a16cf110068c643338a686d06fc0311", null ],
       [ "PlayMusic", "d8/d8f/namespacepu_1_1audio.html#ae6860df6873c68be641096106f2f10e1", null ],
-      [ "PlayMusicWithFadeIn", "d8/d8f/namespacepu_1_1audio.html#a6732fa4e7407c46285dda78126c4ae55", null ],
+      [ "PlayMusicWithFadeIn", "d8/d8f/namespacepu_1_1audio.html#a168459d3581b0f3c1da743852aaeea60", null ],
       [ "PlaySfx", "d8/d8f/namespacepu_1_1audio.html#a38344de3e19215b9d8125e6971c7f6cd", null ],
       [ "ResumeMusic", "d8/d8f/namespacepu_1_1audio.html#a293674d2948d7a79e2cde7796c661848", null ],
       [ "RewindMusic", "d8/d8f/namespacepu_1_1audio.html#a2f34c8478347186d0209fef078d41582", null ],
@@ -20,13 +20,7 @@ var namespacepu =
       [ "SetMusicVolume", "d8/d8f/namespacepu_1_1audio.html#ad8c9e4959cf7ad40f9493659130f2878", null ],
       [ "StopMusic", "d8/d8f/namespacepu_1_1audio.html#adefbe54b078d8a9f1db1d50e9dfcaa7c", null ]
     ] ],
-    [ "sdl2", "d1/d78/namespacepu_1_1sdl2.html", [
-      [ "Font", "d1/d78/namespacepu_1_1sdl2.html#a047543c75bc366131d8e3a89126ef08f", null ],
-      [ "Renderer", "d1/d78/namespacepu_1_1sdl2.html#aa0c4e634637db654441e537fabc75125", null ],
-      [ "Surface", "d1/d78/namespacepu_1_1sdl2.html#a7b87c4dd0744d10e5bb57d274c10f7ac", null ],
-      [ "Texture", "d1/d78/namespacepu_1_1sdl2.html#a880d1002237395b299353a9d6c501d4e", null ],
-      [ "Window", "d1/d78/namespacepu_1_1sdl2.html#af25620a2e82c56dc48a4abc6e5f0b31f", null ]
-    ] ],
+    [ "sdl2", "d1/d78/namespacepu_1_1sdl2.html", "d1/d78/namespacepu_1_1sdl2" ],
     [ "ttf", "d5/d72/namespacepu_1_1ttf.html", "d5/d72/namespacepu_1_1ttf" ],
     [ "ui", "d9/d7f/namespacepu_1_1ui.html", "d9/d7f/namespacepu_1_1ui" ],
     [ "i32", "da/df2/namespacepu.html#abd11f97b8b05a9c48f1aebeb941a9aca", null ]

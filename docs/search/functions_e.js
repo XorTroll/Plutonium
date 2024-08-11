@@ -13,7 +13,7 @@ var searchData=
   ['renderroundedrectangle_10',['RenderRoundedRectangle',['../d0/d27/classpu_1_1ui_1_1render_1_1_renderer.html#a578c086e93c8eecc71995dbd170dc2f9',1,'pu::ui::render::Renderer']]],
   ['renderroundedrectanglefill_11',['RenderRoundedRectangleFill',['../d0/d27/classpu_1_1ui_1_1render_1_1_renderer.html#a97268b78eb7286d476c39a3308b55483',1,'pu::ui::render::Renderer']]],
   ['rendershadowsimple_12',['RenderShadowSimple',['../d0/d27/classpu_1_1ui_1_1render_1_1_renderer.html#a41477557dcafdb135112dbaec7980e17',1,'pu::ui::render::Renderer']]],
-  ['rendertext_13',['RenderText',['../dd/d76/classpu_1_1ttf_1_1_font.html#a63b8e719cf5a6badb9b381fc4437b316',1,'pu::ttf::Font::RenderText()'],['../da/d54/namespacepu_1_1ui_1_1render.html#a5d9f841115348f57afed74d536a6b291',1,'pu::ui::render::RenderText()']]],
+  ['rendertext_13',['RenderText',['../dd/d76/classpu_1_1ttf_1_1_font.html#a63b8e719cf5a6badb9b381fc4437b316',1,'pu::ttf::Font::RenderText()'],['../da/d54/namespacepu_1_1ui_1_1render.html#a577acc29da8b5092bce3fa3a2ec8e8c0',1,'pu::ui::render::RenderText()']]],
   ['rendertexture_14',['RenderTexture',['../d0/d27/classpu_1_1ui_1_1render_1_1_renderer.html#ace361f412b2089bec3631e4e86874396',1,'pu::ui::render::Renderer']]],
   ['resetbackgroundimage_15',['ResetBackgroundImage',['../d6/d11/classpu_1_1ui_1_1_layout.html#a5feaf9aea18eab076c4fc810efb5b3fe',1,'pu::ui::Layout']]],
   ['resetbaserenderalpha_16',['ResetBaseRenderAlpha',['../d0/d27/classpu_1_1ui_1_1render_1_1_renderer.html#a0acd213f97329a9f584b6983cfe61910',1,'pu::ui::render::Renderer']]],

@@ -2,9 +2,8 @@ var classpu_1_1ui_1_1_container =
 [
     [ "Container", "dc/dcd/classpu_1_1ui_1_1_container.html#a2ff66728ca4ad1640d6f3993b727a35e", null ],
     [ "Add", "dc/dcd/classpu_1_1ui_1_1_container.html#ad05f397ce7e1a6029eff10884406c019", null ],
-    [ "At", "dc/dcd/classpu_1_1ui_1_1_container.html#a4d3542c9a6bb9d5330cb4572d2ffa6c7", null ],
     [ "Clear", "dc/dcd/classpu_1_1ui_1_1_container.html#a2a123855380966b76b7904ffe94b7fc5", null ],
-    [ "GetCount", "dc/dcd/classpu_1_1ui_1_1_container.html#a1e30ab38bd2f2a90b5def1a08b1a232f", null ],
+    [ "GetElements", "dc/dcd/classpu_1_1ui_1_1_container.html#a2cf755d2f357748363e0ab1944409bfc", null ],
     [ "Has", "dc/dcd/classpu_1_1ui_1_1_container.html#a207e830a8cb788fa3737a6f0f536fb8c", null ],
     [ "PreRender", "dc/dcd/classpu_1_1ui_1_1_container.html#a9a72b95abf9aaf98500384a7a3258b4e", null ],
     [ "elems", "dc/dcd/classpu_1_1ui_1_1_container.html#a0e8fcdecac68cddf4c9baa90599569c6", null ],

@@ -1,6 +1,9 @@
 var annotated_dup =
 [
     [ "pu", "da/df2/namespacepu.html", [
+      [ "sdl2", "d1/d78/namespacepu_1_1sdl2.html", [
+        [ "TextureHandle", "d4/da3/classpu_1_1sdl2_1_1_texture_handle.html", "d4/da3/classpu_1_1sdl2_1_1_texture_handle" ]
+      ] ],
       [ "ttf", "d5/d72/namespacepu_1_1ttf.html", [
         [ "Font", "dd/d76/classpu_1_1ttf_1_1_font.html", "dd/d76/classpu_1_1ttf_1_1_font" ]
       ] ],

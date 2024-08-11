@@ -9,6 +9,7 @@ var classpu_1_1ui_1_1elm_1_1_menu =
     [ "Menu", "dc/d6c/classpu_1_1ui_1_1elm_1_1_menu.html#aefeac0d8d523984cd8a96840fd1441a8", null ],
     [ "AddItem", "dc/d6c/classpu_1_1ui_1_1elm_1_1_menu.html#a29a820f09597fef7e363cfaacf6d4f7a", null ],
     [ "ClearItems", "dc/d6c/classpu_1_1ui_1_1elm_1_1_menu.html#abf94e076df3b81e5f35a22afcf8e59a2", null ],
+    [ "ForceReloadItems", "dc/d6c/classpu_1_1ui_1_1elm_1_1_menu.html#adb26790d0555b4c39fe831143ba634cc", null ],
     [ "GetHeight", "dc/d6c/classpu_1_1ui_1_1elm_1_1_menu.html#a65ceb988a218bbbd3fe7e1dd89ebf413", null ],
     [ "GetItems", "dc/d6c/classpu_1_1ui_1_1elm_1_1_menu.html#a958940cffac582f4f9fe4b4529d8a0d0", null ],
     [ "GetSelectedItem", "dc/d6c/classpu_1_1ui_1_1elm_1_1_menu.html#a1b94e50b817d58ca2fab65f3682d4c80", null ],

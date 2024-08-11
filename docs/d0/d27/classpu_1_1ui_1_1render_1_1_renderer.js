@@ -3,6 +3,9 @@ var classpu_1_1ui_1_1render_1_1_renderer =
     [ "Renderer", "d0/d27/classpu_1_1ui_1_1render_1_1_renderer.html#a2d06e4ab292e03c75b40d88562dd5469", null ],
     [ "Finalize", "d0/d27/classpu_1_1ui_1_1render_1_1_renderer.html#a15df7905cffacb178961b93b87d990dc", null ],
     [ "FinalizeRender", "d0/d27/classpu_1_1ui_1_1render_1_1_renderer.html#ab6e04837ac0ea0a08eeab90ec1d27df6", null ],
+    [ "GetButtonsDown", "d0/d27/classpu_1_1ui_1_1render_1_1_renderer.html#aa5f1dd652e65126aaec674601712d308", null ],
+    [ "GetButtonsHeld", "d0/d27/classpu_1_1ui_1_1render_1_1_renderer.html#ac3ae330c0e45d8ba86a205266ef731db", null ],
+    [ "GetButtonsUp", "d0/d27/classpu_1_1ui_1_1render_1_1_renderer.html#a05b2464fba7d6f6541fc97d7df13ded9", null ],
     [ "HasInitialized", "d0/d27/classpu_1_1ui_1_1render_1_1_renderer.html#afea5a6b3fe4e8b149fe97a3d6678e144", null ],
     [ "HasRomFs", "d0/d27/classpu_1_1ui_1_1render_1_1_renderer.html#a7eadc0c749b995b0e4011c4e0d59984a", null ],
     [ "Initialize", "d0/d27/classpu_1_1ui_1_1render_1_1_renderer.html#a6dfe3a5a54c6fbefd664abb073fe4f4d", null ],
@@ -19,5 +22,6 @@ var classpu_1_1ui_1_1render_1_1_renderer =
     [ "ResetBaseRenderAlpha", "d0/d27/classpu_1_1ui_1_1render_1_1_renderer.html#a0acd213f97329a9f584b6983cfe61910", null ],
     [ "ResetBaseRenderPosition", "d0/d27/classpu_1_1ui_1_1render_1_1_renderer.html#ad1726412cb8b0f2658fa8ac980d40a5c", null ],
     [ "SetBaseRenderAlpha", "d0/d27/classpu_1_1ui_1_1render_1_1_renderer.html#a86280457eb612a88ab7c00199a17c115", null ],
-    [ "SetBaseRenderPosition", "d0/d27/classpu_1_1ui_1_1render_1_1_renderer.html#af3446219ca682fa60778a3509bbedbc4", null ]
+    [ "SetBaseRenderPosition", "d0/d27/classpu_1_1ui_1_1render_1_1_renderer.html#af3446219ca682fa60778a3509bbedbc4", null ],
+    [ "UpdateInput", "d0/d27/classpu_1_1ui_1_1render_1_1_renderer.html#ae045f36af002b20bea971da1e6c2ad8f", null ]
 ];
