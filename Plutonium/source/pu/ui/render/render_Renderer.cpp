@@ -24,38 +24,53 @@ namespace pu::ui::render {
 
     }
 
-    void Renderer::Initialize() {
+    Result Renderer::Initialize() {
         if(!this->initialized) {
-            this->ttf_init = false;
-
             if(this->init_opts.init_romfs) {
-                this->ok_romfs = R_SUCCEEDED(romfsInit());
+                PU_RC_TRY(romfsInit());
             }
 
-            if(!this->init_opts.default_shared_fonts.empty()) {
-                // TODO: choose pl service type?
-                this->ok_pl = R_SUCCEEDED(plInitialize(PlServiceType_User));
+            if(this->init_opts.NeedsPlService()) {
+                PU_RC_TRY(plInitialize(static_cast<PlServiceType>(this->init_opts.pl_srv_type)));
             }
 
             padConfigureInput(this->init_opts.pad_player_count, this->init_opts.pad_style_tag);
             padInitializeWithMask(&this->input_pad, this->init_opts.pad_id_mask);
 
-            // TODO: check sdl return errcodes!
-
-            SDL_Init(this->init_opts.sdl_flags);
+            if(SDL_Init(this->init_opts.sdl_flags) != 0) {
+                return ResultSdlInitFailed;
+            }
+            
             g_Window = SDL_CreateWindow("Plutonium-SDL2", 0, 0, this->init_opts.width, this->init_opts.height, 0);
+            if(g_Window == nullptr) {
+                return ResultSdlCreateWindowFailed;
+            }
+
             g_Renderer = SDL_CreateRenderer(g_Window, -1, this->init_opts.sdl_render_flags);
+            if(g_Renderer == nullptr) {
+                return ResultSdlCreateRendererFailed;
+            }
+
             g_WindowSurface = SDL_GetWindowSurface(g_Window);
             SDL_SetRenderDrawBlendMode(g_Renderer, SDL_BLENDMODE_BLEND);
             SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "2");
 
             if(this->init_opts.init_img) {
-                IMG_Init(this->init_opts.sdl_img_flags);
+                if(IMG_Init(this->init_opts.sdl_img_flags) != this->init_opts.sdl_img_flags) {
+                    auto f = fopen("sdmc:/IMG_Init_Failed.txt", "w");
+                    if(f != nullptr) {
+                        fprintf(f, "IMG_Init failed with flags: %d %s\n", this->init_opts.sdl_img_flags, IMG_GetError());
+                        fclose(f);
+                    }
+
+                    return ResultImgInitFailed;
+                }
             }
 
             if(!this->init_opts.default_shared_fonts.empty() || !this->init_opts.default_font_paths.empty()) {
-                TTF_Init();
-                this->ttf_init = true;
+                if(TTF_Init() != 0) {
+                    return ResultTtfInitFailed;
+                }
 
                 #define _CREATE_DEFAULT_FONT_FOR_SIZES(sizes) { \
                     for(const auto size: sizes) { \
@@ -74,16 +89,13 @@ namespace pu::ui::render {
                 _CREATE_DEFAULT_FONT_FOR_SIZES(this->init_opts.extra_default_font_sizes);
             }
 
-            if(this->init_opts.init_mixer) {
-                Mix_Init(this->init_opts.audio_mixer_flags);
-                Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, MIX_DEFAULT_CHANNELS, 4096);
-            }
-
             this->initialized = true;
             this->base_a = TextureRenderOptions::NoAlpha;
             this->base_x = 0;
             this->base_y = 0;
         }
+
+        return 0;
     }
 
     void Renderer::Finalize() {
@@ -91,25 +103,27 @@ namespace pu::ui::render {
             // Close all the fonts before closing TTF
             g_FontTable.clear();
 
-            if(this->ttf_init) {
+            if(this->init_opts.NeedsTtf()) {
                 TTF_Quit();
             }
+
             if(this->init_opts.init_img) {
                 IMG_Quit();
             }
-            if(this->init_opts.init_mixer) {
-                Mix_CloseAudio();
-            }
-            if(this->ok_pl) {
+
+            if(this->init_opts.NeedsPlService()) {
                 plExit();
             }
-            if(this->ok_romfs) {
+
+            if(this->init_opts.init_romfs) {
                 romfsExit();
             }
+
             SDL_DestroyRenderer(g_Renderer);
             SDL_FreeSurface(g_WindowSurface);
             SDL_DestroyWindow(g_Window);
             SDL_Quit();
+
             this->initialized = false;
         }
     }
@@ -127,22 +141,41 @@ namespace pu::ui::render {
         if(texture == nullptr) {
             return;
         }
+
+        i32 tex_w;
+        i32 tex_h;
+        if((opts.height == TextureRenderOptions::NoHeight) || (opts.height == TextureRenderOptions::NoWidth)) {
+            SDL_QueryTexture(texture, nullptr, nullptr, &tex_w, &tex_h);
+        }
         
-        SDL_Rect pos = {
+        SDL_Rect dst_rect = {
             .x = x + this->base_x,
             .y = y + this->base_y
         };
+        SDL_Rect src_rect = {};
+
         if(opts.width != TextureRenderOptions::NoWidth) {
-            pos.w = opts.width;
+            dst_rect.w = opts.width;
+            src_rect.w = opts.width;
         }
         else {
-            SDL_QueryTexture(texture, nullptr, nullptr, &pos.w, nullptr);
+            dst_rect.w = tex_w;
+            src_rect.w = tex_w;
         }
         if(opts.height != TextureRenderOptions::NoHeight) {
-            pos.h = opts.height;
+            dst_rect.h = opts.height;
+            src_rect.h = opts.height;
         }
         else {
-            SDL_QueryTexture(texture, nullptr, nullptr, nullptr, &pos.h);
+            dst_rect.h = tex_h;
+            src_rect.h = tex_h;
+        }
+
+        SDL_Rect *src_rect_ptr = nullptr;
+        if((opts.src_x != TextureRenderOptions::NoSourceX) || (opts.src_y != TextureRenderOptions::NoSourceY)) {
+            src_rect.x = opts.src_x;
+            src_rect.y = opts.src_y;
+            src_rect_ptr = &src_rect;
         }
 
         float angle = 0;
@@ -158,7 +191,7 @@ namespace pu::ui::render {
             SetAlphaValue(texture, static_cast<u8>(this->base_a));
         }
 
-        SDL_RenderCopyEx(g_Renderer, texture, nullptr, &pos, angle, nullptr, SDL_FLIP_NONE);
+        SDL_RenderCopyEx(g_Renderer, texture, src_rect_ptr, &dst_rect, angle, nullptr, SDL_FLIP_NONE);
 
         if(has_alpha_mod || (this->base_a >= 0)) {
             // Aka unset alpha value, needed if the same texture is rendered several times with different alphas

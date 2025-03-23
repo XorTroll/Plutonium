@@ -1,21 +1,19 @@
-
-/*
-
-    Plutonium library
-
-    @file Image.hpp
-    @brief An Image is an Element showing a picture. (JPEG, PNG, TGA, BMP)
-    @author XorTroll
-
-    @copyright Plutonium project - an easy-to-use UI framework for Nintendo Switch homebrew
-
-*/
+/**
+ * Plutonium library
+ * @file elm_Image.hpp
+ * @brief Contains an element for image rendering.
+ * @author XorTroll
+ * @copyright XorTroll
+ */
 
 #pragma once
 #include <pu/ui/elm/elm_Element.hpp>
 
 namespace pu::ui::elm {
 
+    /**
+     * @brief Element for image rendering.
+     */
     class Image : public Element {
         private:
             std::string img_path;
@@ -25,6 +23,12 @@ namespace pu::ui::elm {
             i32 y;
 
         public:
+            /**
+             * @brief Creates a new instance of an Image element.
+             * @param x X position of the Image.
+             * @param y Y position of the Image.
+             * @param image Path to the image to render.
+             */
             Image(const i32 x, const i32 y, sdl2::TextureHandle::Ref image);
             PU_SMART_CTOR(Image)
 
@@ -32,6 +36,10 @@ namespace pu::ui::elm {
                 return this->x;
             }
 
+            /**
+             * @brief Sets the X position of the Image.
+             * @param x New X position.
+             */
             inline void SetX(const i32 x) {
                 this->x = x;
             }
@@ -40,6 +48,10 @@ namespace pu::ui::elm {
                 return this->y;
             }
 
+            /**
+             * @brief Sets the Y position of the Image.
+             * @param y New Y position.
+             */
             inline void SetY(const i32 y) {
                 this->y = y;
             }
@@ -48,6 +60,10 @@ namespace pu::ui::elm {
                 return this->rend_opts.width;
             }
 
+            /**
+             * @brief Sets the width of the Image.
+             * @param width New width.
+             */
             inline void SetWidth(const i32 width) {
                 this->rend_opts.width = width;
             }
@@ -56,14 +72,26 @@ namespace pu::ui::elm {
                 return this->rend_opts.height;
             }
 
+            /**
+             * @brief Sets the height of the Image.
+             * @param height New height.
+             */
             inline void SetHeight(const i32 height) {
                 this->rend_opts.height = height;
             }
 
             PU_CLASS_POD_GETSET(RotationAngle, rend_opts.rot_angle, float)
-            
+
+            /**
+             * @brief Sets the image to render.
+             * @param image Path to the image to render.
+             */
             void SetImage(sdl2::TextureHandle::Ref image);
-            
+
+            /**
+             * @brief Gets the image being rendered.
+             * @return Path to the image being rendered.
+             */
             inline bool IsImageValid() {
                 return this->img_tex != nullptr;
             }

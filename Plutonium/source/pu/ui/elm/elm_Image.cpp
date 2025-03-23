@@ -7,7 +7,7 @@ namespace pu::ui::elm {
         this->x = x;
         this->y = y;
         this->img_tex = nullptr;
-        this->rend_opts = render::TextureRenderOptions::Default();
+        this->rend_opts = render::TextureRenderOptions();
         this->SetImage(image);
     }
 

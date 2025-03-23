@@ -8,6 +8,5 @@ var searchData=
   ['hasicon_5',['HasIcon',['../de/dbb/classpu_1_1ui_1_1elm_1_1_menu_item.html#a32324239744b25ddf9256887069b554c',1,'pu::ui::elm::MenuItem::HasIcon()'],['../d6/de9/classpu_1_1ui_1_1_dialog.html#ababc82b54fb3a8be17107a52a0a0158d',1,'pu::ui::Dialog::HasIcon()']]],
   ['hasinitialized_6',['HasInitialized',['../d0/d27/classpu_1_1ui_1_1render_1_1_renderer.html#afea5a6b3fe4e8b149fe97a3d6678e144',1,'pu::ui::render::Renderer']]],
   ['hasradius_7',['HasRadius',['../d6/d8f/classpu_1_1ui_1_1_overlay.html#a6675ad98ae18c84f0f424bf77870353e',1,'pu::ui::Overlay']]],
-  ['hasromfs_8',['HasRomFs',['../d0/d27/classpu_1_1ui_1_1render_1_1_renderer.html#a7eadc0c749b995b0e4011c4e0d59984a',1,'pu::ui::render::Renderer']]],
-  ['hitsregion_9',['HitsRegion',['../d7/d55/structpu_1_1ui_1_1_touch_point.html#a7797241cb367e5ffbbd2f5d9e7c59929',1,'pu::ui::TouchPoint']]]
+  ['hitsregion_8',['HitsRegion',['../d7/d55/structpu_1_1ui_1_1_touch_point.html#a7797241cb367e5ffbbd2f5d9e7c59929',1,'pu::ui::TouchPoint']]]
 ];

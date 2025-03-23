@@ -1,11 +1,6 @@
 var classpu_1_1ui_1_1elm_1_1_menu =
 [
     [ "OnSelectionChangedCallback", "dc/d6c/classpu_1_1ui_1_1elm_1_1_menu.html#af1b77782418095762505bbd1d3022451", null ],
-    [ "MoveStatus", "dc/d6c/classpu_1_1ui_1_1elm_1_1_menu.html#a4fe72d0f6be7bcdcc7c2f35283d35bd5", [
-      [ "None", "dc/d6c/classpu_1_1ui_1_1elm_1_1_menu.html#a4fe72d0f6be7bcdcc7c2f35283d35bd5a6adf97f83acf6453d4a6a4b1070f3754", null ],
-      [ "WaitingUp", "dc/d6c/classpu_1_1ui_1_1elm_1_1_menu.html#a4fe72d0f6be7bcdcc7c2f35283d35bd5a8b0e578f17b6d9a01ef38543cbea9860", null ],
-      [ "WaitingDown", "dc/d6c/classpu_1_1ui_1_1elm_1_1_menu.html#a4fe72d0f6be7bcdcc7c2f35283d35bd5a8496a3d763901f1ba2de9c38e73d6730", null ]
-    ] ],
     [ "Menu", "dc/d6c/classpu_1_1ui_1_1elm_1_1_menu.html#aefeac0d8d523984cd8a96840fd1441a8", null ],
     [ "AddItem", "dc/d6c/classpu_1_1ui_1_1elm_1_1_menu.html#a29a820f09597fef7e363cfaacf6d4f7a", null ],
     [ "ClearItems", "dc/d6c/classpu_1_1ui_1_1elm_1_1_menu.html#abf94e076df3b81e5f35a22afcf8e59a2", null ],

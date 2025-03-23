@@ -1,7 +1,7 @@
 var audio___sfx_8hpp =
 [
-    [ "Sfx", "d0/d98/audio___sfx_8hpp.html#a88fc28259e6dad775921efd1d384966c", null ],
-    [ "DestroySfx", "d0/d98/audio___sfx_8hpp.html#ac3d79067485a253473beeae7691fea65", null ],
-    [ "LoadSfx", "d0/d98/audio___sfx_8hpp.html#a9d37a88a7efef6bac8947b853965234b", null ],
-    [ "PlaySfx", "d0/d98/audio___sfx_8hpp.html#a38344de3e19215b9d8125e6971c7f6cd", null ]
+    [ "pu::audio::Sfx", "d8/d8f/namespacepu_1_1audio.html#a88fc28259e6dad775921efd1d384966c", null ],
+    [ "pu::audio::DestroySfx", "d8/d8f/namespacepu_1_1audio.html#ac3d79067485a253473beeae7691fea65", null ],
+    [ "pu::audio::LoadSfx", "d8/d8f/namespacepu_1_1audio.html#ac9c66b4e55fe192f7ba5f39899513d47", null ],
+    [ "pu::audio::PlaySfx", "d8/d8f/namespacepu_1_1audio.html#a38344de3e19215b9d8125e6971c7f6cd", null ]
 ];

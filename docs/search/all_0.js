@@ -17,7 +17,7 @@ var searchData=
   ['allowederror_14',['AllowedError',['../d2/d96/classpu_1_1ui_1_1_sigmoid_incrementer.html#af44762c1a03b838c29b6fd882fc40eeb',1,'pu::ui::SigmoidIncrementer']]],
   ['alpha_5fmod_15',['alpha_mod',['../dc/d32/structpu_1_1ui_1_1render_1_1_texture_render_options.html#a4b579ab4b2bb90df8ad49d633a03e22a',1,'pu::ui::render::TextureRenderOptions']]],
   ['application_16',['Application',['../da/dc0/classpu_1_1ui_1_1_application.html',1,'pu::ui::Application'],['../da/dc0/classpu_1_1ui_1_1_application.html#a3833437526232f5a507a45ab538c4fb9',1,'pu::ui::Application::Application()']]],
-  ['audio_5fmixer_5fflags_17',['audio_mixer_flags',['../df/d6f/structpu_1_1ui_1_1render_1_1_renderer_init_options.html#a404582159cc98e75c42bb8ad6e113c3f',1,'pu::ui::render::RendererInitOptions']]],
+  ['audio_5faudio_2ehpp_17',['audio_Audio.hpp',['../dc/dd2/audio___audio_8hpp.html',1,'']]],
   ['audio_5fmusic_2ehpp_18',['audio_Music.hpp',['../de/de5/audio___music_8hpp.html',1,'']]],
   ['audio_5fsfx_2ehpp_19',['audio_Sfx.hpp',['../d0/d98/audio___sfx_8hpp.html',1,'']]]
 ];

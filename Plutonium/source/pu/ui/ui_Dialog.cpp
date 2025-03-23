@@ -35,7 +35,6 @@ namespace pu::ui {
         this->title_clr = DefaultTitleColor;
         this->cnt_clr = DefaultContentColor;
         this->opt_clr = DefaultOptionColor;
-        this->dialog_extra_base_width = DefaultDialogExtraBaseWidth;
         this->dialog_border_radius = DefaultDialogBorderRadius;
         this->space_between_options = DefaultSpaceBetweenOptions;
         this->space_between_option_rows = DefaultSpaceBetweenOptionRows;
@@ -47,7 +46,6 @@ namespace pu::ui {
         this->title_y = DefaultTitleY;
         this->cnt_x = DefaultContentX;
         this->cnt_y = DefaultContentY;
-        this->icon_extra_height = DefaultIconExtraHeight;
         this->opts_base_h_margin = DefaultOptionsBaseHorizontalMargin;
         this->opt_height = DefaultOptionHeight;
         this->opt_h_margin = DefaultOptionHorizontalMargin;
@@ -221,6 +219,11 @@ namespace pu::ui {
                     finish = true;
                 }
                 else if(keys_down & HidNpadButton_B) {
+                    if(this->HasCancelOption()) {
+                        this->selected_opt_idx = this->opts.size() - 1;
+                        this->selected_opt_over_alpha = 0xFF;
+                        this->prev_selected_opt_over_alpha = 0;
+                    }
                     this->user_cancelled = true;
                     finish = true;
                 }
@@ -272,7 +275,7 @@ namespace pu::ui {
                     const auto icon_width = render::GetTextureWidth(this->icon_tex->Get());
                     const auto icon_x = dialog_x + (dialog_width - (icon_width + 2 * this->icon_margin));
                     const auto icon_y = dialog_y + this->icon_margin;
-                    drawer->RenderTexture(this->icon_tex->Get(), icon_x, icon_y, render::TextureRenderOptions::WithCustomAlpha(static_cast<u8>(initial_fade_alpha)));
+                    drawer->RenderTexture(this->icon_tex->Get(), icon_x, icon_y, render::TextureRenderOptions(static_cast<u8>(initial_fade_alpha), {}, {}, {}, {}, {}));
                 }
 
                 auto cur_opt_x = dialog_x + this->opts_base_h_margin;

@@ -33,7 +33,7 @@ var searchData=
   ['getrendercallbacks_30',['GetRenderCallbacks',['../d6/d11/classpu_1_1ui_1_1_layout.html#a98ffb6a05d8923b24298dc65fd552187',1,'pu::ui::Layout']]],
   ['getselecteditem_31',['GetSelectedItem',['../dc/d6c/classpu_1_1ui_1_1elm_1_1_menu.html#a1b94e50b817d58ca2fab65f3682d4c80',1,'pu::ui::elm::Menu']]],
   ['gettext_32',['GetText',['../df/d21/classpu_1_1ui_1_1elm_1_1_text_block.html#a611edbe4430f49292f55c83c409bf52a',1,'pu::ui::elm::TextBlock']]],
-  ['gettextdimensions_33',['GetTextDimensions',['../dd/d76/classpu_1_1ttf_1_1_font.html#adf857402bea5c385c17189953ec24b22',1,'pu::ttf::Font::GetTextDimensions()'],['../da/d54/namespacepu_1_1ui_1_1render.html#a6cffc4f7f2fc5a83ecff399e87add4bb',1,'pu::ui::render::GetTextDimensions(const std::string &amp;font_name, const std::string &amp;text, i32 &amp;out_width, i32 &amp;out_height)']]],
+  ['gettextdimensions_33',['GetTextDimensions',['../dd/d76/classpu_1_1ttf_1_1_font.html#abbc63fb6298a64bbc1b1a77aed9d9bcb',1,'pu::ttf::Font::GetTextDimensions()'],['../da/d54/namespacepu_1_1ui_1_1render.html#a6cffc4f7f2fc5a83ecff399e87add4bb',1,'pu::ui::render::GetTextDimensions(const std::string &amp;font_name, const std::string &amp;text, i32 &amp;out_width, i32 &amp;out_height)']]],
   ['gettextheight_34',['GetTextHeight',['../da/d54/namespacepu_1_1ui_1_1render.html#ace12eee5e824e7246730c4141cc73210',1,'pu::ui::render']]],
   ['gettextureheight_35',['GetTextureHeight',['../da/d54/namespacepu_1_1ui_1_1render.html#a5ddabd3bd6cfe05172eef8c0dee9234c',1,'pu::ui::render']]],
   ['gettexturewidth_36',['GetTextureWidth',['../da/d54/namespacepu_1_1ui_1_1render.html#a8187f56badf43ccf9eed52915345fa01',1,'pu::ui::render']]],

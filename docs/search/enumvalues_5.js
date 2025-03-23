@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['right_0',['Right',['../d2/d5e/namespacepu_1_1ui_1_1elm.html#ac2066021dbc53818c251c446b6d7f864a92b09c7c48c520c3c55e497875da437c',1,'pu::ui::elm']]]
+  ['small_0',['Small',['../d9/d7f/namespacepu_1_1ui.html#ad3aa8662a33d0c410412b1cd1d2984f0a2660064e68655415da2628c2ae2f7592',1,'pu::ui']]]
 ];

@@ -9,10 +9,14 @@ var classpu_1_1ui_1_1elm_1_1_text_block =
     [ "GetY", "df/d21/classpu_1_1ui_1_1elm_1_1_text_block.html#a81fc9e373ad39f42ab9d8b2bd9552352", null ],
     [ "OnInput", "df/d21/classpu_1_1ui_1_1elm_1_1_text_block.html#a2b8c187956510b6794cb741441561d41", null ],
     [ "OnRender", "df/d21/classpu_1_1ui_1_1elm_1_1_text_block.html#a5639bd0b9800c87b124e6cffc22a3932", null ],
+    [ "ResetClamp", "df/d21/classpu_1_1ui_1_1elm_1_1_text_block.html#a7da610c1b5a3ea923ce16ab46056169b", null ],
     [ "SetColor", "df/d21/classpu_1_1ui_1_1elm_1_1_text_block.html#a770dba61aee470eb151d0dc8c4566073", null ],
     [ "SetFont", "df/d21/classpu_1_1ui_1_1elm_1_1_text_block.html#a9f04c7d87296736c67a5a5964c03ee32", null ],
     [ "SetText", "df/d21/classpu_1_1ui_1_1elm_1_1_text_block.html#a71e8dea5cbd362d3847940fb3e5391c8", null ],
     [ "SetX", "df/d21/classpu_1_1ui_1_1elm_1_1_text_block.html#a2bac7d345f87901579ffaeab325074d7", null ],
     [ "SetY", "df/d21/classpu_1_1ui_1_1elm_1_1_text_block.html#ab51da76bb08921802e7cc31b1fd8034f", null ],
-    [ "DefaultColor", "df/d21/classpu_1_1ui_1_1elm_1_1_text_block.html#a22026d87a80576dd41eb1074097cb0f1", null ]
+    [ "DefaultClampSpeedSteps", "df/d21/classpu_1_1ui_1_1elm_1_1_text_block.html#ad5ce7b68a4cd0f18d734e7f37af1f42f", null ],
+    [ "DefaultClampStaticDelaySteps", "df/d21/classpu_1_1ui_1_1elm_1_1_text_block.html#a155f3da2e5ce2331568ea7e1040bb7f1", null ],
+    [ "DefaultColor", "df/d21/classpu_1_1ui_1_1elm_1_1_text_block.html#a22026d87a80576dd41eb1074097cb0f1", null ],
+    [ "NoClamp", "df/d21/classpu_1_1ui_1_1elm_1_1_text_block.html#a571d312767e5b06a79e47224e120a66a", null ]
 ];

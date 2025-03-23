@@ -1,15 +1,10 @@
-
-/*
-
-    Plutonium library
-
-    @file Menu.hpp
-    @brief A Menu is a very useful Element for option browsing or selecting.
-    @author XorTroll
-
-    @copyright Plutonium project - an easy-to-use UI framework for Nintendo Switch homebrew
-
-*/
+/**
+ * Plutonium library
+ * @file elm_Menu.hpp
+ * @brief Contains classes for creating UI menus.
+ * @author XorTroll
+ * @copyright XorTroll
+ */
 
 #pragma once
 #include <pu/ui/elm/elm_Element.hpp>
@@ -18,9 +13,18 @@
 
 namespace pu::ui::elm {
 
+    /**
+     * @brief Represents a menu item.
+     */
     class MenuItem {
         public:
+            /**
+             * @brief Represents a function called when the specific key is pressed over a the MenuItem.
+             */
             using OnKeyCallback = std::function<void()>;
+
+            // Self-explanatory constants
+
             static constexpr Color DefaultColor = { 10, 10, 10, 0xFF };
 
         private:
@@ -31,25 +35,51 @@ namespace pu::ui::elm {
             std::vector<u64> on_key_cb_keys;
 
         public:
+            /**
+             * @brief Creates a new instance of a MenuItem.
+             * @param name Name of the MenuItem.
+             */
             MenuItem(const std::string &name) : name(name), clr(DefaultColor) {}
             PU_SMART_CTOR(MenuItem)
 
+            /**
+             * @brief Gets the name of the MenuItem.
+             * @return Name of the MenuItem.
+             */
             inline std::string GetName() {
                 return this->name;
             }
-            
+
+            /**
+             * @brief Sets the name of the MenuItem.
+             * @param name New name of the MenuItem.
+             */
             inline void SetName(const std::string &name) {
                 this->name = name;
             }
 
             PU_CLASS_POD_GETSET(Color, clr, Color)
 
+            /**
+             * @brief Adds a new OnKeyCallback to the MenuItem.
+             * @param on_key_cb Function to call when the key is pressed.
+             * @param key Key to call the function on. Default is A.
+             */
             void AddOnKey(OnKeyCallback on_key_cb, const u64 key = HidNpadButton_A);
-            
+
+            /**
+             * @brief Gets the amount of OnKeyCallbacks in the MenuItem.
+             * @return Amount of OnKeyCallbacks in the MenuItem.
+             */
             inline u32 GetOnKeyCallbackCount() {
                 return this->on_key_cbs.size();
             }
 
+            /**
+             * @brief Gets the OnKeyCallback at the specified index.
+             * @param idx Index of the OnKeyCallback.
+             * @return OnKeyCallback at the specified index.
+             */
             inline OnKeyCallback GetOnKeyCallback(const u32 idx) {
                 if(idx < this->on_key_cbs.size()) {
                     return this->on_key_cbs.at(idx);
@@ -59,6 +89,11 @@ namespace pu::ui::elm {
                 }
             }
 
+            /**
+             * @brief Gets the key of the OnKeyCallback at the specified index.
+             * @param idx Index of the OnKeyCallback.
+             * @return Key of the OnKeyCallback at the specified index.
+             */
             inline u64 GetOnKeyCallbackKey(const u32 idx) {
                 if(idx < this->on_key_cb_keys.size()) {
                     return this->on_key_cb_keys.at(idx);
@@ -68,19 +103,36 @@ namespace pu::ui::elm {
                 }
             }
 
+            /**
+             * @brief Gets the icon of the MenuItem.
+             * @return Icon of the MenuItem.
+             */
             inline sdl2::TextureHandle::Ref GetIconTexture() {
                 return this->icon;
             }
 
+            /**
+             * @brief Sets the icon of the MenuItem.
+             * @param icon Icon to set.
+             */
             void SetIcon(sdl2::TextureHandle::Ref icon);
 
+            /**
+             * @brief Gets whether the MenuItem has an icon.
+             * @return Whether the MenuItem has an icon.
+             */
             inline bool HasIcon() {
                 return this->icon != nullptr;
             }
     };
 
+    /**
+     * @brief Represents a menu.
+     */
     class Menu : public Element {
         public:
+            // Self-explanatory constants
+
             static constexpr Color DefaultScrollbarColor = { 110, 110, 110, 0xFF };
 
             static constexpr u8 DefaultItemAlphaIncrementSteps = 15;
@@ -99,15 +151,18 @@ namespace pu::ui::elm {
 
             static constexpr s64 DefaultMoveWaitTimeMs = 150;
 
+            /**
+             * @brief Represents a function called when the selection of the Menu changes.
+             */
+            using OnSelectionChangedCallback = std::function<void()>;
+
+        private:
             enum class MoveStatus : u8 {
                 None = 0,
                 WaitingUp = 1,
                 WaitingDown = 2
             };
 
-            using OnSelectionChangedCallback = std::function<void()>;
-
-        private:
             i32 x;
             i32 y;
             i32 w;
@@ -200,6 +255,16 @@ namespace pu::ui::elm {
             }
 
         public:
+            /**
+             * @brief Creates a new instance of a Menu.
+             * @param x X position of the Menu.
+             * @param y Y position of the Menu.
+             * @param width Width of the Menu.
+             * @param items_clr Color of the items in the Menu.
+             * @param items_focus_clr Color of the focused item in the Menu.
+             * @param items_height Height of each shown item in the Menu.
+             * @param items_to_show Number of items to show in the Menu.
+             */
             Menu(const i32 x, const i32 y, const i32 width, const Color items_clr, const Color items_focus_clr, const i32 items_height, const u32 items_to_show);
             PU_SMART_CTOR(Menu)
 
@@ -207,6 +272,10 @@ namespace pu::ui::elm {
                 return this->x;
             }
 
+            /**
+             * @brief Sets the X position of the Menu.
+             * @param x New X position.
+             */
             inline void SetX(const i32 x) {
                 this->x = x;
             }
@@ -215,6 +284,10 @@ namespace pu::ui::elm {
                 return this->y;
             }
 
+            /**
+             * @brief Sets the Y position of the Menu.
+             * @param y New Y position.
+             */
             inline void SetY(const i32 y) {
                 this->y = y;
             }
@@ -223,6 +296,10 @@ namespace pu::ui::elm {
                 return this->w;
             }
 
+            /**
+             * @brief Sets the width of the Menu.
+             * @param width New width.
+             */
             inline void SetWidth(const i32 width) {
                 this->w = width;
             }
@@ -246,32 +323,58 @@ namespace pu::ui::elm {
             PU_CLASS_POD_GETSET(ShadowBaseAlpha, shadow_base_alpha, u8)
             PU_CLASS_POD_GETSET(MoveWaitTimeMs, move_wait_time_ms, s64)
 
+            /**
+             * @brief Sets the font name to use for the Menu.
+             * @param font_name Name of the font to use.
+             */
             inline void SetOnSelectionChanged(OnSelectionChangedCallback on_selection_changed_cb) {
                 this->on_selection_changed_cb = on_selection_changed_cb;
             }
 
+            /**
+             * @brief Adds a new item to the Menu.
+             * @param item Item to add.
+             */
             inline void AddItem(MenuItem::Ref &item) {
                 this->items.push_back(item);
             }
 
+            /**
+             * @brief Clears all items from the Menu.
+             */
             void ClearItems();
 
+            /**
+             * @brief Forces the Menu to reload all items.
+             */
             inline void ForceReloadItems() {
                 this->ReloadItemRenders();
             }
 
             PU_CLASS_POD_SET(CooldownEnabled, cooldown_enabled, bool)
 
+            /**
+             * @brief Gets the selected item of the Menu.
+             * @return Selected item of the Menu.
+             */
             inline MenuItem::Ref &GetSelectedItem() {
                 return this->items.at(this->selected_item_idx);
             }
 
+            /**
+             * @brief Gets the items of the Menu.
+             * @return Items of the Menu.
+             */
             inline std::vector<MenuItem::Ref> &GetItems() {
                 return this->items;
             }
 
             PU_CLASS_POD_GET(SelectedIndex, selected_item_idx, i32)
 
+            /**
+             * @brief Sets the selected index of the Menu.
+             * @param idx Index to set.
+             */
             void SetSelectedIndex(const u32 idx);
 
             void OnRender(render::Renderer::Ref &drawer, const i32 x, const i32 y) override;

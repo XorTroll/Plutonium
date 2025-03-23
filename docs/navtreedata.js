@@ -43,8 +43,7 @@ var NAVTREE =
         [ "All", "functions.html", "functions_dup" ],
         [ "Functions", "functions_func.html", "functions_func" ],
         [ "Variables", "functions_vars.html", null ],
-        [ "Typedefs", "functions_type.html", null ],
-        [ "Enumerations", "functions_enum.html", null ]
+        [ "Typedefs", "functions_type.html", null ]
       ] ]
     ] ],
     [ "Files", "files.html", [
@@ -62,11 +61,11 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "annotated.html",
-"d5/d51/classpu_1_1ui_1_1elm_1_1_toggle.html#a40d4a4dbeba921e66cf19d4f00fa0ed4",
-"d7/d55/structpu_1_1ui_1_1_touch_point.html#a1b490a4531448177279248ec32286074",
-"da/df2/namespacepu.html",
-"de/dfe/sdl2___custom_ttf_8h.html#a603b837e7511507afc5eb1d16b19ef6c"
+"d5/dea/classpu_1_1ui_1_1elm_1_1_rectangle.html#a30994615d16a4dbba5d5ac87e1ca0fa1",
+"d9/d0e/classpu_1_1ui_1_1elm_1_1_element.html",
+"dc/d49/classpu_1_1ui_1_1extras_1_1_toast.html",
+"df/d21/classpu_1_1ui_1_1elm_1_1_text_block.html#a50a27767538bd5f5d11dfe8917df2462"
 ];
 
-var SYNCONMSG = 'click to disable panel synchronisation';
-var SYNCOFFMSG = 'click to enable panel synchronisation';
+var SYNCONMSG = 'click to disable panel synchronization';
+var SYNCOFFMSG = 'click to enable panel synchronization';

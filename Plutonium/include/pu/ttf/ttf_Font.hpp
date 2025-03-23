@@ -1,3 +1,10 @@
+/**
+ * Plutonium library
+ * @file ttf_Font.hpp
+ * @brief Font rendering support, high-level wrapper for SDL2_ttf
+ * @author XorTroll
+ * @copyright XorTroll
+ */
 
 #pragma once
 #include <pu/sdl2/sdl2_Types.hpp>
@@ -6,6 +13,9 @@
 
 namespace pu::ttf {
 
+    /**
+     * @brief High-level wrapper for SDL2_ttf font rendering.
+     */
     class Font {
         private:
             using FontFaceDisposingFunction = void(*)(void*);
@@ -59,28 +69,86 @@ namespace pu::ttf {
             }
 
         public:
+            /**
+             * @brief Constant representing an invalid font face index.
+             */
             static constexpr i32 InvalidFontFaceIndex = -1;
+
+            /**
+             * @brief Default font size to use when creating a new font.
+             */
             static constexpr u32 DefaultFontSize = 25;
 
+            /**
+             * @brief Function to use when disposing a font face that does not need to be disposed.
+             */
             static void EmptyFontFaceDisposingFunction(void*) {}
 
+            /**
+             * @brief Checks if a font face index is valid.
+             * @param index Index to check.
+             * @return Whether the index is valid.
+             */
             static inline constexpr bool IsValidFontFaceIndex(const i32 index) {
                 return index != InvalidFontFaceIndex;
             }
 
+            /**
+             * @brief Creates a new Font instance with the specified font size.
+             * @param font_sz Font size to use.
+             */
             Font(const u32 font_sz) : font_size(font_sz) {}
             ~Font();
 
+            /**
+             * @brief Loads a font from memory data.
+             * @param ptr Pointer to the font data.
+             * @param size Size of the font data.
+             * @param disp_fn Function to call when the font is no longer needed and needs disposing.
+             * @return Index of the loaded font face.
+             */
             i32 LoadFromMemory(void *ptr, const size_t size, FontFaceDisposingFunction disp_fn);
+
+            /**
+             * @brief Loads a font from a file.
+             * @param path Path to the font file.
+             * @return Index of the loaded font face.
+             */
             i32 LoadFromFile(const std::string &path);
+
+            /**
+             * @brief Unloads a font face.
+             * @param font_idx Index of the font face to unload.
+             */
             void Unload(const i32 font_idx);
 
+            /**
+             * @brief Sets the font size used by the Font instance.
+             * @param font_sz Font size used.
+             */
             inline u32 GetFontSize() {
                 return this->font_size;
             }
 
+            /**
+             * @brief Finds the first available font face that can render the specified character.
+             * @param ch Character to find a font face for.
+             */
             sdl2::Font FindValidFontFor(const Uint16 ch);
+
+            /**
+             * @brief Gets the dimensions of a text string rendered with the Font instance.
+             * @param str Text string to get the dimensions of.
+             * @return Dimension value pair with the width and height of the text string.
+             */
             std::pair<u32, u32> GetTextDimensions(const std::string &str);
+
+            /**
+             * @brief Renders a text string with the Font instance.
+             * @param str Text string to render.
+             * @param clr Color to render the text with.
+             * @return Raw SDL2 texture containing the rendered text.
+             */
             sdl2::Texture RenderText(const std::string &str, const ui::Color clr);
     };
 

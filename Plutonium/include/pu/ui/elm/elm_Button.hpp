@@ -1,15 +1,10 @@
-
-/*
-
-    Plutonium library
-
-    @file Button.hpp
-    @brief A Button is an Element for option selecting.
-    @author XorTroll
-
-    @copyright Plutonium project - an easy-to-use UI framework for Nintendo Switch homebrew
-
-*/
+/**
+ * Plutonium library
+ * @file elm_Button.hpp
+ * @brief Represents a simple button that can be clicked and interacted with.
+ * @author XorTroll
+ * @copyright XorTroll
+ */
 
 #pragma once
 #include <functional>
@@ -17,9 +12,17 @@
 
 namespace pu::ui::elm {
 
+    /**
+     * @brief Represents a simple button that can be clicked and interacted with.
+     */
     class Button : public Element {
         public:
+            /**
+             * @brief Callback that is called when the Button is clicked.
+             */
             using OnClickCallback = std::function<void()>;
+
+            // Self-explanatory constants
 
             static constexpr u8 DefaultDarkerColorFactor = 70;
 
@@ -67,6 +70,16 @@ namespace pu::ui::elm {
             }
 
         public:
+            /**
+             * @brief Creates a new instance of a Button.
+             * @param x X position of the Button.
+             * @param y Y position of the Button.
+             * @param width Width of the Button.
+             * @param height Height of the Button.
+             * @param content Content of the Button.
+             * @param content_clr Color of the content of the Button.
+             * @param bg_clr Background color of the Button.
+             */
             Button(const i32 x, const i32 y, const i32 width, const i32 height, const std::string &content, const Color content_clr, const Color bg_clr);
             PU_SMART_CTOR(Button)
             ~Button();
@@ -75,6 +88,10 @@ namespace pu::ui::elm {
                 return this->x;
             }
 
+            /**
+             * @brief Sets the X position of the Button.
+             * @param x New X position to set.
+             */
             inline void SetX(const i32 x) {
                 this->x = x;
             }
@@ -83,6 +100,10 @@ namespace pu::ui::elm {
                 return this->y;
             }
 
+            /**
+             * @brief Sets the Y position of the Button.
+             * @param y New Y position to set.
+             */
             inline void SetY(const i32 y) {
                 this->y = y;
             }
@@ -91,6 +112,10 @@ namespace pu::ui::elm {
                 return this->w;
             }
 
+            /**
+             * @brief Sets the width of the Button.
+             * @param width New width to set.
+             */
             inline void SetWidth(const i32 width) {
                 this->w = width;
             }
@@ -99,24 +124,48 @@ namespace pu::ui::elm {
                 return this->h;
             }
 
+            /**
+             * @brief Sets the height of the Button.
+             * @param height New height to set.
+             */
             inline void SetHeight(const i32 height) {
                 this->h = height;
             }
 
+            /**
+             * @brief Gets the content of the Button.
+             * @return Content of the Button.
+             */
             inline std::string GetContent() {
                 return this->cnt;
             }
 
+            /**
+             * @brief Sets the content of the Button.
+             * @param content New content to set.
+             */
             void SetContent(const std::string &content);
 
             PU_CLASS_POD_GET(ContentColor, cnt_clr, Color)
 
+            /**
+             * @brief Sets the color of the content of the Button.
+             * @param content_clr New color to set.
+             */
             void SetContentColor(const Color content_clr);
 
             PU_CLASS_POD_GETSET(BackgroundColor, bg_clr, Color)
 
+            /**
+             * @brief Sets the background color of the Button.
+             * @param bg_clr New background color to set.
+             */
             void SetContentFont(const std::string &font_name);
-            
+
+            /**
+             * @brief Sets the font of the content of the Button.
+             * @param font_name New font to set.
+             */
             inline void SetOnClick(OnClickCallback on_click_cb) {
                 this->on_click_cb = on_click_cb;
             }

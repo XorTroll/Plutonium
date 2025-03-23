@@ -205,7 +205,7 @@ namespace pu::ui::elm {
                     const auto icon_x = x + this->icon_margin;
                     const auto icon_y = cur_item_y + (this->items_h - icon_height) / 2;
                     name_x = icon_x + icon_width + this->text_margin;
-                    drawer->RenderTexture(icon_tex->Get(), icon_x, icon_y, render::TextureRenderOptions::WithCustomDimensions(icon_width, icon_height));
+                    drawer->RenderTexture(icon_tex->Get(), icon_x, icon_y, render::TextureRenderOptions({}, icon_width, icon_height, {}, {}, {}));
                 }
                 drawer->RenderTexture(name_tex, name_x, name_y);
                 cur_item_y += this->items_h;

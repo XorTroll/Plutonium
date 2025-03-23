@@ -1,23 +1,23 @@
-
-/*
-
-    Plutonium library
-
-    @file Toggle.hpp
-    @brief A Toggle is an Element used to switch between two options by toggling the item.
-    @author XorTroll
-
-    @copyright Plutonium project - an easy-to-use UI framework for Nintendo Switch homebrew
-
-*/
+/**
+ * Plutonium library
+ * @file elm_Toggle.hpp
+ * @brief Contains an element for toggling between two states.
+ * @author XorTroll
+ * @copyright XorTroll
+ */
 
 #pragma once
 #include <pu/ui/elm/elm_Element.hpp>
 
 namespace pu::ui::elm {
 
+    /**
+     * @brief Element for toggling between two states.
+     */
     class Toggle : public Element {
         public:
+            // Self-explanatory constants
+
             static constexpr u32 DefaultContentHorizontalMargin = 30;
             static constexpr u32 DefaultContentVerticalMargin = 20;
 
@@ -47,6 +47,14 @@ namespace pu::ui::elm {
             }
 
         public:
+            /**
+             * @brief Creates a new instance of a Toggle element.
+             * @param x X position of the Toggle.
+             * @param y Y position of the Toggle.
+             * @param content Content of the Toggle.
+             * @param toggle_key Key to toggle the state of the Toggle.
+             * @param clr Color of the Toggle.
+             */
             Toggle(const i32 x, const i32 y, const std::string &content, const u64 toggle_key, const Color clr);
             PU_SMART_CTOR(Toggle)
             ~Toggle();
@@ -55,6 +63,10 @@ namespace pu::ui::elm {
                 return this->x;
             }
 
+            /**
+             * @brief Sets the X position of the Toggle.
+             * @param x New X position.
+             */
             inline void SetX(const i32 x) {
                 this->x = x;
             }
@@ -63,6 +75,10 @@ namespace pu::ui::elm {
                 return this->y;
             }
 
+            /**
+             * @brief Sets the Y position of the Toggle.
+             * @param y New Y position.
+             */
             inline void SetY(const i32 y) {
                 this->y = y;
             }
@@ -70,15 +86,35 @@ namespace pu::ui::elm {
             i32 GetWidth() override;
             i32 GetHeight() override;
 
+            /**
+             * @brief Gets the content of the Toggle.
+             * @return Content of the Toggle.
+             */
             inline std::string GetContent() {
                 return this->cnt;
             }
-            
+
+            /**
+             * @brief Sets the content of the Toggle.
+             * @param content New content.
+             * @note This will re-render the content of the Toggle.
+             */
             void SetContent(const std::string &content);
+
+            /**
+             * @brief Gets the font name of the Toggle.
+             * @return Font name of the Toggle.
+             * @note This will re-render the content of the Toggle.
+             */
             void SetFont(const std::string &font_name);
 
             PU_CLASS_POD_GET(Color, clr, Color)
             
+            /**
+             * @brief Sets the color of the Toggle.
+             * @param clr New color.
+             * @note This will re-render the content of the Toggle.
+             */
             void SetColor(const Color clr);
 
             PU_CLASS_POD_GETSET(Key, key, u64)

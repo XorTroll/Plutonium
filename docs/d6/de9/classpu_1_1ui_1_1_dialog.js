@@ -21,7 +21,6 @@ var classpu_1_1ui_1_1_dialog =
     [ "DefaultContentY", "d6/de9/classpu_1_1ui_1_1_dialog.html#ab9161cd69565cb04ed5ede8c3b978d5b", null ],
     [ "DefaultDialogBorderRadius", "d6/de9/classpu_1_1ui_1_1_dialog.html#a77795a58f1b6158fa5c33d609c125879", null ],
     [ "DefaultDialogColor", "d6/de9/classpu_1_1ui_1_1_dialog.html#a19a446966153782a26f7790750baac4b", null ],
-    [ "DefaultDialogExtraBaseWidth", "d6/de9/classpu_1_1ui_1_1_dialog.html#a12444627593b5644b874f385ebbd5b01", null ],
     [ "DefaultFadeAlphaIncrementSteps", "d6/de9/classpu_1_1ui_1_1_dialog.html#af6d7dc387cebaf60b9dd071677153664", null ],
     [ "DefaultIconExtraHeight", "d6/de9/classpu_1_1ui_1_1_dialog.html#ab7cf2aed11636a2b4c21be0b84de7ef6", null ],
     [ "DefaultIconMargin", "d6/de9/classpu_1_1ui_1_1_dialog.html#a04becf2e173c5d8c40ec2ca22c40159c", null ],
