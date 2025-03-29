@@ -60,7 +60,18 @@ namespace pu::ui {
 
         auto lyt_bg_tex = this->lyt->GetBackgroundImageTexture();
         if(lyt_bg_tex != nullptr) {
-            this->renderer->RenderTexture(lyt_bg_tex->Get(), 0, 0);
+            const auto x_offset = this->lyt->GetBackgroundImageXOffset();
+            if(x_offset == 0) {
+                this->renderer->RenderTexture(lyt_bg_tex->Get(), 0, 0);
+            }
+            else if(x_offset > 0) {
+                this->renderer->RenderTexture(lyt_bg_tex->Get(), x_offset, 0);
+                this->renderer->RenderTexture(lyt_bg_tex->Get(), x_offset - render::ScreenWidth, 0);
+            }
+            else if(x_offset < 0) {
+                this->renderer->RenderTexture(lyt_bg_tex->Get(), x_offset, 0);
+                this->renderer->RenderTexture(lyt_bg_tex->Get(), x_offset + render::ScreenWidth, 0);
+            }
         }
 
         if(!this->in_render_over) {

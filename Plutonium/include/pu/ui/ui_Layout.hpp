@@ -44,6 +44,7 @@ namespace pu::ui {
             Color over_bg_color;
             TouchPoint sim_touch_pos;
             sdl2::TextureHandle::Ref over_bg_tex;
+            s32 over_bg_tex_x_offset;
             OnInputCallback on_ipt;
             std::vector<RenderCallback> render_cbs;
 
@@ -51,7 +52,7 @@ namespace pu::ui {
             /**
              * @brief Creates a new Layout with the default background (white-ish).
              */
-            Layout() : Container(0, 0, render::ScreenWidth, render::ScreenHeight), has_image(false), over_bg_color(DefaultBackgroundColor), sim_touch_pos(), over_bg_tex(), on_ipt(), render_cbs() {}
+            Layout() : Container(0, 0, render::ScreenWidth, render::ScreenHeight), has_image(false), over_bg_color(DefaultBackgroundColor), sim_touch_pos(), over_bg_tex(), over_bg_tex_x_offset(0), on_ipt(), render_cbs() {}
             PU_SMART_CTOR(Layout)
             virtual ~Layout();
 
@@ -151,6 +152,29 @@ namespace pu::ui {
              * @return The simulated touch position.
              */
             TouchPoint ConsumeSimulatedTouchPosition();
+
+            /**
+             * @brief Sets the offset of the background image.
+             * @param x_offset X offset to set.
+             */
+            inline void SetBackgroundImageXOffset(const s32 x_offset) {
+                this->over_bg_tex_x_offset = x_offset;
+            }
+
+            /**
+             * @brief Gets the offset of the background image.
+             * @return The offset of the background image.
+             */
+            inline s32 GetBackgroundImageXOffset() {
+                return this->over_bg_tex_x_offset;
+            }
+
+            /**
+             * @brief Resets the offset of the background image.
+             */
+            inline void ResetBackgroundImageXOffset() {
+                this->over_bg_tex_x_offset = 0;
+            }
     };
 
 }
