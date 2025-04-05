@@ -13,8 +13,17 @@ namespace pu::ui::render {
         return tex;
     }
 
-    sdl2::Texture LoadImage(const std::string &path) {
+    sdl2::Texture LoadImageFromFile(const std::string &path) {
         return ConvertToTexture(IMG_Load(path.c_str()));
+    }
+
+    sdl2::Texture LoadImageFromBuffer(const void *img_data, const size_t img_size) {
+        if((img_data == nullptr) || (img_size == 0)) {
+            return nullptr;
+        }
+
+        auto surface = IMG_Load_RW(SDL_RWFromConstMem(img_data, img_size), 1);
+        return ConvertToTexture(surface);
     }
     
     i32 GetTextureWidth(sdl2::Texture texture) {

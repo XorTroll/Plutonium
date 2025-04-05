@@ -25,7 +25,17 @@ namespace pu::ui::render {
      * @param path The path to the image.
      * @return The loaded image as a Texture, or nullptr if the image could not be loaded.
      */
-    sdl2::Texture LoadImage(const std::string &path);
+    sdl2::Texture LoadImageFromFile(const std::string &path);
+
+    /**
+     * @brief Loads an image from the specified data buffer.
+     * @param img_data The data buffer containing the image in the some supported image format (PNG, JPEG, etc).
+     * @param img_size The size of the data buffer.
+     * @return The loaded image as a Texture, or nullptr if the image could not be loaded.
+     * @note If the data buffer is nullptr or the size is 0, this function will do nothing and return nullptr.
+     * @note No write or free is done on the data buffer (it is only read), so it is up to the user to manage it.
+     */
+    sdl2::Texture LoadImageFromBuffer(const void *img_data, const size_t img_size);
 
     /**
      * @brief Gets the width of a Texture.
