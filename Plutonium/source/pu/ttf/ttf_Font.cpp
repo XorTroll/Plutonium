@@ -109,8 +109,7 @@ namespace pu::ttf {
     sdl2::Texture Font::RenderText(const std::string &str, const ui::Color clr) {
         auto font = this->TryGetFirstFont();
         if(font != nullptr) {
-            const auto [w, _] = ui::render::GetDimensions();
-            auto srf = TTF_RenderUTF8_Blended_Wrapped(font, str.c_str(), { clr.r, clr.g, clr.b, clr.a }, w);
+            auto srf = TTF_RenderUTF8_Blended(font, str.c_str(), { clr.r, clr.g, clr.b, clr.a });
             return ui::render::ConvertToTexture(srf);
         }
         else {
