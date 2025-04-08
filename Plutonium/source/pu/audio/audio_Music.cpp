@@ -6,11 +6,11 @@ namespace pu::audio {
         return Mix_LoadMUS(path.c_str());
     }
 
-    void PlayMusic(Music mus, const i32 loops) {
+    void PlayMusic(Music mus, const s32 loops) {
         Mix_PlayMusic(mus, loops);
     }
 
-    void PlayMusicWithFadeIn(Music mus, const i32 loops, const i32 ms) {
+    void PlayMusicWithFadeIn(Music mus, const s32 loops, const s32 ms) {
         Mix_FadeInMusic(mus, loops, ms);
     }
 
@@ -26,15 +26,15 @@ namespace pu::audio {
         Mix_ResumeMusic();   
     }
 
-    void SetMusicVolume(const i32 vol) {
+    void SetMusicVolume(const s32 vol) {
         Mix_VolumeMusic(vol);
     }
 
-    i32 GetMusicVolume() {
+    s32 GetMusicVolume() {
         return Mix_VolumeMusic(-1);
     }
 
-    void FadeOutMusic(const i32 ms) {
+    void FadeOutMusic(const s32 ms) {
         Mix_FadeOutMusic(ms);
     }
 

@@ -51,25 +51,25 @@ namespace pu::ui::elm {
              * @brief Gets the X position of the Element.
              * @return X position of the Element.
              */
-            virtual i32 GetX() = 0;
+            virtual s32 GetX() = 0;
 
             /**
              * @brief Gets the Y position of the Element.
              * @return Y position of the Element.
              */
-            virtual i32 GetY() = 0;
+            virtual s32 GetY() = 0;
 
             /**
              * @brief Gets the width of the Element.
              * @return Width of the Element.
              */
-            virtual i32 GetWidth() = 0;
+            virtual s32 GetWidth() = 0;
 
             /**
              * @brief Gets the height of the Element.
              * @return Height of the Element.
              */
-            virtual i32 GetHeight() = 0;
+            virtual s32 GetHeight() = 0;
 
             /**
              * @brief Renders the Element on the screen.
@@ -78,7 +78,7 @@ namespace pu::ui::elm {
              * @param y Y position to render the Element.
              * @note This method is called by the Application. It should not be called manually.
              */
-            virtual void OnRender(render::Renderer::Ref &drawer, const i32 x, const i32 y) = 0;
+            virtual void OnRender(render::Renderer::Ref &drawer, const s32 x, const s32 y) = 0;
 
             /**
              * @brief Called before rendering the Element in order to handle input.
@@ -153,14 +153,14 @@ namespace pu::ui::elm {
              * @return Actual X position of the Element.
              * @note This is the X value actually used for rendering.
              */
-            i32 GetProcessedX();
+            s32 GetProcessedX();
 
             /**
              * @brief Gets the actual Y position of the Element, considering the parent Container (depends on alignment).
              * @return Actual Y position of the Element.
              * @note This is the Y value actually used for rendering.
              */
-            i32 GetProcessedY();
+            s32 GetProcessedY();
     };
 
 }

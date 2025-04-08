@@ -42,14 +42,14 @@ namespace pu::ui::render {
      * @param texture The Texture to get the width from.
      * @return The width of the Texture.
      */
-    i32 GetTextureWidth(sdl2::Texture texture);
+    s32 GetTextureWidth(sdl2::Texture texture);
 
     /**
      * @brief Gets the height of a Texture.
      * @param texture The Texture to get the height from.
      * @return The height of the Texture.
      */
-    i32 GetTextureHeight(sdl2::Texture texture);
+    s32 GetTextureHeight(sdl2::Texture texture);
 
     /**
      * @brief Sets the alpha value (for blending) of a Texture.

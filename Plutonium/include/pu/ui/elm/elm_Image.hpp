@@ -19,8 +19,8 @@ namespace pu::ui::elm {
             std::string img_path;
             sdl2::TextureHandle::Ref img_tex;
             render::TextureRenderOptions rend_opts;
-            i32 x;
-            i32 y;
+            s32 x;
+            s32 y;
 
         public:
             /**
@@ -29,10 +29,10 @@ namespace pu::ui::elm {
              * @param y Y position of the Image.
              * @param image Path to the image to render.
              */
-            Image(const i32 x, const i32 y, sdl2::TextureHandle::Ref image);
+            Image(const s32 x, const s32 y, sdl2::TextureHandle::Ref image);
             PU_SMART_CTOR(Image)
 
-            inline i32 GetX() override {
+            inline s32 GetX() override {
                 return this->x;
             }
 
@@ -40,11 +40,11 @@ namespace pu::ui::elm {
              * @brief Sets the X position of the Image.
              * @param x New X position.
              */
-            inline void SetX(const i32 x) {
+            inline void SetX(const s32 x) {
                 this->x = x;
             }
 
-            inline i32 GetY() override {
+            inline s32 GetY() override {
                 return this->y;
             }
 
@@ -52,11 +52,11 @@ namespace pu::ui::elm {
              * @brief Sets the Y position of the Image.
              * @param y New Y position.
              */
-            inline void SetY(const i32 y) {
+            inline void SetY(const s32 y) {
                 this->y = y;
             }
 
-            inline i32 GetWidth() override {
+            inline s32 GetWidth() override {
                 return this->rend_opts.width;
             }
 
@@ -64,11 +64,11 @@ namespace pu::ui::elm {
              * @brief Sets the width of the Image.
              * @param width New width.
              */
-            inline void SetWidth(const i32 width) {
+            inline void SetWidth(const s32 width) {
                 this->rend_opts.width = width;
             }
 
-            inline i32 GetHeight() override {
+            inline s32 GetHeight() override {
                 return this->rend_opts.height;
             }
 
@@ -76,7 +76,7 @@ namespace pu::ui::elm {
              * @brief Sets the height of the Image.
              * @param height New height.
              */
-            inline void SetHeight(const i32 height) {
+            inline void SetHeight(const s32 height) {
                 this->rend_opts.height = height;
             }
 
@@ -96,7 +96,7 @@ namespace pu::ui::elm {
                 return this->img_tex != nullptr;
             }
             
-            void OnRender(render::Renderer::Ref &drawer, const i32 x, const i32 y) override;
+            void OnRender(render::Renderer::Ref &drawer, const s32 x, const s32 y) override;
             void OnInput(const u64 keys_down, const u64 keys_up, const u64 keys_held, const TouchPoint touch_pos) override {}
     };
 

@@ -70,11 +70,11 @@ namespace pu::ui {
             std::vector<std::string> opts;
             std::string cancel_opt;
             u32 selected_opt_idx;
-            i32 selected_opt_over_alpha;
-            SigmoidIncrementer<i32> selected_opt_over_alpha_incr;
-            i32 prev_selected_opt_idx;
-            i32 prev_selected_opt_over_alpha;
-            SigmoidIncrementer<i32> prev_selected_opt_over_alpha_incr;
+            s32 selected_opt_over_alpha;
+            SigmoidIncrementer<s32> selected_opt_over_alpha_incr;
+            s32 prev_selected_opt_idx;
+            s32 prev_selected_opt_over_alpha;
+            SigmoidIncrementer<s32> prev_selected_opt_over_alpha_incr;
             bool user_cancelled;
             sdl2::TextureHandle::Ref icon_tex;
             Color title_clr;
@@ -229,7 +229,7 @@ namespace pu::ui {
              * @note This is not really meant to be used manually. Application calls this internally. Check Application::ShowDialog or Application::CreateShowDialog.
              * @return Index of the selected option by the user.
              */
-            i32 Show(Application *app_ref);
+            s32 Show(Application *app_ref);
             
             /**
              * @brief Gets whether the user cancelled the Dialog.

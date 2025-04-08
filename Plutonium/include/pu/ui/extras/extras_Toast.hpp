@@ -19,15 +19,15 @@ namespace pu::ui::extras {
         public:
             // Self-explanatory constants
 
-            static constexpr i32 DefaultY = 550;
-            static constexpr i32 DefaulHeightAndTextHeightFactor = 3;
-            static constexpr i32 DefaulHorizontalMargin = 50;
+            static constexpr s32 DefaultY = 550;
+            static constexpr s32 DefaulHeightAndTextHeightFactor = 3;
+            static constexpr s32 DefaulHorizontalMargin = 50;
             static constexpr u8 DefaulBaseAlpha = 200;
 
         private:
             pu::ui::elm::TextBlock::Ref text;
-            i32 height_and_text_height_factor;
-            i32 h_margin;
+            s32 height_and_text_height_factor;
+            s32 h_margin;
             u8 base_alpha;
 
             void AdjustDimensions();
@@ -41,8 +41,8 @@ namespace pu::ui::extras {
             Toast(elm::TextBlock::Ref &text_block, const Color bg_clr);
             PU_SMART_CTOR(Toast)
 
-            PU_CLASS_POD_GETSET(HeightAndTextHeightFactor, height_and_text_height_factor, i32)
-            PU_CLASS_POD_GETSET(HorizontalMargin, h_margin, i32)
+            PU_CLASS_POD_GETSET(HeightAndTextHeightFactor, height_and_text_height_factor, s32)
+            PU_CLASS_POD_GETSET(HorizontalMargin, h_margin, s32)
             PU_CLASS_POD_GETSET(BaseAlpha, base_alpha, u8)
 
             /**

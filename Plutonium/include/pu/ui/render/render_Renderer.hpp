@@ -30,12 +30,12 @@ namespace pu::ui::render {
         u32 sdl_render_flags;
         u32 width;
         u32 height;
-        i32 pl_srv_type;
+        s32 pl_srv_type;
         std::vector<PlSharedFontType> default_shared_fonts;
         std::vector<std::string> default_font_paths;
         std::vector<u32> extra_default_font_sizes;
         bool init_img;
-        i32 sdl_img_flags;
+        s32 sdl_img_flags;
         bool init_romfs;
         u32 pad_player_count;
         u64 pad_id_mask;
@@ -97,7 +97,7 @@ namespace pu::ui::render {
          * @brief Enables the Renderer to use SDL2_image with the specified flags.
          * @param sdl_img_flags The flags to use for SDL2_image.
          */
-        inline void UseImage(const i32 sdl_img_flags) {
+        inline void UseImage(const s32 sdl_img_flags) {
             this->init_img = true;
             this->sdl_img_flags = sdl_img_flags;
         }
@@ -161,19 +161,19 @@ namespace pu::ui::render {
      * @brief Represents the options for rendering a texture.
      */
     struct TextureRenderOptions {
-        i32 alpha_mod;
-        i32 width;
-        i32 height;
+        s32 alpha_mod;
+        s32 width;
+        s32 height;
         float rot_angle;
-        i32 src_x;
-        i32 src_y;
+        s32 src_x;
+        s32 src_y;
 
-        static constexpr i32 NoAlpha = -1;
-        static constexpr i32 NoWidth = -1;
-        static constexpr i32 NoHeight = -1;
+        static constexpr s32 NoAlpha = -1;
+        static constexpr s32 NoWidth = -1;
+        static constexpr s32 NoHeight = -1;
         static constexpr float NoRotation = -1.0f;
-        static constexpr i32 NoSourceX = -1;
-        static constexpr i32 NoSourceY = -1;
+        static constexpr s32 NoSourceX = -1;
+        static constexpr s32 NoSourceY = -1;
 
         /**
          * @brief Creates a new TextureRenderOptions with the specified parameters.
@@ -184,7 +184,7 @@ namespace pu::ui::render {
          * @param src_x The source X to use for the texture, or nothing to use the entire texture source (0).
          * @param src_y The source Y to use for the texture, or nothing to use the entire texture source (0).
          */
-        constexpr TextureRenderOptions(std::optional<u8> alpha, std::optional<i32> width, std::optional<i32> height, std::optional<float> rot_angle, std::optional<i32> src_x, std::optional<i32> src_y) : alpha_mod(alpha.value_or(NoAlpha)), width(width.value_or(NoWidth)), height(height.value_or(NoHeight)), rot_angle(rot_angle.value_or(NoRotation)), src_x(src_x.value_or(NoSourceX)), src_y(src_y.value_or(NoSourceY)) {}
+        constexpr TextureRenderOptions(std::optional<u8> alpha, std::optional<s32> width, std::optional<s32> height, std::optional<float> rot_angle, std::optional<s32> src_x, std::optional<s32> src_y) : alpha_mod(alpha.value_or(NoAlpha)), width(width.value_or(NoWidth)), height(height.value_or(NoHeight)), rot_angle(rot_angle.value_or(NoRotation)), src_x(src_x.value_or(NoSourceX)), src_y(src_y.value_or(NoSourceY)) {}
 
         /**
          * @brief Creates a new TextureRenderOptions with default parameters (no alpha modifications, no custom width, no custom height, no rotation, no custom source X, no custom source Y).
@@ -199,9 +199,9 @@ namespace pu::ui::render {
         private:
             RendererInitOptions init_opts;
             bool initialized;
-            i32 base_x;
-            i32 base_y;
-            i32 base_a;
+            s32 base_x;
+            s32 base_y;
+            s32 base_a;
             PadState input_pad;
 
             inline u8 GetActualAlpha(const u8 input_a) {
@@ -263,7 +263,7 @@ namespace pu::ui::render {
              * @param opts The options to use for rendering the texture.
              * @note This function should be called each render loop / OnRender call.
              */
-            void RenderTexture(sdl2::Texture texture, const i32 x, const i32 y, const TextureRenderOptions opts = TextureRenderOptions());
+            void RenderTexture(sdl2::Texture texture, const s32 x, const s32 y, const TextureRenderOptions opts = TextureRenderOptions());
 
             /**
              * @brief Renders a rectangle to the screen (only the border).
@@ -274,7 +274,7 @@ namespace pu::ui::render {
              * @param height The height of the rectangle.
              * @note This function should be called each render loop / OnRender call.
              */
-            void RenderRectangle(const Color clr, const i32 x, const i32 y, const i32 width, const i32 height);
+            void RenderRectangle(const Color clr, const s32 x, const s32 y, const s32 width, const s32 height);
 
             /**
              * @brief Renders a filled rectangle to the screen.
@@ -285,7 +285,7 @@ namespace pu::ui::render {
              * @param height The height of the rectangle.
              * @note This function should be called each render loop / OnRender call.
              */
-            void RenderRectangleFill(const Color clr, const i32 x, const i32 y, const i32 width, const i32 height);
+            void RenderRectangleFill(const Color clr, const s32 x, const s32 y, const s32 width, const s32 height);
             
             /**
              * @brief Renders a rectangle outline to the screen.
@@ -297,7 +297,7 @@ namespace pu::ui::render {
              * @param border_width The width of the border.
              * @note This function should be called each render loop / OnRender call.
              */
-            inline void RenderRectangleOutline(const Color clr, const i32 x, const i32 y, const i32 width, const i32 height, const i32 border_width) {
+            inline void RenderRectangleOutline(const Color clr, const s32 x, const s32 y, const s32 width, const s32 height, const s32 border_width) {
                 this->RenderRectangleFill(clr, x - border_width, y - border_width, width + (border_width * 2), height + (border_width * 2));
             }
             
@@ -311,7 +311,7 @@ namespace pu::ui::render {
              * @param radius The radius of the rounded corners.
              * @note This function should be called each render loop / OnRender call.
              */
-            void RenderRoundedRectangle(const Color clr, const i32 x, const i32 y, const i32 width, const i32 height, const i32 radius);
+            void RenderRoundedRectangle(const Color clr, const s32 x, const s32 y, const s32 width, const s32 height, const s32 radius);
 
             /**
              * @brief Renders a filled rounded rectangle to the screen.
@@ -323,7 +323,7 @@ namespace pu::ui::render {
              * @param radius The radius of the rounded corners.
              * @note This function should be called each render loop / OnRender call.
              */
-            void RenderRoundedRectangleFill(const Color clr, const i32 x, const i32 y, const i32 width, const i32 height, const i32 radius);
+            void RenderRoundedRectangleFill(const Color clr, const s32 x, const s32 y, const s32 width, const s32 height, const s32 radius);
 
             /**
              * @brief Renders a circle to the screen (only the border).
@@ -333,7 +333,7 @@ namespace pu::ui::render {
              * @param radius The radius of the circle.
              * @note This function should be called each render loop / OnRender call.
              */
-            void RenderCircle(const Color clr, const i32 x, const i32 y, const i32 radius);
+            void RenderCircle(const Color clr, const s32 x, const s32 y, const s32 radius);
 
             /**
              * @brief Renders a filled circle to the screen.
@@ -343,7 +343,7 @@ namespace pu::ui::render {
              * @param radius The radius of the circle.
              * @note This function should be called each render loop / OnRender call.
              */
-            void RenderCircleFill(const Color clr, const i32 x, const i32 y, const i32 radius);
+            void RenderCircleFill(const Color clr, const s32 x, const s32 y, const s32 radius);
 
             /**
              * @brief Renders a simple shadow to the screen.
@@ -355,7 +355,7 @@ namespace pu::ui::render {
              * @param main_alpha The main alpha to use for the shadow. The shadow's alpha will be blended with this value.
              * @note This function should be called each render loop / OnRender call.
              */
-            void RenderShadowSimple(const i32 x, const i32 y, const i32 width, const i32 height, const i32 base_alpha, const u8 main_alpha = 0xFF);
+            void RenderShadowSimple(const s32 x, const s32 y, const s32 width, const s32 height, const s32 base_alpha, const u8 main_alpha = 0xFF);
             
             /**
              * @brief Sets the base render position for all rendering functions.
@@ -363,7 +363,7 @@ namespace pu::ui::render {
              * @param y The Y position to use as the base render position.
              * @note Every rendered shape/texture will be rendered with this base position added to their X and Y positions.
              */
-            inline void SetBaseRenderPosition(const i32 x, const i32 y) {
+            inline void SetBaseRenderPosition(const s32 x, const s32 y) {
                 this->base_x = x;
                 this->base_y = y;
             }
@@ -489,7 +489,7 @@ namespace pu::ui::render {
      * @param out_height The resulting height of the text.
      * @return Whether the specified font is available (was added) or not, and the text size was calculated.
      */
-    bool GetTextDimensions(const std::string &font_name, const std::string &text, i32 &out_width, i32 &out_height);
+    bool GetTextDimensions(const std::string &font_name, const std::string &text, s32 &out_width, s32 &out_height);
 
     /**
      * @brief Gets the resulting text width for rendering a text with the specified font.
@@ -497,7 +497,7 @@ namespace pu::ui::render {
      * @param text The text to render.
      * @return The resulting width of the text. If the font is not available, 0 will be returned.
      */
-    i32 GetTextWidth(const std::string &font_name, const std::string &text);
+    s32 GetTextWidth(const std::string &font_name, const std::string &text);
 
     /**
      * @brief Gets the resulting text height for rendering a text with the specified font.
@@ -505,7 +505,7 @@ namespace pu::ui::render {
      * @param text The text to render.
      * @return The resulting height of the text. If the font is not available, 0 will be returned.
      */
-    i32 GetTextHeight(const std::string &font_name, const std::string &text);
+    s32 GetTextHeight(const std::string &font_name, const std::string &text);
 
     /**
      * @brief Renders a text to a texture.

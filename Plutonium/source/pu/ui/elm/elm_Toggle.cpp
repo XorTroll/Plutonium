@@ -2,7 +2,7 @@
 
 namespace pu::ui::elm {
 
-    Toggle::Toggle(const i32 x, const i32 y, const std::string &content, const u64 toggle_key, const Color clr) : Element() {
+    Toggle::Toggle(const s32 x, const s32 y, const std::string &content, const u64 toggle_key, const Color clr) : Element() {
         this->x = x;
         this->y = y;
         this->key = toggle_key;
@@ -21,11 +21,11 @@ namespace pu::ui::elm {
         render::DeleteTexture(this->cnt_tex);
     }
 
-    i32 Toggle::GetWidth() {
+    s32 Toggle::GetWidth() {
         return render::GetTextureWidth(this->cnt_tex) + 2 * this->cnt_h_margin;
     }
 
-    i32 Toggle::GetHeight() {
+    s32 Toggle::GetHeight() {
         return render::GetTextureHeight(this->cnt_tex) + 2 * this->cnt_v_margin;
     }
 
@@ -45,7 +45,7 @@ namespace pu::ui::elm {
         this->SetContent(this->cnt);
     }
 
-    void Toggle::OnRender(render::Renderer::Ref &drawer, const i32 x, const i32 y) {
+    void Toggle::OnRender(render::Renderer::Ref &drawer, const s32 x, const s32 y) {
         const auto bg_width = this->GetWidth();
         const auto bg_height = this->GetHeight();
         const auto cnt_x = x + this->cnt_h_margin;

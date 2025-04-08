@@ -1,6 +1,7 @@
 #include <pu/ttf/ttf_Font.hpp>
 #include <pu/ui/render/render_Renderer.hpp>
 #include <pu/ui/render/render_SDL2.hpp>
+#include <sstream>
 
 namespace pu::ttf {
 
@@ -13,6 +14,40 @@ namespace pu::ttf {
             }
         }
 
+        pu::sdl2::Texture RenderMultilineTextSurface(TTF_Font *font, const std::string &text, const SDL_Color color) {
+            std::istringstream stream(text);
+            std::string line;
+            std::vector<SDL_Surface*> line_srfs;
+        
+            s32 max_width = 0;
+            s32 total_height = 0;
+            while(std::getline(stream, line)) {
+                auto surface = TTF_RenderText_Blended(font, line.c_str(), color);
+                if(surface == nullptr) {
+                    continue;
+                }
+        
+                line_srfs.push_back(surface);
+                if(surface->w > max_width) {
+                    max_width = surface->w;
+                }
+                total_height += surface->h;
+            }
+        
+            auto final_srf = SDL_CreateRGBSurface(0, max_width, total_height, 32, 0x00FF0000, 0x0000FF00, 0x000000FF, 0xFF000000);
+        
+            // Blit lines onto the final surface
+            int y = 0;
+            for(auto line_srf : line_srfs) {
+                SDL_Rect dst = { 0, y, line_srf->w, line_srf->h };
+                SDL_BlitSurface(line_srf, nullptr, final_srf, &dst);
+                y += line_srf->h;
+                SDL_FreeSurface(line_srf);
+            }
+        
+            return ui::render::ConvertToTexture(final_srf);
+        }
+
     }
 
     Font::~Font() {
@@ -21,14 +56,14 @@ namespace pu::ttf {
         }
     }
 
-    i32 Font::LoadFromMemory(void *ptr, const size_t size, FontFaceDisposingFunction disp_fn) {
+    s32 Font::LoadFromMemory(void *ptr, const size_t size, FontFaceDisposingFunction disp_fn) {
         const auto idx = rand();
         auto font = std::make_unique<FontFace>(ptr, size, disp_fn, this->font_size, reinterpret_cast<void*>(this));
         this->font_faces.push_back({ idx, std::move(font) });
         return idx;
     }
 
-    i32 Font::LoadFromFile(const std::string &path) {
+    s32 Font::LoadFromFile(const std::string &path) {
         auto f = fopen(path.c_str(), "rb");
         if(f) {
             fseek(f, 0, SEEK_END);
@@ -46,7 +81,7 @@ namespace pu::ttf {
         return InvalidFontFaceIndex;
     }
 
-    void Font::Unload(const i32 font_idx) {
+    void Font::Unload(const s32 font_idx) {
         u32 i = 0;
         for(auto &[idx, font]: this->font_faces) {
             if(idx == font_idx) {
@@ -70,8 +105,8 @@ namespace pu::ttf {
     namespace {
 
         inline void ProcessLineDimensionsImpl(sdl2::Font font, std::string &str, u32 &w, u32 &h) {
-            i32 str_w = 0;
-            i32 str_h = 0;
+            s32 str_w = 0;
+            s32 str_h = 0;
             TTF_SizeUTF8(font, str.c_str(), &str_w, &str_h);
 
             const auto str_w_32 = static_cast<u32>(str_w);
@@ -109,8 +144,7 @@ namespace pu::ttf {
     sdl2::Texture Font::RenderText(const std::string &str, const ui::Color clr) {
         auto font = this->TryGetFirstFont();
         if(font != nullptr) {
-            auto srf = TTF_RenderUTF8_Blended(font, str.c_str(), { clr.r, clr.g, clr.b, clr.a });
-            return ui::render::ConvertToTexture(srf);
+            return RenderMultilineTextSurface(font, str, { clr.r, clr.g, clr.b, clr.a });
         }
         else {
             return nullptr;

@@ -19,22 +19,22 @@ namespace pu::ui::elm {
             // Self-explanatory constants
 
             static constexpr Color DefaultColor = { 0, 0, 0, 0xFF };
-            static constexpr i32 DefaultClampSpeedSteps = 3;
-            static constexpr i32 DefaultClampStaticDelaySteps = 20;
-            static constexpr i32 NoClamp = -1;
+            static constexpr s32 DefaultClampSpeedSteps = 3;
+            static constexpr s32 DefaultClampStaticDelaySteps = 20;
+            static constexpr s32 NoClamp = -1;
 
         private:
-            i32 x;
-            i32 y;
+            s32 x;
+            s32 y;
             Color clr;
             std::string text;
             sdl2::Texture text_tex;
             std::string fnt_name;
-            i32 clamp_w;
-            i32 clamp_speed;
-            i32 clamp_delay;
-            i32 clamp_cur_x;
-            i32 clamp_cur_delay;
+            s32 clamp_w;
+            s32 clamp_speed;
+            s32 clamp_delay;
+            s32 clamp_cur_x;
+            s32 clamp_cur_delay;
         
         public:
             /**
@@ -43,11 +43,11 @@ namespace pu::ui::elm {
              * @param y Y position of the TextBlock.
              * @param text Text to render.
              */
-            TextBlock(const i32 x, const i32 y, const std::string &text);
+            TextBlock(const s32 x, const s32 y, const std::string &text);
             PU_SMART_CTOR(TextBlock)
             ~TextBlock();
 
-            inline i32 GetX() override {
+            inline s32 GetX() override {
                 return this->x;
             }
 
@@ -55,11 +55,11 @@ namespace pu::ui::elm {
              * @brief Sets the X position of the TextBlock.
              * @param x New X position.
              */
-            inline void SetX(const i32 x) {
+            inline void SetX(const s32 x) {
                 this->x = x;
             }
 
-            inline i32 GetY() override {
+            inline s32 GetY() override {
                 return this->y;
             }
 
@@ -67,12 +67,12 @@ namespace pu::ui::elm {
              * @brief Sets the Y position of the TextBlock.
              * @param y New Y position.
              */
-            inline void SetY(const i32 y) {
+            inline void SetY(const s32 y) {
                 this->y = y;
             }
 
-            i32 GetWidth() override;
-            i32 GetHeight() override;
+            s32 GetWidth() override;
+            s32 GetHeight() override;
 
             /**
              * @brief Gets the text of the TextBlock.
@@ -105,9 +105,9 @@ namespace pu::ui::elm {
              */
             void SetColor(const Color clr);
 
-            PU_CLASS_POD_GETSET(ClampWidth, clamp_w, i32)
-            PU_CLASS_POD_GETSET(ClampSpeed, clamp_speed, i32)
-            PU_CLASS_POD_GETSET(ClampDelay, clamp_delay, i32)
+            PU_CLASS_POD_GETSET(ClampWidth, clamp_w, s32)
+            PU_CLASS_POD_GETSET(ClampSpeed, clamp_speed, s32)
+            PU_CLASS_POD_GETSET(ClampDelay, clamp_delay, s32)
 
             /**
              * @brief Resets the clamping of the TextBlock.
@@ -117,7 +117,7 @@ namespace pu::ui::elm {
                 this->clamp_cur_delay = 0;
             }
 
-            void OnRender(render::Renderer::Ref &drawer, const i32 x, const i32 y) override;
+            void OnRender(render::Renderer::Ref &drawer, const s32 x, const s32 y) override;
             void OnInput(const u64 keys_down, const u64 keys_up, const u64 keys_held, const TouchPoint touch_pos) override {}
     };
 

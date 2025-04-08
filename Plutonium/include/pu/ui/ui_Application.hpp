@@ -58,8 +58,8 @@ namespace pu::ui {
             RenderOverFunction render_over_fn;
             bool is_shown;
             u8 fade_alpha_increment_steps;
-            SigmoidIncrementer<i32> fade_alpha_incr;
-            i32 fade_alpha;
+            SigmoidIncrementer<s32> fade_alpha_incr;
+            s32 fade_alpha;
             sdl2::TextureHandle::Ref fade_bg_tex;
             Color fade_bg_clr;
             Layout::Ref lyt;
@@ -133,7 +133,7 @@ namespace pu::ui {
              * @param dialog The Dialog to show.
              * @return The index of the option selected by the user.
              */
-            inline i32 ShowDialog(Dialog::Ref &dialog) {
+            inline s32 ShowDialog(Dialog::Ref &dialog) {
                 return dialog->Show(this);
             }
 
@@ -147,7 +147,7 @@ namespace pu::ui {
              * @param prepare_cb The DialogPrepareCallback to further customize the Dialog.
              * @return The index of the option selected by the user.
              */
-            i32 CreateShowDialog(const std::string &title, const std::string &content, const std::vector<std::string> &opts, const bool use_last_opt_as_cancel, sdl2::TextureHandle::Ref icon = {}, DialogPrepareCallback prepare_cb = nullptr);
+            s32 CreateShowDialog(const std::string &title, const std::string &content, const std::vector<std::string> &opts, const bool use_last_opt_as_cancel, sdl2::TextureHandle::Ref icon = {}, DialogPrepareCallback prepare_cb = nullptr);
             
             /**
              * @brief Starts an Overlay.

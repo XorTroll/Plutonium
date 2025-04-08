@@ -2,7 +2,7 @@
 
 namespace pu::ui::elm {
 
-    Button::Button(const i32 x, const i32 y, const i32 width, const i32 height, const std::string &content, const Color content_clr, const Color bg_clr) : Element() {
+    Button::Button(const s32 x, const s32 y, const s32 width, const s32 height, const std::string &content, const Color content_clr, const Color bg_clr) : Element() {
         this->x = x;
         this->y = y;
         this->w = width;
@@ -41,7 +41,7 @@ namespace pu::ui::elm {
         this->SetContent(this->cnt);
     }
 
-    void Button::OnRender(render::Renderer::Ref &drawer, const i32 x, const i32 y) {
+    void Button::OnRender(render::Renderer::Ref &drawer, const s32 x, const s32 y) {
         drawer->RenderRectangleFill(this->bg_clr, x, y, this->w, this->h);
         if(this->hover) {
             if(this->hover_alpha < 0xFF) {

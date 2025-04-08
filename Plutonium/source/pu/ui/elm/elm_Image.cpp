@@ -3,7 +3,7 @@
 
 namespace pu::ui::elm {
 
-    Image::Image(const i32 x, const i32 y, sdl2::TextureHandle::Ref image) : Element() {
+    Image::Image(const s32 x, const s32 y, sdl2::TextureHandle::Ref image) : Element() {
         this->x = x;
         this->y = y;
         this->img_tex = nullptr;
@@ -19,7 +19,7 @@ namespace pu::ui::elm {
         }
     }
 
-    void Image::OnRender(render::Renderer::Ref &drawer, const i32 x, const i32 y) {
+    void Image::OnRender(render::Renderer::Ref &drawer, const s32 x, const s32 y) {
         if(this->img_tex != nullptr) {
             drawer->RenderTexture(this->img_tex->Get(), x, y, this->rend_opts);
         }

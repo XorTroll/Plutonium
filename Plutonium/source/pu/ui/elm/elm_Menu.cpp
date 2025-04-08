@@ -83,7 +83,7 @@ namespace pu::ui::elm {
         }
     }
 
-    Menu::Menu(const i32 x, const i32 y, const i32 width, const Color items_clr, const Color items_focus_clr, const i32 items_height, const u32 items_to_show) : Element() {
+    Menu::Menu(const s32 x, const s32 y, const s32 width, const Color items_clr, const Color items_focus_clr, const s32 items_height, const u32 items_to_show) : Element() {
         this->x = x;
         this->y = y;
         this->w = width;
@@ -148,7 +148,7 @@ namespace pu::ui::elm {
         }
     }
 
-    void Menu::OnRender(render::Renderer::Ref &drawer, const i32 x, const i32 y) {
+    void Menu::OnRender(render::Renderer::Ref &drawer, const s32 x, const s32 y) {
         if(!this->items.empty()) {
             const auto item_count = this->GetItemCount();
 
@@ -171,7 +171,7 @@ namespace pu::ui::elm {
                         drawer->RenderRectangleFill(this->items_focus_clr, x, cur_item_y, this->w, this->items_h);
                     }
                 }
-                else if(this->prev_selected_item_idx == static_cast<i32>(i)) {
+                else if(this->prev_selected_item_idx == static_cast<s32>(i)) {
                     drawer->RenderRectangleFill(this->items_clr, x, cur_item_y, this->w, this->items_h);
                     if(this->prev_selected_item_alpha > 0) {
                         const auto focus_clr = this->MakeItemsFocusColor(this->prev_selected_item_alpha);
@@ -193,13 +193,13 @@ namespace pu::ui::elm {
                 if(item->HasIcon()) {
                     auto icon_tex = this->items.at(i)->GetIconTexture();
                     const auto factor = (float)render::GetTextureHeight(icon_tex->Get()) / (float)render::GetTextureWidth(icon_tex->Get());
-                    auto icon_width = (i32)(this->items_h * this->icon_item_sizes_factor);
+                    auto icon_width = (s32)(this->items_h * this->icon_item_sizes_factor);
                     auto icon_height = icon_width;
                     if(factor < 1) {
-                        icon_height = (i32)(icon_width * factor);
+                        icon_height = (s32)(icon_width * factor);
                     }
                     else {
-                        icon_width = (i32)(icon_height * factor);
+                        icon_width = (s32)(icon_height * factor);
                     }
 
                     const auto icon_x = x + this->icon_margin;
@@ -258,7 +258,7 @@ namespace pu::ui::elm {
                         this->selected_item_alpha = 0xFF;
                         this->selected_item_alpha_incr.StartToZero(this->item_alpha_incr_steps, 0xFF);
                     }
-                    else if(static_cast<i32>(i) == this->prev_selected_item_idx) {
+                    else if(static_cast<s32>(i) == this->prev_selected_item_idx) {
                         this->prev_selected_item_alpha = 0;
                         this->prev_selected_item_alpha_incr.StartFromZero(this->item_alpha_incr_steps, 0xFF);
                     }

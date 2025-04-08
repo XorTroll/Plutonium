@@ -31,10 +31,10 @@ namespace pu::ui::elm {
             static constexpr DefaultFontSize DefaultContentFontSize = DefaultFontSize::MediumLarge;
 
         private:
-            i32 x;
-            i32 y;
-            i32 w;
-            i32 h;
+            s32 x;
+            s32 y;
+            s32 w;
+            s32 h;
             std::string fnt_name;
             Color bg_clr;
             Color cnt_clr;
@@ -42,21 +42,21 @@ namespace pu::ui::elm {
             sdl2::Texture cnt_tex;
             OnClickCallback on_click_cb;
             bool hover;
-            i32 hover_alpha;
-            SigmoidIncrementer<i32> hover_alpha_incr;
+            s32 hover_alpha;
+            SigmoidIncrementer<s32> hover_alpha_incr;
             u8 darker_color_factor;
             u8 hover_alpha_incr_steps;
 
-            inline Color MakeHoverBackgroundColor(const i32 alpha) {
-                i32 base_r = this->bg_clr.r - this->darker_color_factor;
+            inline Color MakeHoverBackgroundColor(const s32 alpha) {
+                s32 base_r = this->bg_clr.r - this->darker_color_factor;
                 if(base_r < 0) {
                     base_r = 0;
                 }
-                i32 base_g = this->bg_clr.g - this->darker_color_factor;
+                s32 base_g = this->bg_clr.g - this->darker_color_factor;
                 if(base_g < 0) {
                     base_g = 0;
                 }
-                i32 base_b = this->bg_clr.b - this->darker_color_factor;
+                s32 base_b = this->bg_clr.b - this->darker_color_factor;
                 if(base_b < 0) {
                     base_b = 0;
                 }
@@ -80,11 +80,11 @@ namespace pu::ui::elm {
              * @param content_clr Color of the content of the Button.
              * @param bg_clr Background color of the Button.
              */
-            Button(const i32 x, const i32 y, const i32 width, const i32 height, const std::string &content, const Color content_clr, const Color bg_clr);
+            Button(const s32 x, const s32 y, const s32 width, const s32 height, const std::string &content, const Color content_clr, const Color bg_clr);
             PU_SMART_CTOR(Button)
             ~Button();
 
-            inline i32 GetX() override {
+            inline s32 GetX() override {
                 return this->x;
             }
 
@@ -92,11 +92,11 @@ namespace pu::ui::elm {
              * @brief Sets the X position of the Button.
              * @param x New X position to set.
              */
-            inline void SetX(const i32 x) {
+            inline void SetX(const s32 x) {
                 this->x = x;
             }
 
-            inline i32 GetY() override {
+            inline s32 GetY() override {
                 return this->y;
             }
 
@@ -104,11 +104,11 @@ namespace pu::ui::elm {
              * @brief Sets the Y position of the Button.
              * @param y New Y position to set.
              */
-            inline void SetY(const i32 y) {
+            inline void SetY(const s32 y) {
                 this->y = y;
             }
 
-            inline i32 GetWidth() override {
+            inline s32 GetWidth() override {
                 return this->w;
             }
 
@@ -116,11 +116,11 @@ namespace pu::ui::elm {
              * @brief Sets the width of the Button.
              * @param width New width to set.
              */
-            inline void SetWidth(const i32 width) {
+            inline void SetWidth(const s32 width) {
                 this->w = width;
             }
 
-            inline i32 GetHeight() override {
+            inline s32 GetHeight() override {
                 return this->h;
             }
 
@@ -128,7 +128,7 @@ namespace pu::ui::elm {
              * @brief Sets the height of the Button.
              * @param height New height to set.
              */
-            inline void SetHeight(const i32 height) {
+            inline void SetHeight(const s32 height) {
                 this->h = height;
             }
 
@@ -170,7 +170,7 @@ namespace pu::ui::elm {
                 this->on_click_cb = on_click_cb;
             }
             
-            void OnRender(render::Renderer::Ref &drawer, const i32 x, const i32 y) override;
+            void OnRender(render::Renderer::Ref &drawer, const s32 x, const s32 y) override;
             void OnInput(const u64 keys_down, const u64 keys_up, const u64 keys_held, const TouchPoint touch_pos) override;
     };
 

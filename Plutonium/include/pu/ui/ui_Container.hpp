@@ -18,10 +18,10 @@ namespace pu::ui {
      */
     class Container {
         protected:
-            i32 x;
-            i32 y;
-            i32 w;
-            i32 h;
+            s32 x;
+            s32 y;
+            s32 w;
+            s32 h;
             std::vector<elm::Element::Ref> elems;
 
         public:
@@ -32,7 +32,7 @@ namespace pu::ui {
              * @param width The width of the Container.
              * @param height The height of the Container.
              */
-            Container(const i32 x, const i32 y, const i32 width, const i32 height) : x(x), y(y), w(width), h(height), elems() {}
+            Container(const s32 x, const s32 y, const s32 width, const s32 height) : x(x), y(y), w(width), h(height), elems() {}
             PU_SMART_CTOR(Container)
 
             /**
@@ -67,10 +67,10 @@ namespace pu::ui {
                 this->elems.clear();
             }
 
-            PU_CLASS_POD_GETSET(X, x, i32)
-            PU_CLASS_POD_GETSET(Y, y, i32)
-            PU_CLASS_POD_GETSET(Width, w, i32)
-            PU_CLASS_POD_GETSET(Height, h, i32)
+            PU_CLASS_POD_GETSET(X, x, s32)
+            PU_CLASS_POD_GETSET(Y, y, s32)
+            PU_CLASS_POD_GETSET(Width, w, s32)
+            PU_CLASS_POD_GETSET(Height, h, s32)
 
             /**
              * @brief Function to be invoked before rendering the Container.

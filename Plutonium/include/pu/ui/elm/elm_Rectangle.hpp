@@ -16,12 +16,12 @@ namespace pu::ui::elm {
      */
     class Rectangle : public Element {
         private:
-            i32 x;
-            i32 y;
-            i32 w;
-            i32 h;
+            s32 x;
+            s32 y;
+            s32 w;
+            s32 h;
             Color clr;
-            i32 border_radius;
+            s32 border_radius;
 
         public:
             /**
@@ -33,10 +33,10 @@ namespace pu::ui::elm {
              * @param clr Color of the Rectangle.
              * @param border_radius Radius of the Rectangle's corners, or 0 for no rounded corners.
              */
-            Rectangle(const i32 x, const i32 y, const i32 width, const i32 height, const Color clr, const i32 border_radius = 0) : Element(), x(x), y(y), w(width), h(height), clr(clr), border_radius(border_radius) {}
+            Rectangle(const s32 x, const s32 y, const s32 width, const s32 height, const Color clr, const s32 border_radius = 0) : Element(), x(x), y(y), w(width), h(height), clr(clr), border_radius(border_radius) {}
             PU_SMART_CTOR(Rectangle)
 
-            inline i32 GetX() override {
+            inline s32 GetX() override {
                 return this->x;
             }
 
@@ -44,11 +44,11 @@ namespace pu::ui::elm {
              * @brief Sets the X position of the Rectangle.
              * @param x New X position.
              */
-            inline void SetX(const i32 x) {
+            inline void SetX(const s32 x) {
                 this->x = x;
             }
 
-            inline i32 GetY() override {
+            inline s32 GetY() override {
                 return this->y;
             }
 
@@ -56,11 +56,11 @@ namespace pu::ui::elm {
              * @brief Sets the Y position of the Rectangle.
              * @param y New Y position.
              */
-            inline void SetY(const i32 y) {
+            inline void SetY(const s32 y) {
                 this->y = y;
             }
 
-            inline i32 GetWidth() override {
+            inline s32 GetWidth() override {
                 return this->w;
             }
 
@@ -68,11 +68,11 @@ namespace pu::ui::elm {
              * @brief Sets the width of the Rectangle.
              * @param width New width.
              */
-            inline void SetWidth(const i32 width) {
+            inline void SetWidth(const s32 width) {
                 this->w = width;
             }
 
-            inline i32 GetHeight() override {
+            inline s32 GetHeight() override {
                 return this->h;
             }
 
@@ -80,14 +80,14 @@ namespace pu::ui::elm {
              * @brief Sets the height of the Rectangle.
              * @param height New height.
              */
-            inline void SetHeight(const i32 height) {
+            inline void SetHeight(const s32 height) {
                 this->h = height;
             }
 
-            PU_CLASS_POD_GETSET(BorderRadius, border_radius, i32)
+            PU_CLASS_POD_GETSET(BorderRadius, border_radius, s32)
             PU_CLASS_POD_GETSET(Color, clr, Color)
             
-            void OnRender(render::Renderer::Ref &drawer, const i32 x, const i32 y) override;
+            void OnRender(render::Renderer::Ref &drawer, const s32 x, const s32 y) override;
             void OnInput(const u64 keys_down, const u64 keys_up, const u64 keys_held, const TouchPoint touch_pos) override {}
     };
 

@@ -137,13 +137,13 @@ namespace pu::ui::render {
         SDL_RenderPresent(g_Renderer);
     }
 
-    void Renderer::RenderTexture(sdl2::Texture texture, const i32 x, const i32 y, const TextureRenderOptions opts) {
+    void Renderer::RenderTexture(sdl2::Texture texture, const s32 x, const s32 y, const TextureRenderOptions opts) {
         if(texture == nullptr) {
             return;
         }
 
-        i32 tex_w;
-        i32 tex_h;
+        s32 tex_w;
+        s32 tex_h;
         if((opts.height == TextureRenderOptions::NoHeight) || (opts.height == TextureRenderOptions::NoWidth)) {
             SDL_QueryTexture(texture, nullptr, nullptr, &tex_w, &tex_h);
         }
@@ -199,7 +199,7 @@ namespace pu::ui::render {
         }
     }
 
-    void Renderer::RenderRectangle(const Color clr, const i32 x, const i32 y, const i32 width, const i32 height) {
+    void Renderer::RenderRectangle(const Color clr, const s32 x, const s32 y, const s32 width, const s32 height) {
         const SDL_Rect rect = {
             .x = x + this->base_x,
             .y = y + this->base_y,
@@ -210,7 +210,7 @@ namespace pu::ui::render {
         SDL_RenderDrawRect(g_Renderer, &rect);
     }
 
-    void Renderer::RenderRectangleFill(const Color clr, const i32 x, const i32 y, const i32 width, const i32 height) {
+    void Renderer::RenderRectangleFill(const Color clr, const s32 x, const s32 y, const s32 width, const s32 height) {
         const SDL_Rect rect = {
             .x = x + this->base_x,
             .y = y + this->base_y,
@@ -221,7 +221,7 @@ namespace pu::ui::render {
         SDL_RenderFillRect(g_Renderer, &rect);
     }
 	
-    void Renderer::RenderRoundedRectangle(const Color clr, const i32 x, const i32 y, const i32 width, const i32 height, const i32 radius) {
+    void Renderer::RenderRoundedRectangle(const Color clr, const s32 x, const s32 y, const s32 width, const s32 height, const s32 radius) {
         auto proper_radius = radius;
         if((2 * proper_radius) > width) {
             proper_radius = width / 2;
@@ -234,7 +234,7 @@ namespace pu::ui::render {
         SDL_SetRenderDrawBlendMode(g_Renderer, SDL_BLENDMODE_BLEND);
     }
 
-    void Renderer::RenderRoundedRectangleFill(const Color clr, const i32 x, const i32 y, const i32 width, const i32 height, const i32 radius) {
+    void Renderer::RenderRoundedRectangleFill(const Color clr, const s32 x, const s32 y, const s32 width, const s32 height, const s32 radius) {
         auto proper_radius = radius;
         if((2 * proper_radius) > width) {
             proper_radius = width / 2;
@@ -247,17 +247,17 @@ namespace pu::ui::render {
         SDL_SetRenderDrawBlendMode(g_Renderer, SDL_BLENDMODE_BLEND);
     }
 
-    void Renderer::RenderCircle(const Color clr, const i32 x, const i32 y, const i32 radius) {
+    void Renderer::RenderCircle(const Color clr, const s32 x, const s32 y, const s32 radius) {
         circleRGBA(g_Renderer, x + this->base_x, y + this->base_y, radius - 1, clr.r, clr.g, clr.b, this->GetActualAlpha(clr.a));
         aacircleRGBA(g_Renderer, x + this->base_x, y + this->base_y, radius - 1, clr.r, clr.g, clr.b, this->GetActualAlpha(clr.a));
     }
 
-    void Renderer::RenderCircleFill(const Color clr, const i32 x, const i32 y, const i32 radius) {
+    void Renderer::RenderCircleFill(const Color clr, const s32 x, const s32 y, const s32 radius) {
         filledCircleRGBA(g_Renderer, x + this->base_x, y + this->base_y, radius - 1, clr.r, clr.g, clr.b, this->GetActualAlpha(clr.a));
         aacircleRGBA(g_Renderer, x + this->base_x, y + this->base_y, radius - 1, clr.r, clr.g, clr.b, this->GetActualAlpha(clr.a));
     }
 
-    void Renderer::RenderShadowSimple(const i32 x, const i32 y, const i32 width, const i32 height, const i32 base_alpha, const u8 main_alpha) {
+    void Renderer::RenderShadowSimple(const s32 x, const s32 y, const s32 width, const s32 height, const s32 base_alpha, const u8 main_alpha) {
         auto crop = false;
         auto shadow_width = width;
         auto shadow_x = x;
@@ -287,8 +287,8 @@ namespace pu::ui::render {
     }
 
     std::pair<u32, u32> GetDimensions() {
-        i32 w = 0;
-        i32 h = 0;
+        s32 w = 0;
+        s32 h = 0;
         SDL_GetWindowSize(g_Window, &w, &h);
         return { static_cast<u32>(w), static_cast<u32>(h) };
     }
@@ -324,7 +324,7 @@ namespace pu::ui::render {
         return true;
     }
 
-    bool GetTextDimensions(const std::string &font_name, const std::string &text, i32 &out_width, i32 &out_height) {
+    bool GetTextDimensions(const std::string &font_name, const std::string &text, s32 &out_width, s32 &out_height) {
         for(auto &[name, font]: g_FontTable) {
             if(name == font_name) {
                 const auto [w, h] = font->GetTextDimensions(text);
@@ -336,16 +336,16 @@ namespace pu::ui::render {
         return false;
     }
 
-    i32 GetTextWidth(const std::string &font_name, const std::string &text) {
-        i32 width = 0;
-        i32 dummy;
+    s32 GetTextWidth(const std::string &font_name, const std::string &text) {
+        s32 width = 0;
+        s32 dummy;
         GetTextDimensions(font_name, text, width, dummy);
         return width;
     }
 
-    i32 GetTextHeight(const std::string &font_name, const std::string &text) {
-        i32 dummy;
-        i32 height = 0;
+    s32 GetTextHeight(const std::string &font_name, const std::string &text) {
+        s32 dummy;
+        s32 height = 0;
         GetTextDimensions(font_name, text, dummy, height);
         return height;
     }
@@ -363,10 +363,10 @@ namespace pu::ui::render {
                         if(cur_text.empty()) {
                             break;
                         }
-                        if((max_width > 0) && (cur_width <= (i32)max_width)) {
+                        if((max_width > 0) && (cur_width <= (s32)max_width)) {
                             break;
                         }
-                        if((max_height > 0) && (cur_height <= (i32)max_height)) {
+                        if((max_height > 0) && (cur_height <= (s32)max_height)) {
                             break;
                         }
 

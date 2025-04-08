@@ -154,7 +154,7 @@ namespace pu::ui {
         return 0;
     }
 
-    i32 Application::CreateShowDialog(const std::string &title, const std::string &content, const std::vector<std::string> &opts, const bool use_last_opt_as_cancel, sdl2::TextureHandle::Ref icon, DialogPrepareCallback prepare_cb) {
+    s32 Application::CreateShowDialog(const std::string &title, const std::string &content, const std::vector<std::string> &opts, const bool use_last_opt_as_cancel, sdl2::TextureHandle::Ref icon, DialogPrepareCallback prepare_cb) {
         auto dialog = Dialog::New(title, content);
         for(u32 i = 0; i < opts.size(); i++) {
             const auto &opt = opts.at(i);

@@ -3,7 +3,7 @@
 
 namespace pu::ui::elm {
 
-    i32 Element::GetProcessedX() {
+    s32 Element::GetProcessedX() {
         auto x = this->GetX();
         if(this->parent_container != nullptr) {
             auto container = reinterpret_cast<Container*>(this->parent_container);
@@ -19,7 +19,7 @@ namespace pu::ui::elm {
         return x;
     }
 
-    i32 Element::GetProcessedY() {
+    s32 Element::GetProcessedY() {
         auto y = this->GetY();
         if(this->parent_container != nullptr) {
             auto container = reinterpret_cast<Container*>(this->parent_container);

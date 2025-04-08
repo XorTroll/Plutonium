@@ -32,7 +32,7 @@ namespace pu::audio {
      * @param mus Music file to play. If NULL is passed, nothing will happen.
      * @param loops Number of times to loop the music file.
      */
-    void PlayMusic(Music mus, const i32 loops);
+    void PlayMusic(Music mus, const s32 loops);
 
     /**
      * @brief Plays a music file with a fade-in effect.
@@ -41,7 +41,7 @@ namespace pu::audio {
      * @param loops Number of times to loop the music file.
      * @param ms Time in milliseconds to fade in the music file.
      */
-    void PlayMusicWithFadeIn(Music mus, const i32 loops, const i32 ms);
+    void PlayMusicWithFadeIn(Music mus, const s32 loops, const s32 ms);
 
     /**
      * @brief Checks if music is currently playing.
@@ -64,21 +64,21 @@ namespace pu::audio {
      * @note pu::audio::Initialize must be called before using this function.
      * @param vol Volume to set (0-128).
      */
-    void SetMusicVolume(const i32 vol);
+    void SetMusicVolume(const s32 vol);
 
     /**
      * @brief Gets the volume of the currently playing music.
      * @note pu::audio::Initialize must be called before using this function.
      * @return Volume of the currently playing music.
      */
-    i32 GetMusicVolume();
+    s32 GetMusicVolume();
 
     /**
      * @brief Fades out the currently playing music.
      * @note pu::audio::Initialize must be called before using this function.
      * @param ms Time in milliseconds to fade out the music file.
      */
-    void FadeOutMusic(const i32 ms);
+    void FadeOutMusic(const s32 ms);
 
     /**
      * @brief Rewinds the currently playing music.

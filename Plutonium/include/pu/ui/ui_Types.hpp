@@ -105,7 +105,7 @@ namespace pu::ui {
      * @param region_h Height of the region.
      * @return Whether the touch point hits the region.
      */
-    static inline constexpr bool TouchHitsRegion(const i32 touch_x, const i32 touch_y, const i32 region_x, const i32 region_y, const i32 region_w, const i32 region_h) {
+    static inline constexpr bool TouchHitsRegion(const s32 touch_x, const s32 touch_y, const s32 region_x, const s32 region_y, const s32 region_w, const s32 region_h) {
         return (touch_x >= region_x) && (touch_x < (region_x + region_w)) && (touch_y >= region_y) && (touch_y < (region_y + region_h));
     }
 
@@ -118,8 +118,8 @@ namespace pu::ui {
      * @brief Type encoding a touch point.
      */
     struct TouchPoint {
-        i32 x;
-        i32 y;
+        s32 x;
+        s32 y;
 
         /**
          * @brief Creates a new, invalid TouchPoint (with both coordinates set to -1).
@@ -149,7 +149,7 @@ namespace pu::ui {
          * @param region_h Height of the region.
          * @return Whether this TouchPoint hits the region.
          */
-        inline constexpr bool HitsRegion(const i32 region_x, const i32 region_y, const i32 region_w, const i32 region_h) const {
+        inline constexpr bool HitsRegion(const s32 region_x, const s32 region_y, const s32 region_w, const s32 region_h) const {
             if(this->IsEmpty()) {
                 return false;
             }
@@ -242,10 +242,10 @@ namespace pu::ui {
 
                 const auto target_f = (double)this->target_initial_val + this->ComputeIncrement();
                 if(this->target_incr > 0) {
-                    target = (T)((i32)(target_f + 0.5f));
+                    target = (T)((s32)(target_f + 0.5f));
                 }
                 else {
-                    target = (T)((i32)(target_f - 0.5f));
+                    target = (T)((s32)(target_f - 0.5f));
                 }
                 this->f += this->f_incr;
 

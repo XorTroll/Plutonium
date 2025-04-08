@@ -2,7 +2,7 @@
 
 namespace pu::ui::elm {
 
-    TextBlock::TextBlock(const i32 x, const i32 y, const std::string &text) : Element() {
+    TextBlock::TextBlock(const s32 x, const s32 y, const std::string &text) : Element() {
         this->x = x;
         this->y = y;
         this->clr = DefaultColor;
@@ -20,11 +20,11 @@ namespace pu::ui::elm {
         render::DeleteTexture(this->text_tex);
     }
 
-    i32 TextBlock::GetWidth() {
+    s32 TextBlock::GetWidth() {
         return render::GetTextureWidth(this->text_tex);
     }
 
-    i32 TextBlock::GetHeight() {
+    s32 TextBlock::GetHeight() {
         return render::GetTextureHeight(this->text_tex);
     }
 
@@ -45,7 +45,7 @@ namespace pu::ui::elm {
         this->SetText(this->text);
     }
 
-    void TextBlock::OnRender(render::Renderer::Ref &drawer, const i32 x, const i32 y) {
+    void TextBlock::OnRender(render::Renderer::Ref &drawer, const s32 x, const s32 y) {
         const auto do_clamp = (this->clamp_w != NoClamp) && (this->GetWidth() > this->clamp_w);
         if(do_clamp) {
             drawer->RenderTexture(this->text_tex, x, y, render::TextureRenderOptions({}, this->clamp_w, {}, {}, this->clamp_cur_x, 0));

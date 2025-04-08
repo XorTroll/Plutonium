@@ -28,13 +28,13 @@ namespace pu::ui::elm {
             static constexpr Color DefaultBackgroundColor = { 130, 130, 130, 255 };
 
         private:
-            i32 x;
-            i32 y;
+            s32 x;
+            s32 y;
             u64 key;
             bool checked;
             Color clr;
             std::string fnt_name;
-            i32 toggle_alpha;
+            s32 toggle_alpha;
             std::string cnt;
             sdl2::Texture cnt_tex;
             u32 cnt_h_margin;
@@ -55,11 +55,11 @@ namespace pu::ui::elm {
              * @param toggle_key Key to toggle the state of the Toggle.
              * @param clr Color of the Toggle.
              */
-            Toggle(const i32 x, const i32 y, const std::string &content, const u64 toggle_key, const Color clr);
+            Toggle(const s32 x, const s32 y, const std::string &content, const u64 toggle_key, const Color clr);
             PU_SMART_CTOR(Toggle)
             ~Toggle();
 
-            inline i32 GetX() override {
+            inline s32 GetX() override {
                 return this->x;
             }
 
@@ -67,11 +67,11 @@ namespace pu::ui::elm {
              * @brief Sets the X position of the Toggle.
              * @param x New X position.
              */
-            inline void SetX(const i32 x) {
+            inline void SetX(const s32 x) {
                 this->x = x;
             }
 
-            inline i32 GetY() override {
+            inline s32 GetY() override {
                 return this->y;
             }
 
@@ -79,12 +79,12 @@ namespace pu::ui::elm {
              * @brief Sets the Y position of the Toggle.
              * @param y New Y position.
              */
-            inline void SetY(const i32 y) {
+            inline void SetY(const s32 y) {
                 this->y = y;
             }
             
-            i32 GetWidth() override;
-            i32 GetHeight() override;
+            s32 GetWidth() override;
+            s32 GetHeight() override;
 
             /**
              * @brief Gets the content of the Toggle.
@@ -121,7 +121,7 @@ namespace pu::ui::elm {
 
             PU_CLASS_POD_GET(Checked, checked, bool)
 
-            void OnRender(render::Renderer::Ref &drawer, const i32 x, const i32 y) override;
+            void OnRender(render::Renderer::Ref &drawer, const s32 x, const s32 y) override;
             void OnInput(const u64 keys_down, const u64 keys_up, const u64 keys_held, const TouchPoint touch_pos) override;
     };
 

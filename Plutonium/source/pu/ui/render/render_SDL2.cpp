@@ -26,22 +26,22 @@ namespace pu::ui::render {
         return ConvertToTexture(surface);
     }
     
-    i32 GetTextureWidth(sdl2::Texture texture) {
+    s32 GetTextureWidth(sdl2::Texture texture) {
         if(texture == nullptr) {
             return 0;
         }
 
-        i32 w = 0;
+        s32 w = 0;
         SDL_QueryTexture(texture, nullptr, nullptr, &w, nullptr);
         return w;
     }
 
-    i32 GetTextureHeight(sdl2::Texture texture) {
+    s32 GetTextureHeight(sdl2::Texture texture) {
         if(texture == nullptr) {
             return 0;
         }
 
-        i32 h = 0;
+        s32 h = 0;
         SDL_QueryTexture(texture, nullptr, nullptr, nullptr, &h);
         return h;
     }

@@ -58,7 +58,7 @@ namespace pu::ttf {
 
             };
 
-            std::vector<std::pair<i32, std::unique_ptr<FontFace>>> font_faces;
+            std::vector<std::pair<s32, std::unique_ptr<FontFace>>> font_faces;
             u32 font_size;
 
             inline sdl2::Font TryGetFirstFont() {
@@ -72,7 +72,7 @@ namespace pu::ttf {
             /**
              * @brief Constant representing an invalid font face index.
              */
-            static constexpr i32 InvalidFontFaceIndex = -1;
+            static constexpr s32 InvalidFontFaceIndex = -1;
 
             /**
              * @brief Default font size to use when creating a new font.
@@ -89,7 +89,7 @@ namespace pu::ttf {
              * @param index Index to check.
              * @return Whether the index is valid.
              */
-            static inline constexpr bool IsValidFontFaceIndex(const i32 index) {
+            static inline constexpr bool IsValidFontFaceIndex(const s32 index) {
                 return index != InvalidFontFaceIndex;
             }
 
@@ -107,20 +107,20 @@ namespace pu::ttf {
              * @param disp_fn Function to call when the font is no longer needed and needs disposing.
              * @return Index of the loaded font face.
              */
-            i32 LoadFromMemory(void *ptr, const size_t size, FontFaceDisposingFunction disp_fn);
+            s32 LoadFromMemory(void *ptr, const size_t size, FontFaceDisposingFunction disp_fn);
 
             /**
              * @brief Loads a font from a file.
              * @param path Path to the font file.
              * @return Index of the loaded font face.
              */
-            i32 LoadFromFile(const std::string &path);
+            s32 LoadFromFile(const std::string &path);
 
             /**
              * @brief Unloads a font face.
              * @param font_idx Index of the font face to unload.
              */
-            void Unload(const i32 font_idx);
+            void Unload(const s32 font_idx);
 
             /**
              * @brief Sets the font size used by the Font instance.

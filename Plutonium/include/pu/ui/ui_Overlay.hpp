@@ -20,7 +20,7 @@ namespace pu::ui {
             /**
              * @brief Default radius of the overlay rectangle.
              */
-            static constexpr i32 DefaultRadius = 37;
+            static constexpr s32 DefaultRadius = 37;
 
             /**
              * @brief Default maximum alpha value for the overlay fade effect.
@@ -33,9 +33,9 @@ namespace pu::ui {
             static constexpr u8 DefaultFadeAlphaVariation = 25;
 
         private:
-            i32 fade_a;
+            s32 fade_a;
             Color bg_clr;
-            i32 rad;
+            s32 rad;
             bool is_ending;
             u8 max_fade_alpha;
             u8 fade_alpha_variation;
@@ -49,10 +49,10 @@ namespace pu::ui {
              * @param height Height of the Overlay.
              * @param bg_clr Background color of the Overlay.
              */
-            Overlay(const i32 x, const i32 y, const i32 width, const i32 height, const Color bg_clr) : Container(x, y, width, height), fade_a(0), bg_clr(bg_clr), rad(DefaultRadius), is_ending(false), max_fade_alpha(DefaultMaxFadeAlpha), fade_alpha_variation(DefaultFadeAlphaVariation) {}
+            Overlay(const s32 x, const s32 y, const s32 width, const s32 height, const Color bg_clr) : Container(x, y, width, height), fade_a(0), bg_clr(bg_clr), rad(DefaultRadius), is_ending(false), max_fade_alpha(DefaultMaxFadeAlpha), fade_alpha_variation(DefaultFadeAlphaVariation) {}
             PU_SMART_CTOR(Overlay)
 
-            PU_CLASS_POD_GETSET(Radius, rad, i32)
+            PU_CLASS_POD_GETSET(Radius, rad, s32)
 
             /**
              * @brief Checks whether the overlay has a radius for its background rectangle.

@@ -2,7 +2,7 @@
 
 namespace pu::audio {
 
-    bool Initialize(i32 mix_flags) {
+    bool Initialize(s32 mix_flags) {
         if(Mix_Init(mix_flags) != mix_flags) {
             return false;
         }

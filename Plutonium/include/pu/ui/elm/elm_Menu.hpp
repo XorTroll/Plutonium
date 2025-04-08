@@ -163,17 +163,17 @@ namespace pu::ui::elm {
                 WaitingDown = 2
             };
 
-            i32 x;
-            i32 y;
-            i32 w;
-            i32 items_h;
+            s32 x;
+            s32 y;
+            s32 w;
+            s32 items_h;
             u32 items_to_show;
             u32 selected_item_idx;
-            i32 selected_item_alpha;
-            SigmoidIncrementer<i32> selected_item_alpha_incr;
-            i32 prev_selected_item_idx;
-            i32 prev_selected_item_alpha;
-            SigmoidIncrementer<i32> prev_selected_item_alpha_incr;
+            s32 selected_item_alpha;
+            SigmoidIncrementer<s32> selected_item_alpha_incr;
+            s32 prev_selected_item_idx;
+            s32 prev_selected_item_alpha;
+            SigmoidIncrementer<s32> prev_selected_item_alpha_incr;
             u32 advanced_item_count;
             Color scrollbar_clr;
             Color items_clr;
@@ -205,15 +205,15 @@ namespace pu::ui::elm {
             }
 
             inline constexpr Color MakeLighterScrollbarColor() {
-                i32 base_r = this->scrollbar_clr.r - this->light_scrollbar_color_factor;
+                s32 base_r = this->scrollbar_clr.r - this->light_scrollbar_color_factor;
                 if(base_r < 0) {
                     base_r = 0;
                 }
-                i32 base_g = this->scrollbar_clr.g - this->light_scrollbar_color_factor;
+                s32 base_g = this->scrollbar_clr.g - this->light_scrollbar_color_factor;
                 if(base_g < 0) {
                     base_g = 0;
                 }
-                i32 base_b = this->scrollbar_clr.b - this->light_scrollbar_color_factor;
+                s32 base_b = this->scrollbar_clr.b - this->light_scrollbar_color_factor;
                 if(base_b < 0) {
                     base_b = 0;
                 }
@@ -265,10 +265,10 @@ namespace pu::ui::elm {
              * @param items_height Height of each shown item in the Menu.
              * @param items_to_show Number of items to show in the Menu.
              */
-            Menu(const i32 x, const i32 y, const i32 width, const Color items_clr, const Color items_focus_clr, const i32 items_height, const u32 items_to_show);
+            Menu(const s32 x, const s32 y, const s32 width, const Color items_clr, const Color items_focus_clr, const s32 items_height, const u32 items_to_show);
             PU_SMART_CTOR(Menu)
 
-            inline i32 GetX() override {
+            inline s32 GetX() override {
                 return this->x;
             }
 
@@ -276,11 +276,11 @@ namespace pu::ui::elm {
              * @brief Sets the X position of the Menu.
              * @param x New X position.
              */
-            inline void SetX(const i32 x) {
+            inline void SetX(const s32 x) {
                 this->x = x;
             }
 
-            inline i32 GetY() override {
+            inline s32 GetY() override {
                 return this->y;
             }
 
@@ -288,11 +288,11 @@ namespace pu::ui::elm {
              * @brief Sets the Y position of the Menu.
              * @param y New Y position.
              */
-            inline void SetY(const i32 y) {
+            inline void SetY(const s32 y) {
                 this->y = y;
             }
 
-            inline i32 GetWidth() override {
+            inline s32 GetWidth() override {
                 return this->w;
             }
 
@@ -300,16 +300,16 @@ namespace pu::ui::elm {
              * @brief Sets the width of the Menu.
              * @param width New width.
              */
-            inline void SetWidth(const i32 width) {
+            inline void SetWidth(const s32 width) {
                 this->w = width;
             }
 
-            inline i32 GetHeight() override {
+            inline s32 GetHeight() override {
                 return this->items_h * this->items_to_show;
             }
 
-            PU_CLASS_POD_GETSET(ItemsHeight, items_h, i32)
-            PU_CLASS_POD_GETSET(NumberOfItemsToShow, items_to_show, i32)
+            PU_CLASS_POD_GETSET(ItemsHeight, items_h, s32)
+            PU_CLASS_POD_GETSET(NumberOfItemsToShow, items_to_show, s32)
             PU_CLASS_POD_GETSET(ItemsFocusColor, items_focus_clr, Color)
             PU_CLASS_POD_GETSET(ItemsColor, items_clr, Color)
             PU_CLASS_POD_GETSET(ScrollbarColor, scrollbar_clr, Color)
@@ -369,7 +369,7 @@ namespace pu::ui::elm {
                 return this->items;
             }
 
-            PU_CLASS_POD_GET(SelectedIndex, selected_item_idx, i32)
+            PU_CLASS_POD_GET(SelectedIndex, selected_item_idx, s32)
 
             /**
              * @brief Sets the selected index of the Menu.
@@ -377,7 +377,7 @@ namespace pu::ui::elm {
              */
             void SetSelectedIndex(const u32 idx);
 
-            void OnRender(render::Renderer::Ref &drawer, const i32 x, const i32 y) override;
+            void OnRender(render::Renderer::Ref &drawer, const s32 x, const s32 y) override;
             void OnInput(const u64 keys_down, const u64 keys_up, const u64 keys_held, const TouchPoint touch_pos) override;
     };
 }

@@ -97,7 +97,7 @@ namespace pu::ui {
         this->icon_tex = tex;
     }
 
-    i32 Dialog::Show(Application *app_ref) {
+    s32 Dialog::Show(Application *app_ref) {
         if(this->HasCancelOption()) {
             this->AddOption(this->cancel_opt);
         }
@@ -179,8 +179,8 @@ namespace pu::ui {
 
         auto finish = false;
         auto is_finishing = false;
-        i32 initial_fade_alpha = 0;
-        SigmoidIncrementer<i32> initial_fade_alpha_incr;
+        s32 initial_fade_alpha = 0;
+        SigmoidIncrementer<s32> initial_fade_alpha_incr;
         initial_fade_alpha_incr.StartFromZero(this->fade_alpha_incr_steps, 0xFF);
         const auto base_opt_base_y = opt_base_y;
         while(true) {
@@ -301,7 +301,7 @@ namespace pu::ui {
                         }
                         drawer->RenderRoundedRectangleFill(over_clr, cur_opt_x, opt_base_y, opt_width, this->opt_height, this->opt_border_radius);
                     }
-                    else if(this->prev_selected_opt_idx == static_cast<i32>(i)) {
+                    else if(this->prev_selected_opt_idx == static_cast<s32>(i)) {
                         this->prev_selected_opt_over_alpha_incr.Increment(this->prev_selected_opt_over_alpha);
 
                         if(this->prev_selected_opt_over_alpha > 0) {

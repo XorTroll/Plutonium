@@ -58,8 +58,6 @@ PU_CLASS_POD_SET(fn_name, var_name, type)
 
 namespace pu {
 
-    using i32 = s32;
-
     constexpr u32 Module = 493;
 
     // I guess these are self-explanatory
