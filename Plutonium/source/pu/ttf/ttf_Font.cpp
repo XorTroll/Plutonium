@@ -14,15 +14,19 @@ namespace pu::ttf {
             }
         }
 
-        pu::sdl2::Texture RenderMultilineTextSurface(TTF_Font *font, const std::string &text, const SDL_Color color) {
+        sdl2::Texture RenderMultilineText(sdl2::Font font, const std::string &text, const SDL_Color color) {
             std::istringstream stream(text);
             std::string line;
             std::vector<SDL_Surface*> line_srfs;
-        
+
             s32 max_width = 0;
             s32 total_height = 0;
             while(std::getline(stream, line)) {
-                auto surface = TTF_RenderText_Blended(font, line.c_str(), color);
+                if(line.empty()) {
+                    line = " ";
+                }
+
+                auto surface = TTF_RenderUTF8_Blended(font, line.c_str(), color);
                 if(surface == nullptr) {
                     continue;
                 }
@@ -34,18 +38,28 @@ namespace pu::ttf {
                 total_height += surface->h;
             }
         
-            auto final_srf = SDL_CreateRGBSurface(0, max_width, total_height, 32, 0x00FF0000, 0x0000FF00, 0x000000FF, 0xFF000000);
+            // Initialize with fg and 0 alpha (like SDL_ttf does)
+            auto final_srf = SDL_CreateRGBSurface(SDL_SWSURFACE, max_width, total_height, 32, 0x00FF0000, 0x0000FF00, 0x000000FF, 0xFF000000);
+            const auto pixel = (color.r << 16) | (color.g << 8) | color.b;
+            SDL_FillRect(final_srf, nullptr, pixel);
         
             // Blit lines onto the final surface
-            int y = 0;
+            s32 y = 0;
             for(auto line_srf : line_srfs) {
-                SDL_Rect dst = { 0, y, line_srf->w, line_srf->h };
+                SDL_Rect dst = {
+                    .x = 0,
+                    .y = y,
+                    .w = line_srf->w,
+                    .h = line_srf->h
+                };
                 SDL_BlitSurface(line_srf, nullptr, final_srf, &dst);
                 y += line_srf->h;
                 SDL_FreeSurface(line_srf);
             }
-        
-            return ui::render::ConvertToTexture(final_srf);
+
+            auto tex = ui::render::ConvertToTexture(final_srf);
+            SDL_SetTextureBlendMode(tex, SDL_BLENDMODE_BLEND);
+            return tex;
         }
 
     }
@@ -144,7 +158,7 @@ namespace pu::ttf {
     sdl2::Texture Font::RenderText(const std::string &str, const ui::Color clr) {
         auto font = this->TryGetFirstFont();
         if(font != nullptr) {
-            return RenderMultilineTextSurface(font, str, { clr.r, clr.g, clr.b, clr.a });
+            return RenderMultilineText(font, str, { clr.r, clr.g, clr.b, clr.a });
         }
         else {
             return nullptr;
