@@ -21,7 +21,14 @@ namespace pu::ui::elm {
     }
 
     s32 TextBlock::GetWidth() {
-        return render::GetTextureWidth(this->text_tex);
+        const auto base_width = render::GetTextureWidth(this->text_tex);
+        const auto do_clamp = (this->clamp_w != NoClamp) && (base_width > this->clamp_w);
+        if(do_clamp) {
+            return this->clamp_w;
+        }
+        else {
+            return base_width;
+        }
     }
 
     s32 TextBlock::GetHeight() {
@@ -46,11 +53,12 @@ namespace pu::ui::elm {
     }
 
     void TextBlock::OnRender(render::Renderer::Ref &drawer, const s32 x, const s32 y) {
-        const auto do_clamp = (this->clamp_w != NoClamp) && (this->GetWidth() > this->clamp_w);
+        const auto base_width = render::GetTextureWidth(this->text_tex);
+        const auto do_clamp = (this->clamp_w != NoClamp) && (base_width > this->clamp_w);
         if(do_clamp) {
             drawer->RenderTexture(this->text_tex, x, y, render::TextureRenderOptions({}, this->clamp_w, {}, {}, this->clamp_cur_x, 0));
 
-            if(this->clamp_cur_x >= (this->GetWidth() - this->clamp_w)) {
+            if(this->clamp_cur_x >= (base_width - this->clamp_w)) {
                 this->clamp_cur_delay++;
                 if(this->clamp_cur_delay >= this->clamp_delay) {
                     this->clamp_cur_x = 0;
