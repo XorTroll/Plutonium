@@ -1,66 +1,11 @@
-# Plutonium 
+# Plutonium (Ocean rewrite)
 
-> Easy-to-use, SDL2-based UI framework for Nintendo Switch homebrew
+This branch contains a deep rewrite of some core parts of Plutonium. The README still needs to be updated to reflect the changes, as this branch is finished and a new Plutonium (v2.0.0) is released.
 
-## What is Plutonium?
+## Current status
 
-Plutonium is a high-level, C++ graphics library with the aim of making Nintendo Switch homebrew UIs in a more user-firendly way.
+![demo1](res/demo1.jpg)
 
-It uses libnx and SDL2, so both libraries are required. To be more exact, this libraries should be installed via pacman:
+![demo2](res/demo2.jpg)
 
-```
-switch-sdl2 switch-sdl2_ttf switch-sdl2_image switch-sdl2_gfx switch-sdl2_mixer switch-mesa switch-glad switch-glm switch-libdrm_nouveau switch-libwebp switch-libpng switch-freetype switch-bzip2 switch-libjpeg-turbo switch-opusfile switch-libopus
-```
-
-Plutonium internally uses SDL2 for UI rendering.
-
-Plutonium's API is somewhat based on WPF/WinForms's system. The dev doesn't have to interact with the rendering (unless you want to), as it's done via a main rendering system and different objects to render.
-
-## Using this libraries
-
-Simply download/fork this repository ;)
-
-Check the [basic example](example) for a basic usage of the libraries. In case you want to see a really powerful app which really shows what Plutonium is capable of, take a look at [Goldleaf](https://github.com/XorTroll/Goldleaf), [uLaunch](https://github.com/XorTroll/uLaunch) or many other homebrew apps made using this libraries.
-
-Check the [documentation](https://XorTroll.github.io/Plutonium/) for a more detailed explanation of the library's usage.
-
-### Simple project layout
-
-This is how a regular Plutonium project would (more or less) have its Makefile and project layout using Plutonium:
-
-- Makefile
-
-```Makefile
-...
-
-LIBS := -lpu -lfreetype -lSDL2_mixer -lopusfile -lopus -lmodplug -lmpg123 -lvorbisidec -logg -lSDL2_ttf -lSDL2_gfx -lSDL2_image -lSDL2 -lEGL -lGLESv2 -lglapi -ldrm_nouveau -lwebp -lpng -ljpeg `sdl2-config --libs` `freetype-config --libs` -lnx
-LIBDIRS := $(PORTLIBS) $(LIBNX) $(CURDIR)/Plutonium
-
-...
-```
-
-- Project directory
-
-```txt
-Project
- |
- |-- Makefile
- |-- source
- |-- include
- |-- Plutonium
-      |
-      |-- include
-      |-- lib
-```
-
-## Building
-
-Clone the repository, cd into `Plutonium` directory and run `make`.
-
-You will need devkitPro, libnx and all the libraries mentioned above (installed via pacman).
-
-## Support
-
-If you would like to be more informed about my projects' status and support, you should check [my Discord server](https://discord.gg/3KpFyaH). It's a simple server for Nintendo homebrew and hacking stuff, focused on my projects.
-
-If you like my work, you should take a look at my [Patreon](https://patreon.com/xortroll) page!
+![demo3](res/demo3.jpg)

@@ -1,0 +1,3 @@
+[submodule "switch-libpulsar"]
+	path = switch-libpulsar
+	url = https://github.com/p-sam/switch-libpulsar

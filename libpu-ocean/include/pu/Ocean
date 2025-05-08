@@ -1,0 +1,11 @@
+/**
+ * Plutonium-ocean library
+ * @file Ocean
+ * @brief Plutonium-ocean library's main header.
+ * @author XorTroll
+ * @copyright XorTroll
+ */
+
+#pragma once
+#include <pu/Plutonium>
+#include <pu/ocean/OceanStyle.hpp>

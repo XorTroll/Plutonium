@@ -1,0 +1,40 @@
+/**
+ * Plutonium library
+ * @file Plutonium
+ * @brief Plutonium library's main header.
+ * @author XorTroll
+ * @copyright XorTroll
+ */
+
+#pragma once
+#include <pu/pu_Include.hpp>
+
+#include <pu/audio/audio_Audio.hpp>
+
+#include <pu/ui/ui_Renderizable.hpp>
+#include <pu/ui/ui_Group.hpp>
+#include <pu/ui/ui_Layer.hpp>
+#include <pu/ui/ui_Layout.hpp>
+#include <pu/ui/ui_Style.hpp>
+#include <pu/ui/ui_Application.hpp>
+#include <pu/ui/ui_Types.hpp>
+#include <pu/ui/ui_Text.hpp>
+#include <pu/ui/ui_TouchDetector.hpp>
+#include <pu/ui/ui_TouchScroller.hpp>
+#include <pu/ui/ui_SigmoidIncrementer.hpp>
+#include <pu/ui/ui_ColorVariation.hpp>
+
+#include <pu/util/util_Hex.hpp>
+
+#include <pu/ui/elm/elm_Element.hpp>
+#include <pu/ui/elm/elm_Button.hpp>
+#include <pu/ui/elm/elm_Separator.hpp>
+#include <pu/ui/elm/elm_Image.hpp>
+#include <pu/ui/elm/elm_ProgressBar.hpp>
+#include <pu/ui/elm/elm_TextBlock.hpp>
+
+#include <pu/ui/ly/ly_Dialog.hpp>
+#include <pu/ui/ly/ly_Toast.hpp>
+
+#include <pu/ui/render/render_Renderer.hpp>
+#include <pu/ui/render/render_SDL2.hpp>
