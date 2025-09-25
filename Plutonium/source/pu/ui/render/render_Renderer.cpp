@@ -142,8 +142,8 @@ namespace pu::ui::render {
             return;
         }
 
-        s32 tex_w;
-        s32 tex_h;
+        s32 tex_w = 0;
+        s32 tex_h = 0;
         if((opts.height == TextureRenderOptions::NoHeight) || (opts.height == TextureRenderOptions::NoWidth)) {
             SDL_QueryTexture(texture, nullptr, nullptr, &tex_w, &tex_h);
         }
