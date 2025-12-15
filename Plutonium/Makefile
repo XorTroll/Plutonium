@@ -39,7 +39,7 @@ SDL_IMAGE_LIBS	:= -lSDL2_image -lpng -ljpeg
 SDL_GFX_LIBS	:= -lSDL2_gfx
 SDL_MIXER_LIBS	:= -lSDL2_mixer -lmodplug -lmpg123 -lvorbisidec -logg
 
-LIBS	:=  $(SDL_IMAGE_LIBS) $(SDL_GFX_LIBS) $(SDL_MIXER_LIBS) -lEGL -lGLESv2 -lglapi `sdl2-config --libs`
+LIBS	:=  $(SDL_IMAGE_LIBS) $(SDL_GFX_LIBS) $(SDL_MIXER_LIBS) -lEGL -lGLESv2 -lglapi -lfreetype `$(PREFIX)pkg-config --cflags freetype2` -lharfbuzz
 
 #---------------------------------------------------------------------------------
 # list of directories containing libraries, this must be the top level containing
