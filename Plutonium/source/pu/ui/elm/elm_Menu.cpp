@@ -39,10 +39,10 @@ namespace pu::ui::elm {
                 this->selected_item_idx--;
                 this->HandleOnSelectionChanged();
 
-                this->selected_item_alpha = 0;
-                this->selected_item_alpha_incr.StartFromZero(this->item_alpha_incr_steps, 0xFF);
-                this->prev_selected_item_alpha = 0xFF;
-                this->prev_selected_item_alpha_incr.StartToZero(this->item_alpha_incr_steps, 0xFF);
+                this->selected_item_alpha = 0xFF;
+                this->selected_item_alpha_incr.StartToZero(this->item_alpha_incr_steps, 0xFF);
+                this->prev_selected_item_alpha = 0x0;
+                this->prev_selected_item_alpha_incr.StartFromZero(this->item_alpha_incr_steps, 0xFF);
             }
         }
         else {
@@ -68,10 +68,10 @@ namespace pu::ui::elm {
                 this->selected_item_idx++;
                 this->HandleOnSelectionChanged();
 
-                this->selected_item_alpha = 0;
-                this->selected_item_alpha_incr.StartFromZero(this->item_alpha_incr_steps, 0xFF);
-                this->prev_selected_item_alpha = 0xFF;
-                this->prev_selected_item_alpha_incr.StartToZero(this->item_alpha_incr_steps, 0xFF);
+                this->selected_item_alpha = 0xFF;
+                this->selected_item_alpha_incr.StartToZero(this->item_alpha_incr_steps, 0xFF);
+                this->prev_selected_item_alpha = 0x0;
+                this->prev_selected_item_alpha_incr.StartFromZero(this->item_alpha_incr_steps, 0xFF);
             }
         }
         else {
