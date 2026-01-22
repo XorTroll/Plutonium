@@ -117,13 +117,15 @@ namespace pu::ui {
         for(const auto &opt_tex: opts_texs) {
             const auto opt_width = render::GetTextureWidth(opt_tex) + 2 * this->opt_h_margin;
             opts_width += opt_width;
+            row_opt_width += opt_width;
 
-            row_opt_width += opt_width + this->space_between_options;
-            if((row_opt_width + this->opts_base_h_margin) >= render::ScreenWidth) {
+            if((row_opt_width + this->opts_base_h_margin) > render::ScreenWidth) {
                 opt_row_count++;
                 // Move this option to the next row
-                row_opt_width = this->opts_base_h_margin + opt_width + this->space_between_options;
+                row_opt_width = this->opts_base_h_margin + opt_width;
             }
+
+            row_opt_width += this->space_between_options;
         }
 
         auto dialog_width = opts_width;
@@ -231,9 +233,13 @@ namespace pu::ui {
                     auto cur_opt_x = dialog_x + this->opts_base_h_margin;
                     for(u32 i = 0; i < this->opts.size(); i++) {
                         auto &opt_tex = opts_texs.at(i);
-                        const auto opt_name_x = cur_opt_x + this->opt_h_margin;
                         const auto opt_name_width = render::GetTextureWidth(opt_tex);
                         const auto opt_width = opt_name_width + 2 * this->opt_h_margin;
+
+                        if((cur_opt_x + opt_width + this->opts_base_h_margin) > pu::ui::render::ScreenWidth) {
+                            cur_opt_x = dialog_x + this->opts_base_h_margin;
+                            opt_base_y += this->opt_height + this->space_between_option_rows;
+                        }
 
                         if(tch_pos.HitsRegion(cur_opt_x, opt_base_y, opt_width, this->opt_height)) {
                             this->selected_opt_idx = i;
@@ -243,11 +249,6 @@ namespace pu::ui {
                         }
 
                         cur_opt_x += opt_width + this->space_between_options;
-
-                        if((opt_name_x + opt_width) > pu::ui::render::ScreenWidth) {
-                            cur_opt_x = dialog_x + this->opts_base_h_margin;
-                            opt_base_y += this->opt_height + this->space_between_option_rows;
-                        }
                     }
                 }
 
@@ -284,7 +285,7 @@ namespace pu::ui {
                     const auto opt_name_width = render::GetTextureWidth(opt_tex);
                     const auto opt_name_height = render::GetTextureHeight(opt_tex);
                     const auto opt_width = opt_name_width + 2 * this->opt_h_margin;
-                    if((cur_opt_x + opt_width) >= pu::ui::render::ScreenWidth) {
+                    if((cur_opt_x + opt_width + this->opts_base_h_margin) > pu::ui::render::ScreenWidth) {
                         cur_opt_x = dialog_x + this->opts_base_h_margin;
                         opt_base_y += this->opt_height + this->space_between_option_rows;
                     }
