@@ -4,3 +4,5 @@ lib/
 *.elf
 *.nacp
 *.nro
+.clangd
+compile_flags.txt

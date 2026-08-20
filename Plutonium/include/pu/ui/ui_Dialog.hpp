@@ -77,6 +77,8 @@ namespace pu::ui {
             SigmoidIncrementer<s32> prev_selected_opt_over_alpha_incr;
             bool user_cancelled;
             sdl2::TextureHandle::Ref icon_tex;
+            s32 icon_max_width;
+            s32 icon_max_height;
             Color title_clr;
             Color cnt_clr;
             Color opt_clr;
@@ -214,6 +216,14 @@ namespace pu::ui {
              * @param tex Texture of the icon.
              */
             void SetIcon(sdl2::TextureHandle::Ref tex);
+
+            inline void SetIconMaximumWidth(const s32 width) {
+                this->icon_max_width = width;
+            }
+
+            inline void SetIconMaximumHeight(const s32 height) {
+                this->icon_max_height = height;
+            }
             
             /**
              * @brief Checks whether the Dialog has an icon.

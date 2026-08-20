@@ -1,3 +1,4 @@
+#include "pu/ui/render/render_SDL2.hpp"
 #include <pu/ui/ui_Dialog.hpp>
 #include <pu/ui/ui_Application.hpp>
 
@@ -26,6 +27,8 @@ namespace pu::ui {
         this->title_tex = nullptr;
         this->cnt_tex = nullptr;
         this->icon_tex = nullptr;
+        this->icon_max_width = -1;
+        this->icon_max_height = -1;
         this->selected_opt_idx = 0;
         this->prev_selected_opt_idx = 0;
         this->selected_opt_over_alpha = 0xFF;
@@ -103,6 +106,7 @@ namespace pu::ui {
         }
 
         std::vector<sdl2::Texture> opts_texs;
+        opts_texs.reserve(this->opts.size());
         for(const auto &opt: this->opts) {
             opts_texs.push_back(render::RenderText(this->opt_font_name, opt, this->opt_clr));
         }
@@ -140,13 +144,36 @@ namespace pu::ui {
         const auto title_cnt_height = this->title_top_margin + render::GetTextureHeight(this->title_tex) + render::GetTextureHeight(this->cnt_tex) + this->space_between_cnt_and_options;
         auto opt_base_y = title_cnt_height;
     
+        s32 base_icon_width = -1;
+        s32 base_icon_height = -1;
         if(this->HasIcon()) {
-            const auto icon_height = render::GetTextureHeight(this->icon_tex->Get()) + 2 * this->icon_margin;
+            base_icon_width = render::GetTextureWidth(this->icon_tex->Get());
+            base_icon_height = render::GetTextureHeight(this->icon_tex->Get());
+
+            const auto needs_w_fix = (this->icon_max_width > 0) && (base_icon_width > this->icon_max_width);
+            const auto needs_h_fix = (this->icon_max_height > 0) && (base_icon_height > this->icon_max_height);
+            if(needs_w_fix && needs_h_fix) {
+                // Both exceed, just force them
+                base_icon_width = this->icon_max_width;
+                base_icon_height = this->icon_max_height;
+            }
+            else if(needs_w_fix) {
+                const auto icon_w_h_ratio = (double)base_icon_width / (double)base_icon_height;
+                base_icon_width = this->icon_max_width;
+                base_icon_height = (s32)((double)base_icon_width / icon_w_h_ratio);
+            }
+            else if(needs_h_fix) {
+                const auto icon_w_h_ratio = (double)base_icon_width / (double)base_icon_height;
+                base_icon_height = this->icon_max_height;
+                base_icon_width = (s32)((double)base_icon_height * icon_w_h_ratio);
+            }
+
+            const auto icon_height = base_icon_height + 2 * this->icon_margin;
             if(icon_height > opt_base_y) {
                 opt_base_y = icon_height;
             }
 
-            const auto icon_width = render::GetTextureWidth(this->icon_tex->Get()) + 2 * this->icon_margin;
+            const auto icon_width = base_icon_width + 2 * this->icon_margin;
 
             const auto icon_title_width = title_width + icon_width;
             if(icon_title_width > dialog_width) {
@@ -272,10 +299,10 @@ namespace pu::ui {
                 drawer->RenderTexture(this->cnt_tex, dialog_x + this->cnt_x, dialog_y + this->cnt_y);
                 
                 if(this->HasIcon()) {
-                    const auto icon_width = render::GetTextureWidth(this->icon_tex->Get());
+                    const auto icon_width = base_icon_width;
                     const auto icon_x = dialog_x + (dialog_width - (icon_width + 2 * this->icon_margin));
                     const auto icon_y = dialog_y + this->icon_margin;
-                    drawer->RenderTexture(this->icon_tex->Get(), icon_x, icon_y, render::TextureRenderOptions(static_cast<u8>(initial_fade_alpha), {}, {}, {}, {}, {}));
+                    drawer->RenderTexture(this->icon_tex->Get(), icon_x, icon_y, render::TextureRenderOptions(static_cast<u8>(initial_fade_alpha), base_icon_width, base_icon_height, {}, {}, {}));
                 }
 
                 auto cur_opt_x = dialog_x + this->opts_base_h_margin;
